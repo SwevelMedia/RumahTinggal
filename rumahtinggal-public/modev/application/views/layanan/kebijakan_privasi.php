@@ -1,0 +1,70 @@
+</head>
+<style>
+h1, h2, h3, h4, h5, h6 {
+    color: #6b6b6b !important;
+}
+
+ol{
+    list-style: decimal;
+}
+</style>
+<section style="margin-top: 100px;" class="mb-5">
+    <div class="container" style="width: 65%;"> 
+<h1 style="text-align: center;margin-bottom: 45px;"><strong>Kebijakan Privasi</strong><strong> (privacy Policy)</strong></h1>
+<p style="text-align: justify;">Apabila kami melakukan perubahan pada kebijakan privasi ini, kami akan mempublikasikan versi terbaru di situs web kami. Mohon mengulas dan menkaji kebijakan ini dari waktu ke waktu.</p>
+<p class="mb-0">&nbsp;</p>
+<h2>Pengenalan</h2>
+<p style="text-align: justify;">Kebijakan privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, mengungkapkan dan menjaga informasi pribadi Anda. Keamanan dari informasi pribadi Anda adalah hal yang paling penting. Kami berkomitmen untuk menjaga kerahasiaan semua informasi pribadi yang Anda telah berikat kepada kami dan kami akan mengambil semua tindakan pencegahan yang wajar untuk melindungi informasi pribadi Anda dari penggunaan yang tidak sah. Dengan menggunakan dan mengakses situs web ini, Anda setuju atas semua hal yang dijelaskan di dalam kebijakan ini.</p>
+<p>&nbsp;</p>
+<h2>Pengumpulan Informasi Pribadi</h2>
+<p style="text-align: justify;">Kami mengumpulkan informasi mengenai Anda ketika Anda melakukan kunjungan ke situs web kami dan menggunakan layanan kami. Ketika Anda memberikan informasi tersebut kepada kami, Anda setuju untuk mentransfer dan menyimpan informasi tersebut di dalam server yang kami kumpulkan, termasuk diantaranya:</p>
+<p style="text-align: justify;">Apayang Anda sediakan untuk kami diantaranya: nama, alamat, detail kontak, informasi penggunaan jasa, informasi penagihan,&nbsp;komunikasi email, ulasan jasa, dan informasi pribadi lainnya yang dijelaskan ketika menggunakan situs web dan layanan kami.</p>
+<p style="text-align: justify;">Informasi Otomatis &ndash; ketika Anda mengunjungi situs web, menjalankan cookies di dalam browser Anda memungkinkan&nbsp;kami untuk mengumpulkan informasi mengenai Anda.Informasi teknis ini dan lainnya yang dikumpulkan ini akan digunakan untuk mengidentifikasi Anda dan membuat pengalaman&nbsp;online&nbsp;yang lebih dipribadikan. Cookies harus dijalankan untuk melengkapi pesanan dan melihat fitur lain di dalam situs kami.</p>
+<p style="text-align: justify;">Informasi dari sumber pihak ketiga lainnya.</p>
+<p>&nbsp;</p>
+<h1><strong>Kegunaan dan Pengungkapan dari Informasi Pribadi</strong></h1>
+<p style="text-align: justify;">Informasi pribadi yang kami kumpulkan dari Anda akan digunakan dan diungkapkan hanya untuk menyediakan barang dan jasa kepada Anda, atau untuk menjalankan bisnis kami. Tipe dari informasi pribadi yang mungkin kami gunakan dan ungkapkan termasuk:</p>
+<p style="text-align: justify;">- Menyediakan jasa kepada Anda secara internal</p>
+<p style="text-align: justify;">- Berkomunikasi dengan Anda</p>
+<p style="text-align: justify;">- Alasan hukum</p>
+<p style="text-align: justify;">Ada beberapa situasi dimana akan dibutuhkan secara hukum untuk memberikan informasi pribadi</p>
+<p style="text-align: justify;">- Eksternal</p>
+<p style="text-align: justify;margin-bottom: 0px;">Kami mungkin akan memberikan informasi Anda kepada pihak ketiga yang berhubungan dengan kami untuk menjalankan layanan atas nama kami, sebagai contoh, membagikan informasi logistik: pemenuhan dan pengiriman paket, penerimaan paket, memungkinkan akses ke situs-situs afiliasi bisnis, dst. Namun, kami tidak akan menjual atau meminjamkan informasi Anda kepada pihak ketiga kecuali kami meminta izin kepada Anda terlebih dahulu</p>
+<p style="text-align: justify;margin-bottom: 0px;">- Retensi Data</p>
+<p style="text-align: justify;">Kami akan menjaga dan menahan informasi Anda selama akun ada masih aktif atau kami masih berkewajiban untuk memberikan layanan kepada Anda. Kami juga akan menjaga data Anda sesuai dengan kepatuhan kami akan tanggung jawab hukum.</p>
+<p style="text-align: justify;">Kami akan meminta persetujuan Anda sebelum melepaskan informasi mengenai Anda kepada pihak ketiga diluar yang kami sebutkan di atas.</p>
+<p style="text-align: justify;">&nbsp;</p>
+<h2>Keamanan dan Perlindungan informasi pribadi Anda</h2>
+<p style="text-align: justify;">Situs web kami dijaga dan dienkripsi menggunakan teknologi SSL (Secure Socket Layer). Kami mengambil beberapa langkah di dalam melindungi informasi pribadi Anda di dalam fasilitas kami untuk melindungi informasi pribadi Anda dari akses dan penggunaan yang tidak sah. Sementara kami menggunakan standar industri untuk melindungi informasi pribadi Anda, kami tidak dapat menjamin keamanan yang lengkap atas informasi pribadi Anda. Kami juga akan melindungi informasi pribadi Anda dengan menggunakan kontrol atas kata sandi yang kami minta untuk dijaga kerahasiaannya. Kami tidak akan pernah meminta kata sandi Anda, dan Anda dapat menggantinya kapan saja dibawah &ldquo;Basic Account&rdquo;.</p>
+<p>&nbsp;</p>
+<h2>Anak-anak dan Privasi</h2>
+<p style="text-align: justify;">Situs web kami tidak ditargetkan atau ditujukan untuk menarik anak-anak dibawah usia 18 tahun. Kami tidak mengetahui bahwa kami mengumpulkan informasi pribadi dari anak-anak di bawah usia 18 tahun atau meminta mereka untuk mengirimkan informasi pribadi. Apabila Anda di bawah usia 18 tahun, Anda diwajibkan untuk menggunakan situs web kami dibawah pengawasan orang tua atau wali.</p>
+<p>&nbsp;</p>
+<h2>Situs Pihak Ketiga</h2>
+<p style="text-align: justify;">Situs web kami berisi link ke situs-situs yang dioperasikan oleh perusahaan lain. Kami tidak akan membagikan informasi pribadi dengan situs-situs tersebut (kecuali kami telah meminta izin dari Anda seperti yang disebutkan di atas) dan kami tidak bertanggung jawab atas praktek kebijakan privasi mereka.</p>
+<p style="text-align: justify;">Kami menyarankan Anda untuk mengecek kebijakan aplikasi yang dijalankan oleh situs web pihak ketiga untuk menentukan bagaimana mereka akan menangani informasi yang dikumpulkan dari Anda.</p>
+<p>&nbsp;</p>
+<h2>Transisi bisnis</h2>
+<p style="text-align: justify;">Di dalam situasi ketika kami di dalam transisi bisnis, seperti merger, akuisisi oleh perusahaan lain, atau penjualan dari sebagian asset, informasi pribadi Anda mungkin ada diantara asset yang ditransfer. Anda akan diberitahu melalui pemberitahuan yang jelas di situs web kami selama 30 hari apabila terjadi perubahan kontrol atau kepemilikan atas informasi pribadi Anda.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h1><strong>Lampiran 2 - Syarat </strong><strong>Aplikasi</strong></h1>
+<ol style="margin-left: 25px;">
+<li style="text-align: justify;">Penggunaan Aplikasi <strong>RUMAHTINGGAL.id</strong>. Anda diperbolehkan untuk menggunakan Aplikasi <strong>RUMAHTINGGAL.id</strong> untuk tujuan yang memampukan Anda untuk menggunakan dan menikmati Layanan <strong>RUMAHTINGGAL.id</strong>, dan seperti yang diizinkan sesuai dengan syarat dan ketentuan, syarat Aplikasi dan syarat layanan ini. &nbsp;Anda tidak diperbolehkan menggabungkan bagian mana pun dari Aplikasi <strong>RUMAHTINGGAL.id</strong> ke dalam program Anda atau menyatukan bagian manapun dan dikombinasikan dengan program Anda sendiri, mengirimkan untuk layanan lainnya, atau menjual, menyewakan, lease, meminjamkan, mendistribusikan atau mensublisensikan Aplikasi <strong>RUMAHTINGGAL.id</strong> atau mengalihkan hak dari Aplikasi <strong>RUMAHTINGGAL.id</strong> secara keseluruhan atau sebagian. Anda tidak diperbolehkan menggunakan Aplikasi <strong>RUMAHTINGGAL.id</strong> untuk tujuan illegal apapun. Anda dan <strong>RUMAHTINGGAL.id</strong> setuju untuk mengesampingkan ketentuan yang diatur di dalam pasal 1266KUHPerdata Indonesia, karena itu kami dapat berhenti memberikan Aplikasi <strong>RUMAHTINGGAL.id</strong> dan kami dapat menghentikan hak Anda untuk menggunakan Aplikasi <strong>RUMAHTINGGAL.id</strong> sewaktu-waktu tanpa diperlukannya persetujuan dari Anda dan/atau pengadilan atau instistusi lainnya di Republik Indonesia. Hak Anda untuk menggunakan Aplikasi <strong>RUMAHTINGGAL.id</strong> akan secara otomatis dihentikan tanpa ada peringatan apabila Anda gagal untuk tunduk dan mengikuti ketentuan ini. Tambahan syarat pihak ketiga termasuk di dalam atau didistribusikan dengan Aplikasi <strong>RUMAHTINGGAL.id</strong> yang secara spesifik diidentifikasikan di dokumentasi terkait dokumentasi akan dijalankan di dalam Aplikasi <strong>RUMAHTINGGAL.id</strong> tersebut dan akan mengatur penggunaan aplikasi di dalam situasi konflik terhadap syarat dan ketentuan ini. Semua aplikasi yang digunakan didalam <strong>RUMAHTINGGAL.id</strong> adalah property dari <strong>RUMAHTINGGAL.id</strong> atau penyedia softwarenya dan dilindungi oleh hak milik kekayaan intelektual Indonesia dan/atau Internasional.</li>
+<li style="text-align: justify;">Kegunaan dari layanan pihak ketiga. Ketika Anda menggunakan Aplikasi <strong>RUMAHTINGGAL.id</strong>, Anda juga mungkin menggunakan layanan dari satu atau lebih pihak ketiga, seperti wireless carrier atau penyedia platform mobile. Penggunaan Anda terhadap layanan pihak ketiga tersebut akan menggunakan kebijakan, syarat dan ketentuan, dan biaya yang didasarkan atas pihak ketiga tersebut.</li>
+<li style="text-align: justify;">Reverse Engineering tidak diperbolehkan. Anda tidak diperbolehkan dan tidak diperkenankan untuk mendorong, membantu, atau mengotorisasi orang lain untuk menyalin, memodifikasi, reverse engineer,&nbsp;menguraikan, atau membongkar atau mengutak-atik Aplikasi <strong>RUMAHTINGGAL.id</strong> baik secara keseluruhan maupun sebagian, atau pekerjaan turunan dari Aplikasi <strong>RUMAHTINGGAL.id</strong>.</li>
+<li style="text-align: justify;">Pembaruan. Untuk menjaga Aplikasi <strong>RUMAHTINGGAL.id</strong> tetap terbaru, kami memberikan pilihan pembaruan otomatis atau manual kapan pun dan tanpa pemberitahuan sebelumnya.</li>
+<li style="text-align: justify;">Regulasi ekspor; Pengguna Akhir Pemerintah. Anda harus mematuhi semua batasan dan regulasi ekspor dan ekspor ulang dari Kementerian Perdagangan, Kementerian Keuangan, dan otoritas lainnya di Republik Indonesia yang berhubungan dengan Aplikasi <strong>RUMAHTINGGAL.id</strong>.</li>
+</ol>
+<p style="text-align: justify;">&nbsp;</p>
+<h1><strong>Kebijakan Konten</strong></h1>
+<ol style="margin-left: 25px;">
+<li style="text-align: justify;"><strong>Definisi Konten Anda</strong>. <strong>RUMAHTINGGAL.id</strong> menyediakan platform untuk profesional (arsitek, desainer interior, kontraktor) menampilkan&nbsp;<strong>Konten Anda</strong>&nbsp;berupa portofolio materi foto, nama/brand/logo perusahaan/institusi, deskripsi karya desain beserta data pelengkap, alamat kantor perusahaan/institusi, official website perusahaan/institusi, dan link social media.</li>
+<li style="text-align: justify;"><strong>RUMAHTINGGAL.id</strong> mengharapkan pengguna untuk menghormati hak kekayaan intelektual pemilik desain dan project. Pengguna yang mengunggah konten telah menyatakan dan menjamin bahwa mereka telah mengizinkan <strong>RUMAHTINGGAL.id</strong> menggunakan kontennya di platform <strong>RUMAHTINGGAL.id</strong>, afiliasi, dan media partner.</li>
+<li style="text-align: justify;"><strong>Lisensi dan Izin untuk Menggunakan Konten Anda</strong>. Anda dengan ini memberikan izin kepada kami dan afiliasi kami, tanpa kompensasi kepada Anda atau orang lain, untuk menggunakan, memproses, mengadaptasi, menampilkan kepada publik, memodifikasi, menerbitkan, mentransmisikan, dan mendistribusikan Konten Anda beserta bagiannya, dalam format, media, atau metode distribusi apa pun.</li>
+<li style="text-align: justify;"><strong>Kepemilikan Konten Anda</strong>. <strong>RUMAHTINGGAL.id</strong> mengakui dan menghormati pemilik desain dan project sebagai Pencipta dan Pemegang Hak Cipta karya desain, dan bahwa tidak ada kepemilikan hak cipta tersebut dipindah-tangankan kepada <strong>RUMAHTINGGAL.id</strong> berdasarkan Perjanjian ini. Oleh karena itu, <strong>RUMAHTINGGAL.id</strong> selalu menyertakan pencantuman link ataupun nama pemilik desain dan project dalam publikasi. Anda selanjutnya menyetujui dan mengizinkan kami untuk menggunakan Konten Anda dengan cara apa pun yang kami anggap pantas dan sesuai keperluan.&nbsp;<strong>Adapun</strong>, <strong>RUMAHTINGGAL.id</strong> mencantumkan keterangan di antaranya materi foto atau nama/brand/logo perusahaan/institusi, atau deskripsi karya desain atau data pelengkap, atau official website perusahaan/institusi, atau link social media, atau link account Anda yang sudah aktif di <strong>RUMAHTINGGAL.id</strong>.</li>
+<li style="text-align: justify;"><strong>Tanggung Jawab Anda untuk Konten Anda</strong>. Dengan memposting, mengunggah, atau mengirimkan Konten Anda kepada pihak <strong>RUMAHTINGGAL.id</strong>, Anda menyatakan dan menjamin kepada kami bahwa Anda memiliki hak kepemilikan, atau Anda telah memperoleh semua lisensi atau izin yang diperlukan dari pihak terkait, untuk menggunakan Konten Anda kepada media apa pun. Ini termasuk mendapatkan hak untuk memberi kami hak untuk menggunakan Konten Anda sesuai dengan Perjanjian ini.<br /> Anda menerima tanggung jawab penuh untuk menghindari pelanggaran terhadap hak kekayaan intelektual atau hak pribadi orang lain sehubungan dengan Konten Anda. Anda bertanggung jawab untuk memastikan bahwa Konten Anda tidak melanggar Kebijakan Konten, ataupun Kebijakan Hak Cipta dan Merek Dagang, atau hukum atau peraturan apa pun yang berlaku.</li>
+<li style="text-align: justify;"><strong>Konsekuensi</strong>. Kami berhak menghapus Konten Anda, secara keseluruhan atau sebagian, dengan alasan apa pun (yang mungkin termasuk pelanggaran terhadap Kebijakan Konten, ataupun Kebijakan Hak Cipta dan Merek Dagang, atau hukum atau peraturan apa pun yang berlaku). Kami berhak untuk menghapus Konten Anda, secara keseluruhan atau sebagian, yang Anda kirimkan dengan alasan apa pun tanpa pemberitahuan. Kami tidak menjamin bahwa kami akan mempublikasikan semua Konten Anda. Jika Anda ingin mempublikasikan ulasan, persyaratannya akan diatur berdasarkan kesepakatan.</li>
+</ol>
+</div>
+</section>
