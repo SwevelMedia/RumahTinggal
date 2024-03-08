@@ -31,8 +31,8 @@
 
 <nav class="navbar navbar-expand-lg bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="<?php echo base_url('assets/demo/img/logo.png'); ?>" width="60px" alt="">
+        <a class="navbar-brand" href="<?php echo base_url(); ?>">
+            <img href="base_url" src="<?php echo base_url('assets/demo/img/logo.png'); ?>" width="60px" alt="">
 
         </a>
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
