@@ -301,7 +301,6 @@ class MidtransCobaController extends CI_Controller
         $status_transaksi = $cekStatus->transaction_status;
 
         $invoice = $this->PembayaranModel->getInvoiceTagihan($orderId)->row();
-
         if ($status_transaksi == 'pending' || $status_transaksi == 'challenge') {
 
             $data_bayar = array(
@@ -309,7 +308,6 @@ class MidtransCobaController extends CI_Controller
                 'kode_status' => '201',
                 'waktu_pembayaran' => ''
             );
-
             $this->PembayaranModel->ubahStatusPembayaran($data_bayar);
             $this->kirimInvoice($invoice->no_invoice, $invoice->nama_akun, $invoice->email, $invoice->nama_rumah, $invoice->kode_status);
         } else if ($status_transaksi == 'settlement' || $status_transaksi == 'capture') {
@@ -318,11 +316,16 @@ class MidtransCobaController extends CI_Controller
                 'kode_status' => '200',
                 'waktu_pembayaran' => $cekStatus->settlement_time
             );
-            $this->generateInvoiceTagihan($orderId);
+            // $this->generateInvoiceTagihan($orderId); // ini buat apa ????
             $this->PembayaranModel->ubahStatusPembayaran($data_bayar);
-            $this->kirimInvoice($invoice->no_invoice, $invoice->nama_akun, $invoice->email, $invoice->nama_rumah, $invoice->kode_status);
-            $dokumen = $this->PembayaranModel->getDokumenByOrderId($orderId);
 
+            // kirim email invoice
+            $this->kirimInvoice($invoice->no_invoice, $invoice->nama_akun, $invoice->email, $invoice->nama_rumah, $invoice->kode_status);
+
+            //dapatkan dokumen laporan desain
+            $dokumen = $this->PembayaranModel->getDokumenByOrderId($orderId)->row();
+
+            //kirim dokumen ke email
             $this->kirimEmailDokumen($orderId, $invoice, $dokumen);
             $this->kirimWhatsapp($invoice->no_wa, "Terima kasih telah melakukan pembayaran untuk Invoice Anda dengan nomor #" . $invoice->no_invoice . ".\nAnda telah membeli Desain " . $invoice->nama_rumah . ".\nDokumen anda dapat diunduh pada link berikut ini : https://rumahtinggal.id/assets/dokumen/dokumen/" . $dokumen->laporan_desain . "\nSelamat membangun rumah sesuai yang diidamkan melalui Rumahtinggal.id.\n\nHarga Lebih Hemat, Desain Lebih Akurat");
             $this->kirimWhatsapp('628112585566', "Terima kasih telah melakukan pembayaran untuk Invoice dengan nomor #" . $invoice->no_invoice . ".\nAnda telah membeli Desain " . $invoice->nama_rumah . ".\nDokumen anda dapat diunduh pada link berikut ini : https://rumahtinggal.id/assets/dokumen/dokumen/" . $dokumen->laporan_desain . "\nSelamat membangun rumah sesuai yang diidamkan melalui Rumahtinggal.id.\n\nHarga Lebih Hemat, Desain Lebih Akurat");
@@ -356,7 +359,7 @@ class MidtransCobaController extends CI_Controller
     public function kirimWhatsapp($phone, $message)
     {
         $curl = curl_init();
-        $token = "Nn1bkizlducS7Qwbf9BExoMCsYOEmDwR2y1rrrl8hdzm745Xmsw0mxMzCcoA0orB";
+        $token = "wBk7ogoSnt9ufoeEIjIrm6LmSevuxtxaRMvcfbi0l5CNb818hxYcjNN94heKR1k9";
 
         $data = [
             'phone' => $phone,
@@ -373,12 +376,12 @@ class MidtransCobaController extends CI_Controller
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($curl, CURLOPT_URL, "https://console.wablas.com/api/send-message");
+        curl_setopt($curl, CURLOPT_URL, "https://jkt.wablas.com/api/send-message");
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
         $result = curl_exec($curl);
         curl_close($curl);
-
+        log_message('error', 'hasil kirim whatsapp' . var_export($result, true));
         return true;
     }
 
@@ -390,11 +393,11 @@ class MidtransCobaController extends CI_Controller
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com'; //'tls://smtp.gmail.com'; //
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'mail@rumahtinggal.id';
-        $mail->Password   = 'C%87SfcjjaHb*te';
+        $mail->Username   = 'f0220002_nisrinayuliasetyawati@student.utp.ac.id';
+        $mail->Password   = 'ahnarjiocdnbayrk';
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
-        $mail->setFrom('mail@rumahtinggal.id', 'Dokumen Desain RumahTinggal.id');
+        $mail->setFrom('f0220002_nisrinayuliasetyawati@student.utp.ac.id', 'Dokumen Desain RumahTinggal.id');
         $mail->addAddress($invoice->email);
         $mail->AddCC('mail.rumahtinggal@gmail.com');
         // $mail->AddCC('masuhudi@gmail.com');
@@ -750,9 +753,11 @@ class MidtransCobaController extends CI_Controller
         $mail->Body = $mailContent;
         $mail->AddAttachment($_SERVER['DOCUMENT_ROOT'] . '/assets/dokumen/dokumen/' . $dokumen->laporan_desain, 'Laporan Desain.pdf');
 
-        //$mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 2;
         $terkirim = $mail->send();
-        if (!$terkirim) echo "Terjadi kesalahan saat pengiriman email: " . $mail->ErrorInfo;
+        if (!$terkirim) {
+            echo "Terjadi kesalahan saat pengiriman email: " . $mail->ErrorInfo;
+        }
 
         return $terkirim;
     }
@@ -879,13 +884,20 @@ class MidtransCobaController extends CI_Controller
         }
 
         $data['no_invoice'] = '#' . $invoice->no_invoice;
-        $data['nama_akun'] = $invoice->nama_akun;
+        $data['nama_customer'] = $invoice->nama_akun; // sesuaikan dengan view pembelian/invoice.php
+        $data['alamat'] = $invoice->alamat_pengiriman;
         $data['no_wa'] = $invoice->no_wa;
         $data['email'] = $invoice->email;
-        $data['tgl_invoice'] = $this->formatTanggal($invoice->tgl_pembelian);
+        $data['tgl_issue'] = $this->formatTanggal($invoice->tgl_pembelian);
+        $data['tgl_expired'] = $this->formatTanggal($invoice->tgl_kadaluarsa);
         $data['nama_rumah'] = 'DESAIN ' . $invoice->nama_rumah;
+        $data['id_rumah'] = $invoice->id_rumah;
+        $data['paket'] = $invoice->jenis_paket;
+        $data['sub_total'] = number_format($invoice->sub_total, 0, ",", ".");
         $data['harga'] = number_format($invoice->harga, 0, ",", ".");
         $data['ppn'] = number_format($invoice->ppn, 0, ",", ".");
+        $data['diskon'] = number_format($invoice->diskon, 0, ",", ".");
+        $data['promo'] = '(Disc. ' . $invoice->pros_diskon . '%)';
 
         if ($invoice->diskon > 0) {
             $data['pros_diskon'] = '(Disc. ' . $invoice->pros_diskon . '%)';
