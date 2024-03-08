@@ -651,7 +651,7 @@
                                 </div>
                                 <div class="mb-2">
                                     <label for="exampleInputEmail1" class="form-label">NOMOR TELEPON</label>
-                                    <input type="text" class="form-control" name="non_wa" value="<?= $profil->no_wa ?>" />
+                                    <input type="text" class="form-control" name="no_wa" value="<?= $profil->no_wa ?>" />
                                 </div>
                                 <div class="mb-2">
                                     <label for="textarea" class="form-label">ALAMAT</label>
@@ -712,7 +712,7 @@
         owlProfil.owlCarousel({
             items: 1,
             margin: 20,
-            loop: true,
+            loop: false,
             nav: true,
             autoplay: true,
             autoplayTimeout: 5000,
