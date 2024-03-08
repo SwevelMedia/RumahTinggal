@@ -93,13 +93,15 @@ class CustomerModel extends CI_Model
 
     function getTransaksi($id_customer)
     {
-        $this->db->select('pembelian.*, rumah.nama_rumah, rumah.foto, ROUND(rumah.lebar_lahan) AS lebar_lahan, ROUND(rumah.panjang_lahan) AS panjang_lahan, ROUND(rumah.luas_bangunan) AS luas_bangunan, rumah.lantai, rumah.kamar_tidur, rumah.toilet, arsitek.id_arsitek, arsitek.nama_arsitek, pembelian.no_invoice, CASE WHEN pembelian.paket = 1 THEN "Lite" ELSE "Premium" END AS jenis_paket', FALSE)
+        $this->db->select('pembelian.*, rumah.nama_rumah, rumah.foto, ROUND(rumah.lebar_lahan) AS lebar_lahan, ROUND(rumah.panjang_lahan) AS panjang_lahan, ROUND(rumah.luas_bangunan) AS luas_bangunan, MAX(ruang_rumah.lantai) AS lantai, SUM(CASE WHEN ruang_rumah.id_ruang = 7 THEN 1 ELSE 0 END) AS kamar_tidur, SUM(CASE WHEN ruang_rumah.id_ruang = 14 THEN 1 ELSE 0 END) AS toilet, arsitek.id_arsitek, arsitek.nama_arsitek, pembelian.no_invoice, CASE WHEN pembelian.paket = 1 THEN "Lite" ELSE "Premium" END AS jenis_paket', FALSE)
             ->from($this->tabel_pembelian)
             ->where('id_customer', $id_customer)
             ->where('(status <> 1 AND tgl_expired > NOW() OR status = 1)', NULL, FALSE)
             ->join('rumah', 'rumah.id_rumah = pembelian.id_rumah')
             ->join('arsitek', 'rumah.id_arsitek = arsitek.id_arsitek')
-            ->order_by("tgl_pembelian", "desc");
+            ->join('ruang_rumah', 'ruang_rumah.id_rumah = pembelian.id_rumah')
+            ->order_by("tgl_pembelian", "desc")
+            ->group_by('pembelian.id_pembelian, rumah.nama_rumah, rumah.foto, ROUND(rumah.lebar_lahan), ROUND(rumah.panjang_lahan), ROUND(rumah.luas_bangunan), arsitek.id_arsitek, arsitek.nama_arsitek, pembelian.no_invoice, jenis_paket');
 
         $query = $this->db->get();
         return $query->result();
@@ -197,7 +199,6 @@ class CustomerModel extends CI_Model
     function ubahCustomer($data)
 
     {
-
 
 
         if ($data['nama_customer'] == null || $data['nama_customer'] == "") {
@@ -584,7 +585,7 @@ class CustomerModel extends CI_Model
 
     {
 
-        return $this->db->query("SELECT id_customer,nama_customer,no_wa FROM customer WHERE id_customer={$id_customer} AND (nama_customer IS NULL OR no_wa='')");
+        return $this->db->query("SELECT id_customer,nama_customer,no_wa,alamat FROM customer WHERE id_customer={$id_customer} AND (nama_customer IS NULL OR no_wa='')");
     }
 
 
