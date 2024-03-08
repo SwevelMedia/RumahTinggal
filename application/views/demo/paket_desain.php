@@ -1444,7 +1444,7 @@
 
     });
 
-    function checkProfil() {
+    function checkProfil(paket, id_rumah) {
 
         var id_customer = Cookies.get('id_customer', {
 
@@ -1465,12 +1465,11 @@
             success: function(data) {
 
                 if (data == null) {
-
-                    $("#notifikasiPO").modal('show');
+                    // $("#notifikasiPO").modal('show');
 
                     $("#disable-modal-pembelian").modal('show');
 
-                    $('#modalOrder').modal('show');
+                    showModalProsesBayar(paket, id_rumah);
 
                 } else if (data.no_wa == null || data.no_wa == "") {
 
@@ -1482,8 +1481,11 @@
 
                     $('#modalOrder').modal('hide');
 
-                    $('#modalLengkapiProfil').modal('show');
+                    $('#modalProsesBayar').modal('hide');
 
+                    $('#modalLengkapiProfil').modal('show');
+                    $('#no_telp').val(data.no_wa)
+                    $('#alamat_profil').val(data.alamat)
                 }
 
             }
@@ -1508,8 +1510,8 @@
                 success: function(data) {
                     $('#modalLengkapiProfil').modal('hide');
                     // $("#notifikasiPO").modal('show');
-                    // $("#disable-modal-pembelian").modal('show');
-                    // $('#modalOrder').modal('show');
+                    $("#disable-modal-pembelian").modal('show');
+                    showModalProsesBayar(1, <?= $id_rumah ?>)
                     $('#alamat_pengiriman').val(alamat);
 
                 },
@@ -1527,14 +1529,78 @@
 
         //window.location.href = "<?= base_url('checkout/') ?>" + paket + "/" + id_rumah;
 
-        //sessionStorage.setItem('paket', paket);
+        sessionStorage.setItem('paket', paket);
 
         //$("#notifikasiPO").show();
 
         //$("#disable-modal-pembelian").show();
 
-        checkProfil();
+        checkProfil(paket, id_rumah);
 
+        // $.ajax({
+
+        //     url: "<?= base_url('checkout/') ?>" + paket + "/" + id_rumah,
+
+        //     type: "POST",
+
+        //     dataType: "JSON",
+
+        //     success: function(data) {
+        //         $('#modalProsesBayar').modal('show');
+        //         $('#nama-pembeli').text('Halo ' + data.nama_customer);
+        //         $('#nama-rumah').text(data.nama_rumah);
+        //         $('#harga-desain').text('Rp' + data.harga);
+        //         $('#harga-desain1').text('Rp' + data.harga);
+        //         $('#tgl_beli').text(data.tgl_pembelian);
+
+
+        //         // $('#tgl_beli').text(data.tgl_pembelian);
+        //         $('#jenis-paket').text('Paket ' + data.paket);
+        //         $('#batas-waktu').text('Pesanan Anda akan dibatalkan pada ' + data.batas_transfer);
+        //         if (data.konsep && data.konsep.foto) {
+        //             // Menggunakan base_url untuk mendapatkan URL lengkap
+        //             var fotoKonsepUrl = '<?= base_url('assets/img/konsep/') ?>' + data.konsep.foto;
+
+        //             // Perbarui atribut src
+        //             $('#foto-rumah').attr('src', fotoKonsepUrl);
+        //         } else {
+        //             console.error('Data konsep tidak valid.');
+        //         }
+
+        //         $('#nama-arsitek').text('By ' + data.nama_arsitek);
+
+        //         $('#sub-total').text(data.harga);
+
+        //         $('#ppn').text(data.ppn);
+
+        //         $('#total').text(data.total);
+
+        //         $('#alamat_pengiriman').val(data.alamat);
+
+        //         // $('#modalOrder').modal('show');
+
+        //         // $('#modalOrder').modal('toggle');
+
+        //         // $('#pop_up_website_coba').modal('show');
+
+        //         //$('#modalOrder').modal('hide');
+
+        //     },
+
+        //     error: function(jqXHR, textStatus, errorThrown) {
+
+        //         modalLogin();
+
+        //     }
+
+        // });
+
+
+
+    }
+
+    function showModalProsesBayar(paketawal, id_rumah) {
+        var paket = sessionStorage.getItem('paket');
         $.ajax({
 
             url: "<?= base_url('checkout/') ?>" + paket + "/" + id_rumah,
@@ -1592,8 +1658,8 @@
             }
 
         });
-
     }
+
 
     // $('#lanjutBayar').on('click', function() {
     //     // Tampilkan modal notifikasi (jika diperlukan)
@@ -2000,10 +2066,10 @@
                 orderId: dataJSON.order_id
             },
             success: function(data) {
-                window.location.href = "<?php echo base_url() ?>demo/invoice/" + dataJSON.order_id;
+                window.location.href = "<?php echo base_url() ?>invoice/" + dataJSON.order_id;
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                window.location.href = "<?php echo base_url() ?>demo/invoice/" + dataJSON.order_id;
+                window.location.href = "<?php echo base_url() ?>invoice/" + dataJSON.order_id;
             }
         });
     }
