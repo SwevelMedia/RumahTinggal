@@ -94,7 +94,7 @@ class AssessmentModel extends CI_Model
 
     public function getRuangLain()
     {
-        return $this->db->query("SELECT * FROM ruang");
+        return $this->db->query("SELECT * FROM ruang where ruang not in ('Kamar Tidur', 'Klinik', 'Apotik', 'Toko', 'Toilet', 'Toilet dalam', 'Ruang Panel')");
     }
 
     public function getGayaDesain()
@@ -104,7 +104,12 @@ class AssessmentModel extends CI_Model
 
     public function getMaterialBangunan()
     {
-        return $this->db->query("SELECT material.*, bagian_rumah.bagian_rumah FROM material,bagian_rumah WHERE material.id_bagian_rumah = bagian_rumah.id_bagian_rumah");
+        return $this->db->query("SELECT material.*, bagian_rumah.bagian_rumah FROM material,bagian_rumah WHERE material.id_bagian_rumah = bagian_rumah.id_bagian_rumah AND material.urut in (1,2,3,4,5,6,20,22,23,33,34,35,40,39,43,47,49,50)");
+    }
+
+    public function getBagianRumah()
+    {
+        return $this->db->query("SELECT * from bagian_rumah");
     }
 }
 
