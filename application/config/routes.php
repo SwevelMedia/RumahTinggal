@@ -134,6 +134,8 @@ $route['sampel_desain_coba'] = 'SampleProjectController/sampel_desain_coba';
 
 $route['assessment'] = 'AssessmentController/index';
 
+$route['demo_assessment'] = 'DemoAssessmentController/index';
+
 $route['api/getKatalogProduk'] = 'DesainController/getKatalogProduk';
 
 $route['api/getSummaryKatalogProduk'] = 'DesainController/getSummaryKatalogProduk';
@@ -141,6 +143,14 @@ $route['api/getSummaryKatalogProduk'] = 'DesainController/getSummaryKatalogProdu
 $route['api/getKatalogProdukPopular'] = 'DesainController/getKatalogProdukPopular';
 
 $route['api/getKatalogProdukFavorit'] = 'DesainController/getKatalogProdukFavorit';
+
+$route['api/filterProduk'] = 'DesainController/filterProduk';
+
+// search
+
+// $route['api/simpanTerm/(:any)'] = 'SearchController/simpanTerm/$1';
+
+// $route['api/getFrequentlySearchedTerms/(:any)'] = 'SearchController/getFrequentlySearchedTerms/$1';
 
 // detail
 
@@ -435,7 +445,8 @@ $route['api/getCountDownloadDokumen/(:any)'] = 'DesainController/getCountDownloa
 
 //demo
 $route['demo'] = 'DemoController/index';
-$route['detail_koleksi/(:any)'] = 'DemoController/detail_koleksi/$1';
+// $route['detail_koleksi/(:any)'] = 'DemoController/detail_koleksi/$1';
+$route['detail_koleksi/(:any)'] = 'DetailController/detail_new/$1';
 $route['ubah_profil_mobile/(:any)'] = 'DemoController/profilMobile/$1';
 $route['ubah_sandi_mobile'] = 'DemoController/UbahSandiMobile';
 $route['cara_kerja'] = 'DemoController/caraKerja';
