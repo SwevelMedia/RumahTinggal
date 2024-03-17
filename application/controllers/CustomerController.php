@@ -154,7 +154,6 @@ class CustomerController extends CI_Controller
   public function simpanDataDownload($id_rumah, $id_customer)
   {
     parse_str(file_get_contents('php://input'), $data);
-    
     $response = $this->CustomerModel->simpanDataDownload($id_rumah, $id_customer, $data);
 
     $this->output
