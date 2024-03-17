@@ -199,53 +199,53 @@ $(document).ready(function () {
 	});
 });
 
-// Function to handle panjangLahan
-$("#kurang-panjang").click(function () {
-	let newValue = parseInt($("#panjangLahan").val()) - 1;
-	if (newValue >= 4) {
-		$("#panjangLahan").val(newValue);
-		$("#ubahPanjang").html(newValue);
-	}
-});
+// // Function to handle panjangLahan
+// $("#kurang-panjang").click(function () {
+// 	let newValue = parseInt($("#panjangLahan").val()) - 1;
+// 	if (newValue >= 4) {
+// 		$("#panjangLahan").val(newValue);
+// 		$("#ubahPanjang").html(newValue);
+// 	}
+// });
 
-$("#tambah-panjang").click(function () {
-	let newValue = parseInt($("#panjangLahan").val()) + 1;
-	if (newValue <= 20) {
-		$("#panjangLahan").val(newValue);
-		$("#ubahPanjang").html(newValue);
-	}
-});
+// $("#tambah-panjang").click(function () {
+// 	let newValue = parseInt($("#panjangLahan").val()) + 1;
+// 	if (newValue <= 20) {
+// 		$("#panjangLahan").val(newValue);
+// 		$("#ubahPanjang").html(newValue);
+// 	}
+// });
 
-$("#panjangLahan").change(function () {
-	let newValue = parseInt($("#panjangLahan").val());
-	if (newValue >= 4 && newValue <= 20) {
-		$("#ubahPanjang").html(newValue);
-	}
-});
+// $("#panjangLahan").change(function () {
+// 	let newValue = parseInt($("#panjangLahan").val());
+// 	if (newValue >= 4 && newValue <= 20) {
+// 		$("#ubahPanjang").html(newValue);
+// 	}
+// });
 
-// Function to handle lebarLahan
-$("#kurang-lebar").click(function () {
-	let newValue = parseInt($("#lebarLahan").val()) - 1;
-	if (newValue >= 6) {
-		$("#lebarLahan").val(newValue);
-		$("#ubahLebar").html(newValue);
-	}
-});
+// // Function to handle lebarLahan
+// $("#kurang-lebar").click(function () {
+// 	let newValue = parseInt($("#lebarLahan").val()) - 1;
+// 	if (newValue >= 6) {
+// 		$("#lebarLahan").val(newValue);
+// 		$("#ubahLebar").html(newValue);
+// 	}
+// });
 
-$("#tambah-lebar").click(function () {
-	let newValue = parseInt($("#lebarLahan").val()) + 1;
-	if (newValue <= 30) {
-		$("#lebarLahan").val(newValue);
-		$("#ubahLebar").html(newValue);
-	}
-});
+// $("#tambah-lebar").click(function () {
+// 	let newValue = parseInt($("#lebarLahan").val()) + 1;
+// 	if (newValue <= 30) {
+// 		$("#lebarLahan").val(newValue);
+// 		$("#ubahLebar").html(newValue);
+// 	}
+// });
 
-$("#lebarLahan").change(function () {
-	let newValue = parseInt($("#lebarLahan").val());
-	if (newValue >= 6 && newValue <= 30) {
-		$("#ubahLebar").html(newValue);
-	}
-});
+// $("#lebarLahan").change(function () {
+// 	let newValue = parseInt($("#lebarLahan").val());
+// 	if (newValue >= 6 && newValue <= 30) {
+// 		$("#ubahLebar").html(newValue);
+// 	}
+// });
 
 var baseUrl = $("#baseUrl").val();
 var images = [
