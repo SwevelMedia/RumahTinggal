@@ -1,28 +1,80 @@
+<style>
+    .irs {
+        width: 100%;
+    }
+
+    .irs--round .irs-line {
+        top: 33px;
+        height: 7px;
+        background-color: #dedede;
+        /* border: 1px solid #026CB6; */
+    }
+
+    .irs--round .irs-handle.state_hover,
+    .irs--round .irs-handle:hover {
+        box-shadow: #000;
+        background-color: #003A65;
+    }
+
+    /* .irs--round .irs-from::before,
+    .irs--round .irs-to::before,
+    .irs--round .irs-single::before {
+        border-top-color: #026CB6;
+    } */
+
+    .irs--round .irs-grid-text {
+        color: #000;
+        font-size: medium;
+    }
+
+    .irs--round .irs-bar {
+        top: 33px;
+        height: 7px;
+        background-color: #026CB6;
+    }
+
+    .irs--round .irs-handle {
+        background-color: #003A65;
+        cursor: pointer;
+        border: none;
+        box-shadow: none;
+        height: 20px;
+        width: 20px;
+    }
+</style>
+
 <div class="owl-carousel owl-theme owl-carousel-eight d-lg-none" id="caraouselTesti">
     <?php foreach ($produk_body as $item) { ?>
-        <div style="background-image: url('<?= base_url('assets/img/desain/' . $item->foto) ?>')" class="card-img-top bg-card"></div>
+        <div style="background-image: url('<?= base_url('assets/img/desain/' . $item->foto) ?>'); object-fit:cover" class="card-img-top bg-card"></div>
     <?php } ?>
 </div>
-<div class="py-5 bg-header-web" style="background-image:linear-gradient(to right, white , lightblue);">
-    <div class="container">
+<div class="py-5 bg-header-web overflow-hidden" style="background-image:radial-gradient(circle at -90%, white 50%, #53b4fc 100%);">
+    <div class="container px-4 px-lg-0">
         <div class="row">
             <!-- Bagian Kiri (Teks) -->
             <div class="col-lg-6 ms-lg-4">
-                <h1 class="fw-bold mb-3 text-primary">Dapatkan Desain</h1>
-                <h1 class="fw-bold mb-3 text-primary">Hunian Idaman Anda!</h1>
+                <h1 class="fw-bold mb-3 text-primary display-4">Dapatkan Desain</h1>
+                <h1 class="fw-bold mb-3 text-primary display-4">Hunian Idaman Anda!</h1>
                 <p class="mb-3">Bangun rumah lebih mudah bersama RumahTinggal.id</p>
                 <div class="row">
                     <div class="col-lg-9 mb-5">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="cari desain" />
-                            <button class="btn btn-primary" type="button" id="cari-desain"><i class="fas fa-search"></i></button>
-                        </div>
+                        <form onsubmit="event.preventDefault(); clickSearch(document.getElementById('textbox-cari-desain').value);">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Cari desain" id="textbox-cari-desain" />
+                                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+
                         <span class="fw-semibold">Populer: </span>
-                        <span class="badge bg-white text-dark border border-1 border-dark rounded-3">Rumah
-                            Minimalis</span>
-                        <span class="badge bg-white text-dark border border-1 border-dark rounded-3">Rumah Tropis</span>
+                        <!-- <?php foreach ($frequent_terms as $term) : ?>
+                            <div class="badge cursor-pointer bg-white text-dark border border-1 border-dark rounded-3" style="cursor: pointer;" onClick="clickSearch('<?php echo $term->term; ?>')"><?php echo $term->term; ?></div>
+                        <?php endforeach; ?> -->
+
+                        <div class="badge cursor-pointer bg-white text-dark border border-1 border-dark rounded-3" style="cursor: pointer;" onClick="clickSearch('tropis')">tropis</div>
+                        <div class="badge cursor-pointer bg-white text-dark border border-1 border-dark rounded-3" style="cursor: pointer;" onClick="clickSearch('minimalis')">minimalis</div>
+                        <div class="badge cursor-pointer bg-white text-dark border border-1 border-dark rounded-3" style="cursor: pointer;" onClick="clickSearch('modern')">modern</div>
                     </div>
-                    <div class="col-lg-10">
+                    <div class="col-xl-10">
                         <div class="card bg-white border-0 shadow-sm">
                             <div class="card-body" id="myCardBody">
                                 <div class="row">
@@ -32,7 +84,8 @@
                                                 <img src="<?php echo base_url('assets/gif/home.png'); ?>" width="50" height="50">
                                             </div>
                                             <div class="text-center text-lg-start">
-                                                <div class="fs-5 fw-semibold">999+</div>
+                                                <div class="fs-5 fw-semibold"><?php echo floor($jumlah_rumah / 10) * 10 . '+'; ?>
+                                                </div>
                                                 <small>Koleksi Desain</small>
                                             </div>
                                         </div>
@@ -43,7 +96,7 @@
                                                 <img src="<?php echo base_url('assets/gif/folder-download.png'); ?>" width="50" height="50">
                                             </div>
                                             <div class="text-center text-lg-start">
-                                                <div class="fs-5 fw-semibold">1000+</div>
+                                                <div class="fs-5 fw-semibold"><?php echo floor($jumlah_unduh / 100) * 100 . '+'; ?></div>
                                                 <small>Desain Diunduh</small>
                                             </div>
                                         </div>
@@ -54,7 +107,7 @@
                                                 <img src="<?php echo base_url('assets/gif/users.png'); ?>" width="50" height="50">
                                             </div>
                                             <div class="text-center text-lg-start">
-                                                <div class="fs-5 fw-semibold">10000+</div>
+                                                <div class="fs-5 fw-semibold"><?php echo floor($jumlah_pengunjung / 100) * 100 . '+'; ?></div>
                                                 <small>Pengunjung Aktif</small>
                                             </div>
                                         </div>
@@ -67,10 +120,10 @@
             </div>
 
             <!-- Bagian Kanan (Gambar) -->
-            <div class="col-lg-6">
+            <div class="col-lg-6 pe-0">
                 <input type="hidden" id="baseUrl" value="<?= base_url(); ?>">
                 <div class="slideshow d-none d-lg-block">
-                    <img src="<?php echo base_url('assets/demo/img/slide1.png'); ?>" alt="Gambar 1">
+                    <img class="img-fluid pb-xxl-4 w-100" src="<?php echo base_url('assets/demo/img/slide1.png'); ?>" alt="Gambar 1">
                 </div>
             </div>
         </div>
@@ -82,7 +135,7 @@
 <!--Temukan Desain start-->
 <div class="py-5">
     <div class="container">
-        <div class="row gx-lg-5">
+        <form class="row gx-lg-5" id="form-impian">
             <div class="col-12 mb-3">
                 <h1 class="fw-semibold text-center">Temukan Desain Impianmu</h1>
             </div>
@@ -90,58 +143,36 @@
                 <div class="mb-3">
                     <label for="panjangLahan" class="form-label fw-semibold d-block w-100">
                         <div class="d-flex justify-content-between">
-                            <div>Panjang Lahan (m)</div>
-                            <div><span id="ubahPanjang" class="badge bg-light text-dark">4</span> meter</div>
+                            <div>Panjang Lahan Minimal (m)</div>
+                            <div><span id="ubahPanjang" class="badge bg-light text-dark"><?= (int)$range_panjang_lahan->max_panjang_lahan ?></span> meter</div>
                         </div>
                     </label>
                     <div class="d-flex align-items-center gap-3">
-                        <div class="btn btn-outline-white border-dark border-2 rounded-circle ">
+                        <div class="btn btn-outline-white border-dark border-2 rounded-circle " onclick='handlePlusMinusLahan(".js-range-slider-panjang","minus")'>
                             <small id="kurang-panjang"><i class="fas fa-minus"></i></small>
                         </div>
 
-                        <input type="range" class="form-range" id="panjangLahan" min="4" max="20" value="4" step="1" />
-                        <div class="btn btn-outline-white border-dark border-2 rounded-circle ">
+                        <input type="text" class="js-range-slider-panjang" id="panjangLahan" name="panjang_lahan" value="" />
+                        <div class="btn btn-outline-white border-dark border-2 rounded-circle " onclick='handlePlusMinusLahan(".js-range-slider-panjang","plus")'>
                             <small id="tambah-panjang"><i class="fas fa-plus"></i></small>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-between px-5 mx-2">
-                        <div>4</div>
-                        <div>6</div>
-                        <div>8</div>
-                        <div>10</div>
-                        <div>12</div>
-                        <div>14</div>
-                        <div>16</div>
-                        <div>18</div>
-                        <div>20</div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="lebarLahan" class="form-label fw-semibold d-block w-100">
                         <div class="d-flex justify-content-between">
-                            <div>Lebar Lahan (m)</div>
-                            <div><span id="ubahLebar" class="badge bg-light text-dark">6</span> meter</div>
+                            <div>Lebar Lahan Minimal (m)</div>
+                            <div><span id="ubahLebar" class="badge bg-light text-dark"><?= (int)$range_lebar_lahan->max_lebar_lahan ?></span> meter</div>
                         </div>
                     </label>
                     <div class="d-flex align-items-center gap-3">
-                        <div class="btn btn-outline-white border-dark border-2 rounded-circle ">
+                        <div class="btn btn-outline-white border-dark border-2 rounded-circle " onclick='handlePlusMinusLahan(".js-range-slider-lebar","minus")'>
                             <small id="kurang-lebar"><i class="fas fa-minus"></i></small>
                         </div>
-                        <input type="range" class="form-range" id="lebarLahan" min="6" max="30" value="6" step="1" />
-                        <div class="btn btn-outline-white border-dark border-2 rounded-circle ">
+                        <input type="text" class="js-range-slider-lebar" id="lebarLahan" name="lebar_lahan" value="" />
+                        <div class="btn btn-outline-white border-dark border-2 rounded-circle " onclick='handlePlusMinusLahan(".js-range-slider-lebar","plus")'>
                             <small id="tambah-lebar"><i class="fas fa-plus"></i></small>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-between px-5 mx-2">
-                        <div>6</div>
-                        <div>9</div>
-                        <div>12</div>
-                        <div>15</div>
-                        <div>18</div>
-                        <div>21</div>
-                        <div>24</div>
-                        <div>27</div>
-                        <div>30</div>
                     </div>
                 </div>
             </div>
@@ -149,28 +180,22 @@
                 <div class="row">
                     <div class="form-group mb-3 col-6 col-lg-12">
                         <label for="jumlah_lantai" class="form-label fw-semibold">Gaya Desain</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="gaya">
                             <option selected>Pilih Gaya Desain</option>
-                            <option value="1">Modern</option>
-                            <option value="2">Minimalis</option>
-                            <option value="3">Industrial</option>
-                            <option value="4">Contemporer</option>
-                            <option value="5">Tropical</option>
-                            <option value="6">Tradisional</option>
-                            <option value="7">Classic</option>
-                            <option value="8">Scandinavian</option>
-                            <option value="9">Asian</option>
+                            <?php foreach ($gaya_desain as $gaya) : ?>
+                                <option value="<?php echo $gaya->id_gaya_desain; ?>"><?php echo $gaya->gaya_desain; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group mb-3 col-6 col-lg-12">
                         <label for="jumlah_lantai" class="form-label fw-semibold">Jumlah Lantai</label>
-                        <input type="number" class="form-control" id="jumlah_lantai" placeholder="Jumlah Lantai" />
+                        <input type="number" class="form-control" id="jumlah_lantai" name="lantai" placeholder="Jumlah Lantai" />
                     </div>
                 </div>
-                <button class="btn btn-primary d-lg-block d-none" type="button" id="button-addon2">Cari Desain<i class=" ms-2 fas fa-search"></i></button>
-                <button class="btn btn-primary d-block w-100 d-lg-none" type="button" id="button-addon2">Cari Desain<i class=" ms-2 fas fa-search"></i></button>
+                <button class="btn btn-primary d-lg-block d-none" id="button-addon2" type="submit">Cari Desain<i class=" ms-2 fas fa-search"></i></button>
+                <button class="btn btn-primary d-block w-100 d-lg-none" id="button-addon2" type="submit">Cari Desain<i class=" ms-2 fas fa-search"></i></button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <div class="py-5 bg-light">
@@ -184,7 +209,7 @@
         <div class="position-relative">
             <div class="card-container owl-carousel owl-theme owl-carousel-one">
                 <?php foreach ($produk_favorit as $item) { ?>
-                    <div class="card border-0 shadow-sm">
+                    <div class="card border-0 shadow-sm mb-2">
                         <a href="javascript:void(0)" class="image" onclick="detailRumah(<?= $item->id_rumah ?>)">
                             <div style="background-image: url('<?= base_url('assets/img/desain/' . $item->foto) ?>')" class="card-img-top bg-card-produk"></div>
                         </a>
@@ -294,11 +319,11 @@
             </div>
         </div>
         <div class="position-relative">
-            <div class="card-container owl-carousel owl-theme owl-carousel-two">
+            <div class="card-container owl-carousel owl-theme owl-carousel-two card-group">
                 <?php foreach ($produk_terbaru as $item) { ?>
-                    <div class="card border-0 shadow-sm">
+                    <div class="card border-0 shadow-sm mb-2">
                         <a href="javascript:void(0)" class="image" onclick="detailRumah(<?= $item->id_rumah ?>)">
-                            <div style="background-image: url('<?= base_url('assets/img/desain/' . $item->foto) ?>')" class="card-img-top bg-card-produk"></div>
+                            <div style="background-image: url('<?= base_url('assets/img/desain/' . $item->foto) ?>')" class="card-img-top bg-card-produk "></div>
                         </a>
                         <div class="card-body">
                             <h5 class="card-title mb-0 fw-semibold" onclick="detailRumah(<?= $item->id_rumah ?>)">
@@ -575,7 +600,7 @@
     </div>
 </div>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
 <script>
     $(document).ready(function() {
         getMaterial();
@@ -593,10 +618,110 @@
     //     });
     // });
 
+    $(".js-range-slider-panjang").ionRangeSlider({
+        skin: "round",
+        min: <?= $range_panjang_lahan->min_panjang_lahan ?>,
+        max: <?= $range_panjang_lahan->max_panjang_lahan ?>,
+        grid: true,
+        grid_num: 9,
+        from: <?= $range_panjang_lahan->max_panjang_lahan ?>,
+        from_min: <?= $range_panjang_lahan->min_panjang_lahan ?>, // set min position for FROM handle (replace FROM to TO to change handle)
+        from_max: <?= $range_panjang_lahan->max_panjang_lahan ?>, // set max position for FROM handle
+        force_edges: false, // force UI in the box
+        hide_min_max: true, // show/hide MIN and MAX labels
+        hide_from_to: true, // show/hide FROM and TO labels
+        block: false,
+        onChange: function(data) {
+
+            let from_panjang = $('.js-range-slider-panjang').data().from;
+            $("#panjangLahan").val(from_panjang);
+            $("#ubahPanjang").html(from_panjang);
+        },
+        onUpdate: function(data) {
+            let from_panjang = $('.js-range-slider-panjang').data().from;
+            $("#panjangLahan").val(from_panjang);
+            $("#ubahPanjang").html(from_panjang);
+        }
+    });
+
+    $(".js-range-slider-lebar").ionRangeSlider({
+        skin: "round",
+        min: <?= $range_lebar_lahan->min_lebar_lahan ?>,
+        max: <?= $range_lebar_lahan->max_lebar_lahan ?>,
+        grid: true,
+        grid_num: 9,
+        from: <?= $range_lebar_lahan->max_lebar_lahan ?>,
+        from_min: <?= $range_lebar_lahan->min_lebar_lahan ?>, // set min position for FROM handle (replace FROM to TO to change handle)
+        from_max: <?= $range_lebar_lahan->max_lebar_lahan ?>, // set max position for FROM handle
+        force_edges: false, // force UI in the box
+        hide_min_max: true, // show/hide MIN and MAX labels
+        hide_from_to: true, // show/hide FROM and TO labels
+        block: false,
+        onChange: function(data) {
+
+            let from_lebar = $('.js-range-slider-lebar').data().from;
+            $("#lebarLahan").val(from_lebar);
+            $("#ubahLebar").html(from_lebar);
+        },
+        onUpdate: function(data) {
+            let from_lebar = $('.js-range-slider-lebar').data().from;
+            $("#lebarLahan").val(from_lebar);
+            $("#ubahLebar").html(from_lebar);
+        }
+    });
+
+    function handlePlusMinusLahan(slider, operation) {
+        // Get the current value of the "panjang" input
+        var currentValue = parseInt($(slider).prop('value'));
+
+        // Subtract 1 from the current value
+        var newValue = currentValue;
+
+        if (operation === "minus") {
+            newValue -= 1;
+        } else {
+            newValue += 1;
+        }
+        // Update the ionRangeSlider for the "panjang" input
+        $(slider).data('ionRangeSlider').update({
+            from: newValue
+        });
+    }
+
+    $(document).ready(function() {
+        $('#form-impian').on('submit', function(e) {
+            e.preventDefault();
+            console.log('submitted')
+            var url = "<?= base_url('koleksi') ?>"; // Base URL
+            var queryParams = [];
+            $(this).find(':input').each(function() {
+                var fieldName = $(this).attr('name');
+                var fieldValue = $(this).val();
+
+                // Check if the field value is not empty and not equal to the default value
+                if (fieldValue && !$(this).is('select') || ($(this).is('select') && fieldValue !== $(this).find('option:first').val())) {
+                    if (fieldName === 'panjang_lahan') {
+                        queryParams.push('min_panjang=' + encodeURIComponent(<?= $range_panjang_lahan->min_panjang_lahan ?>));
+                        queryParams.push('max_panjang=' + encodeURIComponent(fieldValue));
+                    } else if (fieldName === 'lebar_lahan') {
+                        queryParams.push('min_lebar=' + encodeURIComponent(<?= $range_lebar_lahan->min_lebar_lahan ?>));
+                        queryParams.push('max_lebar=' + encodeURIComponent(fieldValue));
+                    } else {
+                        queryParams.push(fieldName + '=' + encodeURIComponent(fieldValue));
+                    }
+                }
+            });
+            if (queryParams.length > 0) {
+                url += '?' + queryParams.join('&');
+            }
+            window.location.href = url;
+        })
+    })
+
 
     function detailRumah(id) {
 
-        location.href = "<?= base_url() . 'detail/' ?>" + id;
+        location.href = "<?= base_url('detail_koleksi/')  ?>" + id;
 
     }
 
@@ -623,7 +748,7 @@
     }
 
     function detailProduk(id) {
-        location.href = "<?= base_url('detail_produk/') ?>" + id;
+        location.href = "<?= base_url('detail_material/') ?>" + id;
     }
 
     function formatRupiah(number) {
@@ -640,6 +765,73 @@
         var duaKataPertama = kataKata.slice(0, 2).join(" ");
         return duaKataPertama;
     }
+
+    // var owlOne = $(".owl-carousel-one");
+    // owlOne.owlCarousel({
+    //     nav: true,
+    //     margin: 20,
+    //     loop: true,
+    //     autoplay: false,
+    //     autoplayTimeout: 7000,
+    //     responsive: {
+    //         0: {
+    //             items: 1,
+    //             dots: false,
+    //             nav: false
+    //         },
+    //         400: {
+    //             items: 2,
+    //             dots: false,
+    //             nav: false
+    //         },
+    //         576: {
+    //             items: 2,
+    //             dots: false,
+    //             nav: false
+    //         },
+    //         768: {
+    //             items: 3,
+    //             dots: false,
+    //             nav: false
+    //         },
+    //         992: {
+    //             items: 4,
+    //             dots: true,
+    //             nav: false
+    //         },
+    //     },
+    // });
+
+    var owlTwo = $(".owl-carousel-two");
+    owlTwo.owlCarousel({
+        nav: true,
+        margin: 20,
+        loop: true,
+        autoplay: false,
+        autoplayTimeout: 7000,
+        responsive: {
+            0: {
+                items: 1,
+                dots: false,
+                nav: false
+            },
+            576: {
+                items: 2,
+                dots: false,
+                nav: false
+            },
+            768: {
+                items: 3,
+                dots: false,
+                nav: false
+            },
+            992: {
+                items: 4,
+                dots: true,
+                nav: false
+            },
+        },
+    });
 
     function getMaterial() {
         $.ajax({
@@ -713,21 +905,54 @@
         });
     }
 
-    function detailRumah(id) {
-        location.href = "<?= base_url('demo/detail_koleksi/') ?>" + id;
-    }
-
-
-    function detailProduk(id) {
-
-        location.href = "<?= base_url('demo/detail_material/') ?>" + id;
-
-    }
-
     $(document).ready(function() {
         $('#cari-desain').on('change', function() {
             var cari = $('#cari-desain').val();
             location.href = "<?= base_url('koleksi#') ?>" + cari;
         });
     });
+
+    function clickSearch(term) {
+
+        if (term.trim() !== '') {
+            var url = "<?= base_url('koleksi') ?>";
+            url += "?search=" + term
+            window.location.href = url
+            // $.ajax({
+            //     url: '<?= base_url('api/simpanTerm/') ?>' + term, // Replace with your API endpoint
+            //     type: 'GET',
+            //     success: function(response) {
+            //         console.log('Response:', response);
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.error('Error:', error);
+            //     }
+            // });
+        } else {}
+    }
+
+    // to make cards in design carousels the same height
+    document.addEventListener("DOMContentLoaded", function() {
+        var cards2 = document.querySelectorAll('.owl-carousel-two .card');
+
+        var maxHeight2 = 0;
+        cards2.forEach(function(card2) {
+            maxHeight2 = Math.max(maxHeight2, card2.offsetHeight);
+        });
+        cards2.forEach(function(card2) {
+            card2.style.height = maxHeight2 + 'px';
+        });
+    });
+
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var cards2 = document.querySelectorAll('.owl-carousel-one .card');
+
+    //     var maxHeight2 = 0;
+    //     cards2.forEach(function(card2) {
+    //         maxHeight2 = Math.max(maxHeight2, card2.offsetHeight);
+    //     });
+    //     cards2.forEach(function(card2) {
+    //         card2.style.height = maxHeight2 + 'px';
+    //     });
+    // });
 </script>
