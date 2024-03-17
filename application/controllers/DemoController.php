@@ -14,6 +14,8 @@ class DemoController extends CI_Controller
         $this->load->model('ArtikelModel');
         $this->load->model('CustomerModel');
         $this->load->model('PembelianModel');
+        // $this->load->model('SearchModel');
+        $this->load->model('BerandaModel');
     }
 
     public function index()
@@ -26,7 +28,13 @@ class DemoController extends CI_Controller
         $data['produk_body'] = $this->DesainModel->getKatalogProdukPopularBody()->result();
         $data['produk_terbaru'] = $this->DesainModel->getRumahTerbaru()->result();
         $data['artikel'] = $this->ArtikelModel->getArtikel()->result();
-
+        // $data['frequent_terms'] = $this->SearchModel->getFrequentlySearchedTerms()->result();
+        $data['jumlah_rumah'] = $this->DesainModel->getJumlahRumah()->row()->jumlah_rumah;
+        $data['jumlah_unduh'] = $this->BerandaModel->getJumlahUnduh()->row()->jumlah_unduh;
+        $data['jumlah_pengunjung'] = $this->BerandaModel->getJumlahPengunjung()->row()->jumlah_pengunjung;
+        $data['range_panjang_lahan'] = $this->DesainModel->getRangePanjangLahan()->row();
+        $data['range_lebar_lahan'] = $this->DesainModel->getRangeLebarLahan()->row();
+        $data['gaya_desain'] = $this->DesainModel->getGayaDesain()->result();
         $this->load->view('demo/layout/layout', $data);
     }
 
