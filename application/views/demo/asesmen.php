@@ -65,6 +65,7 @@
         padding-right: 9%;
     }
 
+
     @media screen and (max-width: 767px) {
         .fieldset-container {
             padding-left: 0%;
@@ -98,6 +99,23 @@
             padding-top: 10%;
         }
 
+        .kamar-card {
+            border: 0;
+        }
+
+        .img-kamar-card {
+            width: 100%;
+            margin-bottom: 1em;
+        }
+
+        .gaya-desain-container {
+            justify-content: center;
+        }
+
+        .pilih-semua {
+            margin-left: 7%;
+        }
+
     }
 
 
@@ -106,7 +124,75 @@
             padding: 1em;
         }
 
+        .material-container {
+            flex-wrap: wrap;
+        }
+
+        .material-header {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .material-column-card {
+            border: 0;
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+
+        .material-cards-container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            margin-top: 1em;
+            justify-content: start;
+            gap: 2em;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .material-card {
+            height: 160px;
+            width: 45%;
+        }
+
     }
+
+    @media screen and (min-width: 1200px) {
+        .material-container {
+            flex-wrap: nowrap;
+        }
+
+        .material-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .material-column-card {
+            flex-direction: column;
+        }
+
+        .material-cards-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .material-card {
+            height: 150px;
+            width: 86%;
+        }
+
+
+    }
+
 
     @media screen and (min-width: 768px) {
         .denah-img {
@@ -120,6 +206,26 @@
 
         .struktur-desc {
             padding-right: 1.5em;
+        }
+
+        .img-kamar-card-container {
+            height: 260px;
+            margin-right: 0.5em;
+        }
+
+        .img-toilet-card-container {
+            height: 315px;
+            margin-right: 0.5em;
+        }
+
+        .img-kamar-card {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .gaya-desain-container {
+            justify-content: space-between;
         }
 
     }
@@ -301,6 +407,20 @@
     .material-column-card {
         padding-top: 20px;
         padding-bottom: 10px;
+    }
+
+    /* 
+    .gaya-desain-container::after {
+        content: "";
+        flex: auto;
+
+    } */
+
+    .pilih-semua {
+        flex-wrap: nowrap;
+        cursor: pointer;
+        width: max-content;
+        padding: 0.5em 1em 0.5em 1em;
     }
 </style>
 
@@ -512,14 +632,14 @@
                     <h5 class="">KAMAR TIDUR DAN TOILET</h5>
                     <p>Kamar tidur dan toilet merupakan ruang penting di dalam rumah tinggal Anda. Tentukan jumlah kamar tidur dan toilet yang Anda butuhkan dengan pertimbangan jumlah anggota keluarga Anda.</p>
                 </div>
-                <div class="col-9 mt-4 p-0 content-container">
-                    <div class="card p-3 w-100">
+                <div class="col-lg-9 col-12 mt-md-4 p-0 content-container">
+                    <div class="card p-lg-3 p-4 w-100 kamar-card">
                         <div class="row align-items-center">
-                            <div class="col-md-5" style='height:260px; overflow:hidden;'>
-                                <img class="image w-100" src="<?= base_url('assets/img/assessment/kamarTidur1.jpg') ?>" alt="">
+                            <div class="col-md-5 img-kamar-card-container" style='overflow:hidden;'>
+                                <img class="image img-kamar-card" src="<?= base_url('assets/img/assessment/kamarTidur1.jpg') ?>" alt="">
                             </div>
                             <div class="col-md-6" style=''>
-                                <div class='pl-lg-2'>
+                                <div class='pl-lg-2 content-kamar-card'>
                                     <h5 class="heading-kamar-card">Jumlah Kamar Tidur</h5>
 
                                     <input type="number" class="form-control kamar-number-input mt-2" id="jumlah_kamar" name="kamar" placeholder="Jumlah Kamar" />
@@ -537,14 +657,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-9 mt-4 p-0">
-                    <div class="card p-3">
-                        <div class="row align-items-start">
-                            <div class="col-5" style='padding-right:0; height:315px; overflow:hidden;'>
-                                <img class="image toilet-img h-100" src="https://d3p0bla3numw14.cloudfront.net/news-content/img/2019/04/14090018/GettyImages-881475252-2.jpg" alt="">
+                <hr class="mt-4 d-md-none" />
+                <div class="col-lg-9 col-12 content-container mt-4 p-0">
+                    <div class="card p-lg-3 p-4 w-100 kamar-card">
+                        <div class="row align-items-center">
+                            <div class="col-md-5 img-toilet-card-container" style=' overflow:hidden;'>
+                                <img class="image toilet-img img-kamar-card" src="https://d3p0bla3numw14.cloudfront.net/news-content/img/2019/04/14090018/GettyImages-881475252-2.jpg" alt="">
                             </div>
-                            <div class="col-6" style='padding-left:0;'>
-                                <div style="padding-left:1.5em;">
+                            <div class="col-md-6">
+                                <div class='pl-lg-2 content-kamar-card'>
                                     <h5 class="heading-kamar-card">Jumlah Toilet</h5>
 
                                     <input type="number" class="form-control kamar-number-input mt-2" id="jumlah_toilet" name="toilet" placeholder="Jumlah Kamar" />
@@ -584,11 +705,11 @@
                     <p>Pilih ruang-ruang lain yang Anda butuhkan. (Dapat memilih lebih dari satu opsi).</p>
                 </div>
                 <div class="col-12">
-                    <div class="row p-0 mt-4 justify-content-start gap-5 ruang-lain-container">
+                    <div class="row p-md-0 p-2 mt-4 justify-content-center gap-lg-5 gap-3 ">
                         <?php foreach ($ruang_lain as $item) : ?>
-                            <div class="col-2 p-0 ruang-lain-item">
+                            <div class="col-lg-2 col-md-3 col-5 p-0 ruang-lain-item">
                                 <div class="card" style="height:180px;overflow:hidden;">
-                                    <div class="d-flex flex-row p-2 gap-2">
+                                    <div class="d-flex flex-row p-2 gap-2 check-card">
                                         <label class="custom-checkbox-ruang" style="">
                                             <input type="checkbox" name="ruang_lain" value='<?php echo $item->id_ruang; ?>'>
                                             <i class="fa-solid fa-check checkmark-ruang"></i>
@@ -608,19 +729,20 @@
                     <h5 class="">GAYA DESAIN RUMAH</h5>
                     <p>Pilih gaya desain rumah yang sesuai dengan selera Anda. (Dapat memilih lebih dari satu opsi).</p>
                 </div>
-                <div class="col-2 p-0 mt-4" style='margin-right:auto;'>
-                    <div class="card d-flex flex-row pilih-semua w-75 p-2 gap-2" style="flex-wrap:nowrap; cursor:pointer;">
-                        <label class="custom-checkbox-gaya_desain" style="">
-                            <input type="checkbox" name="gaya_desain_semua" value='semua'>
-                            <i class="fa-solid fa-check checkmark-gaya_desain"></i>
-                        </label>
-                        <label for="checkbox-gaya_desain" style="white-space:nowrap; cursor:pointer;">Pilih Semua</label>
-                    </div>
-                </div>
+
                 <div class="col-12">
-                    <div class="row p-0 mt-4 justify-content-start gap-5">
+                    <div class="row p-md-0 p-3 gap-lg-5 gap-3 gaya-desain-container">
+                        <div class="col-12 p-0 mt-4" style=''>
+                            <div class="card d-flex flex-row pilih-semua gap-2">
+                                <label class="custom-checkbox-gaya_desain" style="">
+                                    <input type="checkbox" name="gaya_desain_semua" value='semua'>
+                                    <i class="fa-solid fa-check checkmark-gaya_desain"></i>
+                                </label>
+                                <label for="checkbox-gaya_desain" style="white-space:nowrap; cursor:pointer;">Pilih Semua</label>
+                            </div>
+                        </div>
                         <?php foreach ($gaya_desain as $item) : ?>
-                            <div class="col-2 p-0">
+                            <div class="p-0 col-lg-2 col-md-3 col-5">
                                 <div class="card" style="height:180px;overflow:hidden;">
                                     <div class="d-flex flex-row p-2 gap-2">
                                         <label class="custom-checkbox-gaya_desain" style="">
@@ -642,45 +764,51 @@
                     <h5 class="">MATERIAL BANGUNAN</h5>
                     <p>Pilihlah material bangunan untuk rumah tinggal Anda. Pilih material bangunan untuk bagian Struktur, Lantai, Dinding, Plafon, Atap, Pintu dan Jendela.</p>
                 </div>
-                <div class="row justify-content-start p-0 gx-3" style='flex-wrap:nowrap;'>
+                <div class="row justify-content-start p-0 gx-3 material-container">
                     <?php
                     foreach ($bagian_rumah as $bagian) :
                     ?>
-                        <div class="col-2 mt-4" style="">
+                        <div class="col-xl-2 mt-4" style="">
                             <div class="card material-column-card d-flex flex-column justify-content-start align-items-center">
-                                <h5 style="white-space:wrap;"><?= $bagian->bagian_rumah ?></h5>
-                                <div class="d-flex flex-row pilih-semua w-75 p-2 gap-2" style="flex-wrap:nowrap; cursor:pointer;">
-                                    <label class="custom-checkbox-material" style="">
-                                        <input type="checkbox" name="material_semua" value='semua'>
-                                        <i class="fa-solid fa-check checkmark-material"></i>
-                                    </label>
-                                    <label for="checkbox-material" style="white-space:nowrap; cursor:pointer;">Pilih Semua</label>
+                                <div class='material-header'>
+                                    <h5 style="white-space:wrap;"><?= $bagian->bagian_rumah ?></h5>
+                                    <div class="d-flex flex-row pilih-semua-material w-max p-2 gap-2" style="flex-wrap:nowrap; cursor:pointer;">
+                                        <label class="custom-checkbox-material" style="">
+                                            <input type="checkbox" name="material_semua" value='semua'>
+                                            <i class="fa-solid fa-check checkmark-material"></i>
+                                        </label>
+                                        <label for="checkbox-material" style="white-space:nowrap; cursor:pointer;">Pilih Semua</label>
+                                    </div>
                                 </div>
-                                <?php
-                                foreach ($material as $item) :
-                                    if ($item->id_bagian_rumah == $bagian->id_bagian_rumah) :
-                                        $material_title = explode(' ', $item->material);
-                                        // Remove the first word
-                                        array_shift($material_title);
-                                        // Reconstruct the string
-                                        $new_material = implode(' ', $material_title);
-                                        if ($new_material == 'Genteng Tanah Liat') :
-                                            $new_material = 'Genteng';
-                                        endif;
-                                ?>
-                                        <div class="card mt-4" style="height:150px;width:86%;overflow:hidden;">
-                                            <div class="d-flex flex-row p-2 gap-2">
-                                                <label class="custom-checkbox-material" style="">
-                                                    <input type="checkbox" name="material" value='<?php echo $item->urut; ?>'>
-                                                    <i class="fa-solid fa-check checkmark-material"></i>
-                                                </label>
-                                                <label for="checkbox-material"><?php echo $new_material ?></label>
+
+                                <div class='material-cards-container'> <?php
+                                                                        foreach ($material as $item) :
+                                                                            if ($item->id_bagian_rumah == $bagian->id_bagian_rumah) :
+                                                                                $material_title = explode(' ', $item->material);
+                                                                                // Remove the first word
+                                                                                array_shift($material_title);
+                                                                                // Reconstruct the string
+                                                                                $new_material = implode(' ', $material_title);
+                                                                                if ($new_material == 'Genteng Tanah Liat') :
+                                                                                    $new_material = 'Genteng';
+                                                                                endif;
+                                                                        ?>
+                                            <div class="card mt-xl-4 material-card" style="overflow:hidden;">
+                                                <div class="d-flex flex-row p-2 gap-2">
+                                                    <label class="custom-checkbox-material" style="">
+                                                        <input type="checkbox" name="material" value='<?php echo $item->urut; ?>'>
+                                                        <i class="fa-solid fa-check checkmark-material"></i>
+                                                    </label>
+                                                    <label for="checkbox-material"><?php echo $new_material ?></label>
+                                                </div>
+                                                <img src="/assets/demo/img/assessment/material_<?php echo $item->id_bagian_rumah; ?>_<?php echo $item->id_material; ?>.png" class="image h-100 material-img" style='cursor:pointer; object-fit:cover' alt="">
                                             </div>
-                                            <img src="/assets/demo/img/assessment/material_<?php echo $item->id_bagian_rumah; ?>_<?php echo $item->id_material; ?>.png" class="image h-100 material-img" style='cursor:pointer; object-fit:cover' alt="">
-                                        </div>
-                                <?php endif;
-                                endforeach;
-                                ?>
+                                    <?php endif;
+                                                                        endforeach;
+                                    ?>
+                                </div>
+
+
                             </div>
                         </div>
                     <?php
@@ -771,7 +899,7 @@
     $(document).ready(function() {
 
         var totalSteps = 6;
-        var currentStep = 2;
+        var currentStep = 5;
         var stepButtons = $('.step-btn');
 
         var stepLines = $('.step-line');
@@ -859,6 +987,21 @@
         $('.pilih-semua').click(function() {
             var isChecked = $(this).find('input[type="checkbox"]').prop('checked');
             $('input[name="gaya_desain"], input[name="gaya_desain_semua"]').prop('checked', !isChecked);
+        });
+
+
+        $('.pilih-semua-material').click(function() {
+            // Get the column container of the clicked 'Pilih Semua' checkbox
+            var columnContainer = $(this).closest('.material-column-card');
+
+            // Find all checkboxes within the same column container
+            var columnCheckboxes = columnContainer.find('.material-cards-container input[type="checkbox"]');
+
+            // Get the checked state of the 'Pilih Semua' checkbox
+            var isChecked = $(this).find('input[type="checkbox"]').prop('checked');
+
+            // Set the checked state of all checkboxes within the same column container
+            columnCheckboxes.prop('checked', isChecked);
         });
     });
 </script>
