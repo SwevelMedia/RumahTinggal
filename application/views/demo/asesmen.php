@@ -687,7 +687,7 @@
                                             <label for="jenisKlosetJongkok" style="margin-left: 0.5em;">Jongkok</label>
                                         </div>
                                         <div>
-                                            <input type="radio" id="jenisKlosetDuduk" name="toilet-dalam" value="duduk">
+                                            <input type="radio" id="jenisKlosetDuduk" name="jenis-kloset" value="duduk">
                                             <label for="jenisKlosetDuduk" style="margin-left: 0.5em;">Duduk</label>
                                         </div>
                                     </div>
@@ -716,7 +716,7 @@
                                         </label>
                                         <label for="checkbox-ruang"><?php echo $item->ruang; ?></label>
                                     </div>
-                                    <img src="/assets/demo/img/assessment/<?php echo $item->ruang; ?>.png" class="image h-100 ruang-lain-img" style='cursor:pointer; object-fit:cover' alt="">
+                                    <img src="<?= base_url('/assets/demo/img/assessment/' . $item->ruang . '.png') ?>" class="image h-100 ruang-lain-img" style='cursor:pointer; object-fit:cover' alt="">
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -751,7 +751,7 @@
                                         </label>
                                         <label for="checkbox-gaya_desain"><?php echo $item->gaya_desain; ?></label>
                                     </div>
-                                    <img src="/assets/demo/img/assessment/<?php echo $item->gaya_desain; ?>.png" class="image h-100 gaya-desain-img" style='cursor:pointer; object-fit:cover' alt="">
+                                    <img src="<?= base_url('/assets/demo/img/assessment/' . $item->gaya_desain . '.png') ?>" class="image h-100 gaya-desain-img" style='cursor:pointer; object-fit:cover' alt="">
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -801,7 +801,7 @@
                                                     </label>
                                                     <label for="checkbox-material"><?php echo $new_material ?></label>
                                                 </div>
-                                                <img src="/assets/demo/img/assessment/material_<?php echo $item->id_bagian_rumah; ?>_<?php echo $item->id_material; ?>.png" class="image h-100 material-img" style='cursor:pointer; object-fit:cover' alt="">
+                                                <img src="<?= base_url('/assets/demo/img/assessment/material_' . $item->id_bagian_rumah . '_' . $item->id_material . '.png') ?>" class="image h-100 material-img" style='cursor:pointer; object-fit:cover' alt="">
                                             </div>
                                     <?php endif;
                                                                         endforeach;
@@ -899,7 +899,7 @@
     $(document).ready(function() {
 
         var totalSteps = 6;
-        var currentStep = 5;
+        var currentStep = 0;
         var stepButtons = $('.step-btn');
 
         var stepLines = $('.step-line');
