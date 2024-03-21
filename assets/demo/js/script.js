@@ -19,10 +19,14 @@ $(document).ready(function () {
 				nav: false,
 			},
 			768: {
-				items: 3,
+				items: 2,
 				nav: false,
 			},
 			992: {
+				items: 3,
+				nav: false,
+			},
+			1200: {
 				items: 4,
 				nav: false,
 			},
@@ -31,6 +35,9 @@ $(document).ready(function () {
 
 	$("#nextBtnOne").click(function () {
 		owlOne.trigger("next.owl.carousel");
+	});
+	$("#prevBtnOne").click(function () {
+		owlOne.trigger("prev.owl.carousel");
 	});
 
 	var owlTwo = $(".owl-carousel-two");
@@ -65,6 +72,9 @@ $(document).ready(function () {
 
 	$("#nextBtnTwo").click(function () {
 		owlTwo.trigger("next.owl.carousel");
+	});
+	$("#prevBtnTwo").click(function () {
+		owlTwo.trigger("prev.owl.carousel");
 	});
 
 	var owlThree = $(".owl-carousel-three");
