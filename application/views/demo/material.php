@@ -1,10 +1,10 @@
 <style>
-    .gaya-desain-open,
+    .kategori-open,
     .dropdown-content-gaya,
     .dropdown-content-ruangan,
-    .ruangan-open {
+    .merk-open {
         display: none;
-        /* Mulai dengan menyembunyikan gaya-desain-open */
+        /* Mulai dengan menyembunyikan kategori-open */
     }
 
     .accordion-button:not(.collapsed) {
@@ -31,14 +31,19 @@
         background-repeat: no-repeat;
         background-size: cover;
         height: 210px;
-        width: 280px;
+        /* width: 280px; */
     }
 
     @media (max-width: 767px) {
+
+
         .bg-card-mat {
-            height: 280px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 150px;
             width: auto;
-            /* Menetapkan lebar 100% agar sesuai dengan lebar kartu pada tampilan mobile */
+            /* width: 280px; */
         }
     }
 
@@ -48,6 +53,26 @@
 
     .bg-det-mat {
         background-color: #C6E7FF;
+    }
+
+    @media screen and (max-width: 767px) {
+        .material-card-title {
+            margin-bottom: 1em;
+            font-size: 1em;
+        }
+
+        .material-card-subtitle {
+            font-size: 0.8em;
+        }
+
+
+    }
+
+    .material-card-subtitle {
+        color: var(--Hitam, #1C1C1C);
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 0.2px;
     }
 </style>
 
@@ -83,26 +108,26 @@
 </div>
 
 <!--Temukan Desain start-->
-<div class="py-5 bg-light">
+<div class="py-lg-5 py-2 bg-light">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 mb-3 d-none d-lg-block">
+            <form class="form-filter col-lg-3 mb-3 d-none d-lg-block">
                 <div class="d-flex justify-content-between flex-column flex-lg-row align-items-center mb-3">
                     <h5 class="fw-semibold text-center ms-3">
                         <i class="fas fa-filter"></i> Filter
                     </h5>
                     <p class="hapus-filter">Hapus Filter</p>
                 </div>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="cari material pilihan" style="background-color: #F7F7F7;" />
-                    <button class="btn btn-primary" type="button" id="button-addon2" style="background-color: #f7f7f7;">
+                <div class="input-group mb-3 search-group">
+                    <input type="text" class="form-control nama_produk" placeholder="cari material pilihan" style="background-color: white;" name="nama_produk" />
+                    <button class="btn btn-primary search-btn" type="submit" id="button-addon2" style="background-color: white; border-left:none; border-color: #ced4da;">
                         <i class="fas fa-search " style="color: black;"></i>
                     </button>
                 </div>
-                <div class="fw-semibold mb-2">Biaya Konstruksi</div>
+                <div class="fw-semibold mb-2">Harga Material</div>
                 <div class="d-flex justify-content-between flex-column flex-lg-row mb-3 text-center gap-2">
                     <div class="mb-2 col-lg-auto" style="width: 45%;">
-                        <input type="text" id="field1" name="field1" class="form-control" placeholder="Rp Minimal">
+                        <input type="text" id="field1" name="min_harga" class="form-control" placeholder="Rp Minimal">
                     </div>
                     <span class="mb-2 col-lg-auto mt-2">-</span>
                     <div class="mb-2 col-lg-auto" style="width: 45%;">
@@ -118,88 +143,10 @@
                         </h2>
                         <div id="flushKategoriMaterial" class="accordion-collapse collapse" aria-labelledby="kategoriMat" data-bs-parent="#accordionKategoriMaterial">
                             <div class="accordion-body">
-                                <div class=" d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">
-                                            Dinding
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
+                                <div id="kategori-container">
+                                    <!-- AJAX response from getKategoriProduk api will be appended here -->
                                 </div>
-                                <div class=" d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">
-                                            Elektrikal
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class=" d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">
-                                            Lantai
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class=" d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">
-                                            Mekanikal
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class=" d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">
-                                            Pintu & Jendela
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class=" d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">
-                                            Plafon & Atap
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class=" d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">
-                                            Plumbing
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px; margin-left:10px;">200</div>
-                                </div>
-                                <div class=" d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">
-                                            Sanitasi
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class=" d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox1">
-                                        <label class="form-check-label" for="checkbox1">
-                                            Struktur
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <!-- Tambahkan checkbox lainnya sesuai kebutuhan -->
+
                             </div>
                         </div>
                     </div>
@@ -214,196 +161,18 @@
                         </h2>
                         <div id="flush-merkMaterial" class="accordion-collapse collapse" aria-labelledby="MerkMaterial" data-bs-parent="#accordionMerkMaterial">
                             <div class="accordion-body">
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_1">
-                                        <label class="form-check-label" for="checkbox2_1">
-                                            American Standard
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
+                                <div id="merk-container">
+
                                 </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Dekkson
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_1">
-                                        <label class="form-check-label" for="checkbox2_1">
-                                            Duma
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Ethylum
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_1">
-                                        <label class="form-check-label" for="checkbox2_1">
-                                            Formax Roof
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Indofon
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_1">
-                                        <label class="form-check-label" for="checkbox2_1">
-                                            Indotiles
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Indovinyl
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Kanmuri
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_1">
-                                        <label class="form-check-label" for="checkbox2_1">
-                                            KH Beton
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Luminate
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_1">
-                                        <label class="form-check-label" for="checkbox2_1">
-                                            Lysaght
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Monalisa Tiles
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Oppie
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_1">
-                                        <label class="form-check-label" for="checkbox2_1">
-                                            Rainbow
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Regis
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Rooftop
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_1">
-                                        <label class="form-check-label" for="checkbox2_1">
-                                            Royal Roof
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Rucika
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkbox2_2">
-                                        <label class="form-check-label" for="checkbox2_2">
-                                            Venus
-                                        </label>
-                                    </div>
-                                    <div class="badge bg-kategori" style="font-size:12px;">200</div>
-                                </div>
-                                <!-- Tambahkan checkbox lainnya sesuai kebutuhan -->
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
             <div class="col-lg-9">
                 <div class="d-none d-lg-block">
                     <div class="d-flex justify-content-between flex-column flex-lg-row align-items-center mb-3">
-                        <div>Menampilkan 9 dari 2926 material </div>
+                        <div>Menampilkan <span id="jumlah_tampil"></span> dari <span id='jumlah_material'></span> material </div>
                         <div class="dropdown">
                             <button id="sortButton" class="btn btn-outline-white border-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Urutkan:
@@ -419,32 +188,25 @@
 
                     </div>
                 </div>
-                <div class="konten-material row" id="konten-material">
+                <div class="konten-material row gx-2 gx-lg-4" id="konten-material">
                 </div>
                 <div class="d-flex justify-content-center bag-pagination">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination" id="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous" onclick="previousPage()">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a href="javascript:void(0);" class="page-link" onclick="setPage(1)">1</a></li>
-                            <li class="page-item"><a href="javascript:void(0);" class="page-link" onclick="setPage(2)">2</a></li>
-                            <li class="page-item"><a href="javascript:void(0);" class="page-link" onclick="setPage(3)">3</a></li>
-                            <li class="page-item"><a href="javascript:void(0);" class="page-link" onclick="setPage(4)">4</a></li>
-                            <li class="page-item"><a href="javascript:void(0);" class="page-link" onclick="setPage(5)">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next" onclick="nextPage()">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
+
                         </ul>
                     </nav>
                         
                 </div>
                 <form class="form-group" id="getMaterial">
-                    <input type="hidden" name="page" id="page">
+                    <input type="hidden" name="page" id="page" value='1'>
+                    <input type='hidden' name='id_kategori' id='selectedKategori' value=''>
+                    <input type='hidden' name='merk' id='selectedMerk' value=''>
+                    <input type='hidden' name='nama_produk' id='searchedNama' value=''>
+                </form>
+                <form class="form-group" id="getPage">
+                    <input type="hidden" name="total_pages" id="total_pages">
+                    <input type="hidden" name="offset" id="offset">
                 </form>
             </div>
         </div>
@@ -480,39 +242,22 @@
                 <div class="fw-semibold ms-3 mt-3">Harga Material</div>
                 <div class="d-flex mt-2">
                     <div class="ms-3 mb-2 col-lg-auto" style="width: 42%;">
-                        <input type="text" id="field1" name="field1" class="form-control" placeholder="Rp Minimal">
+                        <input type="text" id="min_harga" name="min_harga" class="form-control" placeholder="Rp Minimal">
                     </div>
                     <span class="ms-2 mb-2 col-lg-auto mt-2">-</span>
                     <div class="ms-2 mb-2 col-lg-auto" style="width: 42%;">
-                        <input type="text" id="field2" name="field2" class="form-control" placeholder="Rp Maksimal">
+                        <input type="text" id="max_harga" name="max_harga" class="form-control" placeholder="Rp Maksimal">
                     </div>
                 </div>
                 <div class="bg-white mx-2 p-3 mt-3">
                     <div class="d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="fw-semibold ms-2">Kategori Material</div>
-                            <small class="fw-semibold me-1" id="lihatSemuaGaya">Lihat Semua</small>
+                            <small class="fw-semibold me-1" id="lihatSemuaKategori">Lihat Semua</small>
                         </div>
-                        <div class="gaya-desain mt-2">
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">Dinding</button>
-                                <button class="btn btn-light border-2 m-1">Elektrikal</button>
-                                <button class="btn btn-light border-2 m-1">Lantai</button>
-                            </div>
+                        <div class="kategori mt-2">
                         </div>
-                        <div class="gaya-desain-open">
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">Mekanikal</button>
-                                <button class="btn btn-light border-2 m-1">Pintu & Jendela</button>
-                            </div>
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">Plafon & Atap</button>
-                                <button class="btn btn-light border-2 m-1">Plumbing</button>
-                            </div>
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">Sanitasi</button>
-                                <button class="btn btn-light border-2 m-1">Struktuur</button>
-                            </div>
+                        <div class="kategori-open">
                         </div>
                     </div>
                 </div>
@@ -520,47 +265,11 @@
                     <div class="d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="fw-semibold ms-2">Merk Material</div>
-                            <small class="fw-semibold me-1" id="lihatSemuaRuangan">Lihat Semua</small>
+                            <small class="fw-semibold me-1" id="lihatSemuaMerk">Lihat Semua</small>
                         </div>
-                        <div class="ruangan mt-2">
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">American Standard</button>
-                                <button class="btn btn-light border-2 m-1">Dekkson</button>
-                            </div>
+                        <div class="merk mt-2">
                         </div>
-                        <div class="ruangan-open">
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">Duma</button>
-                                <button class="btn btn-light border-2 m-1">Ethylum</button>
-                                <button class="btn btn-light border-2 m-1">Indofon</button>
-                            </div>
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">Formax Roof</button>
-                                <button class="btn btn-light border-2 m-1">Indotiles</button>
-                            </div>
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">Indovinyl</button>
-                                <button class="btn btn-light border-2 m-1">Kanmuri</button>
-                                <button class="btn btn-light border-2 m-1">KH Beton</button>
-                            </div>
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">Lumintae</button>
-                                <button class="btn btn-light border-2 m-1">Lysaght</button>
-                                <button class="btn btn-light border-2 m-1">Oppie</button>
-                            </div>
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">Monalisa Tiles</button>
-                                <button class="btn btn-light border-2 m-1">Rainbow</button>
-                            </div>
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">Regis</button>
-                                <button class="btn btn-light border-2 m-1">Rooftop</button>
-                                <button class="btn btn-light border-2 m-1">Venus</button>
-                            </div>
-                            <div class="d-flex">
-                                <button class="btn btn-light border-2 m-1">Royal Roof</button>
-                                <button class="btn btn-light border-2 m-1">Rucika</button>
-                            </div>
+                        <div class="merk-open">
 
                         </div>
                     </div>
@@ -578,6 +287,8 @@
 <script>
     $(document).ready(function() {
         getDataMaterial();
+        getKategoriProduk();
+        getMerkProduk();
     });
 
     function detailProduk(id) {
@@ -596,15 +307,57 @@
     }
 
     $(document).ready(function() {
-        $("#lihatSemuaGaya").click(function() {
-            $(".gaya-desain-open").toggle();
+        $("#lihatSemuaKategori").click(function() {
+            $(".kategori-open").toggle();
         });
     });
     $(document).ready(function() {
-        $("#lihatSemuaRuangan").click(function() {
-            $(".ruangan-open").toggle();
+        $("#lihatSemuaMerk").click(function() {
+            $(".merk-open").toggle();
         });
     });
+
+    $(document).ready(function() {
+        $('#kategori-container').on('change', '.kategori_checkbox', function() {
+            $("#page").val(1);
+            var checkedValues = [];
+            $('.kategori_checkbox:checked').each(function() {
+                checkedValues.push($(this).val());
+            });
+            var selectedValuesString = checkedValues.join(',');
+            $('#selectedKategori').val(selectedValuesString);
+            getDataMaterial();
+        });
+
+        $('#merk-container').on('change', '.merk_checkbox', function() {
+            $("#page").val(1);
+            var checkedValues = [];
+            $('.merk_checkbox:checked').each(function() {
+                checkedValues.push($(this).val());
+            });
+            var selectedValuesString = checkedValues.join(',');
+            $('#selectedMerk').val(selectedValuesString);
+
+            getDataMaterial();
+        });
+
+        $('.form-filter').submit(function(e) {
+            e.preventDefault(); // Prevent the default form submission behavior
+
+            $("#page").val(1);
+            var searchTerm = $('.nama_produk').val();
+
+            $('#searchedNama').val(searchTerm);
+            getDataMaterial();
+        });
+    })
+
+    function getTotalPages() {
+        var jumlahMaterial = parseInt($('#jumlah_material').text());
+        var totalPages = Math.ceil(jumlahMaterial / 9);
+        $('#total_pages').val(totalPages);
+        updatePagination();
+    }
 
     function formatRupiah(number) {
         var formattedNumber = number % 1 === 0 ? Math.floor(number) : number;
@@ -627,8 +380,9 @@
         $.ajax({
             type: "POST",
             url: "https://estimator.id/dev_msib/server/api/getKatalogProduk2",
-            data: $("#getMaterial").serialize(),
-            dataType: "JSON",
+            data: $('#getMaterial').serialize(),
+            dataType: "json",
+            contentType: "text/plain",
             success: function(data) {
                 var list = "";
                 if (data != "") {
@@ -637,20 +391,20 @@
                         var harga = data[i].harga_dasar;
 
                         list += `
-                        <div class="col-lg-4 col-md-6 mb-3">
-            <div class="card border-0 shadow-sm">
+                        <div class="col-lg-4 col-6 mb-3">
+            <div class="card border-0 shadow-sm" onclick="detailProduk(${data[i].id_produk})" style='cursor:pointer;'>
                 <div style="background-image: url('<?= $this->config->item('eid') ?>assets/foto/produk/${foto}')" class="card-img-mat bg-card-mat">
                 </div>
                 <div class="card-body" id="myCardBody">
-                    <h5 class="card-title mb-0 fw-semibold">${ambilDuaKataPertama(data[i].nama_produk)}</h5>
-                    <h6 class="mb-0">${data[i].nama_suplier}</h6>
+                    <h5 class="material-card-title card-title mb-0 fw-semibold">${ambilDuaKataPertama(data[i].nama_produk)}</h5>
+                    <h6 class="material-card-subtitle mt-1 mb-0">${data[i].nama_suplier}</h6>
                     <hr />
                     <div><strong>${formatRupiah(harga)}</strong>/buah</div>
                     <div class="d-flex mt-2 gap-1 d-none d-lg-block">
                         <button type="button" class="btn btn-outline-primary" onclick="detailProduk(${data[i].id_produk})">Detail</button>
                         <button type="button" class="btn btn-primary btn-beli" data-number="${data[i].no_wa}" data-id="${data[i].id_produk}" data-product="${data[i].nama_produk}" data-merk="${data[i].merk}" data-spec="${data[i].spesifikasi}"><i class="fa-solid fa-cart-shopping me-2"></i>Beli Sekarang</button>
                     </div>
-                    <div class="d-flex flex-column d-lg-none">
+                    <div class="d-flex flex-column d-none">
                         <button type="button" class="btn btn-outline-primary mb-2" onclick="detailProduk(${data[i].id_produk})">Detail</button>
                         <button type="button" class="btn btn-primary btn-beli" data-number="${data[i].no_wa}" data-id="${data[i].id_produk}" data-product="${data[i].nama_produk}" data-merk="${data[i].merk}" data-spec="${data[i].spesifikasi}"><i class="fa-solid fa-cart-shopping me-2"></i>Beli Sekarang</button>
                     </div>
@@ -661,17 +415,23 @@
                     }
                 } else {
                     list += `
-                            <div class="col-12 mb-3">
-                                <div class="d-flex justify-content-center align-items-center py-5" height="500px" width="100%">
-                                    <div>
-                                            <img src="<?= base_url('assets/aktifitas/img/empty.png') ?>" class="card-img-top" alt="..." />
-                                    </div>
+                        <div class="col-12 mb-3">   
+                            <div class="koleksi-not-found" style="display: none;">
+                                <div class="row justify-content-center text-center">
+                                    <img src="<?php echo base_url('assets/demo/img/empty.png'); ?>" alt="Deskripsi Gambar" class="img-fluid" style="width: 300px; height: 200px;">
+                                    <h5 class="mt-3">Yah! Tidak ada desain hunian yang sesuai dengan pencarian Anda.</h5>
+                                    <div class="mt-1">Silahkan hubungi kami untuk mendapatkan rekomendasi desain yang sesuai.</div>
+                                    <a href="" class="btn btn-primary mt-3" style="width: fit-content;">Hubungi Kami</a>
                                 </div>
-                            </div>`;
+                            </div>
+                        </div>`;
                 }
+                getSummaryKatalog();
+
                 $("#konten-material").html(list).loading("done");
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown)
                 Swal.fire({
                     icon: 'error',
                     title: 'Kesalahan',
@@ -685,8 +445,143 @@
         });
     }
 
+    function setPagination(currentPage, totalPages) {
+        $('#pagination').empty(); // Clear existing pagination
+
+        // Calculate start and end page numbers
+        var startPage = Math.max(1, currentPage - 2);
+        var endPage = Math.min(totalPages, startPage + 4);
+
+        // Add Previous button
+        $('#pagination').append('<li class="page-item"><a class="page-link" href="#" aria-label="Previous" onclick="previousPage()"><span aria-hidden="true">&laquo;</span></a></li>');
+
+        // Add numbered page links
+        for (var i = startPage; i <= endPage; i++) {
+            var pageLink = $('<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="setPage(' + i + ')">' + i + '</a></li>');
+            if (i === currentPage) {
+                pageLink.addClass('active');
+            }
+            $('#pagination').append(pageLink);
+        }
+
+        // Add Next button
+        $('#pagination').append('<li class="page-item"><a class="page-link" href="#" aria-label="Next" onclick="nextPage()"><span aria-hidden="true">&raquo;</span></a></li>');
+    }
+
+    function updatePagination() {
+        var currentPage = parseInt($('#page').val());
+        var totalPages = parseInt($('#total_pages').val());
+        setPagination(currentPage, totalPages);
+    }
+
+
+    function getSummaryKatalog() {
+        var data = {
+
+        }
+        if ($('#selectedKategori').val() !== '') {
+            data = {
+                "id_kategori": $('#selectedKategori').val()
+            };
+        }
+
+        if ($('#selectedMerk').val() !== '') {
+            data = {
+                "merk": $('#selectedMerk').val()
+            };
+        }
+        $.ajax({
+            type: 'POST',
+            url: "https://estimator.id/dev_msib/server/api/getSummaryCariProduk",
+            dataType: "JSON",
+            data: data,
+            success: function(data) {
+                $('#jumlah_material').html(data.suplier);
+                var offset = ($('#page').val() - 1) * 9;
+                $('#jumlah_tampil').text((offset + 1) + ' - ' + Math.min((offset + 9), data.suplier));
+                getTotalPages();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+            }
+        });
+    }
+
+    function getKategoriProduk() {
+        $.ajax({
+            type: 'POST',
+            url: "https://estimator.id/dev_msib/server/api/getKategoriProduk",
+            dataType: "JSON",
+            success: function(data) {
+
+                if (data != '') {
+
+                    $.each(data, function(i, item) {
+                        $('#kategori-container').append(`<div class="d-flex justify-content-between gap-3 align-items-center mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input kategori_checkbox" type="checkbox" value="` + item.id_kategori + `" id="kategori_checkbox_` + item.id_kategori + `" name="id_kategori">
+                                        <label class="form-check-label" for="kategori_checkbox_` + item.id_kategori + `">
+                                        ` + item.kategori + `
+                                        </label>
+                                    </div>
+                                    <div class="badge bg-kategori" style="font-size:12px;">` + item.jumlah + `</div>
+                                </div>`);
+                        if (i < 3) {
+                            $('.kategori').append('<button class="btn btn-light border-2 m-1">' + item.kategori + '</button>');
+                        } else {
+                            $('.kategori-open').append('<button class="btn btn-light border-2 m-1">' + item.kategori + '</button>');
+                        }
+
+                    });
+
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+            }
+        });
+    }
+
+    function getMerkProduk() {
+        $.ajax({
+            type: 'POST',
+            url: "https://estimator.id/dev_msib/server/api/getMerkProduk",
+            dataType: "JSON",
+            success: function(data) {
+
+                if (data != '') {
+
+                    $.each(data, function(i, item) {
+                        $('#merk-container').append(`<div class="d-flex justify-content-between gap-3 align-items-center mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input merk_checkbox" type="checkbox" value="'` + item.merk + `' " id="merk_checkbox_` + i + `" name="merk_checkbox">
+                                        <label class="form-check-label" for="merk_checkbox_` + i + `">
+                                        ` + item.merk + `
+                                        </label>
+                                    </div>
+                                    <div class="badge bg-kategori" style="font-size:12px;">` + item.jumlah + `</div>
+                                </div>`);
+
+                        if (i < 2) {
+                            $('.merk').append('<button class="btn btn-light border-2 m-1">' + item.merk + '</button>');
+                        } else {
+                            $('.merk-open').append('<button class="btn btn-light border-2 m-1">' + item.merk + '</button>');
+                        }
+                    });
+
+
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                toastr.error('Terjadi masalah saat pengambilan data.', 'Kesalahan', opsi_toastr);
+            }
+        });
+    }
+
+
     function setPage(page_value) {
         $("#page").val(page_value);
+        updatePagination();
         getDataMaterial();
     }
 
@@ -696,28 +591,32 @@
         // Mendapatkan nilai halaman saat ini dari elemen dengan ID "page"
         var currentPage = parseInt($("#page").val());
 
-        // Menambahkan 1 untuk mendapatkan halaman berikutnya
-        var nextPage = currentPage + 1;
-
-        // Mengatur nilai halaman yang baru
-        $("#page").val(nextPage);
-
-        // Memanggil fungsi untuk mendapatkan data sesuai dengan halaman yang baru
-        getDataMaterial();
+        var totalPages = parseInt($('#total_pages').val());
+        if (currentPage < totalPages) {
+            $('#page').val(currentPage + 1);
+            updatePagination();
+            getDataMaterial(); // Submit form to fetch data for next page
+        }
     }
 
     function previousPage() {
         // Mendapatkan nilai halaman saat ini dari elemen dengan ID "page"
         var currentPage = parseInt($("#page").val());
 
-        // Menambahkan 1 untuk mendapatkan halaman berikutnya
-        var nextPage = currentPage - 1;
+        // // Menambahkan 1 untuk mendapatkan halaman berikutnya
+        // var nextPage = currentPage - 1;
 
-        // Mengatur nilai halaman yang baru
-        $("#page").val(nextPage);
+        // // Mengatur nilai halaman yang baru
+        // $("#page").val(nextPage);
 
-        // Memanggil fungsi untuk mendapatkan data sesuai dengan halaman yang baru
-        getDataMaterial();
+        // // Memanggil fungsi untuk mendapatkan data sesuai dengan halaman yang baru
+        // getDataMaterial();
+
+        if (currentPage > 1) {
+            $('#page').val(currentPage - 1);
+            updatePagination();
+            getDataMaterial();
+        }
     }
 
     // var currentPage = 1;
