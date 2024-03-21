@@ -110,8 +110,6 @@ class DesainController extends CI_Controller
     //   }
     // }
 
-    log_message('error',  'gayadesain' . var_export($gaya, true));
-
     // Get the filtered records from the database
     $data['koleksi_rumah'] = $this->DesainModel->getKatalogProdukNew($sort, $search, (int)$min_panjang, (int)$max_panjang, (int)$min_lebar, (int)$max_lebar, $lantai, $kamar, $gaya, $ruang, $min_biaya, $max_biaya)->result();
 
