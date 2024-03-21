@@ -8,12 +8,29 @@
 	width: auto;
 }
 
+.container-bg-card-produk {
+	height: 232px;
+	width: 309px;
+}
+
 .bg-card-produk {
-	background-position: center;
+	/* background-position: center;
 	background-repeat: no-repeat;
-	background-size: cover;
-	height: 180px;
-	width: 240px;
+	background-size: cover; */
+	/* height: 232px;
+	width: 309px; */
+}
+
+.img-container {
+	width: 100%; /* Width of the container */
+	overflow: hidden;
+	height: auto; /* Ensure that the image doesn't overflow the container */
+}
+
+.img-card-produk {
+	width: 100%; /* Ensure the image fills the container */
+	height: auto;
+	object-fit: cover; /* Let the browser calculate the height based on the aspect ratio */
 }
 
 .banner-card {
@@ -39,6 +56,10 @@
 .card-img-artikel {
 	height: 180px;
 	width: auto;
+}
+
+.card-container {
+	width: 100%;
 }
 
 .card {
@@ -70,16 +91,45 @@
 	z-index: 3;
 }
 
-@media screen and (min-width: 768px) {
+.product-card {
+	width: 100%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
 	.card:hover .card-body {
-		transform: translateY(-186px);
+		transform: translateY(-90%);
+	}
+	.bg-header-web-home {
+		height: 93vh;
+	}
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+	.card:hover .card-body {
+		transform: translateY(-75%);
+	}
+	.bg-header-web-home {
+		height: 93vh;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.card:hover .card-body {
+		transform: translateY(-225px);
+	}
+	.bg-header-web-home {
+		height: 93vh;
 	}
 }
 
 /* Aturan transform khusus untuk layar yang lebih sempit (misalnya, kurang dari 768px) */
 @media screen and (max-width: 767px) {
-	.card:hover .card-body {
+	/* .card:hover .card-body {
 		transform: translateY(-150px);
+	} */
+
+	.card:hover .card-body {
+		transform: translateY(-85%);
 	}
 
 	.bg-card-produk {
@@ -198,4 +248,48 @@
 
 .checked {
 	color: orange;
+}
+
+.tooltip-biaya {
+	position: relative;
+}
+
+.tooltip-biaya .tooltip-biaya-text {
+	visibility: hidden;
+	width: max-content;
+	background-color: #00528e;
+	color: #fff;
+	text-align: center;
+	border-radius: 5px;
+	padding: 5px 10px;
+	position: absolute;
+	z-index: 1;
+	bottom: calc(100% + 5px);
+	/* Adjust the distance between the text and the tooltip-biaya */
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0;
+	transition: opacity 0.3s;
+	font-size: 0.9em;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	letter-spacing: 0.5px;
+}
+
+.tooltip-biaya .tooltip-biaya-text::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	/* Adjust the position of the triangle */
+	border-width: 5px;
+	border-style: solid;
+	border-color: #00528e transparent transparent transparent;
+}
+
+.tooltip-biaya:hover .tooltip-biaya-text {
+	visibility: visible;
+	opacity: 1;
 }
