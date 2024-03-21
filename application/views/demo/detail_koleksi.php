@@ -13,13 +13,14 @@ Also includes a counter of the slides
     .slide-image-container {
         overflow: hidden;
         position: relative;
-        width: 440px;
-        height: 330px;
+        width: 100%;
+        height: 100%;
     }
 
     .img-touch-koleksi {
         width: 100%;
         height: 100%;
+        object-fit: contain;
         transition: transform 0.3s ease-in-out;
     }
 
@@ -31,7 +32,7 @@ Also includes a counter of the slides
     }
 
     .slider-photos {
-        width: 450px;
+        width: 100%;
     }
 
     .slider-photos .slider-thumbs .slide {
@@ -162,8 +163,8 @@ Also includes a counter of the slides
         <div class="col-lg-10">
             <div class="row">
                 <div class="col-lg-7 mb-3 d-none d-lg-block">
-                    <div class="position-relative">
-                        <div class="slider slider-photos ms-3">
+                    <div class="position-relative h-100">
+                        <div class="slider slider-photos ms-3 h-100">
                             <div class="slides owl-carousel">
                                 <div class="slide mb-3">
                                     <div class="slide-image-container" id="zoom-container-eksterior">
@@ -580,7 +581,10 @@ Also includes a counter of the slides
                 <div class="border border-dark rounded-3 card card-body mb-2 my-1">
                     <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between mb-1 bg-white">
                         <div class="d-flex justify-content-between gap-2 align-items-center ">
-                            <i class="fa-regular fa-heart me-0"></i>
+                            <span id="heart-like" style="cursor:pointer;" data-id="<?php echo $id_rumah ?>">
+                                <i class="fa-regular fa-heart me-0">
+                                </i>
+                            </span>
                             <div>Wishlist</div>
                         </div>
                         <div class="d-flex justify-content-between gap-2 align-items-center ">
@@ -1205,4 +1209,50 @@ Also includes a counter of the slides
         window.open(url, '_blank');
 
     }
+
+    $(document).ready(function() {
+        $('#heart-like').click(function() {
+            var id_customer = Cookies.get('id_customer', {
+
+                domain: 'rumahtinggal.id'
+
+            });
+            icon = $(this).find('[data-fa-i2svg]');
+            // icon.toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
+            console.log(icon)
+            if (id_customer != null && id_customer != '') {
+                let id_rumah = $(this).data('id');
+                // let jum_stat = $(this).next().text();
+                if (icon.hasClass('fa-regular')) {
+                    icon.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
+                }
+
+                //     // jum_stat++;
+
+                //     $.ajax({
+                //         url: "<?= base_url('api/simpanDisukai') ?>",
+                //         type: "POST",
+                //         data: {
+                //             "id_rumah": id_rumah,
+                //             "id_customer": id_customer,
+                //             "suka": 1
+                //         },
+                //         dataType: "JSON",
+                //         success: function(data) {}
+                //     });
+                // } else {
+                //     $(this).removeClass('fa-solid').addClass('fa-regular');
+                //     jum_stat--;
+
+                //     $.ajax({
+                //         url: "<?= base_url('api/hapusDisukai') . $id_rumah ?>" + id_rumah + "/" + id_customer,
+                //         type: "POST",
+                //         dataType: "JSON",
+                //         success: function(data) {}
+                //     });
+                // }
+                // $(this).next().text(jum_stat);
+            } else $('#ModalLogin').modal('show');
+        });
+    });
 </script>
