@@ -41,6 +41,10 @@
         height: 20px;
         width: 20px;
     }
+
+    .home-banner-left {
+        height: 100%;
+    }
 </style>
 
 <div class="owl-carousel owl-theme owl-carousel-eight d-lg-none" id="caraouselTesti">
@@ -48,13 +52,15 @@
         <div style="background-image: url('<?= base_url('assets/img/desain/' . $item->foto) ?>'); object-fit:cover" class="card-img-top bg-card"></div>
     <?php } ?>
 </div>
-<div class="py-5 bg-header-web overflow-hidden" style="background-image:radial-gradient(circle at -90%, white 50%, #53b4fc 100%);">
-    <div class="container px-4 px-lg-0">
-        <div class="row">
+<div class="py-5 bg-header-web-home overflow-hidden" style="background-image:radial-gradient(circle at -90%, white 50%, #53b4fc 100%);">
+    <div class="container px-4 home-banner-left px-lg-0">
+        <div class="row home-banner-left">
             <!-- Bagian Kiri (Teks) -->
-            <div class="col-lg-6 ms-lg-4">
-                <h1 class="fw-bold mb-3 text-primary display-4">Dapatkan Desain</h1>
-                <h1 class="fw-bold mb-3 text-primary display-4">Hunian Idaman Anda!</h1>
+            <div class="col-lg-6 ms-lg-4 d-flex flex-column h-100 justify-content-center home-banner-left">
+                <h1 class="fw-bold mb-3 text-primary display-4 d-none d-md-block">Dapatkan Desain</h1>
+                <h1 class="fw-bold mb-3 text-primary display-4 d-none d-md-block">Hunian Idaman Anda!</h1>
+                <h1 class="fw-bold mb-3 text-primary display-5 d-block d-md-none">Dapatkan Desain</h1>
+                <h1 class="fw-bold mb-3 text-primary display-5 d-block d-md-none">Hunian Idaman Anda!</h1>
                 <p class="mb-3">Bangun rumah lebih mudah bersama RumahTinggal.id</p>
                 <div class="row">
                     <div class="col-lg-9 mb-5">
@@ -141,6 +147,23 @@
             </div>
             <div class="col-lg-8 mb-3">
                 <div class="mb-3">
+                    <label for="lebarLahan" class="form-label fw-semibold d-block w-100">
+                        <div class="d-flex justify-content-between">
+                            <div>Lebar Lahan Minimal (m)</div>
+                            <div><span id="ubahLebar" class="badge bg-light text-dark"><?= (int)$range_lebar_lahan->max_lebar_lahan ?></span> meter</div>
+                        </div>
+                    </label>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="btn btn-outline-white border-dark border-2 rounded-circle " onclick='handlePlusMinusLahan(".js-range-slider-lebar","minus")'>
+                            <small id="kurang-lebar"><i class="fas fa-minus"></i></small>
+                        </div>
+                        <input type="text" class="js-range-slider-lebar" id="lebarLahan" name="lebar_lahan" value="" />
+                        <div class="btn btn-outline-white border-dark border-2 rounded-circle " onclick='handlePlusMinusLahan(".js-range-slider-lebar","plus")'>
+                            <small id="tambah-lebar"><i class="fas fa-plus"></i></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
                     <label for="panjangLahan" class="form-label fw-semibold d-block w-100">
                         <div class="d-flex justify-content-between">
                             <div>Panjang Lahan Minimal (m)</div>
@@ -158,26 +181,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label for="lebarLahan" class="form-label fw-semibold d-block w-100">
-                        <div class="d-flex justify-content-between">
-                            <div>Lebar Lahan Minimal (m)</div>
-                            <div><span id="ubahLebar" class="badge bg-light text-dark"><?= (int)$range_lebar_lahan->max_lebar_lahan ?></span> meter</div>
-                        </div>
-                    </label>
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="btn btn-outline-white border-dark border-2 rounded-circle " onclick='handlePlusMinusLahan(".js-range-slider-lebar","minus")'>
-                            <small id="kurang-lebar"><i class="fas fa-minus"></i></small>
-                        </div>
-                        <input type="text" class="js-range-slider-lebar" id="lebarLahan" name="lebar_lahan" value="" />
-                        <div class="btn btn-outline-white border-dark border-2 rounded-circle " onclick='handlePlusMinusLahan(".js-range-slider-lebar","plus")'>
-                            <small id="tambah-lebar"><i class="fas fa-plus"></i></small>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="col-lg-4">
                 <div class="row">
+                    <div class="form-group mb-3 col-6 col-lg-12">
+                        <label for="jumlah_lantai" class="form-label fw-semibold">Jumlah Lantai</label>
+                        <input type="number" class="form-control" id="jumlah_lantai" name="lantai" min="1" placeholder="Jumlah Lantai" />
+                    </div>
                     <div class="form-group mb-3 col-6 col-lg-12">
                         <label for="jumlah_lantai" class="form-label fw-semibold">Gaya Desain</label>
                         <select class="form-select" aria-label="Default select example" name="gaya">
@@ -187,10 +198,7 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="form-group mb-3 col-6 col-lg-12">
-                        <label for="jumlah_lantai" class="form-label fw-semibold">Jumlah Lantai</label>
-                        <input type="number" class="form-control" id="jumlah_lantai" name="lantai" placeholder="Jumlah Lantai" />
-                    </div>
+
                 </div>
                 <button class="btn btn-primary d-lg-block d-none" id="button-addon2" type="submit">Cari Desain<i class=" ms-2 fas fa-search"></i></button>
                 <button class="btn btn-primary d-block w-100 d-lg-none" id="button-addon2" type="submit">Cari Desain<i class=" ms-2 fas fa-search"></i></button>
@@ -210,14 +218,15 @@
             <div class="card-container owl-carousel owl-theme owl-carousel-one">
                 <?php foreach ($produk_favorit as $item) { ?>
                     <div class="card border-0 shadow-sm mb-2">
-                        <a href="javascript:void(0)" class="image" onclick="detailRumah(<?= $item->id_rumah ?>)">
-                            <div style="background-image: url('<?= base_url('assets/img/desain/' . $item->foto) ?>')" class="card-img-top bg-card-produk"></div>
-                        </a>
-                        <div class="card-body">
+                        <div class="img-container">
+                            <img src="<?= base_url('assets/img/desain/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
+                        </div>
+
+                        <div class="card-body card-home">
                             <h5 class="card-title mb-0 fw-semibold" onclick="detailRumah(<?= $item->id_rumah ?>)">
                                 <?= $item->nama_rumah ?></h5>
-                            <h6 class="nama_arsitek mb-0">Design by
-                                <?= $item->nama_arsitek ?></h6>
+                            <small class="nama_arsitek mb-0">Design by
+                                <?= $item->nama_arsitek ?></small>
                             <hr />
                             <div class="d-flex align-items-center gap-3 mb-1">
                                 <div>
@@ -234,7 +243,10 @@
                                 </div>
                                 <div>
                                     <small>Biaya Konstruksi</small>
-                                    <small class="fw-semibold d-block"><?= $item->lantai == '1' ? "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".")); ?></small>
+                                    <small class="fw-semibold d-block tooltip-biaya"><?= $item->lantai == '1' ? "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".")); ?>
+                                        <span class="tooltip-biaya-text">Estimasi Awal</span>
+                                    </small>
+
                                 </div>
                             </div>
                             <div class="mt-3"></div>
@@ -242,48 +254,48 @@
                         <div class="card-info">
                             <div class="row justify-content-between">
                                 <div class="col-6">
-                                    <div class="d-flex align-items-center gap-3 ms-2">
-                                        <div>
+                                    <div class="d-flex align-items-center gap-2 ms-2">
+                                        <div class='m-0 p-0'>
                                             <img src="<?php echo base_url('assets/demo/img/bangunan.png'); ?>" width="20" height="20">
                                         </div>
                                         <div>
-                                            <small>Bangunan</small>
-                                            <small class="fw-semibold d-block"><?= $item->luas_bangunan ?> m2 </small>
+                                            <small style="font-size:0.8em">Luas Bangunan</small>
+                                            <small class="fw-semibold d-block" style="font-size:0.8em"><?= $item->luas_bangunan ?> m2 </small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center gap-2">
                                         <div>
                                             <img src="<?php echo base_url('assets/demo/img/kt.png'); ?>" width="20" height="20">
                                         </div>
                                         <div>
-                                            <small>Kamar Tidur</small>
-                                            <small class="fw-semibold d-block"><?= $item->kamar_tidur ?> Kamar </small>
+                                            <small style="font-size:0.8em">Kamar Tidur</small>
+                                            <small class="fw-semibold d-block" style="font-size:0.8em"><?= $item->kamar_tidur ?> Kamar </small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row justify-content-between mb-3">
                                 <div class="col-6">
-                                    <div class="d-flex align-items-center gap-3 ms-2">
+                                    <div class="d-flex align-items-center gap-2 ms-2">
                                         <div>
                                             <img src="<?php echo base_url('assets/demo/img/lantai.png'); ?>" width="20" height="20">
                                         </div>
                                         <div>
-                                            <small>Lantai</small>
-                                            <small class="fw-semibold d-block"><?= $item->lantai ?> Lantai </small>
+                                            <small style="font-size:0.8em">Jumlah Lantai</small>
+                                            <small class="fw-semibold d-block" style="font-size:0.8em"><?= $item->lantai ?> Lantai </small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center gap-2">
                                         <div>
                                             <img src="<?php echo base_url('assets/demo/img/km.png'); ?>" width="20" height="20">
                                         </div>
                                         <div>
-                                            <small>Kamar Mandi</small>
-                                            <small class="fw-semibold d-block"><?= $item->toilet ?> Kamar</small>
+                                            <small style="font-size:0.8em">Kamar Mandi</small>
+                                            <small class="fw-semibold d-block" style="font-size:0.8em"><?= $item->toilet ?> Kamar</small>
                                         </div>
                                     </div>
                                 </div>
@@ -299,12 +311,15 @@
             </div>
 
 
-            <div class="position-absolute top-50 start-100 translate-middle d-none d-lg-block" style="z-index: 1000">
+            <div class="position-absolute top-50 start-100 translate-middle d-lg-block" style="z-index: 1000">
                 <button class="btn btn-white border-0 bg-white shadow-sm rounded-circle me-3" id="nextBtnOne"><i class="fas fa-arrow-right fs-7"></i></button>
             </div>
+            <div class="position-absolute top-50 start-0 translate-middle" style="z-index: 1000">
+                <button class="btn btn-white border-0 bg-white shadow-sm rounded-circle" id="prevBtnOne"><i class="fas fa-arrow-left"></i></button>
+            </div>
         </div>
-        <div class="pt-3">
-            <div class="d-block d-lg-none text-center mt-5 mt-3">
+        <div class="pt-1">
+            <div class="d-block d-lg-none text-center mt-3">
                 <a class="btn btn-primary" href="<?= base_url('koleksi') ?>">Lihat Semua<i class="ms-2 fas fa-arrow-right"></i></a>
             </div>
         </div>
@@ -321,15 +336,16 @@
         <div class="position-relative">
             <div class="card-container owl-carousel owl-theme owl-carousel-two card-group">
                 <?php foreach ($produk_terbaru as $item) { ?>
-                    <div class="card border-0 shadow-sm mb-2">
-                        <a href="javascript:void(0)" class="image" onclick="detailRumah(<?= $item->id_rumah ?>)">
-                            <div style="background-image: url('<?= base_url('assets/img/desain/' . $item->foto) ?>')" class="card-img-top bg-card-produk "></div>
-                        </a>
+                    <div class="card border-0 shadow-sm mb-2 product-card">
+                        <div class="img-container">
+                            <img src="<?= base_url('assets/img/desain/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
+                        </div>
+
                         <div class="card-body">
                             <h5 class="card-title mb-0 fw-semibold" onclick="detailRumah(<?= $item->id_rumah ?>)">
                                 <?= $item->nama_rumah ?></h5>
-                            <h6 class="nama_arsitek mb-0">Design by
-                                <?= $item->nama_arsitek ?></h6>
+                            <small class="nama_arsitek mb-0">Design by
+                                <?= $item->nama_arsitek ?></small>
                             <hr />
                             <div class="d-flex align-items-center gap-3 mb-1">
                                 <div>
@@ -354,48 +370,48 @@
                         <div class="card-info">
                             <div class="row justify-content-between">
                                 <div class="col-6">
-                                    <div class="d-flex align-items-center gap-3 ms-2">
+                                    <div class="d-flex align-items-center gap-2 ms-2">
                                         <div>
                                             <img src="<?php echo base_url('assets/demo/img/bangunan.png'); ?>" width="20" height="20">
                                         </div>
                                         <div>
-                                            <small>Bangunan</small>
-                                            <small class="fw-semibold d-block"><?= $item->luas_bangunan ?> m2 </small>
+                                            <small style="font-size:0.8em">Luas Bangunan</small>
+                                            <small class="fw-semibold d-block" style="font-size:0.8em"><?= $item->luas_bangunan ?> m2 </small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center gap-2">
                                         <div>
                                             <img src="<?php echo base_url('assets/demo/img/kt.png'); ?>" width="20" height="20">
                                         </div>
                                         <div>
-                                            <small>Kamar Tidur</small>
-                                            <small class="fw-semibold d-block"><?= $item->kamar_tidur ?> Kamar </small>
+                                            <small style="font-size:0.8em">Kamar Tidur</small>
+                                            <small class="fw-semibold d-block" style="font-size:0.8em"><?= $item->kamar_tidur ?> Kamar </small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row justify-content-between mb-3">
                                 <div class="col-6">
-                                    <div class="d-flex align-items-center gap-3 ms-2">
+                                    <div class="d-flex align-items-center gap-2 ms-2">
                                         <div>
                                             <img src="<?php echo base_url('assets/demo/img/lantai.png'); ?>" width="20" height="20">
                                         </div>
                                         <div>
-                                            <small>Lantai</small>
-                                            <small class="fw-semibold d-block"><?= $item->lantai ?> Lantai </small>
+                                            <small style="font-size:0.8em">Jumlah Lantai</small>
+                                            <small class="fw-semibold d-block" style="font-size:0.8em"><?= $item->lantai ?> Lantai </small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="d-flex align-items-center gap-3">
+                                    <div class="d-flex align-items-center gap-2">
                                         <div>
                                             <img src="<?php echo base_url('assets/demo/img/km.png'); ?>" width="20" height="20">
                                         </div>
                                         <div>
-                                            <small>Kamar Mandi</small>
-                                            <small class="fw-semibold d-block"><?= $item->toilet ?> Kamar</small>
+                                            <small style="font-size:0.8em">Kamar Mandi</small>
+                                            <small class="fw-semibold d-block" style="font-size:0.8em"><?= $item->toilet ?> Kamar</small>
                                         </div>
                                     </div>
                                 </div>
@@ -409,12 +425,15 @@
                     </div>
                 <?php } ?>
             </div>
-            <div class="position-absolute top-50 start-100 translate-middle d-none d-lg-block" style="z-index: 1000">
+            <div class="position-absolute top-50 start-100 translate-middle d-lg-block" style="z-index: 1000">
                 <button class="btn btn-white border-0 bg-white shadow-sm rounded-circle me-3" id="nextBtnTwo"><i class="fas fa-arrow-right fs-7"></i></button>
             </div>
+            <div class="position-absolute top-50 start-0 translate-middle" style="z-index: 1000">
+                <button class="btn btn-white border-0 bg-white shadow-sm rounded-circle" id="prevBtnTwo"><i class="fas fa-arrow-left"></i></button>
+            </div>
         </div>
-        <div class="pt-3">
-            <div class="d-block d-lg-none text-center mt-5 mt-3">
+        <div class="pt-1">
+            <div class="d-block d-lg-none text-center mt-3">
                 <a class="btn btn-primary" href="<?= base_url('koleksi') ?>">Lihat Semua<i class="ms-2 fas fa-arrow-right"></i></a>
             </div>
         </div>
@@ -439,7 +458,7 @@
                             <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
                         </p>
                     </video>
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;">
+                    <div id="play-icon-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;">
                         <img src="<?php echo base_url('assets/demo/img/play-icon.png'); ?>" class="play-icon" alt="Play Icon">
                     </div>
                 </div>
@@ -493,9 +512,9 @@
                         <button class="btn btn-white border-0 bg-white shadow-sm rounded-circle" id="prevBtnThree"><i class="fas fa-arrow-left"></i></button>
                     </div>
                 </div>
-                <div class="d-block d-lg-none text-center mt-7">
+                <!-- <div class="d-block d-lg-none text-center mt-7">
                     <button class="btn btn-primary" type="button" id="button-addon3">Baca Cerita Lainnya<i class=" ms-2 fas fa-arrow-right"></i></button>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="row">
@@ -606,6 +625,14 @@
         getMaterial();
     });
 
+    var video = document.getElementById('my-video');
+    var playIconContainer = document.getElementById('play-icon-container');
+
+    // Add event listener to hide the play icon when the video is played
+    video.addEventListener('play', function() {
+        playIconContainer.style.display = 'none';
+    });
+
     // $(document).ready(function() {
     //     $('#button-addon2').on('click', function() {
     //         var cari = $('#cari-desain-input').val(); // Ambil nilai dari input pencarian
@@ -669,6 +696,13 @@
             $("#ubahLebar").html(from_lebar);
         }
     });
+
+    function adjustHeight(img) {
+        var aspectRatio = 1.33; // Desired aspect ratio (4:3)
+        var containerWidth = $(img).parent().width(); // Get the width of the container using jQuery
+        var height = containerWidth / aspectRatio; // Calculate the height based on the aspect ratio
+        $(img).css('height', height + 'px'); // Set the height of the image using jQuery
+    }
 
     function handlePlusMinusLahan(slider, operation) {
         // Get the current value of the "panjang" input
@@ -813,22 +847,23 @@
             0: {
                 items: 1,
                 dots: false,
-                nav: false
+                nav: false,
             },
             576: {
                 items: 2,
-                dots: false,
-                nav: false
+                nav: false,
             },
             768: {
-                items: 3,
-                dots: false,
-                nav: false
+                items: 2,
+                nav: false,
             },
             992: {
+                items: 3,
+                nav: false,
+            },
+            1200: {
                 items: 4,
-                dots: true,
-                nav: false
+                nav: false,
             },
         },
     });
@@ -931,8 +966,16 @@
         } else {}
     }
 
-    // to make cards in design carousels the same height
-    document.addEventListener("DOMContentLoaded", function() {
+    $(window).ready(updateHeight);
+    $(window).resize(updateHeight);
+
+    function updateHeight() {
+        var div = $('.img-container');
+        var divref = $('.owl-carousel-two').find('.product-card')
+        var width = divref.width() / 1.3333333;
+
+        div.css('height', width);
+
         var cards2 = document.querySelectorAll('.owl-carousel-two .card');
 
         var maxHeight2 = 0;
@@ -942,7 +985,20 @@
         cards2.forEach(function(card2) {
             card2.style.height = maxHeight2 + 'px';
         });
-    });
+    }
+
+    // to make cards in design carousels the same height
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var cards2 = document.querySelectorAll('.owl-carousel-two .card');
+
+    //     var maxHeight2 = 0;
+    //     cards2.forEach(function(card2) {
+    //         maxHeight2 = Math.max(maxHeight2, card2.offsetHeight);
+    //     });
+    //     cards2.forEach(function(card2) {
+    //         card2.style.height = maxHeight2 + 'px';
+    //     });
+    // });
 
     // document.addEventListener("DOMContentLoaded", function() {
     //     var cards2 = document.querySelectorAll('.owl-carousel-one .card');
