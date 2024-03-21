@@ -13,11 +13,12 @@
         text-overflow: ellipsis;
     }
 
+    /* 
     .card:hover .truncateTitle {
         white-space: normal;
         overflow: visible;
         text-overflow: clip;
-    }
+    } */
 
     .teks-card-info {
         font-weight: 600;
@@ -36,13 +37,50 @@
 
         .teks-card-info {
             font-weight: normal;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
 
         .lihat-detail-button {
             font-size: small;
         }
+
+        .info-row {
+            padding-right: 8px;
+        }
+
+        .card-body-text {
+            font-size: 0.8rem;
+        }
     }
+
+    @media screen and (min-width: 768px) {
+        .teks-card-info {
+            font-size: 0.8em;
+        }
+
+        .info-row {
+            padding-right: 12px;
+        }
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1199px) {
+        .card:hover .card-body {
+            transform: translateY(-115%);
+        }
+    }
+
+    @media screen and (min-width: 1200px) and (max-width: 1399px) {
+        .card:hover .card-body {
+            transform: translateY(-90%);
+        }
+    }
+
+    @media screen and (min-width: 1400px) {
+        .card:hover .card-body {
+            transform: translateY(-105%);
+        }
+    }
+
 
     .irs--round .irs-line {
         top: 33px;
@@ -56,12 +94,6 @@
         box-shadow: #000;
         background-color: #003A65;
     }
-
-    /* .irs--round .irs-from::before,
-    .irs--round .irs-to::before,
-    .irs--round .irs-single::before {
-        border-top-color: #026CB6;
-    } */
 
     .irs--round .irs-grid-text {
         color: #000;
@@ -95,6 +127,14 @@
 
     .custom-radio-btn input[type="radio"]:checked+label {
         background-color: #007bff;
+    }
+
+    @media screen and (max-width: 767px) {
+
+
+        .card:hover .card-body {
+            transform: translateY(-100%);
+        }
     }
 </style>
 
@@ -171,19 +211,6 @@ function truncateTitle($title, $length)
 // Ambil nilai sort dari URL atau setel ke default
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 
-// ... Bagian lain dari kode PHP Anda ...
-
-// // Check if form is submitted
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     $_SESSION['lantai'] = $_POST['lantai']; // Assuming 'category' is the name of your filter input
-//     $koleksi_rumah = array_filter($koleksi_rumah, 'filterByLantai');
-// }
-
-// function filterByLantai($rumah)
-// {
-//     return $rumah->lantai == $_SESSION['lantai'];
-// }
-// 
 ?>
 
 <div class="py-2 bg-header-web">
@@ -201,10 +228,10 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                         <img src="<?php echo base_url('assets/demo/img/banner2.png'); ?>" alt="" class="banner-img" />
                         <img src="<?php echo base_url('assets/demo/img/banner3.png'); ?>" alt="" class="banner-img" />
                     </div>
-                    <div class="position-absolute top-50 start-100 translate-middle d-none d-lg-block" style="z-index: 1000">
+                    <div class="position-absolute top-50 start-100 translate-middle d-none d-lg-block" style="z-index: 500">
                         <button class="btn btn-white border-0 bg-white shadow-sm rounded-circle me-3" id="nextBtnKoleksi"><i class="fas fa-arrow-right fs-7"></i></button>
                     </div>
-                    <div class="position-absolute top-50 start-60 translate-middle d-none d-lg-block" style="z-index: 1000">
+                    <div class="position-absolute top-50 start-60 translate-middle d-none d-lg-block" style="z-index: 500">
                         <button class="btn btn-white border-0 bg-white shadow-sm rounded-circle" id="prevBtnKoleksi"><i class="fas fa-arrow-left"></i></button>
                     </div>
                 </div>
@@ -246,14 +273,16 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                         <i class="fas fa-search " style="color: black;"></i>
                     </button>
                 </div>
-                <div class="fw-semibold mb-2">Biaya Konstruksi</div>
-                <div class="d-flex justify-content-between flex-column flex-lg-row mb-3 text-center gap-2">
-                    <div class="mb-2 col-lg-auto" style="width: 45%;">
-                        <input type="text" id="min_biaya" name="min_biaya" class="form-control" placeholder="Rp Minimal" value=<?php echo getParams($query_params, 'min_biaya') ?>>
-                    </div>
-                    <span class="mb-2 col-lg-auto mt-2">-</span>
-                    <div class="mb-2 col-lg-auto" style="width: 45%;">
-                        <input type="text" id="max_biaya" name="max_biaya" class="form-control" placeholder="Rp Maksimal" value=<?php echo getParams($query_params, 'max_biaya') ?>>
+
+                <div class="mb-3">
+                    <label for="lebarLahan" class="form-label fw-semibold d-block w-100">
+                        <div class="d-flex justify-content-between">
+                            <div>Lebar Lahan (m)</div>
+                            <div><span id="ubahLebar" class="badge bg-light text-dark"><?= (int)$range_lebar_lahan->min_lebar_lahan . ' - ' . (int)$range_lebar_lahan->max_lebar_lahan ?></span> meter</div>
+                        </div>
+                    </label>
+                    <div style="margin-top: -24px; " id="sliderLebarContainer">
+                        <input type="text" class="js-range-slider-lebar" id="lebarLahan" name="lebar_lahan" value="" />
                     </div>
                 </div>
                 <div class="mb-3">
@@ -267,24 +296,14 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                         <input type="text" class="js-range-slider-panjang" id="panjangLahan" name="panjang_lahan" value="" />
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label for="lebarLahan" class="form-label fw-semibold d-block w-100">
-                        <div class="d-flex justify-content-between">
-                            <div>Lebar Lahan (m)</div>
-                            <div><span id="ubahLebar" class="badge bg-light text-dark"><?= (int)$range_lebar_lahan->min_lebar_lahan . ' - ' . (int)$range_lebar_lahan->max_lebar_lahan ?></span> meter</div>
-                        </div>
-                    </label>
-                    <div style="margin-top: -24px; " id="sliderLebarContainer">
-                        <input type="text" class="js-range-slider-lebar" id="lebarLahan" name="lebar_lahan" value="" />
-                    </div>
-                </div>
+
                 <div class="form-group mb-3 col-6 col-lg-12">
                     <label for="jumlah_lantai" class="form-label fw-semibold">Jumlah Lantai</label>
-                    <input type="number" class="form-control" id="jumlah_lantai" name="lantai" placeholder="Jumlah Lantai" value=<?php echo getParams($query_params, 'lantai') ?> />
+                    <input type="number" class="form-control" id="jumlah_lantai" min=1 name="lantai" placeholder="Jumlah Lantai" value=<?php echo getParams($query_params, 'lantai') ?> />
                 </div>
                 <div class="form-group mb-3 col-6 col-lg-12">
                     <label for="jumlah_kamar" class="form-label fw-semibold">Jumlah Kamar</label>
-                    <input type="number" class="form-control" id="jumlah_kamar" placeholder="Jumlah Kamar" name="kamar" value=<?php echo getParams($query_params, 'kamar') ?> />
+                    <input type="number" class="form-control" id="jumlah_kamar" min=1 placeholder="Jumlah Kamar" name="kamar" value=<?php echo getParams($query_params, 'kamar') ?> />
                 </div>
                 <hr />
                 <div class="accordion" id="accordionGayaDesain">
@@ -324,10 +343,11 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                 Ruangan
                             </button>
                         </h2>
-                        <div id="flushRuanganRumah" class="accordion-collapse collapse" aria-labelledby="ruanganRumah" data-bs-parent="#accordionRuangan">
-                            <div class="accordion-body">
+                        <div id="flushRuanganRumah" class="accordion-collapse collapse" aria-labelledby="ruanganRumah" data-bs-parent="#accordionRuangan" style="max-height: 320px; overflow-y: auto;">
+                            <div class="accordion-body" style="height: auto;">
                                 <?php
                                 // Loop through the design options array to generate checkboxes
+                                $index = 0;
                                 foreach ($ruangan as $option) :
                                     $isChecked = getChecked($query_params, 'ruang', $option->id_ruang);
                                 ?>
@@ -340,10 +360,23 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                         </div>
                                     </div>
                                 <?php
+                                    $index++;
                                 endforeach;
                                 ?>
                             </div>
                         </div>
+
+                    </div>
+                </div>
+                <hr />
+                <div class="fw-semibold mb-2">Biaya Konstruksi</div>
+                <div class="d-flex justify-content-between flex-column flex-lg-row text-center gap-2">
+                    <div class="mb-2 col-lg-auto" style="width: 45%;">
+                        <input type="text" id="min_biaya" name="min_biaya" class="form-control" placeholder="Rp Minimal" value=<?php echo getParams($query_params, 'min_biaya') ?>>
+                    </div>
+                    <span class="mb-2 col-lg-auto mt-2">-</span>
+                    <div class="mb-2 col-lg-auto" style="width: 45%;">
+                        <input type="text" id="max_biaya" name="max_biaya" class="form-control" placeholder="Rp Maksimal" value=<?php echo getParams($query_params, 'max_biaya') ?>>
                     </div>
                 </div>
 
@@ -356,7 +389,8 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                     <div class="fw-semibold mb-2 text-center p-2">Temukan Desain Hunian dengan Lebih Akurat</div>
                     <p class="mb-3 text-center p-2">Fitur asesmen memudahkan Anda untuk mencari desain hunian sesuai kebutuhan</p>
                     <div class="pb-4 mx-auto">
-                        <button class="btn btn-danger" type="button" id="button-addon2">Mulai Assesmen</button>
+                        <a href="<?= base_url('assessment') ?>" class="btn btn-danger" id="button-addon2">Mulai Assesmen</a>
+
                     </div>
                 </div>
             </form>
@@ -396,7 +430,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                     </div>
                 </div>
                 <div class="konten-koleksi">
-                    <div class="row">
+                    <div class="row gx-3" style="flex:1;">
                         <?php
                         // Jumlah item per halaman
                         $paginated_data = array_slice($koleksi_rumah, $offset, $items_per_page);
@@ -405,87 +439,102 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                         foreach ($paginated_data as $item) {
                         ?>
                             <div class="col-lg-6 col-xl-4 col-md-6 col-6 mb-3">
-                                <div class="card desain-card border-0 shadow-sm" style="height: max-content;">
-                                    <a href="javascript:void(0)" class="image mb-3 mb-md-0 card-image">
-                                        <div style="background-image: url('<?= base_url('assets/img/desain/' . $item->foto) ?>')" class="card-img-top bg-card-produk"></div>
-                                    </a>
-                                    <div class="card-body pt-0 pt-md-4">
+                                <div class="card desain-card border-0 shadow-sm pb-1 h-100" style="height: max-content;">
+                                    <div class="img-container">
+                                        <img src="<?= base_url('assets/img/desain/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
+                                    </div>
+
+
+                                    <div class="card-body pt-3 pt-md-4">
                                         <h5 class="card-title mb-0 fw-semibold d-none d-md-block">
                                             <?= $item->nama_rumah; ?></h5>
                                         <h6 class="card-title mb-0 fw-semibold d-md-none truncateTitle">
                                             <?= $item->nama_rumah ?></h6>
-                                        <h6 class="nama_arsitek mb-0 d-none d-md-block" onclick="detailArsitek(<?= $item->id_rumah ?>)">
-                                            <?= $item->nama_arsitek ?></h6>
-                                        <h6 class="nama_arsitek mb-0 d-md-none" onclick="detailArsitek(<?= $item->id_rumah ?>)" style="font-size: 0.9rem;">
-                                            <?= $item->nama_arsitek ?></h6>
+                                        <!-- <h6 class="nama_arsitek mb-0 d-none d-md-block" onclick="detailArsitek(<?= $item->id_rumah ?>)">
+                                            <?= $item->nama_arsitek ?></h6> -->
+                                        <small class="nama_arsitek mb-0" onclick="detailArsitek(<?= $item->id_rumah ?>)">
+                                            <?= $item->nama_arsitek ?></small>
                                         <hr class="my-2 d-md-none" />
                                         <hr class="my-3 d-none d-md-block" />
                                         <div class=" d-flex align-items-center gap-3 mb-1">
-                                            <div>
+                                            <div class="d-none d-md-block">
                                                 <img src="<?php echo base_url('assets/demo/img/arrows-expand.png'); ?>" width="25" height="25">
+                                            </div>
+                                            <div class="d-block d-md-none">
+                                                <img src="<?php echo base_url('assets/demo/img/arrows-expand.png'); ?>" width="20" height="20">
                                             </div>
                                             <div>
                                                 <small class="d-none d-md-inline lahan-minimal">Lahan Minimal</small>
-                                                <small class="fw-semibold d-block"><?= $item->lebar_lahan . ' m x ' . $item->panjang_lahan . ' m' ?></small>
+                                                <small class="fw-semibold d-block card-body-text"><?= $item->lebar_lahan . ' m x ' . $item->panjang_lahan . ' m' ?></small>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center gap-3">
-                                            <div>
+                                            <div class="d-none d-md-block">
                                                 <img src="<?php echo base_url('assets/demo/img/cash.png'); ?>" width="25" height="25">
+                                            </div>
+                                            <div class="d-block d-md-none">
+                                                <img src="<?php echo base_url('assets/demo/img/cash.png'); ?>" width="20" height="20">
                                             </div>
                                             <div>
                                                 <small class="d-none d-md-inline biaya-konstruksi">Biaya Konstruksi</small>
-                                                <small class="fw-semibold d-block"><?= $item->lantai == '1' ? "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".")); ?></small>
+                                                <small class="fw-semibold d-block tooltip-biaya card-body-text"><?= $item->lantai == '1' ? "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".")); ?>
+                                                    <span class="tooltip-biaya-text">Estimasi Awal</span>
+                                                </small>
                                             </div>
                                         </div>
                                         <div class="mt-3"></div>
                                     </div>
                                     <div class="card-info">
-                                        <div class="row justify-content-between mb-2 g-0">
+                                        <div class="row justify-content-between mb-2 g-0 info-row">
                                             <div class="col-6">
-                                                <div class="d-flex align-items-center justify-content-start gap-2 gap-md-3 ms-2">
+                                                <div class="d-flex align-items-center justify-content-start gap-2 gap-md-3 gap-xl-2 gap-xxl-3 ms-2">
                                                     <div>
-                                                        <img src="<?php echo base_url('assets/demo/img/bangunan.png'); ?>" width="20" height="20">
+                                                        <img src="<?php echo base_url('assets/demo/img/bangunan.png'); ?>" width="18" height="18">
                                                     </div>
                                                     <div>
-                                                        <small class="d-none d-md-inline ">Bangunan</small>
-                                                        <small class="d-block teks-card-info"><?= $item->luas_bangunan ?> m2 </small>
+                                                        <small class="d-none d-md-inline  d-lg-inline d-xl-none d-xxl-inline " style="font-size:0.7em">Luas Bangunan</small>
+                                                        <small class="d-none d-lg-none d-xl-inline d-xxl-none" style="font-size:0.7em">Bangunan</small>
+                                                        <small class="d-block teks-card-info" style="white-space: nowrap;"><?= $item->luas_bangunan ?> m2 </small>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <div class="d-flex align-items-center justify-content-start gap-2 gap-md-3">
+                                                <div class="d-flex align-items-center justify-content-start gap-2 ms-3 gap-md-3 gap-xl-2 gap-xxl-3">
                                                     <div>
-                                                        <img src="<?php echo base_url('assets/demo/img/kt.png'); ?>" width="20" height="20">
+                                                        <img src="<?php echo base_url('assets/demo/img/kt.png'); ?>" width="18" height="18">
                                                     </div>
                                                     <div>
-                                                        <small class="d-none d-md-inline ">Kamar Tidur</small>
-                                                        <small class="d-block teks-card-info"><?= $item->kamar_tidur ?> Kamar </small>
+                                                        <small class="d-none d-md-inline " style="font-size:0.7em">Kamar Tidur</small>
+                                                        <small class="d-none d-sm-block teks-card-info"><?= $item->kamar_tidur   ?> Kamar</small>
+                                                        <small class="d-block d-sm-none teks-card-info"><?= $item->kamar_tidur   ?></small>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row justify-content-between mb-3 g-0">
+                                        <div class="row justify-content-between mb-3 g-0 info-row">
                                             <div class="col-6">
-                                                <div class="d-flex align-items-center justify-content-start gap-2 gap-md-3 ms-2">
+                                                <div class="d-flex align-items-center justify-content-start gap-2 gap-md-3 gap-xl-2 gap-xxl-3 ms-2">
                                                     <div>
-                                                        <img src="<?php echo base_url('assets/demo/img/lantai.png'); ?>" width="20" height="20">
+                                                        <img src="<?php echo base_url('assets/demo/img/lantai.png'); ?>" width="18" height="18">
                                                     </div>
                                                     <div>
-                                                        <small class="d-none d-md-inline ">Lantai</small>
+
+                                                        <small class="d-none d-md-inline  d-lg-inline d-xl-none d-xxl-inline " style="font-size:0.7em">Jumlah Lantai</small>
+                                                        <small class="d-none d-lg-none d-xl-inline d-xxl-none" style="font-size:0.7em"> Lantai</small>
                                                         <small class="d-none d-md-block teks-card-info"><?= $item->lantai ?> Lantai </small>
                                                         <small class="d-block d-md-none teks-card-info"><?= $item->lantai ?> Lt. </small>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <div class="d-flex align-items-center justify-content-start gap-2 gap-md-3">
+                                                <div class="d-flex align-items-center justify-content-start ms-3 gap-2 gap-md-3 gap-xl-2 gap-xxl-3">
                                                     <div>
-                                                        <img src="<?php echo base_url('assets/demo/img/km.png'); ?>" width="20" height="20">
+                                                        <img src="<?php echo base_url('assets/demo/img/km.png'); ?>" width="18" height="18">
                                                     </div>
                                                     <div>
-                                                        <small class="d-none d-md-inline ">Kamar Mandi</small>
-                                                        <small class="d-block teks-card-info"><?= $item->toilet ?> Kamar</small>
+                                                        <small class="d-none d-md-inline " style="font-size:0.7em">Kamar Mandi</small>
+                                                        <small class="d-none d-sm-block teks-card-info"><?= $item->toilet ?> Kamar</small>
+                                                        <small class="d-block d-sm-none teks-card-info"><?= $item->toilet ?></small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -499,9 +548,19 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                     </div>
                                 </div>
                             </div>
-                        <?php
+
+                            <?php
                         }
-                        ?>
+                            ?><?php if (count($paginated_data) < 1) : ?>
+                            <div class="koleksi-not-found mb-5">
+                                <div class="row justify-content-center text-center">
+                                    <img src="<?php echo base_url('assets/demo/img/empty.png'); ?>" alt="Deskripsi Gambar" class="img-fluid" style="width: 300px; height: 200px;">
+                                    <h5 class="mt-3">Yah! Tidak ada desain hunian yang sesuai dengan pencarian Anda.</h5>
+                                    <div class="mt-1">Silahkan hubungi kami untuk mendapatkan rekomendasi desain yang sesuai.</div>
+                                    <a href="https://api.whatsapp.com/send?phone=628112636228&text=Hai%20rumahtinggal.id%2C%20saya%20ingin%20bertanya%20mengenai%20desain%20rumahtinggal.id%20" target="_blank" class="btn btn-primary mt-3" style="width: fit-content;">Hubungi Kami</a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <div class="d-flex justify-content-center">
                         <nav aria-label="Page navigation example">
@@ -533,6 +592,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                 }
                                 ?>
 
+
                                 <li class="page-item <?php echo ($current_page == $total_pages) ? 'disabled' : ''; ?>">
                                     <a class="page-link" href="<?php echo getPageUrl(min($total_pages, $current_page + 2)); ?>" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
@@ -543,15 +603,6 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                         </nav>
                     </div>
                 </div>
-                <div class="koleksi-not-found" style="display: none;">
-                    <div class="row justify-content-center text-center">
-                        <img src="<?php echo base_url('assets/demo/img/empty.png'); ?>" alt="Deskripsi Gambar" class="img-fluid" style="width: 300px; height: 200px;">
-                        <h5 class="mt-3">Yah! Tidak ada desain hunian yang sesuai dengan pencarian Anda.</h5>
-                        <div class="mt-1">Silahkan hubungi kami untuk mendapatkan rekomendasi desain yang sesuai.</div>
-                        <a href="" class="btn btn-primary mt-3" style="width: fit-content;">Hubungi Kami</a>
-                    </div>
-                </div>
-
 
             </div>
         </div>
@@ -560,7 +611,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 
 <div class="modal fade" id="modalFilter" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form class="modal-content">
+        <form class="modal-content modal-filter">
             <div class="bg-light">
                 <div class="d-flex justify-content-between align-items-center mt-2">
                     <h5 class="fw-semibold ms-3">
@@ -593,17 +644,6 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                         </div>
                     </div>
                     <div class="mx-3 mt-3">
-                        <label for="panjangLahan" class="form-label fw-semibold d-block w-100">
-                            <div class="d-flex justify-content-between">
-                                <div>Panjang Lahan (m)</div>
-                                <div><span id="ubahPanjangMobile" class="badge bg-light text-dark"><?= (int)$range_panjang_lahan->min_panjang_lahan . ' - ' . (int)$range_panjang_lahan->max_panjang_lahan ?></span> meter</div>
-                            </div>
-                        </label>
-                        <div style="margin-top: -24px; " id="sliderPanjangContainer">
-                            <input type="text" class="js-range-slider-panjang-mobile" id="panjangLahan" name="panjang_lahan" value="" />
-                        </div>
-                    </div>
-                    <div class="mx-3 mt-3">
                         <label for="lebarLahan" class="form-label fw-semibold d-block w-100">
                             <div class="d-flex justify-content-between">
                                 <div>Lebar Lahan (m)</div>
@@ -614,14 +654,26 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                             <input type="text" class="js-range-slider-lebar-mobile" id="lebarLahan" name="lebar_lahan" value="" />
                         </div>
                     </div>
+                    <div class="mx-3 mt-3">
+                        <label for="panjangLahan" class="form-label fw-semibold d-block w-100">
+                            <div class="d-flex justify-content-between">
+                                <div>Panjang Lahan (m)</div>
+                                <div><span id="ubahPanjangMobile" class="badge bg-light text-dark"><?= (int)$range_panjang_lahan->min_panjang_lahan . ' - ' . (int)$range_panjang_lahan->max_panjang_lahan ?></span> meter</div>
+                            </div>
+                        </label>
+                        <div style="margin-top: -24px; " id="sliderPanjangContainer">
+                            <input type="text" class="js-range-slider-panjang-mobile" id="panjangLahan" name="panjang_lahan" value="" />
+                        </div>
+                    </div>
+
 
                     <div class="form-group ms-3 mt-3 me-3">
                         <label for="jumlah_lantai" class="form-label fw-semibold">Jumlah Lantai</label>
-                        <input type="number" class="form-control" id="jumlah_lantai" placeholder="Jumlah Lantai" name="lantai" value=<?php echo getParams($query_params, 'lantai') ?> />
+                        <input type="number" class="form-control" id="jumlah_lantai" min=1 placeholder="Jumlah Lantai" name="lantai" value=<?php echo getParams($query_params, 'lantai') ?> />
                     </div>
                     <div class="form-group ms-3 mt-3 me-3">
                         <label for="jumlah_kamar" class="form-label fw-semibold">Jumlah Kamar</label>
-                        <input type="number" class="form-control" id="jumlah_kamar" placeholder="Jumlah Kamar" name="kamar" value=<?php echo getParams($query_params, 'kamar') ?> />
+                        <input type="number" class="form-control" id="jumlah_kamar" min=1 placeholder="Jumlah Kamar" name="kamar" value=<?php echo getParams($query_params, 'kamar') ?> />
                     </div>
                     <div class="bg-white mx-2 p-3 mt-3">
                         <div class="d-flex flex-column">
@@ -689,7 +741,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
         </form>
     </div>
 </div>
-
+</div>
 <?php
 function getPageUrl($page)
 {
@@ -712,17 +764,16 @@ function getPageUrl($page)
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var cards2 = document.querySelectorAll('.desain-card');
+    $(window).ready(updateHeight);
+    $(window).resize(updateHeight);
 
-        var maxHeight2 = 0;
-        cards2.forEach(function(card2) {
-            maxHeight2 = Math.max(maxHeight2, card2.offsetHeight);
-        });
-        cards2.forEach(function(card2) {
-            card2.style.height = maxHeight2 + 'px';
-        });
-    });
+    function updateHeight() {
+        var div = $('.img-container');
+        var divref = $('desain-card');
+        var width = divref.width() / 1.3333333;
+
+        div.css('height', width);
+    }
 
     //function to handle sort buttons in mobile
     function handleSortClick(button) {
@@ -1146,7 +1197,7 @@ function getPageUrl($page)
     //handle form filter submit untuk mobile
 
     $(document).ready(function() {
-        $('.modal-content').on('submit', function(e) {
+        $('.modal-content .modal-filter').on('submit', function(e) {
             e.preventDefault();
             var url = "<?= base_url('koleksi') ?>"; // Base URL
             var queryParams = [];
