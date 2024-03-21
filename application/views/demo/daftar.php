@@ -1,22 +1,47 @@
+<style>
+    .modal-desc {
+        font-size: 1.3em;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.5px;
+    }
+
+    .modal-bullet {
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.5px;
+    }
+
+    .modal-content {
+        overflow: hidden;
+        border-radius: 24px;
+    }
+</style>
+
 <div class="modal fade" id="modalDaftar" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="row justify-content-center">
                 <div class="col-lg-6 bg-info text-white d-none d-lg-block" style="background-image: url('<?= base_url('assets/demo/img/popup.png') ?>'); background-size: 100% 100%; background-repeat: no-repeat">
-                    <h4 class="ms-5 mt-5">Wujudkan Rumah Impian Anda</h4>
-                    <h4 class="ms-5 mb-3">Bersama RumahTinggal.id</h4>
-                    <div class="container ms-5">
-                        <ul class="list-unstyled">
-                            <li class="d-flex align-items-center mb-2"><span class="me-2">&#10003;</span> 500+ Desain
-                                Berkualitas</li>
-                            <li class="d-flex align-items-center mb-2"><span class="me-2">&#10003;</span> Harga Desain
-                                Terjangkau</li>
-                            <li class="d-flex align-items-center mb-2"><span class="me-2">&#10003;</span> Akses Mudah
-                                dan Cepat</li>
-                            <li class="d-flex align-items-center mb-2"><span class="me-2">&#10003;</span> One Stop
-                                Solution</li>
-                        </ul>
+                    <div style="margin-left:2.2em;">
+                        <h4 class=" mt-5 modal-desc">Wujudkan Rumah Impian Anda</h4>
+                        <h4 class=" mb-3 modal-desc">Bersama RumahTinggal.id</h4>
+                        <div class="container ">
+                            <ul class="list-unstyled">
+                                <li class="d-flex align-items-center mb-2 modal-bullet"><span class="me-2">&#10003;</span> <?php echo floor($jumlah_rumah / 10) * 10 . '+'; ?> Desain
+                                    Berkualitas</li>
+                                <li class="d-flex align-items-center mb-2 modal-bullet"><span class="me-2">&#10003;</span> Harga Desain
+                                    Terjangkau</li>
+                                <li class="d-flex align-items-center mb-2 modal-bullet"><span class="me-2">&#10003;</span> Akses Mudah
+                                    dan Cepat</li>
+                                <li class="d-flex align-items-center mb-2 modal-bullet"><span class="me-2">&#10003;</span> One Stop
+                                    Solution</li>
+                            </ul>
+                        </div>
                     </div>
+
                 </div>
                 <div class="col-lg-6 col-10 py-2">
                     <div class="row py-3 justify-content-center">
@@ -54,12 +79,10 @@
                                     <span class="px-3">atau</span>
                                     <hr class="flex-grow-1 border border-dark border-1" />
                                 </div>
-                                <div class="mt-2 mb-4">
-                                    <button class="btn btn-outline-white border-dark w-100" type="button" id="button-addon2">
-                                        <img src=<?php echo base_url('assets/demo/img/google.png'); ?> alt="Google Logo" width="30px" class="me-2" />
-                                        <strong>Masuk Dengan Google</strong>
-                                    </button>
+                                <!-- <div id="g_id_onload" data-client_id=<?php echo $google_client_id ?> data-callback="handleCredentialResponse">
                                 </div>
+                                <div class="g_id_signin w-100 mb-3" data-width=319 data-type="standard"></div> -->
+                                <div id="google-button-daftar" class="w-100 mb-3"></div>
                             </form>
                             <small>Dengan Mendaftar, Anda dinyatakan telah setuju dengan syarat & ketentuan
                                 RumahTinggal.id </small>
@@ -72,6 +95,36 @@
 </div>
 
 <script>
+    window.onload = function() {
+        var id_customer = Cookies.get('id_customer', {
+
+            domain: 'rumahtinggal.id'
+
+        });
+        if (id_customer == null || id_customer == '') {
+            google.accounts.id.initialize({
+                client_id: "<?php echo $google_client_id ?>",
+                callback: handleCredentialResponseLogin
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("google-button-daftar"), {
+                    theme: "outline",
+                    size: "large",
+                    width: 319
+                } // customization attributes
+            );
+            google.accounts.id.renderButton(
+                document.getElementById("google-button-login"), {
+                    theme: "outline",
+                    size: "large",
+                    width: 319
+                } // customization attributes
+            );
+            google.accounts.id.prompt(); // also display the One Tap dialog
+        }
+
+    }
+
     function modalDaftar() {
         $('#modalDaftar').modal('show');
     }
@@ -139,4 +192,52 @@
             }
         });
     });
+
+    function decodeJwtResponseFromGoogleAPI(token) {
+        let base64Url = token.split('.')[1]
+        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        let jsonPayload =
+            decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' +
+                    c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        return JSON.parse(jsonPayload)
+    }
+
+    function handleCredentialResponseLogin(response) {
+        responsePayload = decodeJwtResponseFromGoogleAPI(response.credential);
+        $.ajax({
+            url: "<?= base_url('api/loginGoogle/') ?>" + responsePayload.email,
+            type: "POST",
+            data: {
+                "nama_lengkap": responsePayload.name,
+                "email": responsePayload.email,
+                "password": ''
+            },
+            dataType: "JSON",
+            success: function(response) {
+
+                $('#ModalLogin').modal('hide');
+                Swal.fire({
+                    title: "Anda Berhasil Masuk!",
+                    html: "<img src='<?= base_url('assets/demo/img/login.png') ?>' alt='Success' width='250px'><p>Anda telah masuk ke akun Anda, Mari lihat koleksi rumah impian!</p>",
+                    timer: 7000,
+                    showConfirmButton: true,
+                    timerProgressBar: true,
+                    confirmButtonText: "Mulai",
+                    confirmButtonColor: "#056BB7"
+                }).then(() => {
+                    let url = $(location).attr('href');
+                    window.location.href = "<?= base_url() ?>";
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Kesalahan',
+                    text: 'Email atau kata sandi Anda Salah.'
+                });
+            }
+        });
+    }
 </script>
