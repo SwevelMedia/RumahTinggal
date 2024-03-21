@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-signin-client_id" content="619189282883-54euurh55b0od41supra7n7eoksj2jbu.apps.googleusercontent.com">
     <link rel="stylesheet" href="<?php echo base_url('assets/demo/css/styles.css'); ?>" />
     <title><?= $title; ?></title>
     <link rel="stylesheet" href="<?php echo base_url('assets/demo/css/bootstrap.css'); ?>" />
@@ -54,10 +55,15 @@
 </head>
 
 <body>
+    <?php
+    // Load common data directly in the layout file
+    $data['jumlah_rumah'] = $this->DesainModel->getJumlahRumah()->row()->jumlah_rumah;
+    $data['google_client_id'] = '619189282883-54euurh55b0od41supra7n7eoksj2jbu.apps.googleusercontent.com';
+    ?>
     <?php $this->load->view('demo/layout/navbar') ?>
     <?php $this->load->view($halaman) ?>
-    <?php $this->load->view('demo/masuk') ?>
-    <?php $this->load->view('demo/daftar') ?>
+    <?php $this->load->view('demo/masuk', $data) ?>
+    <?php $this->load->view('demo/daftar', $data) ?>
     <?php $this->load->view('demo/layout/footer') ?>
     <script src="<?php echo base_url('assets/demo/js/bootstrap.bundle.js'); ?>"></script>
     <script src="<?php echo base_url('assets/demo/js/script.js'); ?>"></script>
