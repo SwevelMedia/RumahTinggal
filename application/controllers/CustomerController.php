@@ -589,7 +589,37 @@ class CustomerController extends CI_Controller
     exit;
   }
 
+  public function loginGoogle($email)
+  {
+    parse_str(file_get_contents('php://input'), $data);
+    log_message('error', 'email google' . var_export($email, true));
+    $customer = $this->CustomerModel->getCustomerByEmail($email)->row();
+    if ($customer != null) {
+      set_cookie('id_customer', $customer->id_customer, time() + 86400);
+      $response = array(
+        'Success' => true,
+        'info' => 'Selamat datang' . $customer->nama_customer . '.'
+      );
+    } else {
+      $this->CustomerModel->daftarCustomer($data, '', '', '');
+      $customer = $this->CustomerModel->getCustomerByEmail($email)->row();
+      if ($customer != null) {
+        set_cookie('id_customer', $customer->id_customer, time() + 86400);
 
+        $response = array(
+          'Success' => true,
+          'Info' => 'Pengguna berhasil terautentikasi.'
+        );
+      }
+    }
+
+    $this->output
+      ->set_status_header(201)
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+      ->_display();
+    exit;
+  }
 
 
 
