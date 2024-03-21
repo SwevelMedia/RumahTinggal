@@ -149,8 +149,9 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = TRUE;
-$config['composer_autoload'] = 'google-api-php-client/src/Google/autoload.php';
+// $config['composer_autoload'] = TRUE;
+// $config['composer_autoload'] =  FCPATH . 'google-api-php-client/src/Google/autoload.php';
+$config['composer_autoload'] =  FCPATH . 'vendor/autoload.php';
 /*
 |--------------------------------------------------------------------------
 | Allowed URL Characters
@@ -213,7 +214,6 @@ $config['directory_trigger'] = 'd';
 |
 */
 $config['allow_get_array'] = TRUE;
-
 /*
 |--------------------------------------------------------------------------
 | Error Logging Threshold
