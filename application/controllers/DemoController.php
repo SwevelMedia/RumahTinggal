@@ -1,7 +1,7 @@
 <?php
 
 defined('BASEPATH') or exit('No direct script access allowed');
-
+header("Access-Control-Allow-Origin: *");
 class DemoController extends CI_Controller
 {
 
@@ -74,6 +74,9 @@ class DemoController extends CI_Controller
     {
         $data['halaman'] = 'demo/masuk';
         $data['title'] = 'Masuk Akun';
+        $data['jumlah_rumah'] = $this->DesainModel->getJumlahRumah()->row()->jumlah_rumah;
+        $data['google_client_id'] = '619189282883-54euurh55b0od41supra7n7eoksj2jbu.apps.googleusercontent.com';
+        log_message('error', 'google id' . var_export($data['google_client_id'], true));
         $this->load->view('demo/layout/layout', $data);
     }
 
@@ -81,6 +84,8 @@ class DemoController extends CI_Controller
     {
         $data['halaman'] = 'demo/daftar';
         $data['title'] = 'Daftar Akun';
+        $data['jumlah_rumah'] = $this->DesainModel->getJumlahRumah()->row()->jumlah_rumah;
+        $data['google_client_id'] = "619189282883-54euurh55b0od41supra7n7eoksj2jbu.apps.googleusercontent.com";
         $this->load->view('demo/layout/layout', $data);
     }
 
