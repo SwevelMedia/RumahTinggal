@@ -1,21 +1,50 @@
-<div class="modal fade" id="modalLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<style>
+    .modal-desc {
+        font-size: 1.3em;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: 0.5px;
+    }
+
+    .modal-bullet {
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.5px;
+    }
+
+    .modal-content {
+        overflow: hidden;
+        border-radius: 24px;
+    }
+
+    #g-signin-container {
+        display: none;
+        /* Initially hide the container */
+    }
+</style>
+
+<div class="modal fade" id="modalLogin" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="row justify-content-center">
                 <div class="col-lg-6 bg-info text-white d-none d-lg-block" style="background-image: url('<?= base_url('assets/demo/img/popup.png') ?>'); background-size: 100% 100%; background-repeat: no-repeat">
-                    <h4 class="ms-5 mt-5">Wujudkan Rumah Impian Anda</h4>
-                    <h4 class="ms-5 mb-3">Bersama RumahTinggal.id</h4>
-                    <div class="container ms-5">
-                        <ul class="list-unstyled">
-                            <li class="d-flex align-items-center mb-2"><span class="me-2">&#10003;</span> 500+ Desain
-                                Berkualitas</li>
-                            <li class="d-flex align-items-center mb-2"><span class="me-2">&#10003;</span> Harga Desain
-                                Terjangkau</li>
-                            <li class="d-flex align-items-center mb-2"><span class="me-2">&#10003;</span> Akses Mudah
-                                dan Cepat</li>
-                            <li class="d-flex align-items-center mb-2"><span class="me-2">&#10003;</span> One Stop
-                                Solution</li>
-                        </ul>
+                    <div style="margin-left:2.2em;">
+                        <h4 class=" mt-5 modal-desc">Wujudkan Rumah Impian Anda</h4>
+                        <h4 class=" mb-3 modal-desc">Bersama RumahTinggal.id</h4>
+                        <div class="container ">
+                            <ul class="list-unstyled">
+                                <li class="d-flex align-items-center mb-2 modal-bullet"><span class="me-2">&#10003;</span> <?php echo floor($jumlah_rumah / 10) * 10 . '+'; ?> Desain
+                                    Berkualitas</li>
+                                <li class="d-flex align-items-center mb-2 modal-bullet"><span class="me-2">&#10003;</span> Harga Desain
+                                    Terjangkau</li>
+                                <li class="d-flex align-items-center mb-2 modal-bullet"><span class="me-2">&#10003;</span> Akses Mudah
+                                    dan Cepat</li>
+                                <li class="d-flex align-items-center mb-2 modal-bullet"><span class="me-2">&#10003;</span> One Stop
+                                    Solution</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-10 py-2">
@@ -30,7 +59,7 @@
                                 <a href="#" onclick="modalDaftar()">ayo daftar</a>
 
                             </small>
-                            <form action="" id="frm-login">
+                            <form action="" id="frm-login" onsubmit="event.preventDefault()">
                                 <div class="form-floating mt-3 mb-2">
                                     <input type="email" class="form-control" id="email_login" placeholder="Email" />
                                     <label for="email_login">Email</label>
@@ -43,20 +72,19 @@
                                     <a href="#" id="lupaKataSandiLink" onclick="showForgotPassword()">Lupa Kata Sandi?</a>
                                 </div>
                                 <div class="mt-3">
-                                    <button class="btn btn-primary w-100" type="button" id="login-button">Masuk</button>
+                                    <button class="btn btn-primary w-100" type="submit" id="login-button">Masuk</button>
                                 </div>
                                 <div class="text-center my-2 d-flex align-items-center">
                                     <hr class="flex-grow-1 border border-dark border-1" />
                                     <span class="px-3">atau</span>
                                     <hr class="flex-grow-1 border border-dark border-1" />
                                 </div>
-                                <div class="mt-2 mb-4">
-                                    <button class="btn btn-outline-white border-dark w-100" type="button" id="button-addon2">
-                                        <img src=<?php echo base_url('assets/demo/img/google.png'); ?> alt="Google Logo" width="30px" class="me-2" />
-                                        <strong>Masuk Dengan Google</strong>
-                                    </button>
-                                </div>
+                                <div id="google-button-login" class="w-100 mb-3">
 
+                                </div>
+                                <!-- <div id="g_id_onload" data-client_id=<?php echo $google_client_id ?> data-callback="handleCredentialResponse">
+                                </div>
+                                <div class="g_id_signin w-100 mb-3" data-width=319 data-type="standard"></div> -->
                             </form>
                             <small>Dengan Mendaftar, Anda dinyatakan telah setuju dengan syarat & ketentuan
                                 RumahTinggal.id </small>
@@ -77,7 +105,7 @@
                     <h5 class="ms-5 mb-3">Bersama RumahTinggal.id</h5>
                     <div class="container ms-5">
                         <ul class="list-unstyled">
-                            <li class="d-flex align-items-center mb-2"><span class="me-2">&#10003;</span> 500+ Desain
+                            <li class="d-flex align-items-center mb-2"><span class="me-2">&#10003;</span> <?php echo floor($jumlah_rumah / 10) * 10 . '+'; ?> Desain
                                 Berkualitas</li>
                             <li class="d-flex align-items-center mb-2"><span class="me-2">&#10003;</span> Harga Desain
                                 Terjangkau</li>
@@ -130,12 +158,63 @@
 </div>
 
 <script src="<?php echo base_url('assets/demo/js/navbar-script.js'); ?>"></script>
+<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+
 
 <script>
+    window.onload = function() {
+        var id_customer = Cookies.get('id_customer', {
+
+            domain: 'rumahtinggal.id'
+
+        });
+        if (id_customer == null || id_customer == '') {
+            google.accounts.id.initialize({
+                client_id: "<?php echo $google_client_id ?>",
+                callback: handleCredentialResponseLogin
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("google-button-login"), {
+                    theme: "outline",
+                    size: "large",
+                    width: 319
+                } // customization attributes
+            );
+            google.accounts.id.prompt(); // also display the One Tap dialog
+        }
+
+    }
+
     function modalLogin() {
         $('#modalDaftar').modal('hide');
         $('#modalLogin').modal('show');
     }
+
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     // Show the Google Sign-In container
+    //     document.getElementById("google-signin-container").style.display = "block";
+    // });
+
+
+
+    // $(document).ready(function() {
+    //     function renderButton() {
+    //         gapi.signin2.render('my-signin2', {
+    //             'scope': 'profile email',
+    //             'width': 290,
+    //             'height': 50,
+    //             'longtitle': true,
+    //             'theme': 'dark',
+    //             'onsuccess': onSuccess,
+    //             'onfailure': onFailure
+    //         });
+    //     }
+    //     renderButton(); 
+    // })
+
+
 
     function showForgotPassword() {
         var modalLogin = document.getElementById('modalLogin');
@@ -156,6 +235,7 @@
     };
 
     $(document).ready(function() {
+
         $('#login-button').on('click', function() {
             var email = $('#email_login').val().trim();
             var password = $('#password_login').val().trim();
@@ -265,8 +345,8 @@
                 if (response.status == 1) {
                     $('#modalLogin').modal('hide');
                     Swal.fire({
-                        title: "Akun Anda Telah dibuat!",
-                        html: "<img src='<?= base_url('assets/demo/img/signin.png') ?>' alt='Success' width='250px'><p>Ayo masuk ke akun Anda untuk menjelajahi koleksi desain rumah menarik!</p>",
+                        title: "Anda Berhasil Masuk!",
+                        html: "<img src='<?= base_url('assets/demo/img/login.png') ?>' alt='Success' width='250px'><p>Anda telah masuk ke akun Anda, Mari lihat koleksi rumah impian!</p>",
                         timer: 7000,
                         showConfirmButton: true,
                         timerProgressBar: true,
@@ -294,50 +374,54 @@
         });
     }
 
-    // function loginAkun(email, pass) {
-    //     $.ajax({
-    //         // ...
 
-    //         success: function(response) {
-    //             if (response.status == 1) {
-    //                 // Pengguna berhasil login
-    //                 isUserLoggedIn = true;
+    function decodeJwtResponseFromGoogleAPI(token) {
+        let base64Url = token.split('.')[1]
+        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        let jsonPayload =
+            decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' +
+                    c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        return JSON.parse(jsonPayload)
+    }
 
-    //                 // Simpan status login dan informasi pengguna di localStorage
-    //                 localStorage.setItem('isUserLoggedIn', 'true');
-    //                 localStorage.setItem('nama_customer', response.nama_customer);
+    function handleCredentialResponseLogin(response) {
+        responsePayload = decodeJwtResponseFromGoogleAPI(response.credential);
+        $.ajax({
+            url: "<?= base_url('api/loginGoogle/') ?>" + responsePayload.email,
+            type: "POST",
+            data: {
+                "nama_lengkap": responsePayload.name,
+                "email": responsePayload.email,
+                "password": ''
+            },
+            dataType: "JSON",
+            success: function(response) {
 
-    //                 // Memicu peristiwa loginSuccess
-    //                 var event = new Event('loginSuccess');
-    //                 document.dispatchEvent(event);
-
-    //                 $('#modalLogin').modal('hide');
-
-    //                 // ... (kode lain yang diperlukan)
-    //             } else {
-    //                 // Login gagal
-    //                 isUserLoggedIn = false;
-    //                 Swal.fire({
-    //                     icon: 'error',
-    //                     title: 'Kesalahan',
-    //                     text: response.info
-    //                 });
-    //                 // ... (kode lain yang diperlukan)
-    //             }
-    //         },
-    //         error: function(jqXHR, textStatus, errorThrown) {
-    //             // Kesalahan pada AJAX
-    //             isUserLoggedIn = false;
-    //             Swal.fire({
-    //                 icon: 'warning',
-    //                 title: 'Kesalahan',
-    //                 text: 'Email atau kata sandi Anda Salah.'
-    //             });
-    //         }
-
-    //         // ...
-    //     });
-    // }
+                $('#ModalLogin').modal('hide');
+                Swal.fire({
+                    title: "Anda Berhasil Masuk!",
+                    html: "<img src='<?= base_url('assets/demo/img/login.png') ?>' alt='Success' width='250px'><p>Anda telah masuk ke akun Anda, Mari lihat koleksi rumah impian!</p>",
+                    timer: 7000,
+                    showConfirmButton: true,
+                    timerProgressBar: true,
+                    confirmButtonText: "Mulai",
+                    confirmButtonColor: "#056BB7"
+                }).then(() => {
+                    let url = $(location).attr('href');
+                    window.location.href = "<?= base_url() ?>";
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Kesalahan',
+                    text: 'Email atau kata sandi Anda Salah.'
+                });
+            }
+        });
+    }
 
 
 
@@ -357,33 +441,7 @@
             },
             dataType: "JSON",
             success: function(response) {
-                // if(response.status == 1) {
-                //   $('#ModalLogin').modal('hide');
-                //   toastr.success(response.info, 'Informasi', opsi_toastr);
-                //   let url = $(location).attr('href');
-                //   window.location.href = url;
-                // } else alert(response.info);
-                // toastr.error('Silahkan cek email Anda', 'Berhasil', opsi_toastr);
-                // toastr.success('Silahkan cek email Anda', 'Berhasil', opsi_toastr);
-                // toastr.success(response.info, 'Informasi', opsi_toastr);
-                // toastr.success(response.info, 'Informasi', opsi_toastr);
-                //      if(response.status == 1) {
-                //   $('#ModalLogin').modal('hide');
-                //   toastr.success(response.info, 'Informasi', opsi_toastr);
-                //   let url = $(location).attr('href');
-                //   window.location.href = url;
-                // } else toastr.error(response.info);
-                // if (data.Success == true) {
-                //      toastr.success(data.Info, 'Informasi', opsi_toastr);
-                //      window.location.href = "<?php echo base_url() ?>";
-                //  }
-                // if(response.status == 1) {
-                // $('#ModalLogin').modal('hide');
-                // toastr.success(response.info, 'Informasi', opsi_toastr);
-                //  window.location.href = "<?php echo base_url() ?>";
-                // let url = $(location).attr('href');
-                // window.location.href = url;
-                // } else toastr.error(response.info);
+
 
                 $('#ModalLogin').modal('hide');
                 toastr.success(response.info, 'Informasi', opsi_toastr);
@@ -406,18 +464,6 @@
 
     function onFailure(error) {
         console.log(error);
-    }
-
-    function renderButton() {
-        gapi.signin2.render('my-signin2', {
-            'scope': 'profile email',
-            'width': 290,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': onSuccess,
-            'onfailure': onFailure
-        });
     }
 
 
