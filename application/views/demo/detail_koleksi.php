@@ -559,7 +559,7 @@ Also includes a counter of the slides
                     top: 70px;
                     right: 30px;
                     transition: top 0.3s ease-in-out;
-                    z-index: 9999;
+                    z-index: 900;
                     width: 200px;
                     animation: fadeInDown 0.5s ease-in-out;
                 }
@@ -727,7 +727,7 @@ Also includes a counter of the slides
 </div>
 
 
-
+<!-- <script src="https://kit.fontawesome.com/b30683d06c.js" crossorigin="anonymous"></script> -->
 <script>
     function detailRumah(id) {
         location.href = "<?= base_url('demo/detail_koleksi/') ?>" + id;
@@ -1211,48 +1211,67 @@ Also includes a counter of the slides
     }
 
     $(document).ready(function() {
+        $.ajax({
+            url: '<?php echo base_url('api/getKatalogProdukFavorit'); ?>', // Assuming base_url() is a function provided by your framework to generate the base URL
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                // Check if any object in the response array has the desired id_rumah
+                var isFavorited = response.some(function(item) {
+                    return item.id_rumah == <?php echo $id_rumah; ?>;
+                });
+
+                // Modify the heart-like element based on whether the product is favorited or not
+                if (isFavorited) {
+                    $('#heart-like').find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle errors if any
+                console.error('Error:', error);
+            }
+        });
+    });
+
+
+
+    $(document).ready(function() {
         $('#heart-like').click(function() {
             var id_customer = Cookies.get('id_customer', {
 
                 domain: 'rumahtinggal.id'
 
             });
-            icon = $(this).find('[data-fa-i2svg]');
+            icon = $(this).find('svg');
             // icon.toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
-            console.log(icon)
             if (id_customer != null && id_customer != '') {
                 let id_rumah = $(this).data('id');
-                // let jum_stat = $(this).next().text();
-                if (icon.hasClass('fa-regular')) {
-                    icon.removeClass('fa-regular').addClass('fa-solid').css('color', 'red');
+                console.log('id rumah', id_rumah)
+                if (icon.attr('data-prefix') === "far") {
+                    $(this)
+                        .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
+                    $.ajax({
+                        url: "<?= base_url('api/simpanDisukai') ?>",
+                        type: "POST",
+                        data: {
+                            "id_rumah": id_rumah,
+                            "id_customer": id_customer,
+                            "suka": 1
+                        },
+                        dataType: "JSON",
+                        success: function(data) {}
+                    });
+                } else {
+                    $(this)
+                        .find('[data-fa-i2svg]').toggleClass('fa-solid').toggleClass('fa-regular').css('color', 'black');
+                    $.ajax({
+                        url: "<?= base_url('api/hapusDisukai/') ?>" + id_rumah + "/" + id_customer,
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function(data) {}
+                    });
                 }
-
-                //     // jum_stat++;
-
-                //     $.ajax({
-                //         url: "<?= base_url('api/simpanDisukai') ?>",
-                //         type: "POST",
-                //         data: {
-                //             "id_rumah": id_rumah,
-                //             "id_customer": id_customer,
-                //             "suka": 1
-                //         },
-                //         dataType: "JSON",
-                //         success: function(data) {}
-                //     });
-                // } else {
-                //     $(this).removeClass('fa-solid').addClass('fa-regular');
-                //     jum_stat--;
-
-                //     $.ajax({
-                //         url: "<?= base_url('api/hapusDisukai') . $id_rumah ?>" + id_rumah + "/" + id_customer,
-                //         type: "POST",
-                //         dataType: "JSON",
-                //         success: function(data) {}
-                //     });
-                // }
-                // $(this).next().text(jum_stat);
-            } else $('#ModalLogin').modal('show');
+            } else $('#modalLogin').modal('show');
         });
     });
 </script>
