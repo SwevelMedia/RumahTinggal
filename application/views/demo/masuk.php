@@ -182,7 +182,7 @@
                     width: 319
                 } // customization attributes
             );
-            google.accounts.id.prompt(); // also display the One Tap dialog
+            // google.accounts.id.prompt(); // also display the One Tap dialog
         }
 
     }
@@ -354,7 +354,7 @@
                         confirmButtonColor: "#056BB7"
                     }).then(() => {
                         let url = $(location).attr('href');
-                        window.location.href = "<?= base_url('demo') ?>";
+                        window.location.href = url;
                     });
                 } else {
                     Swal.fire({
@@ -410,7 +410,7 @@
                     confirmButtonColor: "#056BB7"
                 }).then(() => {
                     let url = $(location).attr('href');
-                    window.location.href = "<?= base_url() ?>";
+                    window.location.href = url;
                 });
             },
             error: function(jqXHR, textStatus, errorThrown) {

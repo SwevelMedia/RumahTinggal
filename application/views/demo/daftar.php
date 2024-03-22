@@ -120,7 +120,7 @@
                     width: 319
                 } // customization attributes
             );
-            google.accounts.id.prompt(); // also display the One Tap dialog
+            // google.accounts.id.prompt(); // also display the One Tap dialog
         }
 
     }
