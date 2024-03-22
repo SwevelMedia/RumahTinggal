@@ -15,6 +15,11 @@ class BerandaModel extends CI_Model
 		return $this->db->where('aktif', '1')->get('banner_header');
 	}
 
+	function getBannerMobile()
+	{
+		return $this->db->query('SELECT * from banner_mobile');
+	}
+
 	public function getTestimoni()
 	{
 		$query = $this->db->get('testimoni'); // 'testimoni' adalah nama tabel dalam contoh ini
