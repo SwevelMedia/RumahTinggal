@@ -77,7 +77,7 @@
 
     @media screen and (min-width: 1400px) {
         .card:hover .card-body {
-            transform: translateY(-105%);
+            transform: translateY(-233px);
         }
     }
 
@@ -149,10 +149,10 @@ function getSortLabel($sortType)
             return 'Desain Populer';
         case 'terbaru':
             return 'Terbaru';
-        case 'biaya_terendah':
-            return 'Biaya Terendah';
-        case 'biaya_tertinggi':
-            return 'Biaya Tertinggi';
+        case 'harga_terendah':
+            return 'Harga Terendah';
+        case 'harga_tertinggi':
+            return 'Harga Tertinggi';
         default:
             return 'Paling Sesuai';
     }
@@ -217,8 +217,8 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
     <div class="container py-2 px-4">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <h1 class="fw-bold mb-3 text-primary">Koleksi Desain</h1>
-                <h1 class="fw-bold mb-3 text-primary">Hunian Impian Anda</h1>
+                <h1 class="fw-bold mb-1 text-primary">Koleksi Desain</h1>
+                <h1 class="fw-bold mb-2 text-primary">Hunian Impian Anda</h1>
                 <p class="mb-3">Temukan desain hunian terbaik yang sesuai </br> dengan kebutuhan dan selera Anda</p>
             </div>
             <div class="col-lg-6">
@@ -261,7 +261,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
     <div class="container">
         <div class="row">
             <form class="col-lg-3 mb-3 d-none d-lg-block" id="form-filter">
-                <div class="d-flex justify-content-between flex-column flex-lg-row align-items-center mb-3">
+                <div class="d-flex justify-content-between flex-column flex-lg-row align-items-start mb-3">
                     <h5 class="fw-semibold text-center ms-3">
                         <i class="fas fa-filter"></i> Filter
                     </h5>
@@ -299,11 +299,11 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 
                 <div class="form-group mb-3 col-6 col-lg-12">
                     <label for="jumlah_lantai" class="form-label fw-semibold">Jumlah Lantai</label>
-                    <input type="number" class="form-control" id="jumlah_lantai" min=1 name="lantai" placeholder="Jumlah Lantai" value=<?php echo getParams($query_params, 'lantai') ?> />
+                    <input type="number" class="form-control numeric-input" id="jumlah_lantai" min=1 name="lantai" placeholder="Jumlah Lantai" value=<?php echo getParams($query_params, 'lantai') ?> />
                 </div>
                 <div class="form-group mb-3 col-6 col-lg-12">
                     <label for="jumlah_kamar" class="form-label fw-semibold">Jumlah Kamar</label>
-                    <input type="number" class="form-control" id="jumlah_kamar" min=1 placeholder="Jumlah Kamar" name="kamar" value=<?php echo getParams($query_params, 'kamar') ?> />
+                    <input type="number" class="form-control numeric-input" id="jumlah_kamar" min=1 placeholder="Jumlah Kamar" name="kamar" value=<?php echo getParams($query_params, 'kamar') ?> />
                 </div>
                 <hr />
                 <div class="accordion" id="accordionGayaDesain">
@@ -372,11 +372,11 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                 <div class="fw-semibold mb-2">Biaya Konstruksi</div>
                 <div class="d-flex justify-content-between flex-column flex-lg-row text-center gap-2">
                     <div class="mb-2 col-lg-auto" style="width: 45%;">
-                        <input type="text" id="min_biaya" name="min_biaya" class="form-control" placeholder="Rp Minimal" value=<?php echo getParams($query_params, 'min_biaya') ?>>
+                        <input type="number" min='0' id="min_biaya" name="min_biaya" class="form-control numeric-input" placeholder="Rp Minimal" value=<?php echo getParams($query_params, 'min_biaya') ?>>
                     </div>
                     <span class="mb-2 col-lg-auto mt-2">-</span>
                     <div class="mb-2 col-lg-auto" style="width: 45%;">
-                        <input type="text" id="max_biaya" name="max_biaya" class="form-control" placeholder="Rp Maksimal" value=<?php echo getParams($query_params, 'max_biaya') ?>>
+                        <input type="number" min='0' id="max_biaya" name="max_biaya" class="form-control numeric-input" placeholder="Rp Maksimal" value=<?php echo getParams($query_params, 'max_biaya') ?>>
                     </div>
                 </div>
 
@@ -411,8 +411,12 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                             // Hitung offset untuk query
                             $offset = ($current_page - 1) * $items_per_page;
 
-                            // Tampilkan pesan di sini di luar perulangan
-                            echo '<p>Menampilkan ' . ($offset + 1) . ' - ' . min(($offset + $items_per_page), count($koleksi_rumah)) . ' dari ' . count($koleksi_rumah) . ' desain</p>';
+                            if (count($koleksi_rumah) > 0) {
+                                // Tampilkan pesan di sini di luar perulangan
+                                echo '<p>Menampilkan ' . ($offset + 1) . ' - ' . min(($offset + $items_per_page), count($koleksi_rumah)) . ' dari ' . count($koleksi_rumah) . ' desain</p>';
+                            }
+
+
                             ?>
                         </div>
                         <div class="dropdown">
@@ -439,13 +443,13 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                         foreach ($paginated_data as $item) {
                         ?>
                             <div class="col-lg-6 col-xl-4 col-md-6 col-6 mb-3">
-                                <div class="card desain-card border-0 shadow-sm pb-1 h-100" style="height: max-content;">
+                                <div class="card desain-card border-0 shadow-sm pb-2 pb-md-0 h-100 w-100" style="height: max-content;">
                                     <div class="img-container">
                                         <img src="<?= base_url('assets/img/desain/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
                                     </div>
 
 
-                                    <div class="card-body pt-3 pt-md-4">
+                                    <div class="card-body pt-3 pt-md-3">
                                         <h5 class="card-title mb-0 fw-semibold d-none d-md-block">
                                             <?= $item->nama_rumah; ?></h5>
                                         <h6 class="card-title mb-0 fw-semibold d-md-none truncateTitle">
@@ -477,12 +481,14 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                             </div>
                                             <div>
                                                 <small class="d-none d-md-inline biaya-konstruksi">Biaya Konstruksi</small>
-                                                <small class="fw-semibold d-block tooltip-biaya card-body-text"><?= $item->lantai == '1' ? "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".")); ?>
+                                                <small class="fw-semibold d-block d-none d-md-block tooltip-biaya card-body-text"><?= $item->lantai == '1' ? "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".")); ?>
                                                     <span class="tooltip-biaya-text">Estimasi Awal</span>
+                                                </small>
+                                                <small class="d-block d-md-none fw-semibold d-block card-body-text"><?= $item->lantai == '1' ? "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".")); ?>
                                                 </small>
                                             </div>
                                         </div>
-                                        <div class="mt-3"></div>
+                                        <!-- <div class="mt-3"></div> -->
                                     </div>
                                     <div class="card-info">
                                         <div class="row justify-content-between mb-2 g-0 info-row">
@@ -566,39 +572,44 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <?php
-                                // Menampilkan 5 angka halaman sekaligus
-                                $start = max(1, $current_page - 2);
-                                $end = min($total_pages, $start + 4);
+                                if (count($koleksi_rumah) > 0) {
+                                    // Menampilkan 5 angka halaman sekaligus
+                                    $start = max(1, $current_page - 2);
+                                    $end = min($total_pages, $start + 4);
 
-                                // Ensure that we always display exactly 5 page numbers
-                                if ($end - $start < 4) {
-                                    $start = max(1, $end - 4);
-                                }
+                                    // Ensure that we always display exactly 5 page numbers
+                                    if ($end - $start < 4) {
+                                        $start = max(1, $end - 4);
+                                    }
                                 ?>
-                                <li class="page-item <?php echo ($current_page == 1) ? 'disabled' : ''; ?>">
-                                    <a class="page-link" href="<?php echo getPageUrl(max(1, $current_page - 2)); ?>" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <?php
+                                    <li class="page-item <?php echo ($current_page == 1) ? 'disabled' : ''; ?>">
+                                        <a class="page-link" href="<?php echo getPageUrl(max(1, $current_page - 2)); ?>" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    <?php
 
-                                for ($i = $start; $i <= $end; $i++) {
-                                ?>
-                                    <li class="page-item <?php echo ($i == $current_page) ? 'active' : ''; ?>">
-                                        <a class="page-link" href="<?php echo getPageUrl($i); ?>"><?php echo $i; ?></a>
+                                    for ($i = $start; $i <= $end; $i++) {
+                                    ?>
+                                        <li class="page-item <?php echo ($i == $current_page) ? 'active' : ''; ?>">
+                                            <a class="page-link" href="<?php echo getPageUrl($i); ?>"><?php echo $i; ?></a>
+                                        </li>
+                                    <?php
+                                    }
+                                    ?>
+
+
+                                    <li class="page-item <?php echo ($current_page == $total_pages) ? 'disabled' : ''; ?>">
+                                        <a class="page-link" href="<?php echo getPageUrl(min($total_pages, $current_page + 2)); ?>" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
                                     </li>
                                 <?php
                                 }
                                 ?>
 
-
-                                <li class="page-item <?php echo ($current_page == $total_pages) ? 'disabled' : ''; ?>">
-                                    <a class="page-link" href="<?php echo getPageUrl(min($total_pages, $current_page + 2)); ?>" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -611,7 +622,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 
 <div class="modal fade" id="modalFilter" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form class="modal-content modal-filter">
+        <form class="modal-content modal-filter" id="modal-filter-mobile">
             <div class="bg-light">
                 <div class="d-flex justify-content-between align-items-center mt-2">
                     <h5 class="fw-semibold ms-3">
@@ -636,11 +647,11 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                     <div class="fw-semibold ms-3 mt-3">Biaya Konstruksi</div>
                     <div class="d-flex mt-2">
                         <div class="ms-3 mb-2 col-lg-auto" style="width: 42%;">
-                            <input type="text" id="min_biaya" name="min_biaya" class="form-control" placeholder="Rp Minimal" value=<?php echo getParams($query_params, 'min_biaya') ?>>
+                            <input type="number" id="min_biaya" name="min_biaya" class="form-control numeric-input" placeholder="Rp Minimal" value=<?php echo getParams($query_params, 'min_biaya') ?>>
                         </div>
                         <span class="ms-2 mb-2 col-lg-auto mt-2">-</span>
                         <div class="ms-2 mb-2 col-lg-auto" style="width: 42%;">
-                            <input type="text" id="max_biaya" name="max_biaya" class="form-control" placeholder="Rp Maksimal" value=<?php echo getParams($query_params, 'max_biaya') ?>>
+                            <input type="number" id="max_biaya" name="max_biaya" class="form-control numeric-input" placeholder="Rp Maksimal" value=<?php echo getParams($query_params, 'max_biaya') ?>>
                         </div>
                     </div>
                     <div class="mx-3 mt-3">
@@ -669,13 +680,42 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 
                     <div class="form-group ms-3 mt-3 me-3">
                         <label for="jumlah_lantai" class="form-label fw-semibold">Jumlah Lantai</label>
-                        <input type="number" class="form-control" id="jumlah_lantai" min=1 placeholder="Jumlah Lantai" name="lantai" value=<?php echo getParams($query_params, 'lantai') ?> />
+                        <input type="number" class="form-control numeric-input" id="jumlah_lantai" min=1 placeholder="Jumlah Lantai" name="lantai" value=<?php echo getParams($query_params, 'lantai') ?> />
                     </div>
                     <div class="form-group ms-3 mt-3 me-3">
                         <label for="jumlah_kamar" class="form-label fw-semibold">Jumlah Kamar</label>
-                        <input type="number" class="form-control" id="jumlah_kamar" min=1 placeholder="Jumlah Kamar" name="kamar" value=<?php echo getParams($query_params, 'kamar') ?> />
+                        <input type="number" class="form-control numeric-input" id="jumlah_kamar" min=1 placeholder="Jumlah Kamar" name="kamar" value=<?php echo getParams($query_params, 'kamar') ?> />
                     </div>
-                    <div class="bg-white mx-2 p-3 mt-3">
+                    <div class="ms-3 mt-3 me-3 accordion" id="accordionGayaDesain">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="gayaDesain">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flushGayaDesain" aria-expanded="false" aria-controls="flushGayaDesain">
+                                    Gaya Desain
+                                </button>
+                            </h2>
+                            <div id="flushGayaDesain" class="accordion-collapse collapse" aria-labelledby="gayaDesain" data-bs-parent="#accordionGayaDesain">
+                                <div class="accordion-body">
+                                    <?php
+                                    // Loop through the design options array to generate checkboxes
+                                    foreach ($gaya_desain as $option) :
+                                        $isChecked = getChecked($query_params, 'gaya', $option->id_gaya_desain);
+                                    ?>
+                                        <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="<?php echo $option->id_gaya_desain; ?>" id="checkbox_desain_<?php echo $option->id_gaya_desain; ?>" name="checkbox_desain" <?php echo $isChecked; ?>>
+                                                <label class="form-check-label" for="checkbox_desain_<?php echo $option->id_gaya_desain; ?>">
+                                                    <?php echo $option->gaya_desain; ?>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    <?php
+                                    endforeach;
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="bg-white mx-2 p-3 mt-3">
                         <div class="d-flex flex-column">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="fw-semibold ms-2">Gaya Desain</div>
@@ -704,8 +744,40 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                             <input type="hidden" id="selectedGayaValues" name="gaya" value="<?php echo getParams($query_params, 'gaya') ?>">
 
                         </div>
+                    </div> -->
+                    <div class="accordion ms-3 mt-3 me-3" id="accordionRuangan">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="ruanganRumah">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flushRuanganRumah" aria-expanded="false" aria-controls="flushRuanganRumah1">
+                                    Ruangan
+                                </button>
+                            </h2>
+                            <div id="flushRuanganRumah" class="accordion-collapse collapse" aria-labelledby="ruanganRumah" data-bs-parent="#accordionRuangan" style="max-height: 320px; overflow-y: auto;">
+                                <div class="accordion-body" style="height: auto;">
+                                    <?php
+                                    // Loop through the design options array to generate checkboxes
+                                    $index = 0;
+                                    foreach ($ruangan as $option) :
+                                        $isChecked = getChecked($query_params, 'ruang', $option->id_ruang);
+                                    ?>
+                                        <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="<?php echo $option->id_ruang; ?>" id="checkbox_desain_<?php echo $option->id_ruang; ?>" name="checkbox_ruang" <?php echo $isChecked; ?>>
+                                                <label class="form-check-label" for="checkbox_desain_<?php echo $option->id_ruang; ?>">
+                                                    <?php echo $option->ruang; ?>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    <?php
+                                        $index++;
+                                    endforeach;
+                                    ?>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="bg-white mx-2 p-3 mt-3">
+                    <!-- <div class="bg-white mx-2 p-3 mt-3">
                         <div class="d-flex flex-column">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="fw-semibold ms-2">Ruangan</div>
@@ -732,12 +804,13 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="d-flex justify-content-center align-items-center mx-auto gap-3 mt-3 mb-3">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                        <button type="submit" class="btn btn-primary">Terapkan</button>
+                        <button type='button' id='mobile-filter-submit' class="btn btn-primary">Terapkan</button>
                     </div>
                 </div>
+            </div>
         </form>
     </div>
 </div>
@@ -769,11 +842,24 @@ function getPageUrl($page)
 
     function updateHeight() {
         var div = $('.img-container');
-        var divref = $('desain-card');
+        var divref = $('.desain-card');
         var width = divref.width() / 1.3333333;
 
         div.css('height', width);
     }
+
+    //function to prevent non-numeric inputs in numeric inputs
+    $(document).ready(function() {
+        function restrictToNumeric(event) {
+            var inputValue = $(this).val();
+
+            var numericValue = inputValue.replace(/\D/g, '');
+
+            $(this).val(numericValue);
+        }
+
+        $('.numeric-input').on("input", restrictToNumeric);
+    });
 
     //function to handle sort buttons in mobile
     function handleSortClick(button) {
@@ -1071,20 +1157,6 @@ function getPageUrl($page)
         window.location.href = currentUrl;
     };
 
-    document.addEventListener("DOMContentLoaded", function() {
-        // Ambil nilai hash URL setelah karakter '#' (termasuk karakter '#')
-        var hashValue = window.location.hash;
-
-        // Hapus karakter '#' dari nilai hash
-        var cari = decodeURIComponent(hashValue.substring(1));
-
-        // Sekarang, Anda dapat menggunakan nilai cari untuk melakukan pencarian atau tindakan lainnya
-        console.log(cari); // Untuk melihat nilai cari di konsol browser
-
-        // Lakukan operasi pencarian atau tindakan lainnya berdasarkan nilai cari
-        // ...
-    });
-
     //handle form untuk desktop
     $(document).ready(function() {
         $('#form-filter').on('submit', function(e) {
@@ -1189,20 +1261,47 @@ function getPageUrl($page)
                 currentUrl += currentUrl.includes('?') ? '&search=' + searchQuery : '?search=' + searchQuery;
             }
 
-            window.location.href = currentUrl;
+            // window.location.href = currentUrl;
 
         })
     });
 
     //handle form filter submit untuk mobile
-
     $(document).ready(function() {
         $('.modal-content .modal-filter').on('submit', function(e) {
             e.preventDefault();
+        })
+    });
+
+    $(document).ready(function() {
+        $('#mobile-filter-submit').on('click', function() {
+            var form = document.getElementById('modal-filter-mobile');
+            // handle checkbox desain
+            var checkboxes_desain = form.querySelectorAll('[name="checkbox_desain"]');
+            var checkedDesain = [];
+            checkboxes_desain.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    checkedDesain.push(checkbox.value);
+                }
+            });
+            var queryStringDesain = checkedDesain.length > 0 ? '&gaya=' + checkedDesain.map(item => item).join(',') : '';
+
+
+            // handle checkbox ruangan
+            var checkboxes_ruang = form.querySelectorAll('[name="checkbox_ruang"]');
+
+            var checkedRuang = [];
+            checkboxes_ruang.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    checkedRuang.push(checkbox.value);
+                }
+            });
+            var queryStringRuang = checkedRuang.length > 0 ? '&ruang=' + checkedRuang.map(item => item).join(',') : '';
+
             var url = "<?= base_url('koleksi') ?>"; // Base URL
             var queryParams = [];
             var searchQuery = document.querySelector('.search-mobile input[name="search"]').value;
-            $(this).find(':input').each(function() {
+            $('#modal-filter-mobile').find(':input').each(function() {
                 var fieldName = $(this).attr('name');
 
                 // Handle special case for 'panjangLahan' input
@@ -1232,7 +1331,7 @@ function getPageUrl($page)
                     }
                 } else {
                     // For other inputs excluding checkboxes
-                    if ($(this).is(':radio')) {
+                    if ($(this).is(':checkbox')) {
                         return; // Skip checkboxes
                     }
                     var fieldValue = $(this).val();
@@ -1244,11 +1343,12 @@ function getPageUrl($page)
 
 
             if (queryParams.length > 0) {
-                url += '?' + queryParams.join('&');
+                url += '?' + queryParams.join('&') + queryStringDesain + queryStringRuang;
             }
             if (searchQuery !== '') {
                 url += '&' + "search=" + searchQuery
             }
+            // console.log('filter url', url)
             window.location.href = url;
         })
     });
