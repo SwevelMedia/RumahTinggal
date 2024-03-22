@@ -55,7 +55,7 @@
 <div class="owl-carousel owl-theme owl-carousel-eight d-lg-none" id="caraouselTesti">
     <?php foreach ($banner_mobile as $item) { ?>
         <?php if ($item->id_rumah !== null) { ?>
-            <div style="background-image: url('<?= base_url('assets/demo/img/beranda/' . $item->nama_rumah) . '.svg' ?>'); object-fit:cover" class="card-img-top bg-card" href="<?= base_url('detail_koleksi/' . $item->id_rumah) ?>"></div>
+            <div style="background-image: url('<?= base_url('assets/demo/img/beranda/' . $item->nama_rumah) . '.png' ?>'); object-fit:cover" class="card-img-top bg-card" href="<?= base_url('detail_koleksi/' . $item->id_rumah) ?>"></div>
         <?php } ?>
     <?php } ?>
 </div>
