@@ -716,6 +716,7 @@ class CustomerController extends CI_Controller
 
     $data['profil'] = $this->CustomerModel->getCustomerById($id_customer)->row();
 
+    $data['wishlist'] = $this->CustomerModel->getKatalogDaftarProdukFavorit($id_customer)->result();
 
     $data['transaksi'] = $this->CustomerModel->getTransaksi($id_customer);
 
