@@ -355,7 +355,7 @@ class CustomerModel extends CI_Model
 
 
 
-    function getKatalogDaftarProdukFavorit($data, $id_customer)
+    function getKatalogDaftarProdukFavorit($id_customer)
 
     {
 
@@ -387,15 +387,15 @@ class CustomerModel extends CI_Model
 
         // $ruang_lain_implode = implode(',',array_slice($data['ruang_lain'],1));
 
-        $order = $data['order'];
+        // $order = $data['order'];
 
-        $cari = $data['cari_rumah'];
+        // $cari = $data['cari_rumah'];
 
 
 
-        // $count_ruang_lain = count( array_slice($data['ruang_lain'],1) );
+        // // $count_ruang_lain = count( array_slice($data['ruang_lain'],1) );
 
-        $where = 'a.id_arsitek=arsitek.id_arsitek AND a.id_rumah=ruang_rumah.id_rumah AND a.id_rumah=gaya_desain_rumah.id_rumah AND gaya_desain_rumah.id_gaya_desain=gaya_desain.id_gaya_desain AND harga_konstruksi.id_rumah = a.id_rumah';
+        // $where = 'a.id_arsitek=arsitek.id_arsitek AND a.id_rumah=ruang_rumah.id_rumah AND a.id_rumah=gaya_desain_rumah.id_rumah AND gaya_desain_rumah.id_gaya_desain=gaya_desain.id_gaya_desain AND harga_konstruksi.id_rumah = a.id_rumah';
 
         // if ($panjang_lahan != '') $where .= ' AND panjang_lahan <= '.$panjang_lahan.'';
 
@@ -413,7 +413,7 @@ class CustomerModel extends CI_Model
 
         // if ($arsitek != '') $where .= ' AND a.id_arsitek IN ('.$arsitek.')';
 
-        if ($cari != '') $where .= ' AND (a.nama_rumah like "%' . $cari . '%" OR gaya_desain like "%' . $cari . '%")';
+        // if ($cari != '') $where .= ' AND (a.nama_rumah like "%' . $cari . '%" OR gaya_desain like "%' . $cari . '%")';
 
         // if ($ruang_lain_implode != '') $where .= ' AND ruang_rumah.id_ruang IN ('.$ruang_lain_implode.')';
 
@@ -427,25 +427,49 @@ class CustomerModel extends CI_Model
 
 
 
-        $orderby = '';
+        // $orderby = '';
 
-        if ($order == '1') $orderby .= 'ORDER BY tgl_update asc';
+        // if ($order == '1') $orderby .= 'ORDER BY tgl_update asc';
 
-        if ($order == '2') $orderby .= 'ORDER BY tgl_update desc';
+        // if ($order == '2') $orderby .= 'ORDER BY tgl_update desc';
 
-        if ($order == '3') $orderby .= 'ORDER BY dilihat desc';
+        // if ($order == '3') $orderby .= 'ORDER BY dilihat desc';
 
-        if ($order == '4') $orderby .= 'ORDER BY suka desc';
+        // if ($order == '4') $orderby .= 'ORDER BY suka desc';
 
-        if ($order == '5') $orderby .= 'ORDER BY nama_rumah asc';
+        // if ($order == '5') $orderby .= 'ORDER BY nama_rumah asc';
 
-        if ($order == '6') $orderby .= 'ORDER BY nama_rumah desc';
+        // if ($order == '6') $orderby .= 'ORDER BY nama_rumah desc';
 
-        if ($order == '7') $orderby .= 'ORDER BY promo desc';
+        // if ($order == '7') $orderby .= 'ORDER BY promo desc';
 
 
 
-        return $this->db->query("SELECT b.kamar_tidur,b.toilet,b.toiletwc,b.id_rumah,b.foto, b.nama_rumah, b.id_arsitek, b.nama_arsitek,b.luas_lahan, b.lebar_lahan , b.panjang_lahan, b.luas_bangunan, lantai, b.suka, dilihat, b.rating, b.harga_konstruksi,b.promo FROM (SELECT a.kamar_tidur,a.toilet,a.toiletwc,a.id_rumah,a.foto, a.nama_rumah, a.id_arsitek, arsitek.nama_arsitek,ROUND(a.luas_lahan) AS luas_lahan, ROUND(a.lebar_lahan) AS lebar_lahan , ROUND(a.panjang_lahan) AS panjang_lahan, ROUND(a.luas_bangunan) AS luas_bangunan,a.lantai AS lantai,a.tgl_buat,a.tgl_update,a.dilihat,a.suka,round(AVG(a.rating),1) AS rating,gaya_desain_rumah.id_gaya_desain,gaya_desain.gaya_desain, harga_konstruksi,promo FROM (SELECT b.*, IFNULL(ulasan.rating,0) AS rating,IFNULL(rumah_promo.promo,0) AS promo  FROM ({$this->from}) b LEFT JOIN ulasan ON b.id_rumah = ulasan.id_rumah LEFT JOIN rumah_promo ON b.id_rumah = rumah_promo.id_rumah) a,arsitek,ruang_rumah,gaya_desain,gaya_desain_rumah,ulasan,harga_konstruksi WHERE $where GROUP BY id_rumah,a.lantai)b,rumah_disukai WHERE rumah_disukai.id_rumah=b.id_rumah AND rumah_disukai.id_customer='{$id_customer}' GROUP BY id_rumah $orderby");
+        // return $this->db->query("SELECT b.kamar_tidur,b.toilet,b.toiletwc,b.id_rumah,b.foto, b.nama_rumah, b.id_arsitek, b.nama_arsitek,b.luas_lahan, b.lebar_lahan , b.panjang_lahan, b.luas_bangunan, lantai, b.suka, dilihat, b.rating, b.harga_konstruksi,b.promo FROM (SELECT a.kamar_tidur,a.toilet,a.toiletwc,a.id_rumah,a.foto, a.nama_rumah, a.id_arsitek, arsitek.nama_arsitek,ROUND(a.luas_lahan) AS luas_lahan, ROUND(a.lebar_lahan) AS lebar_lahan , ROUND(a.panjang_lahan) AS panjang_lahan, ROUND(a.luas_bangunan) AS luas_bangunan,a.lantai AS lantai,a.tgl_buat,a.tgl_update,a.dilihat,a.suka,round(AVG(a.rating),1) AS rating,gaya_desain_rumah.id_gaya_desain,gaya_desain.gaya_desain, harga_konstruksi,promo FROM (SELECT b.*, IFNULL(ulasan.rating,0) AS rating,IFNULL(rumah_promo.promo,0) AS promo  FROM ({$this->from}) b LEFT JOIN ulasan ON b.id_rumah = ulasan.id_rumah LEFT JOIN rumah_promo ON b.id_rumah = rumah_promo.id_rumah) a,arsitek,ruang_rumah,gaya_desain,gaya_desain_rumah,ulasan,harga_konstruksi WHERE $where GROUP BY id_rumah,a.lantai)b,rumah_disukai WHERE rumah_disukai.id_rumah=b.id_rumah AND rumah_disukai.id_customer='{$id_customer}' GROUP BY id_rumah");
+
+        return $this->db->query("SELECT rumah.nama_rumah, 
+        rumah.foto, 
+        rumah.id_rumah, 
+        ROUND(rumah.lebar_lahan) AS lebar_lahan, 
+        ROUND(rumah.panjang_lahan) AS panjang_lahan, 
+        ROUND(rumah.luas_bangunan) AS luas_bangunan, 
+        MAX(ruang_rumah.lantai) AS lantai, 
+        SUM(CASE WHEN ruang_rumah.id_ruang = 7 THEN 1 ELSE 0 END) AS kamar_tidur, 
+        SUM(CASE WHEN ruang_rumah.id_ruang = 14 THEN 1 ELSE 0 END) AS toilet, 
+        arsitek.id_arsitek, 
+        arsitek.nama_arsitek
+ FROM rumah_disukai
+ JOIN rumah ON rumah.id_rumah = rumah_disukai.id_rumah
+ JOIN arsitek ON rumah.id_arsitek = arsitek.id_arsitek
+ JOIN ruang_rumah ON ruang_rumah.id_rumah = rumah_disukai.id_rumah
+ WHERE id_customer = '{$id_customer}'
+ GROUP BY rumah.nama_rumah, 
+          rumah.foto, 
+          ROUND(rumah.lebar_lahan), 
+          ROUND(rumah.panjang_lahan), 
+          ROUND(rumah.luas_bangunan), 
+          arsitek.id_arsitek, 
+          arsitek.nama_arsitek;");
     }
 
 
