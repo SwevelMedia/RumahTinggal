@@ -26,6 +26,7 @@ class DemoController extends CI_Controller
         $data['produk_favorit'] = $this->DesainModel->getKatalogProdukFavorit()->result();
         $data['produk_popular'] = $this->DesainModel->getKatalogProdukPopular()->result();
         $data['produk_body'] = $this->DesainModel->getKatalogProdukPopularBody()->result();
+        $data['banner_mobile'] = $this->BerandaModel->getBannerMobile()->result();;
         $data['produk_terbaru'] = $this->DesainModel->getRumahTerbaru()->result();
         $data['artikel'] = $this->ArtikelModel->getArtikel()->result();
         // $data['frequent_terms'] = $this->SearchModel->getFrequentlySearchedTerms()->result();
