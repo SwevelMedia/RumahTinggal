@@ -106,20 +106,29 @@
                 client_id: "<?php echo $google_client_id ?>",
                 callback: handleCredentialResponseLogin
             });
-            google.accounts.id.renderButton(
-                document.getElementById("google-button-daftar"), {
-                    theme: "outline",
-                    size: "large",
-                    width: 319
-                } // customization attributes
-            );
-            google.accounts.id.renderButton(
-                document.getElementById("google-button-login"), {
-                    theme: "outline",
-                    size: "large",
-                    width: 319
-                } // customization attributes
-            );
+
+            $('#modalDaftar, #modalLogin').on('shown.bs.modal', function(e) {
+                var loginButtonWidth = document.getElementById('btn-daftar').offsetWidth;
+                if (loginButtonWidth < 5) {
+                    loginButtonWidth = document.getElementById('login-button').offsetWidth;
+                }
+                console.log(loginButtonWidth)
+                google.accounts.id.renderButton(
+                    document.getElementById("google-button-daftar"), {
+                        theme: "outline",
+                        size: "large",
+                        width: loginButtonWidth
+                    } // customization attributes
+                );
+                google.accounts.id.renderButton(
+                    document.getElementById("google-button-login"), {
+                        theme: "outline",
+                        size: "large",
+                        width: loginButtonWidth
+                    } // customization attributes
+                );
+            });
+
             // google.accounts.id.prompt(); // also display the One Tap dialog
         }
 
