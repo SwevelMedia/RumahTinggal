@@ -166,26 +166,31 @@
 <script>
     window.onload = function() {
         var id_customer = Cookies.get('id_customer', {
-
             domain: 'rumahtinggal.id'
-
         });
         if (id_customer == null || id_customer == '') {
             google.accounts.id.initialize({
                 client_id: "<?php echo $google_client_id ?>",
                 callback: handleCredentialResponseLogin
             });
-            google.accounts.id.renderButton(
-                document.getElementById("google-button-login"), {
-                    theme: "outline",
-                    size: "large",
-                    width: 319
-                } // customization attributes
-            );
-            // google.accounts.id.prompt(); // also display the One Tap dialog
-        }
 
+            // Wait for the modal to be shown
+            $('#modalLogin').on('shown.bs.modal', function(e) {
+                // Get the width of the element with ID 'masukButton'
+                var masukButtonWidth = document.getElementById('login-button').offsetWidth;
+
+                google.accounts.id.renderButton(
+                    document.getElementById("google-button-login"), {
+                        theme: "outline",
+                        size: "large",
+                        width: masukButtonWidth // Set the width dynamically
+                    }
+                );
+                // google.accounts.id.prompt(); // also display the One Tap dialog
+            });
+        }
     }
+
 
     function modalLogin() {
         $('#modalDaftar').modal('hide');
