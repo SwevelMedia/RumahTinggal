@@ -1216,9 +1216,9 @@ class CustomerController extends CI_Controller
 
     $id_customer = get_cookie('id_customer');
 
-    parse_str(file_get_contents('php://input'), $data);
+    // parse_str(file_get_contents('php://input'), $data);
 
-    $response = $this->CustomerModel->getKatalogDaftarProdukFavorit($data, $id_customer)->result();
+    $response = $this->CustomerModel->getKatalogDaftarProdukFavorit($id_customer)->result();
 
     $this->output
 
