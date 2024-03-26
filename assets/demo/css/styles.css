@@ -8,6 +8,14 @@
 	width: auto;
 }
 
+.bg-card-banner-mobile {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 25vh;
+	width: auto;
+}
+
 .container-bg-card-produk {
 	height: 232px;
 	width: 309px;
