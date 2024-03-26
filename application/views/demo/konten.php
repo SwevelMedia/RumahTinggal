@@ -45,6 +45,30 @@
     .home-banner-left {
         height: 100%;
     }
+
+    .populer-badge {
+        border-radius: 24px;
+        border: 1px solid var(--Grey-05, #999);
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        color: var(--Grey-05, #999);
+        transition: background-color 0.1s, color 0.1s;
+    }
+
+    .populer-badge:hover {
+        background-color: var(--Primary-09, #00528E);
+        color: var(--Primary-01, #EBF6FF);
+        border: 1px solid var(--Primary-09, #00528E);
+
+    }
+
+    @media screen and (max-width: 767px) {
+        .artikel-card {
+            height: 420px;
+        }
+    }
 </style>
 
 <!-- <div class="owl-carousel owl-theme owl-carousel-eight d-lg-none" id="caraouselTesti">
@@ -55,7 +79,7 @@
 <div class="owl-carousel owl-theme owl-carousel-eight d-lg-none" id="caraouselTesti">
     <?php foreach ($banner_mobile as $item) { ?>
         <?php if ($item->id_rumah !== null) { ?>
-            <div style="background-image: url('<?= base_url('assets/demo/img/beranda/' . $item->nama_rumah) . '.png' ?>'); object-fit:cover" class="card-img-top bg-card" href="<?= base_url('detail_koleksi/' . $item->id_rumah) ?>"></div>
+            <div style="background-image: url('<?= base_url('assets/demo/img/beranda/' . $item->nama_rumah) . '.png' ?>'); object-fit:cover" class="card-img-top bg-card-banner-mobile" href="<?= base_url('detail_koleksi/' . $item->id_rumah) ?>"></div>
         <?php } ?>
     <?php } ?>
 </div>
@@ -89,9 +113,9 @@
                             <div class="badge cursor-pointer bg-white text-dark border border-1 border-dark rounded-3" style="cursor: pointer;" onClick="clickSearch('<?php echo $term->term; ?>')"><?php echo $term->term; ?></div>
                         <?php endforeach; ?> -->
 
-                        <div class="badge cursor-pointer bg-white text-dark border border-1 border-dark rounded-3" style="cursor: pointer;" onClick="clickSearch('tropis')">tropis</div>
-                        <div class="badge cursor-pointer bg-white text-dark border border-1 border-dark rounded-3" style="cursor: pointer;" onClick="clickSearch('minimalis')">minimalis</div>
-                        <div class="badge cursor-pointer bg-white text-dark border border-1 border-dark rounded-3" style="cursor: pointer;" onClick="clickSearch('modern')">modern</div>
+                        <div class="badge populer-badge" style="cursor: pointer;" onClick="clickSearch('tropis')">tropis</div>
+                        <div class="badge populer-badge" style="cursor: pointer;" onClick="clickSearch('minimalis')">minimalis</div>
+                        <div class="badge populer-badge" style="cursor: pointer;" onClick="clickSearch('modern')">modern</div>
                     </div>
                     <div class="col-xl-10">
                         <div class="card bg-white border-0 shadow-sm">
@@ -498,9 +522,9 @@
                             <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
                         </p>
                     </video>
-                    <div id="play-icon-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;">
+                    <!-- <div id="play-icon-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;">
                         <img src="<?php echo base_url('assets/demo/img/play-icon.png'); ?>" class="play-icon" alt="Play Icon">
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-lg-4 mb-3">
@@ -607,12 +631,11 @@
                                 <div class="card artikel-card mb-3 shadow-sm" style="max-width: 600px">
                                     <div class="row g-0">
                                         <div class="col-md-4 px-2 py-2">
-                                            <div class="bg-card d-md-none">
-                                                <img class="image" src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" style="object-fit: cover; width: 100%; height: 100%;" onload='updateArticleHeight()'>
+
+                                            <div class="bg-card ">
+                                                <img class="image" src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" style="object-fit: cover; width: 100%; height: 100%;">
                                             </div>
-                                            <div class="bg-card d-none d-md-block">
-                                                <img class="image" src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" style="object-fit: cover; width: 100%; height: 100%;">
-                                            </div>
+
 
                                         </div>
                                         <div class="col-md-8">
@@ -671,13 +694,13 @@
         getMaterial();
     });
 
-    var video = document.getElementById('my-video');
-    var playIconContainer = document.getElementById('play-icon-container');
+    // var video = document.getElementById('my-video');
+    // var playIconContainer = document.getElementById('play-icon-container');
 
-    // Add event listener to hide the play icon when the video is played
-    video.addEventListener('play', function() {
-        playIconContainer.style.display = 'none';
-    });
+    // // Add event listener to hide the play icon when the video is played
+    // video.addEventListener('play', function() {
+    //     playIconContainer.style.display = 'none';
+    // });
 
     //function to prevent non-numeric inputs in numeric inputs
     $(document).ready(function() {
@@ -1034,32 +1057,18 @@
         });
     }
 
-    $(window).resize(updateArticleHeight);
+    // $(window).resize(updateArticleHeight);
 
 
-    function updateArticleHeight() {
-        var cards2 = document.querySelectorAll('.owl-carousel-five .artikel-card');
-        var maxHeight2 = 0;
-        cards2.forEach(function(card2) {
-            maxHeight2 = Math.max(maxHeight2, card2.offsetHeight);
-        });
-        cards2.forEach(function(card2) {
-            card2.style.height = maxHeight2 + 'px';
-        });
-
-    }
-
-    // $(document).ready(function() {
-    //     var cards2 = document.querySelectorAll('.artikel-card');
-
+    // function updateArticleHeight() {
+    //     var cards2 = document.querySelectorAll('.owl-carousel-five .artikel-card');
     //     var maxHeight2 = 0;
     //     cards2.forEach(function(card2) {
     //         maxHeight2 = Math.max(maxHeight2, card2.offsetHeight);
     //     });
-    //     console.log(cards2.offsetHeight)
+    //     cards2.forEach(function(card2) {
+    //         card2.style.height = maxHeight2 + 'px';
+    //     });
 
-    //     // cards2.forEach(function(card2) {
-    //     //     card2.style.height = maxHeight2 + 'px';
-    //     // });
-    // })
+    // }
 </script>
