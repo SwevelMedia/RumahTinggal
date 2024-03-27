@@ -215,8 +215,8 @@
                             <h5 class="semibold mt-3">Paket Gratis</h5>
                             <div style="font-size: 11px; color:grey; font-weight: normal; text-align: justify;" class="mb-1">Dapatkan laporan desain rumah ini GRATIS! Laporan desain berisi gambar 3D eksterior, denah, tampak bangunan, dan spesifikasi material.</div>
                             <h5 class="semibold mt-4"> Rp 0</h5>
-                            <a href="javascript:void(0)" class="btn btn-success w-100 mt-3 text-start" id="unduhSekarang" style="font-size: 11px; font-weight: 600">
-                                <i class="fas fa-download me-2 ms-2"></i> Unduh Sekarang
+                            <a href="javascript:void(0)" class="btn btn-success w-100 mt-3 text-center" id="unduhSekarang" style="font-size: 11px; font-weight: 600">
+                                <i class="fas fa-download me-2"></i> Unduh Sekarang
                             </a>
                         </div>
                     </th>
@@ -226,8 +226,8 @@
                             <div style="font-size: 11px; color:grey; font-weight: normal; text-align: justify;">Produk paket 1 berupa laporan desain rumah dan gambar skematik (denah, tampak, potongan) untuk panduan tukang dalam membangun.</div>
                             <small class="mt-2" style="color:grey; font-weight: normal;"><s>Rp<?= $harga_p1 ?></s></small>
                             <h5 class="semibold">Rp<?= $harga_promo_p1 ?></h5>
-                            <button type="button" class="btn btn-outline-primary w-100 mt-3 text-start" onclick="checkoutPaket(1,<?= $id_rumah ?>)" style="font-size: 11px; font-weight: 600" onclick="openProsesBayar()">
-                                <i class=" fa-solid fa-cart-shopping me-2 ms-3"></i> Beli Sekarang
+                            <button type="button" class="btn btn-outline-primary w-100 mt-3 text-center" onclick="checkoutPaket(1,<?= $id_rumah ?>)" style="font-size: 11px; font-weight: 600" onclick="openProsesBayar()">
+                                <i class=" fa-solid fa-cart-shopping me-2"></i> Beli Sekarang
                             </button>
                         </div>
                     </th>
@@ -237,8 +237,8 @@
                             <div style="font-size: 11px; color:grey; font-weight: normal; text-align: justify;">Produk paket 2 berupa laporan desain, gambar skematik, dan gambar kerja yang terdiri dari gambar struktur, arsitektur, instalasi air dan listrik.</div>
                             <small class="mt-2" style="color:grey; font-weight: normal;"><s>Rp<?= $harga_p2 ?></s></small>
                             <h5 class="semibold"> Rp<?= $harga_promo_p2 ?></h5>
-                            <button type="button" class="btn btn-primary w-100 mt-3 text-start" onclick="checkoutPaket(2,<?= $id_rumah ?>)" style="font-size: 11px; font-weight: 600" onclick="openProsesBayar()">
-                                <i class="fa-solid fa-cart-shopping  me-2 ms-3"></i> Beli Sekarang
+                            <button type="button" class="btn btn-primary w-100 mt-3 text-center" onclick="checkoutPaket(2,<?= $id_rumah ?>)" style="font-size: 11px; font-weight: 600" onclick="openProsesBayar()">
+                                <i class="fa-solid fa-cart-shopping  me-2"></i> Beli Sekarang
                             </button>
                             <div class="position-absolute top-0 end-0 me-1 mt-1">
                                 <small class="badge bg-primary" style="font-size: 10px; font-weight: normal;"> <img src="<?php echo base_url('assets/demo/img/checklist-bg.png'); ?>" width="12" height="12">
@@ -253,8 +253,8 @@
                             <div style="font-size: 11px; color:grey; font-weight: normal;text-align: justify;">Produk paket 3 ini seperti paket 2 dengan tambahan produk Rencana Anggaran Biaya (RAB) dan Rencana Kerja dan Syarat (RKS) yang terperinci.</div>
                             <small class="mt-2" style="color:grey; font-weight: normal;"><s>Rp<?= $harga_p3 ?></s></small>
                             <h5 class="semibold"> Rp<?= $harga_promo_p3 ?></h5>
-                            <button type="button" class="btn btn-outline-primary w-100 mt-3 text-start" onclick="checkoutPaket(3,<?= $id_rumah ?>)" style="font-size: 11px; font-weight: 600" onclick="openProsesBayar()">
-                                <i class="fa-solid fa-cart-shopping me-2 ms-3"></i> Beli Sekarang
+                            <button type="button" class="btn btn-outline-primary w-100 mt-3 text-center" onclick="checkoutPaket(3,<?= $id_rumah ?>)" style="font-size: 11px; font-weight: 600" onclick="openProsesBayar()">
+                                <i class="fa-solid fa-cart-shopping me-2"></i> Beli Sekarang
                             </button>
                         </div>
                     </th>
@@ -286,7 +286,7 @@
                     </td>
                     <td style="text-align: center; vertical-align: middle; color: red;"><i class="fas fa-times fa-2x"></i></td>
                     <td style="text-align: center; vertical-align: middle; color: red;"><i class="fas fa-times fa-2x"></i></td>
-                    <td style="text-align: center; vertical-align: middle; color: red;"><i class="fas fa-times fa-2x"></i></td>
+                    <td style="text-align: center; vertical-align: middle; color: green;"><i class="fa-solid fa-check fa-2x"></i></td>
                     <td style="text-align: center; vertical-align: middle; color: green;"><i class="fa-solid fa-check fa-2x"></i></td>
                 </tr>
                 <tr>
@@ -329,7 +329,8 @@
                             </div>
                             <div class="col-8">
                                 <h5>Modifikasi Desain</h5>
-                                <button type="button" class="btn btn-outline-light w-50 ">detail</button>
+                                <button type="button" class="btn btn-outline-light w-50" onclick='modifikasiDesain()' data-toggle="modal" data-target="#modalModifikasiDesain">Detail</button>
+
                             </div>
                         </div>
                     </div>
@@ -344,7 +345,7 @@
                             </div>
                             <div class="col-8">
                                 <h5>Desain Interior</h5>
-                                <button type="button" class="btn btn-outline-light w-50">detail</button>
+                                <button type="button" class="btn btn-outline-light w-50" onclick='desainInterior()'>Detail</button>
                             </div>
                         </div>
                     </div>
@@ -359,7 +360,7 @@
                             </div>
                             <div class="col-8">
                                 <h5>Perhitungan Struktur</h5>
-                                <button type="button" class="btn btn-outline-light w-50">detail</button>
+                                <button type="button" class="btn btn-outline-light w-50" onclick='perhitunganStruktur()'>Detail</button>
                             </div>
                         </div>
                     </div>
@@ -374,7 +375,7 @@
                             </div>
                             <div class="col-8">
                                 <h5> Gambar Pengajuan IMB</h5>
-                                <button type="button" class="btn btn-outline-light w-50">detail</button>
+                                <button type="button" class="btn btn-outline-light w-50" onclick='gambarPengajuan()'>Detail</button>
                             </div>
                         </div>
                     </div>
@@ -389,7 +390,7 @@
                             </div>
                             <div class="col-8">
                                 <h5>Jasa Pengukuran Lahan</h5>
-                                <button type="button" class="btn btn-outline-light w-50">detail</button>
+                                <button type="button" class="btn btn-outline-light w-50" onclick='pengukuranLahan()'>Detail</button>
                             </div>
                         </div>
                     </div>
@@ -404,7 +405,7 @@
                             </div>
                             <div class="col-8">
                                 <h5>Jasa Pengujian Tanah</h5>
-                                <button type="button" class="btn btn-outline-light w-50">detail</button>
+                                <button type="button" class="btn btn-outline-light w-50" onclick='pengujianTanah()'>Detail</button>
                             </div>
                         </div>
                     </div>
@@ -601,7 +602,7 @@
     <!-- modal laporan desain -->
     <div class="modal fade" id="modalLaporanDesain" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content px-3 py-2">
                 <div class="text-end">
                     <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -630,7 +631,7 @@
     <!-- modal gambar skematik -->
     <div class="modal fade" id="modalGambarSkematik" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content px-3 py-2">
                 <div class="text-end">
                     <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -659,7 +660,7 @@
     <!-- modal gambar kerja -->
     <div class="modal fade" id="modalGambarKerja" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content px-3 py-2">
                 <div class="text-end">
                     <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -688,7 +689,7 @@
     <!-- modak RAB -->
     <div class="modal fade" id="modalRAB" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content px-3 py-2">
                 <div class="text-end">
                     <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -717,7 +718,7 @@
     <!-- modal RKS -->
     <div class="modal fade" id="modalRKS" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content px-3 py-2">
                 <div class="text-end">
                     <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -749,7 +750,7 @@
 
         <div class="modal-dialog">
 
-            <div class="modal-content">
+            <div class="modal-content px-3 py-2">
 
                 <div class="modal-header">
 
@@ -805,7 +806,7 @@
 
         <div class="modal-dialog modal-dialog-centered" role="document">
 
-            <div class="modal-content" style="border-radius: 0;border: none;">
+            <div class="modal-content px-3 py-2" style="border-radius: 0;border: none;">
 
                 <div class="modal-body">
                     <div class=" d-flex justify-content-between">
@@ -884,7 +885,7 @@
 
         <div class="modal-dialog modal-dialog-centered" role="document">
 
-            <div class="modal-content" style="border-radius: 0;border: none;">
+            <div class="modal-content px-3 py-2" style="border-radius: 0;border: none;">
 
                 <div class="modal-body">
                     <div class="justify-content-center text-center">
@@ -904,7 +905,7 @@
 
         <div class="modal-dialog">
 
-            <div class="modal-content">
+            <div class="modal-content px-3 py-2">
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 
@@ -946,6 +947,156 @@
 
         </div>
 
+    </div>
+
+    <!-- modal modifikasi desain -->
+    <div class="modal fade" id="modalModifikasiDesain" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content px-3 py-2">
+                <div class="text-end">
+                    <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <h5 class="d-lg-none ms-3"> Modifikasi Desain</h5>
+                <div class="row mt-2 p-2">
+                    <div class="col-lg-6 col-12 order-lg-1 order-2">
+                        <h5 class="d-none d-lg-block ms-1"><b>Modifikasi Desain</b></h5>
+                        <p class="mt-1 mx-1" style="text-align: justify;">Anda dapat meminta arsitek rumahtinggal.id untuk memodifikasi desain rumah ini agar lebih sesuai dengan kebutuhan dan keinginan Anda. Modifikasi dapat berupa denah, 3D eksterior, maupun spesifikasi material yang digunakan. </p>
+                    </div>
+                    <div class="col-lg-6 col-12 order-lg-2 order-1 text-center">
+                        <video style="width:90%" poster="https://rumahtinggal.id/assets/img/thumbnail_website.jpg" controls>
+
+                            <source src="<?php echo base_url('assets/demo/img/home.mp4'); ?>" type="video/mp4">
+
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal desain interior -->
+    <div class="modal fade" id="modalDesainInterior" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content px-3 py-2">
+                <div class="text-end">
+                    <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <h5 class="d-lg-none ms-3"> Desain Interior</h5>
+                <div class="row mt-2 p-2">
+                    <div class="col-lg-6 col-12 order-lg-1 order-2">
+                        <h5 class="d-none d-lg-block ms-1"><b>Desain Interior</b></h5>
+                        <p class="mt-1 mx-1" style="text-align: justify;">Desain interior sangat berguna untuk memberikan gambaran mengenai suasana interior rumah agar lebih nyaman dihuni. Desain ini mencakup penataan furniture serta desain lantai, dinding, dan plafond. </p>
+                    </div>
+                    <div class="col-lg-6 col-12 order-lg-2 order-1 text-center">
+                        <video style="width:90%" poster="https://rumahtinggal.id/assets/img/thumbnail_website.jpg" controls>
+
+                            <source src="<?php echo base_url('assets/demo/img/home.mp4'); ?>" type="video/mp4">
+
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal perhitungan struktur -->
+    <div class="modal fade" id="modalPerhitunganStruktur" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content px-3 py-2">
+                <div class="text-end">
+                    <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <h5 class="d-lg-none ms-3"> Perhitungan Struktur</h5>
+                <div class="row mt-2 p-2">
+                    <div class="col-lg-6 col-12 order-lg-1 order-2">
+                        <h5 class="d-none d-lg-block ms-1"><b>Perhitungan Struktur</b></h5>
+                        <p class="mt-1 mx-1" style="text-align: justify;">Dokumen perhitungan struktur diperlukan untuk menunjukkan bahwa rumah telah didesain sesuai kaidah struktur yang berlaku. Dokumen ini bisa digunakan sebagai syarat dalam pengajuan IMB (Izin Mendirikan Bangunan). </p>
+                    </div>
+                    <div class="col-lg-6 col-12 order-lg-2 order-1 text-center">
+                        <video style="width:90%" poster="https://rumahtinggal.id/assets/img/thumbnail_website.jpg" controls>
+
+                            <source src="<?php echo base_url('assets/demo/img/home.mp4'); ?>" type="video/mp4">
+
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal gambar pengajuan -->
+    <div class="modal fade" id="modalGambarPengajuan" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content px-3 py-2">
+                <div class="text-end">
+                    <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <h5 class="d-lg-none ms-3"> Gambar Persetujuan Bangunan Gedung (PBG)</h5>
+                <div class="row mt-2 p-2">
+                    <div class="col-lg-6 col-12 order-lg-1 order-2">
+                        <h5 class="d-none d-lg-block ms-1"><b>Gambar Persetujuan Bangunan Gedung (PBG)</b></h5>
+                        <p class="mt-1 mx-1" style="text-align: justify;">Gambar pengajuan IMB (Izin Mendirikan Bangunan) diperlukan sebagai salah satu syarat saat emngajukan IMB. Dokumen ini meliputi gambar detail struktur, arsitektur, instalasi ail dan listrik, serta gambar lain yang disyaratkan di amsing-masing daerah. </p>
+                    </div>
+                    <div class="col-lg-6 col-12 order-lg-2 order-1 text-center">
+                        <video style="width:90%" poster="https://rumahtinggal.id/assets/img/thumbnail_website.jpg" controls>
+
+                            <source src="<?php echo base_url('assets/demo/img/home.mp4'); ?>" type="video/mp4">
+
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal pengukuran lahan -->
+    <div class="modal fade" id="modalPengukuranLahan" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content px-3 py-2">
+                <div class="text-end">
+                    <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <h5 class="d-lg-none ms-3"> Jasa Pengukuran Lahan</h5>
+                <div class="row mt-2 p-2">
+                    <div class="col-lg-6 col-12 order-lg-1 order-2">
+                        <h5 class="d-none d-lg-block ms-1"><b>Jasa Pengukuran Lahan</b></h5>
+                        <p class="mt-1 mx-1" style="text-align: justify;">RumahTinggal.id juga menerima jasa pengukuran topografi lahan. Ini biasanya diperlukan untuk lokasi pembangunan yang memiliki lahan luas, lahan dengan bentuk tidak beraturan, atau lahan berkontur. Hasil pengukuran lahan sangat membantu dalam proses desain rumah. </p>
+                    </div>
+                    <div class="col-lg-6 col-12 order-lg-2 order-1 text-center">
+                        <video style="width:90%" poster="https://rumahtinggal.id/assets/img/thumbnail_website.jpg" controls>
+
+                            <source src="<?php echo base_url('assets/demo/img/home.mp4'); ?>" type="video/mp4">
+
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal pengujian tanah -->
+    <div class="modal fade" id="modalPengujianTanah" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content px-3 py-2">
+                <div class="text-end">
+                    <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <h5 class="d-lg-none ms-3"> Jasa Pengujian Tanah</h5>
+                <div class="row mt-2 p-2">
+                    <div class="col-lg-6 col-12 order-lg-1 order-2">
+                        <h5 class="d-none d-lg-block ms-1"><b>Jasa Pengujian Tanah</b></h5>
+                        <p class="mt-1 mx-1" style="text-align: justify;">RumahTinggal.id juga menerima jasa pengujian tanah berupa sondir test. Hasil pengujian tanah ini dapat memudahkan proses perancangan struktur rumah. Selain itu dokumen pengujian tanah juga bisa digunakan sebagai salah satu syarat dalam pengajuan IMB. </p>
+                    </div>
+                    <div class="col-lg-6 col-12 order-lg-2 order-1 text-center">
+                        <video style="width:90%" poster="https://rumahtinggal.id/assets/img/thumbnail_website.jpg" controls>
+
+                            <source src="<?php echo base_url('assets/demo/img/home.mp4'); ?>" type="video/mp4">
+
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 
@@ -995,6 +1146,36 @@
 
     function gambarSkematik() {
         var modal = new bootstrap.Modal(document.getElementById('modalGambarSkematik'));
+        modal.show();
+    }
+
+    function modifikasiDesain() {
+        var modal = new bootstrap.Modal(document.getElementById('modalModifikasiDesain'));
+        modal.show();
+    }
+
+    function desainInterior() {
+        var modal = new bootstrap.Modal(document.getElementById('modalDesainInterior'));
+        modal.show();
+    }
+
+    function perhitunganStruktur() {
+        var modal = new bootstrap.Modal(document.getElementById('modalPerhitunganStruktur'));
+        modal.show();
+    }
+
+    function gambarPengajuan() {
+        var modal = new bootstrap.Modal(document.getElementById('modalGambarPengajuan'));
+        modal.show();
+    }
+
+    function pengukuranLahan() {
+        var modal = new bootstrap.Modal(document.getElementById('modalPengukuranLahan'));
+        modal.show();
+    }
+
+    function pengujianTanah() {
+        var modal = new bootstrap.Modal(document.getElementById('modalPengujianTanah'));
         modal.show();
     }
 
