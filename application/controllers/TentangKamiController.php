@@ -34,10 +34,15 @@ class TentangKamiController extends CI_Controller
     {
 
         $this->load->model('DetailModel');
+        $this->load->model('BerandaModel');
+        $this->load->model('DesainModel');
 
         $data['halaman'] = 'demo/layanan';
         $data['title'] = 'Layanan';
         $data['arsitek'] = $this->DetailModel->getAllArsitek();
+        $data['jumlah_rumah'] = $this->DesainModel->getJumlahRumah()->row()->jumlah_rumah;
+        $data['jumlah_unduh'] = $this->BerandaModel->getJumlahUnduh()->row()->jumlah_unduh;
+        $data['jumlah_pengunjung'] = $this->BerandaModel->getJumlahPengunjung()->row()->jumlah_pengunjung;
         $this->load->view('demo/layout/layout', $data);
     }
 }
