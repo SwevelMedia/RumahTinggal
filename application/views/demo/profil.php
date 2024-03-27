@@ -793,6 +793,28 @@
         </div>
     </div>
 
+    <!-- modal ubah profil -->
+    <div class="modal fade" id="modalGantiFoto" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content px-3 py-2">
+                <div class="text-end">
+                    <button type="button" class="btn-close me-2 mt-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <h5>Ubah Foto Profil</h5>
+                        <form id="formGantiFoto">
+                            <div class="form-group">
+                                <label for="uploadFoto">Upload foto</label>
+                                <input type="file" class="d-block">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 
@@ -821,6 +843,13 @@
     //         card2.style.height = maxHeight2 + 'px';
     //     });
     // }
+
+    function gantiFoto() {
+        var modal = new bootstrap.Modal(document.getElementById('modalGantiFoto'));
+
+        $('#ubahProfil').modal('hide');
+        modal.show();
+    }
 
     function detailRumah(id) {
         location.href = "<?= base_url('detail_koleksi/') ?>" + id;
