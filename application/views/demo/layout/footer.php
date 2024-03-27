@@ -5,8 +5,8 @@
                 <div class="col-lg-7 mb-3">
                     <div class="d-none d-lg-flex justify-content-between flex-column flex-lg-row mb-5 text-center gap-2">
                         <h6><a href="<?= base_url('tentangKami') ?>" style="color: white; text-decoration: none;">Tentang Kami</a></h6>
-                        <h6><a href="<?= base_url('#') ?>" style="color: white; text-decoration: none;">Kebijakan Privasi</a></h6>
-                        <h6><a href="<?= base_url('#') ?>" style="color: white; text-decoration: none;">Syarat dan Ketentuan</a></h6>
+                        <h6><a href="<?= base_url('kebijakan_privasi') ?>" style="color: white; text-decoration: none;">Kebijakan Privasi</a></h6>
+                        <h6><a href="<?= base_url('syarat_ketentuan') ?>" style="color: white; text-decoration: none;">Syarat dan Ketentuan</a></h6>
                         <h6><a href="<?= base_url('cara_kerja') ?>" style="color: white; text-decoration: none;">Cara Kerja</a></h6>
                         <h6><a href="<?= base_url('faq') ?>" style="color: white; text-decoration: none;">FAQ</a></h6>
                     </div>
