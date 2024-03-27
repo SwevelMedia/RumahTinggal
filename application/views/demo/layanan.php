@@ -87,7 +87,7 @@
         <div class="row mb-3">
             <div class="col-12 text-center">
                 <h2 class="fw-semibold mb-3">Selamat Datang di Rumahtinggal.id</h2>
-                <p>Kami adalah marketplace desain rumah tinggal yang terjangkau bagi masyarakat Indonesia. Kami ada untuk menyelesaikan permasalahan banyaknya masyarakat Indonesia yang tidak dapat mengakses layanan jasa arsitek.</p>
+                <p>Kami adalah marketplace desain rumah tinggal yang terjangkau bagi masyarakat Indonesia. <br />Kami ada untuk menyelesaikan permasalahan banyaknya masyarakat Indonesia yang tidak dapat mengakses layanan jasa arsitek.</p>
             </div>
         </div>
         <div class="row justify-content-center d-none d-lg-flex">
@@ -97,7 +97,7 @@
                         <i class="fas fa-home fs-1 text-primary"></i>
                     </div>
                     <div class="text-center text-lg-start">
-                        <div class="fs-5 fw-semibold text-primary">999+</div>
+                        <div class="fs-5 fw-semibold text-primary"><?php echo floor($jumlah_rumah / 10) * 10 . '+'; ?></div>
                         <small>Koleksi Desain</small>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                         <i class="fas fa-file-download fs-1 text-primary"></i>
                     </div>
                     <div class="text-center text-lg-start">
-                        <div class="fs-5 fw-semibold text-primary">1000+</div>
+                        <div class="fs-5 fw-semibold text-primary"><?php echo floor($jumlah_unduh / 100) * 100 . '+'; ?></div>
                         <small>Desain Diunduh</small>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                         <i class="fas fa-user fs-1 text-primary"></i>
                     </div>
                     <div class="text-center text-lg-start">
-                        <div class="fs-5 fw-semibold text-primary">10000+</div>
+                        <div class="fs-5 fw-semibold text-primary"><?php echo floor($jumlah_pengunjung / 100) * 100 . '+'; ?></div>
                         <small>Pengunjung Aktif</small>
                     </div>
                 </div>
