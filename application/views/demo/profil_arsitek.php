@@ -338,10 +338,12 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                     ?>
 
                         <div class="col-lg-3 col-md-6 mb-3">
-                            <div class="card border-0 shadow-sm">
-                                <a href="javascript:void(0)" class="image">
-                                    <div style="background-image:url('<?= base_url() . 'assets/img/thumbnail/' . $item->foto ?>'" class="card-img-top bg-card-produk"></div>
-                                </a>
+                            <div class="card desain-arsitek-card border-0 shadow-sm h-100">
+
+
+                                <div class="img-container">
+                                    <img src="<?= base_url('assets/img/thumbnail/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
+                                </div>
                                 <div class="card-body">
                                     <h5 class="card-title mb-0 fw-semibold">
                                         <?= $item->nama_rumah ?></h5>
@@ -419,7 +421,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                     </div>
                                     <div class="pb-1">
                                         <div class="text-center">
-                                            <a class="btn btn-primary w-100"> <i class="me-2 far fa-file"></i>Lihat Detail</a>
+                                            <a class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class=" me-2 far fa-file"></i>Lihat Detail</a>
                                         </div>
                                     </div>
                                 </div>
@@ -502,9 +504,13 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                     foreach ($paginated_data as $item) : ?>
                         <div class="col-lg-3 col-md-6 mb-3">
                             <div class="card border-0 shadow-sm" style="height:350px;">
-                                <a href="javascript:void(0)" class="image">
+                                <!-- <a href="javascript:void(0)" class="image">
                                     <div style="background-image:url('<?= base_url() . 'assets/img/portofolio/' . $item->foto ?>'" class="card-img-top bg-card-produk"></div>
-                                </a>
+                                </a> -->
+
+                                <div class="img-container">
+                                    <img src="<?= base_url('assets/img/portofolio/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="">
+                                </div>
                                 <div class="card-body-proyek p-2">
                                     <div class="card-title mb-0 fw-semibold">
                                         <?= $item->judul ?>
@@ -580,6 +586,21 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 </div>
 
 <script>
+    $(window).ready(updateHeight);
+    $(window).resize(updateHeight);
+
+    function updateHeight() {
+        var div = $('.img-container');
+        var divref = $('.desain-arsitek-card');
+        var width = divref.width() / 1.3333333;
+
+        div.css('height', width);
+    }
+
+    function detailRumah(id) {
+        location.href = "<?= base_url('detail_koleksi/') ?>" + id;
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         // Mendapatkan semua elemen tautan dengan kelas .nav-link-profil
         var navLinks = document.querySelectorAll('.nav-link-profil');
