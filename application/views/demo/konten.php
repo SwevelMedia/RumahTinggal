@@ -550,8 +550,10 @@
                         <div class="testimoni-card card border-0 bg-light rounded-4">
                             <div class="card-body p-4 h-100" id="myCardBody">
                                 <div class="d-flex mb-3 align-items-center gap-3">
-                                    <div class="bg-card-circle" style="background-image: url('<?php echo base_url("assets/demo/img/beranda/Relani Shidig Fadirga.png"); ?>')">
+                                    <div class="bg-card-circle" id="bgCard" style="background-image: url('https://cdn-a.shopicial.com/img/noavatar.png');overflow:hidden;">
+                                        <img src="<?php echo base_url("assets/demo/img/beranda/Relani Shidig Fadirga.png"); ?>" alt="Real Image" style="display: none;" onload="document.getElementById('bgCard').style.backgroundImage = 'url(<?php echo base_url('assets/demo/img/beranda/Relani Shidig Fadirga.png'); ?>)'; this.style.display = 'block';">
                                     </div>
+
                                     <div>
                                         <h4 class="fw-semibold m-0 p-0">Relani Shidig Fadirga</h4>
                                     </div>
@@ -566,7 +568,8 @@
                         <div class="card border-0 bg-light rounded-4 testimoni-card">
                             <div class="card-body p-4 h-100" id="myCardBody">
                                 <div class="d-flex mb-3 align-items-center gap-3">
-                                    <div class="bg-card-circle" style="background-image: url('<?php echo base_url("assets/demo/img/beranda/Muhtadin.png"); ?>')">
+                                    <div class="bg-card-circle" id="bgCard" style="background-image: url('https://cdn-a.shopicial.com/img/noavatar.png');overflow:hidden;">
+                                        <img src="<?php echo base_url("assets/demo/img/beranda/Muhtadin.png"); ?>" alt="Real Image" style="display: none;" onload="document.getElementById('bgCard').style.backgroundImage = 'url(<?php echo base_url('assets/demo/img/beranda/Muhtadin.png'); ?>)'; this.style.display = 'block';">
                                     </div>
                                     <div>
                                         <h4 class="fw-semibold m-0 p-0">Muhtadin</h4>
@@ -584,7 +587,8 @@
                         <div class="card border-0 bg-light rounded-4 testimoni-card">
                             <div class="card-body p-4 h-100" id="myCardBody">
                                 <div class="d-flex mb-3 align-items-center gap-3">
-                                    <div class="bg-card-circle" style="background-image: url('<?php echo base_url("assets/demo/img/beranda/Fajar Wijayanto.png"); ?>')">
+                                    <div class="bg-card-circle" id="bgCard" style="background-image: url('https://cdn-a.shopicial.com/img/noavatar.png');overflow:hidden;">
+                                        <img src="<?php echo base_url("assets/demo/img/beranda/Fajar Wijayanto.png"); ?>" alt="Real Image" style="display: none;" onload="document.getElementById('bgCard').style.backgroundImage = 'url(<?php echo base_url('assets/demo/img/beranda/Fajar Wijayanto.png'); ?>)'; this.style.display = 'block';">
                                     </div>
                                     <div>
                                         <h4 class="fw-semibold m-0 p-0">Fajar Wijayanto</h4>
@@ -1113,20 +1117,24 @@
         });
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        // Get all elements with the class 'testimoni-card'
-        var containers = document.querySelectorAll(".testimoni-card");
-        var video = document.querySelector("#my-video");
-        // Loop through each container
-        containers.forEach(function(container) {
-            // Get the video element within the current container
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     // Get all elements with the class 'testimoni-card'
+    //     var containers = document.querySelectorAll(".testimoni-card");
+    //     var video = document.querySelector("#my-video");
+    //     // Loop through each container
+    //     containers.forEach(function(container) {
+    //         // Get the video element within the current container
 
-            console.log(video.offsetHeight)
+    //         // console.log(video.offsetHeight)
 
-            // Set the height of the container to match the height of the video
-            container.style.height = video.offsetHeight + "px";
-        });
-    });
+    //         if (video.offsetHeight > 1) {
+    //             container.style.height = video.offsetHeight + "px";
+    //         }
+
+    //         // Set the height of the container to match the height of the video
+
+    //     });
+    // });
 
     // $(window).resize(updateArticleHeight);
 
