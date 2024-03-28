@@ -742,6 +742,77 @@ class CustomerController extends CI_Controller
     }
   }
 
+  public function hapusFotoCustomer()
+  {
+    $cookie_customer = get_cookie('id_customer');
+    if ($cookie_customer != null && $cookie_customer != '') {
+      $customerData = $this->CustomerModel->getCustomerById($cookie_customer)->row();
+
+      // If a previous photo exists, delete it
+      if (!empty($customerData->foto)) {
+        $previous_photo_path = FCPATH . '/assets/demo/img/customer/' . $customerData->foto;
+        log_message('error', 'prev phto' . var_export($previous_photo_path, true));
+        if (file_exists($previous_photo_path)) {
+          unlink($previous_photo_path);
+          $data_baru['foto'] = '';
+          $data_baru['id_customer'] = $cookie_customer;
+          $this->CustomerModel->ubahFotoCustomer($data_baru);
+          $response['message'] = 'File uploaded successfully';
+          echo json_encode($response);
+        }
+      }
+    }
+  }
+
+  public function uploadFotoCustomer()
+  {
+    $cookie_customer = get_cookie('id_customer');
+    if (!empty($_FILES['foto']['name']) && ($cookie_customer != null && $cookie_customer != '')) {
+
+      // Set upload configuration
+      $config['upload_path'] = realpath(FCPATH . '/assets/demo/img/customer/');
+      $config['allowed_types'] = 'jpg|jpeg|png|gif';
+      $config['max_size'] = 2048;
+
+      $this->load->library('upload', $config);
+
+      // Perform the upload
+      if ($this->upload->do_upload('foto')) {
+
+        // Get the previous profile picture filename
+        $customerData = $this->CustomerModel->getCustomerById($cookie_customer)->row();
+
+        // If a previous photo exists, delete it
+        if (!empty($customerData->foto)) {
+          $previous_photo_path = FCPATH . '/assets/demo/img/customer/' . $customerData->foto;
+          if (file_exists($previous_photo_path)) {
+            unlink($previous_photo_path);
+          }
+        }
+
+        $upload_data = $this->upload->data();
+        $filename = $upload_data['file_name'];
+
+        // Update customer table in db
+        $data_baru['foto'] = $filename;
+        $data_baru['id_customer'] = $cookie_customer;
+        $this->CustomerModel->ubahFotoCustomer($data_baru);
+
+        $response['message'] = 'File uploaded successfully';
+        $response['filename'] = $filename;
+        echo json_encode($response);
+      } else {
+        $error = $this->upload->display_errors('', '');
+        $response['error'] = $error;
+        http_response_code(400); // Bad request
+        echo json_encode($response);
+      }
+    } else {
+      $response['error'] = 'No file uploaded';
+      http_response_code(400);
+      echo json_encode($response);
+    }
+  }
 
 
   public function ubahCustomer()
