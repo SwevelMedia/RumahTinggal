@@ -33,7 +33,7 @@
                 <hr />
             </div>
             <div class="caker-4">
-                <div class="d-flex justify-content-center align-items-center gap-4">
+                <div class="d-flex align-items-center gap-4">
                     <img src="<?php echo base_url('assets/demo/img/caker4.png'); ?>" alt="Deskripsi Gambar" class="img-fluid" width="200" height="200">
                     <div class="ket-kerja1">
                         <h5 class="semibold">4</h5>
