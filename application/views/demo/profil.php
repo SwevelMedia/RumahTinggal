@@ -161,10 +161,10 @@
 
                     if ($profil->foto != "") {
 
-                        echo '<img id="default-foto" alt=""src=" https://rumahtinggal.id/assets/img/customer/' . $profil->foto . '" class="rounded-circle mt-2 ms-2" width="90" height="90" /> ';
+                        echo '<img id="default-foto" alt="" src="' . base_url("assets/demo/img/customer/") . $profil->foto . '" class="rounded-circle mt-2 ms-2" width="90" height="90" style="object-fit:cover;"/> ';
                     } else {
 
-                        echo ' <img id="default-foto" alt="" src="https://cdn-a.shopicial.com/img/noavatar.png" class="rounded-circle mt-2 ms-2" width="90" height="90" />';
+                        echo ' <img id="default-foto" alt="" src="https://cdn-a.shopicial.com/img/noavatar.png" style="object-fit:cover;" class="rounded-circle mt-2 ms-2" width="90" height="90" />';
                     }
 
                     ?>
@@ -216,8 +216,7 @@
                         <?php
 
                         if ($profil->foto != "") {
-
-                            echo '<img id="default-foto" alt=""src=" https://rumahtinggal.id/assets/img/customer/' . $profil->foto . '" class="rounded-circle mx-auto mt-2" width="70" height="70" /> ';
+                            echo '<img id="default-foto" alt="" src="' . base_url("assets/demo/img/customer/") . $profil->foto . '" class="rounded-circle mx-auto mt-2" style="object-fit:cover;" width="70" height="70" /> ';
                         } else {
 
                             echo ' <img id="default-foto" alt="" src="https://cdn-a.shopicial.com/img/noavatar.png" class="rounded-circle mx-auto mt-2" width="70" height="70" />';
@@ -390,8 +389,8 @@
                                     <?php if (!empty($transaksi)) { ?>
                                         <?php foreach ($transaksi as $trns) { ?>
                                             <div class="card border-0 shadow-sm mx-auto mb-3" style="width: 280px;">
-                                                <a href="javascript:void(0)" class="image">
-                                                    <div style="background-image: url('<?= base_url('assets/demo/img/slidermob1.png'); ?>" class="card-img-top bg-card-desainmob"></div>
+                                                <a href="" class="image">
+                                                    <div style="background-image: url('<?= base_url('assets/img/thumbnail/' . $trns->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
                                                 </a>
                                                 <div class="card-body">
                                                     <h5 class="card-title mb-0 fw-semibold"><?= $trns->nama_rumah ?></h5>
@@ -692,6 +691,106 @@
                                         </div>
                                     <?php } ?>
                                 </div>
+                                <div class="d-lg-none">
+                                    <?php foreach ($wishlist as $item) { ?>
+                                        <!-- Konten transaksi -->
+
+                                        <div class="card border-0 shadow-sm mb-3 mx-auto" style="width: 280px;">
+                                            <a href="" class="image">
+                                                <div style="background-image: url('<?= base_url('assets/img/thumbnail/' . $item->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
+                                            </a>
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-0 fw-semibold"><?= $item->nama_rumah ?></h5>
+                                                <h6 class="nama_arsitek mb-0">Design by <?= $item->nama_arsitek ?></h6>
+                                                <hr />
+                                                <div class="d-flex align-items-center gap-3 mb-1">
+                                                    <div>
+                                                        <img src="<?= base_url('assets/demo/img/arrows-expand.png'); ?>" width="25" height="25">
+                                                    </div>
+                                                    <div>
+                                                        <small>Lahan Minimal</small>
+                                                        <small class="fw-semibold d-block"><?= $item->lebar_lahan . ' m x ' . $item->panjang_lahan . ' m' ?></small>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <div>
+                                                        <img src="<?= base_url('assets/demo/img/cash.png'); ?>" width="25" height="25">
+                                                    </div>
+                                                    <div>
+                                                        <small>Biaya Konstruksi</small>
+                                                        <small class="fw-semibold d-block">
+                                                            <?php
+                                                            if ($item->lantai == '1') {
+                                                                echo "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".");
+                                                            } elseif ($item->lantai == '2') {
+                                                                echo "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".");
+                                                            } else {
+                                                                echo "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".");
+                                                            }
+                                                            ?>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-3"></div>
+                                            </div>
+                                            <div class="card-info">
+                                                <div class="row justify-content-between">
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center gap-3 ms-2">
+                                                            <div>
+                                                                <img src="<?= base_url('assets/demo/img/bangunan.png'); ?>" width="20" height="20">
+                                                            </div>
+                                                            <div>
+                                                                <small>Bangunan</small>
+                                                                <small class="fw-semibold d-block"><?= $item->luas_bangunan ?> m2 </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center gap-3">
+                                                            <div>
+                                                                <img src="<?= base_url('assets/demo/img/kt.png'); ?>" width="20" height="20">
+                                                            </div>
+                                                            <div>
+                                                                <small>Kamar Tidur</small>
+                                                                <small class="fw-semibold d-block"><?= $item->kamar_tidur ?> Kamar </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row justify-content-between mb-3">
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center gap-3 ms-2">
+                                                            <div>
+                                                                <img src="<?= base_url('assets/demo/img/lantai.png'); ?>" width="20" height="20">
+                                                            </div>
+                                                            <div>
+                                                                <small>Lantai</small>
+                                                                <small class="fw-semibold d-block"><?= $item->lantai ?> Lantai </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center gap-3">
+                                                            <div>
+                                                                <img src="<?= base_url('assets/demo/img/km.png'); ?>" width="20" height="20">
+                                                            </div>
+                                                            <div>
+                                                                <small>Kamar Mandi</small>
+                                                                <small class="fw-semibold d-block"><?= $item->toilet ?> Kamar</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="pb-1">
+                                                    <div class="text-center">
+                                                        <a class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                                 <!-- <div class="card card-body mx-3 mb-2" id="myCardBody" style="background-color: #FFFBEE ;">
                                     <div class="d-flex align-items-center">
                                         <i class="fa-solid fa-circle-exclamation fa-2x" style="color: orange;"></i>
@@ -726,16 +825,22 @@
                             <div class="d-flex mb-3 gap-3" style="display: flex; justify-content: center;">
                                 <?php
                                 if ($profil->foto != "") {
-                                    echo '<img id="default-foto" alt="" src="https://rumahtinggal.id/assets/img/customer/' . $profil->foto . '" class="bg-card-circle-akun"/>';
+                                    echo '<img id="default-foto-ubah" alt="" src="' . base_url("assets/demo/img/customer/") . $profil->foto . '" class="bg-card-circle-akun" style="object-fit:cover;"/>';
                                 } else {
-                                    echo '<img id="default-foto" alt="" src="https://cdn-a.shopicial.com/img/noavatar.png" class="bg-card-circle-akun"/>';
+                                    echo '<img id="default-foto-ubah" alt="" src="https://cdn-a.shopicial.com/img/noavatar.png" class="bg-card-circle-akun" style="object-fit:cover;"/>';
                                 }
                                 ?>
+
                                 <div>
                                     <div class="mt-3 ms-3">
-                                        <button class="btn btn-primary" type="button" id="button-addon2">Ganti Foto Profil</button>
+
+                                        <input type="file" id="fileInput" style="display: none;">
+
+
+                                        <button class="btn btn-primary" type="button" id="ganti-foto-button">Ganti Foto Profil</button>
                                     </div>
-                                    <div class="mt-3 ms-4" style="color: red;">Hapus Foto Profil</div>
+
+                                    <div id="hapus-foto-button" class="mt-3 ms-4" style="color: red; cursor:pointer;">Hapus Foto Profil</div>
                                 </div>
                             </div>
                             <form id="ubahCustomer">
@@ -850,6 +955,77 @@
         $('#ubahProfil').modal('hide');
         modal.show();
     }
+
+    document.getElementById('ganti-foto-button').addEventListener('click', function() {
+        document.getElementById('fileInput').click();
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function() {
+        var file = this.files[0];
+        if (file) {
+            // Display the selected image temporarily
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('default-foto-ubah').src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById('hapus-foto-button').addEventListener('click', function() {
+        // Create a new file input element
+        var newFileInput = document.createElement('input');
+        newFileInput.type = 'file';
+        newFileInput.id = 'fileInput';
+        newFileInput.style.display = 'none';
+
+        // Replace the existing file input with the new one
+        var oldFileInput = document.getElementById('fileInput');
+        oldFileInput.parentNode.replaceChild(newFileInput, oldFileInput);
+        // Update the image source to default
+        document.getElementById('default-foto-ubah').src = 'https://cdn-a.shopicial.com/img/noavatar.png';
+    });
+
+    function uploadFoto(file) {
+        var formData = new FormData();
+        formData.append('foto', file);
+
+        $.ajax({
+            url: "<?= base_url('api/uploadFotoCustomer') ?>",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+
+                console.log('File uploaded successfully:', data);
+                var responseData = JSON.parse(data);
+                $('#default-foto-ubah').attr('src', '<?php echo base_url("assets/demo/img/customer/") ?>' + responseData.filename);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error uploading file:', error);
+            }
+        });
+    }
+
+    function hapusFoto() {
+        $.ajax({
+            url: "<?= base_url('api/hapusFotoCustomer') ?>", // Replace with the appropriate endpoint
+            type: 'POST',
+            success: function(response) {
+                // Handle success response
+                console.log('Profile picture deleted successfully:', response);
+                // You may want to display a success message to the user here
+            },
+            error: function(xhr, status, error) {
+                // Handle error response
+                console.error('Error deleting profile picture:', error);
+                // You may want to display an error message to the user here
+            }
+        });
+    }
+
+
 
     function detailRumah(id) {
         location.href = "<?= base_url('detail_koleksi/') ?>" + id;
@@ -969,6 +1145,18 @@
 
     function ubahCustomer() {
         $('#btn-simpan').val("Simpan...");
+
+        var fileInput = document.getElementById('fileInput');
+        var file = fileInput.files[0];
+        var tempFoto = document.getElementById('default-foto-ubah').src;
+        if (file) {
+            // Perform the upload
+            uploadFoto(file);
+        } else if (tempFoto == 'https://cdn-a.shopicial.com/img/noavatar.png' && "<?php echo $profil->foto ?>" != '') {
+            hapusFoto()
+        } else {
+            console.error('No file selected.');
+        }
 
         $.ajax({
             url: "<?php echo base_url() ?>api/ubahCustomer",
