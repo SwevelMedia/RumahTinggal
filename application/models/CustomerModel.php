@@ -222,8 +222,6 @@ class CustomerModel extends CI_Model
 
                 'no_wa' => $data['no_wa'],
 
-                'foto' => $data['foto'],
-
                 'tgl_daftar' => date("Y-m-d"),
 
                 'jam_daftar' => date("H:i:s")
@@ -232,6 +230,20 @@ class CustomerModel extends CI_Model
         }
 
 
+
+        $this->db->where($this->pk_customer, $data['id_customer'])
+
+            ->update($this->tabel, $val);
+    }
+
+    function ubahFotoCustomer($data)
+    {
+
+        $val = array(
+
+            'foto' => $data['foto'],
+
+        );
 
         $this->db->where($this->pk_customer, $data['id_customer'])
 
@@ -303,11 +315,12 @@ class CustomerModel extends CI_Model
     {
         return $this->db->query("SELECT a.*, ROUND(AVG(a.rating_dlm), 1) AS rating 
                             FROM (
-                                SELECT b.*, IFNULL(ulasan.rating, 0) AS rating_dlm 
+                                SELECT b.*, IFNULL(ulasan.rating, 0) AS rating_dlm,
+                                MAX(ruang_rumah.lantai) AS lantai
                                 FROM (
                                     SELECT pembelian.id_customer, pembelian.no_invoice, pembelian.id_rumah, rumah.nama_rumah, rumah.foto, 
                                            ROUND(rumah.lebar_lahan) AS lebar_lahan, ROUND(rumah.panjang_lahan) AS panjang_lahan, 
-                                           ROUND(rumah.luas_bangunan) AS luas_bangunan, rumah.lantai, arsitek.id_arsitek, arsitek.nama_arsitek, 
+                                           ROUND(rumah.luas_bangunan) AS luas_bangunan, arsitek.id_arsitek, arsitek.nama_arsitek, 
                                            pembelian.paket, dokumen.laporan_desain, dokumen.rab, dokumen.ded, dokumen.rks 
                                     FROM pembelian, rumah, dokumen, arsitek 
                                     WHERE pembelian.id_rumah = '{$id_rumah}' 
@@ -318,6 +331,7 @@ class CustomerModel extends CI_Model
                                       AND pembelian.status = 1
                                 ) b 
                                 LEFT JOIN ulasan ON b.id_rumah = ulasan.id_rumah
+                                LEFT JOIN ruang_rumah ON b.id_rumah = ruang_rumah.id_rumah
                             ) a 
                             GROUP BY a.id_rumah");
     }
