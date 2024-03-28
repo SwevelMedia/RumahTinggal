@@ -14,7 +14,7 @@ class DetailModel extends CI_Model
 
     public $rumah_disuka = "rumah_disukai";
 
-    public $from = "SELECT c.*, COUNT(denah.lantai) AS lantai FROM (SELECT b.*, COUNT(ruang_rumah.id_ruang) AS toilet FROM (SELECT a.*, count(ruang_rumah.id_ruang) AS toiletwc FROM (SELECT rumah.id_rumah, rumah.nama_rumah, rumah.id_arsitek, rumah.lebar_lahan, rumah.panjang_lahan, (rumah.lebar_lahan*rumah.panjang_lahan) AS luas_lahan,rumah.luas_bangunan,rumah.muka,rumah.wastafel,rumah.bathup,rumah.kloset_duduk,rumah.kloset_jongkok, rumah.foto,rumah.video,rumah.tgl_buat,rumah.tgl_update,rumah.suka,rumah.dilihat, count(ruang_rumah.id_ruang) AS kamar_tidur FROM rumah, ruang_rumah WHERE rumah.id_rumah=ruang_rumah.id_rumah AND ruang_rumah.id_ruang = 7 group by id_rumah )a,ruang_rumah WHERE a.id_rumah=ruang_rumah.id_rumah AND ruang_rumah.id_ruang = 14 GROUP BY a.id_rumah) b, ruang_rumah WHERE b.id_rumah=ruang_rumah.id_rumah AND (ruang_rumah.id_ruang=14 OR ruang_rumah.id_ruang=15) GROUP BY b.id_rumah) c, denah WHERE c.id_rumah = denah.id_rumah GROUP BY c.id_rumah";
+    public $from = "SELECT c.*, COUNT(denah.lantai) AS lantai FROM (SELECT b.*, COUNT(ruang_rumah.id_ruang) AS toilet FROM (SELECT a.*, count(ruang_rumah.id_ruang) AS toiletwc FROM (SELECT rumah.id_rumah, rumah.nama_rumah, rumah.id_arsitek, rumah.lebar_lahan, rumah.panjang_lahan, (rumah.lebar_lahan*rumah.panjang_lahan) AS luas_lahan,rumah.luas_bangunan,rumah.muka,rumah.wastafel,rumah.bathup,rumah.kloset_duduk,rumah.kloset_jongkok, rumah.foto,rumah.video,rumah.tgl_buat,rumah.tgl_update,rumah.suka,rumah.dilihat, count(ruang_rumah.id_ruang) AS kamar_tidur FROM rumah LEFT JOIN ruang_rumah ON rumah.id_rumah=ruang_rumah.id_rumah WHERE ruang_rumah.id_ruang = 7 group by rumah.id_rumah )a LEFT JOIN ruang_rumah ON a.id_rumah=ruang_rumah.id_rumah AND ruang_rumah.id_ruang = 14 GROUP BY a.id_rumah) b LEFT JOIN ruang_rumah ON b.id_rumah=ruang_rumah.id_rumah AND (ruang_rumah.id_ruang=14 OR ruang_rumah.id_ruang=15) GROUP BY b.id_rumah) c LEFT JOIN denah ON c.id_rumah = denah.id_rumah GROUP BY c.id_rumah";
 
 
 
@@ -24,7 +24,7 @@ class DetailModel extends CI_Model
 
     {
 
-        return $this->db->query("SELECT a.kamar_tidur,a.toilet,a.toiletwc,a.id_rumah,a.foto,a.video, a.nama_rumah, a.id_arsitek, arsitek.nama_arsitek,ROUND(a.luas_lahan,2) AS luas_lahan, a.lebar_lahan, a.panjang_lahan, a.luas_bangunan, a.lantai,a.dilihat,a.suka,arsitek.nama_arsitek FROM ({$this->from}) a,arsitek WHERE arsitek.id_arsitek=a.id_arsitek AND a.id_rumah = '{$id_rumah}' GROUP BY nama_rumah,lantai order by lantai desc limit 1 ");
+        return $this->db->query("SELECT a.kamar_tidur,a.toilet,a.toiletwc,a.id_rumah,a.foto,a.video, a.nama_rumah, a.id_arsitek, arsitek.nama_arsitek,ROUND(a.luas_lahan,2) AS luas_lahan, a.lebar_lahan, a.panjang_lahan, a.luas_bangunan, a.lantai,a.dilihat,a.suka,arsitek.nama_arsitek FROM ({$this->from}) a LEFT JOIN arsitek ON arsitek.id_arsitek=a.id_arsitek WHERE a.id_rumah = '{$id_rumah}' GROUP BY nama_rumah,lantai order by lantai desc limit 1 ");
     }
 
 
