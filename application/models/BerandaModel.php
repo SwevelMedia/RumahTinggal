@@ -20,6 +20,11 @@ class BerandaModel extends CI_Model
 		return $this->db->query('SELECT * from banner_mobile');
 	}
 
+	function getBannerDesktop()
+	{
+		return $this->db->query('SELECT * from banner_desktop where id_rumah >0');
+	}
+
 	public function getTestimoni()
 	{
 		$query = $this->db->get('testimoni'); // 'testimoni' adalah nama tabel dalam contoh ini
