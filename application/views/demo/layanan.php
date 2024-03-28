@@ -43,7 +43,7 @@
 </style>
 <div class="py-5">
     <div class="container">
-        <div class="row flex-column-reverse flex-lg-row">
+        <div class="row flex-column-reverse flex-lg-row align-items-center">
             <div class="col-lg-6 mb-3">
                 <h1 class="fw-bold mb-3 text-primary">Marketplace Desain Hunian</h1>
                 <h1 class="fw-bold mb-3 text-primary">Terbesar di Indonesia</h1>
