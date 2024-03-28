@@ -257,26 +257,26 @@ $(document).ready(function () {
 // 	}
 // });
 
-var baseUrl = $("#baseUrl").val();
-var images = [
-	`${baseUrl}assets/demo/img/slide1.png`,
-	`${baseUrl}assets/demo/img/slide2.png`,
-	`${baseUrl}assets/demo/img/slide3.png`,
-];
+// var baseUrl = $("#baseUrl").val();
+// var images = [
+// 	`${baseUrl}assets/demo/img/slide1.png`,
+// 	`${baseUrl}assets/demo/img/slide2.png`,
+// 	`${baseUrl}assets/demo/img/slide3.png`,
+// ];
 
-var index = 0;
-var slideshow = document.querySelector(".slideshow");
-var slideshowImage = slideshow.querySelector("img");
+// var index = 0;
+// var slideshow = document.querySelector(".slideshow");
+// var slideshowImage = slideshow.querySelector("img");
 
-function changeImage() {
-	slideshowImage.src = images[index];
-	index = (index + 1) % images.length;
-}
+// function changeImage() {
+// 	slideshowImage.src = images[index];
+// 	index = (index + 1) % images.length;
+// }
 
-setTimeout(function () {
-	changeImage();
-	setInterval(changeImage, 4000);
-}, 3000);
+// setTimeout(function () {
+// 	changeImage();
+// 	setInterval(changeImage, 4000);
+// }, 3000);
 
 function formatRupiah(number) {
 	var reverse = number.toString().split("").reverse().join(""),
