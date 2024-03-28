@@ -69,6 +69,14 @@
             height: 420px;
         }
     }
+
+    .teks-testimoni {
+        font-style: normal;
+        font-weight: 300;
+        line-height: 150%;
+        /* 36px */
+        letter-spacing: 0.5px;
+    }
 </style>
 
 <!-- <div class="owl-carousel owl-theme owl-carousel-eight d-lg-none" id="caraouselTesti">
@@ -83,7 +91,14 @@
         <?php } ?>
     <?php } ?>
 </div>
-<div class="pt-md-0 py-md-5 bg-header-web-home overflow-hidden" style="background-image:radial-gradient(circle at -90%, white 50%, #53b4fc 100%);">
+<div class="pt-md-0 py-md-0 bg-header-web-home overflow-hidden" style="position:relative;background-image:radial-gradient(circle at -90%, white 50%, #53b4fc 100%);">
+    <input type="hidden" id="baseUrl" value="<?= base_url(); ?>">
+    <div class="slideshow d-none d-lg-block" style='position:absolute;height:90%; right:0; bottom:0;'>
+        <a class="slideshow-img-link" href=<?php echo base_url("detail_koleksi/258") ?>>
+            <img src="<?php echo base_url('assets/demo/img/beranda/rumah 2.png'); ?>" alt="Gambar 1" style="max-height: 100%; width: auto;">
+
+        </a>
+    </div>
     <div class="container px-2 home-banner-left px-lg-0">
         <div class="row m-0 p-0 home-banner-left">
             <!-- Bagian Kiri (Teks) -->
@@ -190,12 +205,14 @@
             </div>
 
             <!-- Bagian Kanan (Gambar) -->
-            <div class="col-lg-6 pe-0">
+            <!-- <div class="col-lg-6 pe-0 h-100">
                 <input type="hidden" id="baseUrl" value="<?= base_url(); ?>">
                 <div class="slideshow d-none d-lg-block">
-                    <img class="img-fluid pb-xxl-4 w-100" src="<?php echo base_url('assets/demo/img/slide1.png'); ?>" alt="Gambar 1">
+                    <a class="slideshow-img-link" href=<?php echo base_url("detail_koleksi/258") ?>>
+                        <img class="img-fluid pb-xxl-5 w-100" src="<?php echo base_url('assets/demo/img/beranda/rumah 2.png'); ?>" alt="Gambar 1">
+                    </a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -512,7 +529,7 @@
                 </div>
             </div>
             <div class="col-lg-8 mb-3">
-                <div style="position: relative;">
+                <div class="video-container" style="position: relative;">
                     <video id="my-video" class="rounded-4 shadow-sm" controls preload="auto" width="100%" height="auto" poster="https://rumahtinggal.id/assets/img/thumbnail_website.png" data-setup="{}">
                         <source src="<?= base_url('assets/video/home.mp4') ?>" type="video/mp4" />
                         <source src="<?= base_url('assets/video/home.mp4') ?>" type="video/mp4" />
@@ -530,39 +547,53 @@
             <div class="col-lg-4 mb-3">
                 <div class="position-relative h-100">
                     <div class="owl-carousel owl-theme owl-carousel-three h-100" id="caraouselTesti">
-                        <div class="card border-0 bg-light rounded-4" style="height: 412px;">
-                            <div class="card-body p-4" id="myCardBody">
+                        <div class="testimoni-card card border-0 bg-light rounded-4">
+                            <div class="card-body p-4 h-100" id="myCardBody">
                                 <div class="d-flex mb-3 align-items-center gap-3">
-                                    <div class="bg-card-circle" style="background-image: url('<?php echo base_url("assets/demo/img/happy.png"); ?>')">
+                                    <div class="bg-card-circle" style="background-image: url('<?php echo base_url("assets/demo/img/beranda/Relani Shidig Fadirga.png"); ?>')">
                                     </div>
                                     <div>
-                                        <h4 class="fw-semibold">Pak Naufal</h4>
-                                        <div>Bantul</div>
+                                        <h4 class="fw-semibold m-0 p-0">Relani Shidig Fadirga</h4>
                                     </div>
                                 </div>
-                                <p style="line-height: 2; margin-top:30px;">
-                                    Saya sangat terkesan berbelanja di platform marketplace ini. Antarmuka yang mudah
-                                    dipahami membantu saya menemukan produk yang dicari dengan lancar. Proses pembayaran
-                                    yang cepat dan pilihan pengiriman fleksibel dapat meningkatkan kenyamanan
-                                    berbelanja.
+                                <p class="teks-testimoni" style="margin-top:25px;">
+                                    Alhamdulillah Rumah Tinggal.id memberikan solusi yang mudah untuk design rumah. Pelayanan yang diberikan juga maksimal, hasil sesuai yang diinginkan dan memuaskan.
+                                    <br /><br />
+                                    Maturnuwun Rumah Tinggal.id
                                 </p>
                             </div>
                         </div>
-                        <div class="card border-0 bg-light rounded-4" style="height: 412px;">
-                            <div class="card-body p-4" id="myCardBody">
+                        <div class="card border-0 bg-light rounded-4 testimoni-card">
+                            <div class="card-body p-4 h-100" id="myCardBody">
                                 <div class="d-flex mb-3 align-items-center gap-3">
-                                    <div class="bg-card-circle" style="background-image: url('<?php echo base_url("assets/demo/img/mbak1.jpg"); ?>')">
+                                    <div class="bg-card-circle" style="background-image: url('<?php echo base_url("assets/demo/img/beranda/Muhtadin.png"); ?>')">
                                     </div>
                                     <div>
-                                        <h4 class="fw-semibold">Ibu Jessica</h4>
-                                        <div>Sleman</div>
+                                        <h4 class="fw-semibold m-0 p-0">Muhtadin</h4>
                                     </div>
                                 </div>
-                                <p style="line-height: 2; margin-top:30px;">
-                                    Saya sangat terkesan berbelanja di platform marketplace ini. Antarmuka yang mudah
-                                    dipahami membantu saya menemukan produk yang dicari dengan lancar. Proses pembayaran
-                                    yang cepat dan pilihan pengiriman fleksibel dapat meningkatkan kenyamanan
-                                    berbelanja.
+                                <p class="teks-testimoni" style="margin-top:25px;">
+                                    Saya sudah terima desainnya. Menurut saya ini sudah sangat luar biasa. Lebih bagus dari apa yg saya bayangkan, walaupun proses konsulnya online, tapi apa yg saya inginkan bisa tersalurkan dengan baik.
+                                    <br /> <br />
+                                    Saya sebagai org awam di dunia desain seperti ini juga bisa tambah ilmu mengenai desain rumah dan apa apa saja yg perlu di perhatikan saat akan membangun rumah.
+                                    <br /> <br />
+                                    Terima kasih buat rumahtinggal.id sdh membantu saya dalam desain rumah tinggal impian saya.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card border-0 bg-light rounded-4 testimoni-card">
+                            <div class="card-body p-4 h-100" id="myCardBody">
+                                <div class="d-flex mb-3 align-items-center gap-3">
+                                    <div class="bg-card-circle" style="background-image: url('<?php echo base_url("assets/demo/img/beranda/Fajar Wijayanto.png"); ?>')">
+                                    </div>
+                                    <div>
+                                        <h4 class="fw-semibold m-0 p-0">Fajar Wijayanto</h4>
+                                    </div>
+                                </div>
+                                <p class="teks-testimoni" style="margin-top:25px;">
+                                    Terimakasih banyak tim RumahTinggal.id. Kami jadi bisa mewujudkan salah satu desain rumah impian kami. Diskusinya sangat cair dan humble, jadi kami nyaman untuk mencurahkan ide di kepala kami. Dan kami sangat puas melihat wujud desain salah satu rumah impian kami, sesuai dengan apa yang kami bayangkan.
+                                    <br /> <br />
+                                    Terimakasih tim RumahTinggal.id, mewujudkan ide rumah impian kami menjadi desain yang memuaskan.
                                 </p>
                             </div>
                         </div>
@@ -693,6 +724,31 @@
     $(document).ready(function() {
         getMaterial();
     });
+
+    // var baseUrl = $("#baseUrl").val();
+    // var images = [
+    //     `${baseUrl}assets/demo/img/slide1.png`,
+    //     `${baseUrl}assets/demo/img/slide2.png`,
+    //     `${baseUrl}assets/demo/img/slide3.png`,
+    // ];
+
+    var index = 0;
+    var slideshow = document.querySelector(".slideshow");
+    var slideshowLink = slideshow.querySelector(".slideshow-img-link");
+    var slideshowImage = slideshow.querySelector("img");
+    var images = <?php echo json_encode($banner_desktop); ?>;
+    console.log(images)
+
+    function changeImage() {
+        slideshowImage.src = "<?php echo base_url('assets/demo/img/beranda/'); ?>" + images[index].foto;
+        slideshowLink.href = "<?php echo base_url('detail_koleksi/') ?>" + images[index].id_rumah;
+        index = (index + 1) % images.length;
+    }
+
+    setTimeout(function() {
+        changeImage();
+        setInterval(changeImage, 4000);
+    }, 3000);
 
     // var video = document.getElementById('my-video');
     // var playIconContainer = document.getElementById('play-icon-container');
@@ -1056,6 +1112,21 @@
             card2.style.height = maxHeight2 + 'px';
         });
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get all elements with the class 'testimoni-card'
+        var containers = document.querySelectorAll(".testimoni-card");
+        var video = document.querySelector("#my-video");
+        // Loop through each container
+        containers.forEach(function(container) {
+            // Get the video element within the current container
+
+            console.log(video.offsetHeight)
+
+            // Set the height of the container to match the height of the video
+            container.style.height = video.offsetHeight + "px";
+        });
+    });
 
     // $(window).resize(updateArticleHeight);
 
