@@ -392,7 +392,7 @@
 
                         list += `
                         <div class="col-lg-4 col-6 mb-3">
-            <div class="card border-0 shadow-sm" onclick="detailProduk(${data[i].id_produk})" style='cursor:pointer;'>
+            <div class="card border-0 shadow-sm">
                 <div style="background-image: url('<?= $this->config->item('eid') ?>assets/foto/produk/${foto}')" class="card-img-mat bg-card-mat">
                 </div>
                 <div class="card-body" id="myCardBody">
@@ -400,10 +400,11 @@
                     <h6 class="material-card-subtitle mt-1 mb-0">${data[i].nama_suplier}</h6>
                     <hr />
                     <div><strong>${formatRupiah(harga)}</strong>/buah</div>
-                    <div class="d-flex mt-2 gap-1 d-none d-lg-block">
-                        <button type="button" class="btn btn-outline-primary" onclick="detailProduk(${data[i].id_produk})">Detail</button>
-                        <button type="button" class="btn btn-primary btn-beli" data-number="${data[i].no_wa}" data-id="${data[i].id_produk}" data-product="${data[i].nama_produk}" data-merk="${data[i].merk}" data-spec="${data[i].spesifikasi}"><i class="fa-solid fa-cart-shopping me-2"></i>Beli Sekarang</button>
+                    <div class="d-none d-lg-flex mt-2 w-100 flex-row gap-1 justify-content-center">
+                    <button type="button" class="btn btn-outline-primary" onclick="detailProduk(${data[i].id_produk})">Detail</button>
+                    <button type="button" class="btn btn-primary btn-beli flex-grow-1" style="" data-number="${data[i].no_wa}" data-id="${data[i].id_produk}" data-product="${data[i].nama_produk}" data-merk="${data[i].merk}" data-spec="${data[i].spesifikasi}"><i class="fa-solid fa-cart-shopping me-2"></i>Beli Sekarang</button>
                     </div>
+
                     <div class="d-flex flex-column d-none">
                         <button type="button" class="btn btn-outline-primary mb-2" onclick="detailProduk(${data[i].id_produk})">Detail</button>
                         <button type="button" class="btn btn-primary btn-beli" data-number="${data[i].no_wa}" data-id="${data[i].id_produk}" data-product="${data[i].nama_produk}" data-merk="${data[i].merk}" data-spec="${data[i].spesifikasi}"><i class="fa-solid fa-cart-shopping me-2"></i>Beli Sekarang</button>
