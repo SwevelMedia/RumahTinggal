@@ -7,6 +7,7 @@
     <meta name="google-signin-client_id" content="619189282883-54euurh55b0od41supra7n7eoksj2jbu.apps.googleusercontent.com">
     <link rel="stylesheet" href="<?php echo base_url('assets/demo/css/styles.css'); ?>" />
     <title><?= $title; ?></title>
+    <link rel="icon" href="<?php echo base_url('assets/demo/img/'); ?>favicon.png" type="image/gif">
     <link rel="stylesheet" href="<?php echo base_url('assets/demo/css/bootstrap.css'); ?>" />
     <!--<script src="https://accounts.google.com/gsi/client" async defer></script>-->
     <!-- Script untuk Google Sign-In API -->
