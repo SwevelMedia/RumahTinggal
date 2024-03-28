@@ -246,6 +246,10 @@ $route['profil/(:any)'] = 'CustomerController/profil/$1';
 
 $route['api/ubahCustomer'] = 'CustomerController/ubahCustomer';
 
+$route['api/uploadFotoCustomer'] = 'CustomerController/uploadFotoCustomer';
+
+$route['api/hapusFotoCustomer'] = 'CustomerController/hapusFotoCustomer';
+
 $route['api/getAktifitas/(:any)'] = 'CustomerController/getAktifitas/$1';
 
 $route['api/kirimBuktiTransaksi'] = 'CustomerController/kirimBuktiTransaksi';
