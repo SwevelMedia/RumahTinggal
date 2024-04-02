@@ -98,12 +98,12 @@
                 <i class="me-2 fas fa-filter"></i>Filter
             </button>
         </div>
-        <div class="input-group mb-3 mt-3">
-            <input type="text" class="form-control" placeholder="cari material terbaik" style="background-color: #F7F7F7;" />
-            <button class="btn btn-primary" type="button" id="button-addon2" style="background-color: #f7f7f7;">
+        <form class="search-mobile input-group mb-3 mt-3">
+            <input type="text" class="form-control nama-produk-mobile" placeholder="cari material terbaik" style="background-color: #F7F7F7;" name="nama-produk-mobile" value="" />
+            <button class="btn btn-primary" type="submit" id="button-addon2" style="background-color: #f7f7f7; border-left:none; border-color: #ced4da;">
                 <i class="fas fa-search" style="color: black;"></i>
             </button>
-        </div>
+        </form>
     </div>
 </div>
 
@@ -112,11 +112,11 @@
     <div class="container">
         <div class="row">
             <form class="form-filter col-lg-3 mb-3 d-none d-lg-block">
-                <div class="d-flex justify-content-between flex-column flex-lg-row align-items-center mb-3">
+                <div class="d-flex justify-content-between flex-column flex-lg-row align-items-start mb-3">
                     <h5 class="fw-semibold text-center ms-3">
                         <i class="fas fa-filter"></i> Filter
                     </h5>
-                    <p class="hapus-filter">Hapus Filter</p>
+                    <p class="hapus-filter" style="text-decoration: underline; color: #00528e; cursor:pointer;">Hapus Filter</p>
                 </div>
                 <div class="input-group mb-3 search-group">
                     <input type="text" class="form-control nama_produk" placeholder="cari material pilihan" style="background-color: white;" name="nama_produk" />
@@ -124,16 +124,16 @@
                         <i class="fas fa-search " style="color: black;"></i>
                     </button>
                 </div>
-                <div class="fw-semibold mb-2">Harga Material</div>
+                <!-- <div class="fw-semibold mb-2">Harga Material</div>
                 <div class="d-flex justify-content-between flex-column flex-lg-row mb-3 text-center gap-2">
                     <div class="mb-2 col-lg-auto" style="width: 45%;">
-                        <input type="text" id="field1" name="min_harga" class="form-control" placeholder="Rp Minimal">
+                        <input type="number" id="min_harga" name="min_harga" min="0" class="form-control numeric-input" placeholder="Rp Minimal">
                     </div>
                     <span class="mb-2 col-lg-auto mt-2">-</span>
                     <div class="mb-2 col-lg-auto" style="width: 45%;">
-                        <input type="text" id="field2" name="field2" class="form-control" placeholder="Rp Maksimal">
+                        <input type="number" id="max_harga" name="max_harga" min="0" class="form-control numeric-input" placeholder="Rp Maksimal">
                     </div>
-                </div>
+                </div> -->
                 <div class="accordion" id="accordionKategoriMaterial">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="kategoriMat">
@@ -173,16 +173,16 @@
                 <div class="d-none d-lg-block">
                     <div class="d-flex justify-content-between flex-column flex-lg-row align-items-center mb-3">
                         <div>Menampilkan <span id="jumlah_tampil"></span> dari <span id='jumlah_material'></span> material </div>
-                        <div class="dropdown">
-                            <button id="sortButton" class="btn btn-outline-white border-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="btn-group">
+                            <button id="sortButton" class="btn btn-outline-white border-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                                 Urutkan:
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="?sort=default">Paling Sesuai</a></li>
-                                <li><a class="dropdown-item" href="?sort=populer">Desain Populer</a></li>
-                                <li><a class="dropdown-item" href="?sort=terbaru">Desain Terbaru</a></li>
-                                <li><a class="dropdown-item" href="?sort=harga_terendah">Harga Terendah</a></li>
-                                <li><a class="dropdown-item" href="?sort=harga_tertinggi">Harga Tertinggi</a></li>
+                            <ul class="dropdown-menu" role='menu'>
+                                <li><a class="dropdown-item" onclick="setSort(0)">Paling Sesuai</a></li>
+                                <!-- <li><a class="dropdown-item" onclick="setSort(1)">Desain Populer</a></li> -->
+                                <li><a class="dropdown-item" onclick="setSort(1)">Desain Terbaru</a></li>
+                                <li><a class="dropdown-item" onclick="setSort(3)">Harga Terendah</a></li>
+                                <li><a class="dropdown-item" onclick="setSort(4)">Harga Tertinggi</a></li>
                             </ul>
                         </div>
 
@@ -203,6 +203,9 @@
                     <input type='hidden' name='id_kategori' id='selectedKategori' value=''>
                     <input type='hidden' name='merk' id='selectedMerk' value=''>
                     <input type='hidden' name='nama_produk' id='searchedNama' value=''>
+                    <input type="hidden" id="sort_by" name="sort_by" value="1">
+                    <input type="hidden" id="minHarga" name="min_harga" value="">
+                    <input type="hidden" id="maxHarga" name="max_harga" value="">
                 </form>
                 <form class="form-group" id="getPage">
                     <input type="hidden" name="total_pages" id="total_pages">
@@ -221,62 +224,74 @@
                     <h5 class="fw-semibold ms-3">
                         <i class="fas fa-filter"></i> Filter
                     </h5>
-                    <p class="hapus-filter me-3">Hapus Filter</p>
+                    <p class="hapus-filter me-3" data-bs-dismiss="modal">Hapus Filter</p>
                 </div>
                 <div class="bg-white mx-2 p-2">
                     <div class="d-flex flex-column">
                         <div class="fw-semibold ms-2">Urutkan</div>
-                        <div class="d-flex">
-                            <button class="btn btn-light border-2 m-1">Paling Sesuai</button>
-                            <button class="btn btn-light border-2 m-1">Paling Populer</button>
+                        <div class="d-flex flex-row flex-wrap" id="sortButtonGroup">
+                            <button type="button" class="btn btn-light border-2 m-1 sortButtonMobile" onclick="handleSortClick(this)" data-value="0">Paling Sesuai</button>
+                            <button type="button" class="btn btn-light border-2 m-1 sortButtonMobile" onclick="handleSortClick(this)" data-value="1">Terbaru</button>
+                            <button type="button" class="btn btn-light border-2 m-1 sortButtonMobile" onclick="handleSortClick(this)" data-value="3">Biaya Terendah</button>
+                            <button type="button" class="btn btn-light border-2 m-1 sortButtonMobile" onclick="handleSortClick(this)" data-value="4">Biaya Tertinggi</button>
                         </div>
-                        <div class="d-flex">
-                            <button class="btn btn-light border-2 m-1">Terbaru</button>
-                            <button class="btn btn-light border-2 m-1">Biaya Terendah</button>
-                        </div>
-                        <div class="d-flex">
-                            <button class="btn btn-light border-2 m-1">Biaya Tertinggi</button>
-                        </div>
+
                     </div>
                 </div>
-                <div class="fw-semibold ms-3 mt-3">Harga Material</div>
+                <!-- <div class="fw-semibold ms-3 mt-3">Harga Material</div>
                 <div class="d-flex mt-2">
                     <div class="ms-3 mb-2 col-lg-auto" style="width: 42%;">
-                        <input type="text" id="min_harga" name="min_harga" class="form-control" placeholder="Rp Minimal">
+                        <input type="number" id="min_harga" name="min_harga" min="0" class="form-control numeric-input" placeholder="Rp Minimal">
                     </div>
                     <span class="ms-2 mb-2 col-lg-auto mt-2">-</span>
                     <div class="ms-2 mb-2 col-lg-auto" style="width: 42%;">
-                        <input type="text" id="max_harga" name="max_harga" class="form-control" placeholder="Rp Maksimal">
+                        <input type="number" id="max_harga" name="max_harga" min="0" class="form-control numeric-input" placeholder="Rp Maksimal">
                     </div>
-                </div>
-                <div class="bg-white mx-2 p-3 mt-3">
+                </div> -->
+                <div class="bg-white mx-2 px-2 py-3 mt-3">
                     <div class="d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="fw-semibold ms-2">Kategori Material</div>
-                            <small class="fw-semibold me-1" id="lihatSemuaKategori">Lihat Semua</small>
-                        </div>
-                        <div class="kategori mt-2">
-                        </div>
-                        <div class="kategori-open">
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white mx-2 p-3 mt-3">
-                    <div class="d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="fw-semibold ms-2">Merk Material</div>
-                            <small class="fw-semibold me-1" id="lihatSemuaMerk">Lihat Semua</small>
-                        </div>
-                        <div class="merk mt-2">
-                        </div>
-                        <div class="merk-open">
+                        <div class="accordion" id="accordionKategoriMaterial">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="kategoriMat">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flushKategoriMaterial" aria-expanded="false" aria-controls="flushKategoriMaterial">
+                                        Kategori Material
+                                    </button>
+                                </h2>
+                                <div id="flushKategoriMaterial" class="accordion-collapse collapse" aria-labelledby="kategoriMat" data-bs-parent="#accordionKategoriMaterial">
+                                    <div class="accordion-body">
+                                        <div id="kategori-container-mobile">
+                                            <!-- AJAX response from getKategoriProduk api will be appended here -->
+                                        </div>
 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white mx-2 px-2 py-3">
+                    <div class="d-flex flex-column">
+                        <div class="accordion" id="accordionMerkMaterial">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="MerkMaterial">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-merkMaterial" aria-expanded="false" aria-controls="flush-merkMaterial">
+                                        Merk Material
+                                    </button>
+                                </h2>
+                                <div id="flush-merkMaterial" class="accordion-collapse collapse" aria-labelledby="MerkMaterial" data-bs-parent="#accordionMerkMaterial">
+                                    <div class="accordion-body">
+                                        <div id="merk-container-mobile">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center align-items-center mx-auto gap-3 mt-3 mb-3">
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                    <button type="button" class="btn btn-primary">Terapkan</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick=" submitFilterMobile()">Terapkan</button>
                 </div>
             </div>
         </div>
@@ -326,7 +341,36 @@
             });
             var selectedValuesString = checkedValues.join(',');
             $('#selectedKategori').val(selectedValuesString);
-            getDataMaterial();
+            getMerkProduk();
+
+        });
+
+        $('#kategori-container-mobile').on('change', '.kategori_checkbox_mobile', function() {
+            $("#page").val(1);
+            var checkedValues = [];
+            $('.kategori_checkbox_mobile:checked').each(function() {
+                checkedValues.push($(this).val());
+            });
+            var selectedValuesString = checkedValues.join(',');
+            $('#selectedKategori').val(selectedValuesString);
+            // getMerkProduk();
+
+        });
+
+        $('#min_harga').on('change', function() {
+            if ($(this).val() > 0) {
+                $("#page").val(1);
+                $('#minHarga').val($(this).val());
+                getMerkProduk();
+            }
+        });
+
+        $('#max_harga').on('change', function() {
+            if ($(this).val() > 0) {
+                $("#page").val(1);
+                $('#maxHarga').val($(this).val());
+                getMerkProduk();
+            }
         });
 
         $('#merk-container').on('change', '.merk_checkbox', function() {
@@ -341,6 +385,18 @@
             getDataMaterial();
         });
 
+        $('#merk-container-mobile').on('change', '.merk_checkbox_mobile', function() {
+            $("#page").val(1);
+            var checkedValues = [];
+            $('.merk_checkbox_mobile:checked').each(function() {
+                checkedValues.push($(this).val());
+            });
+            var selectedValuesString = checkedValues.join(',');
+            $('#selectedMerk').val(selectedValuesString);
+            // getMerkProduk();
+
+        });
+
         $('.form-filter').submit(function(e) {
             e.preventDefault(); // Prevent the default form submission behavior
 
@@ -348,9 +404,76 @@
             var searchTerm = $('.nama_produk').val();
 
             $('#searchedNama').val(searchTerm);
+            getMerkProduk();
+        });
+
+        $('.search-mobile').submit(function(e) {
+            e.preventDefault(); // Prevent the default form submission behavior
+
+            $("#page").val(1);
+            var searchTerm = $('.nama-produk-mobile').val();
+
+            $('#searchedNama').val(searchTerm);
             getDataMaterial();
         });
+
+        $(document).on('click', '.hapus-filter', function() {
+            $('input[type="text"]').val('');
+            $('input[type="number"]').val('');
+            $('input[type="hidden"]').val('');
+            $('input[type="checkbox"]').prop('checked', false);
+
+            $('.sortButtonMobile.active').removeClass('active');
+            $("#page").val(1);
+            getMerkProduk();
+        });
     })
+
+    function submitFilterMobile() {
+
+        $("#page").val(1);
+        getMerkProduk();
+    }
+
+    function setSort(by) {
+        $('#sort_by').val(by);
+        let sortText = '';
+        switch (by) {
+            case 0:
+                sortText = 'Urutkan: Paling Sesuai';
+                break;
+            case 1:
+                sortText = 'Urutkan: Desain Terbaru';
+                break;
+            case 3:
+                sortText = 'Urutkan: Harga Terendah';
+                break;
+            case 4:
+                sortText = 'Urutkan: Harga Tertinggi';
+                break;
+            default:
+                sortText = 'Urutkan:';
+        }
+        document.getElementById('sortButton').textContent = sortText;
+        getDataMaterial();
+    }
+
+    function handleSortClick(button) {
+        var isActive = button.classList.contains('active');
+        var buttons = document.querySelectorAll('#sortButtonGroup .btn');
+
+        buttons.forEach(function(btn) {
+            btn.classList.remove('active');
+        });
+
+        if (!isActive) {
+            button.classList.add('active');
+            var customValue = button.getAttribute('data-value');
+            document.getElementById('sort_by').value = customValue;
+        } else {
+            document.getElementById('sort_by').value = '';
+        }
+    }
 
     function getTotalPages() {
         var jumlahMaterial = parseInt($('#jumlah_material').text());
@@ -374,6 +497,18 @@
         return duaKataPertama;
     }
 
+    $(document).ready(function() {
+        function restrictToNumeric(event) {
+            var inputValue = $(this).val();
+
+            var numericValue = inputValue.replace(/\D/g, '');
+
+            $(this).val(numericValue);
+        }
+
+        $('.numeric-input').on("input", restrictToNumeric);
+    });
+
 
 
     function getDataMaterial() {
@@ -385,12 +520,16 @@
             contentType: "text/plain",
             success: function(data) {
                 var list = "";
+                var minHarga = $('#minHarga').val() > 0 ? $('#minHarga').val() : 0
+                var maxHarga = $('#maxHarga').val() > 0 ? $('#maxHarga').val() : 9990000000;
                 if (data != "") {
                     for (var i = 0; i <= data.length - 1; i++) {
                         var foto = data[i].foto || 'no-foto.jpg';
                         var harga = data[i].harga_dasar;
 
-                        list += `
+                        if (harga >= minHarga && harga <= maxHarga) {
+
+                            list += `
                         <div class="col-lg-4 col-6 mb-3">
             <div class="card border-0 shadow-sm">
                 <div style="background-image: url('<?= $this->config->item('eid') ?>assets/foto/produk/${foto}')" class="card-img-mat bg-card-mat">
@@ -413,10 +552,11 @@
             </div>
         </div>
                         `;
+                        }
                     }
                 } else {
                     list += `
-                        <div class="col-12 mb-3">   
+                        <div class="col-12 mb-3">    
                             <div class="koleksi-not-found" style="display: none;">
                                 <div class="row justify-content-center text-center">
                                     <img src="<?php echo base_url('assets/demo/img/empty.png'); ?>" alt="Deskripsi Gambar" class="img-fluid" style="width: 300px; height: 200px;">
@@ -428,6 +568,8 @@
                         </div>`;
                 }
                 getSummaryKatalog();
+
+                $("#konten-material").empty();
 
                 $("#konten-material").html(list).loading("done");
             },
@@ -491,6 +633,12 @@
                 "merk": $('#selectedMerk').val()
             };
         }
+
+        if ($('#searchedNama').val() !== '') {
+            data = {
+                "keyword": $('#searchedNama').val()
+            };
+        }
         $.ajax({
             type: 'POST',
             url: "https://estimator.id/dev_msib/server/api/getSummaryCariProduk",
@@ -527,6 +675,16 @@
                                     </div>
                                     <div class="badge bg-kategori" style="font-size:12px;">` + item.jumlah + `</div>
                                 </div>`);
+
+                        $('#kategori-container-mobile').append(`<div class="d-flex justify-content-between gap-3 align-items-center mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input kategori_checkbox_mobile" type="checkbox" value="` + item.id_kategori + `" id="kategori_checkbox_mobile` + item.id_kategori + `" name="id_kategori">
+                                        <label class="form-check-label" for="kategori_checkbox_` + item.id_kategori + `">
+                                        ` + item.kategori + `
+                                        </label>
+                                    </div>
+                                    <div class="badge bg-kategori" style="font-size:12px;">` + item.jumlah + `</div>
+                                </div>`);
                         if (i < 3) {
                             $('.kategori').append('<button class="btn btn-light border-2 m-1">' + item.kategori + '</button>');
                         } else {
@@ -546,16 +704,27 @@
     function getMerkProduk() {
         $.ajax({
             type: 'POST',
-            url: "https://estimator.id/dev_msib/server/api/getMerkProduk",
+            url: "https://estimator.id/dev_msib/server/api/getFilterMerkProduk",
+            data: $('#getMaterial').serialize(),
             dataType: "JSON",
             success: function(data) {
 
                 if (data != '') {
-
+                    $('#merk-container').empty();
+                    $('#merk-container-mobile').empty()
                     $.each(data, function(i, item) {
                         $('#merk-container').append(`<div class="d-flex justify-content-between gap-3 align-items-center mb-2">
                                     <div class="form-check">
                                         <input class="form-check-input merk_checkbox" type="checkbox" value="'` + item.merk + `' " id="merk_checkbox_` + i + `" name="merk_checkbox">
+                                        <label class="form-check-label" for="merk_checkbox_` + i + `">
+                                        ` + item.merk + `
+                                        </label>
+                                    </div>
+                                    <div class="badge bg-kategori" style="font-size:12px;">` + item.jumlah + `</div>
+                                </div>`);
+                        $('#merk-container-mobile').append(`<div class="d-flex justify-content-between gap-3 align-items-center mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input merk_checkbox_mobile" type="checkbox" value="'` + item.merk + `' " id="merk_checkbox_mobile` + i + `" name="merk_checkbox">
                                         <label class="form-check-label" for="merk_checkbox_` + i + `">
                                         ` + item.merk + `
                                         </label>
@@ -569,6 +738,22 @@
                             $('.merk-open').append('<button class="btn btn-light border-2 m-1">' + item.merk + '</button>');
                         }
                     });
+                    var checkedValues = $('#selectedMerk').val().split(',');
+                    $('.merk_checkbox_mobile').each(function() {
+                        var checkboxValue = $(this).val();
+                        if (checkedValues.includes(checkboxValue)) {
+                            $(this).prop('checked', true); // Check the checkbox if its value is in checkedValues
+                        }
+                    });
+
+                    $('.merk_checkbox').each(function() {
+                        var checkboxValue = $(this).val();
+                        if (checkedValues.includes(checkboxValue)) {
+                            $(this).prop('checked', true); // Check the checkbox if its value is in checkedValues
+                        }
+                    });
+
+                    getDataMaterial();
 
 
                 }
