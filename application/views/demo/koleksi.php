@@ -957,6 +957,9 @@ function getPageUrl($page)
 
             $('.buttonGaya.active').removeClass('active');
             $('.buttonRuang.active').removeClass('active');
+
+            window.location.href = "<?php echo base_url('koleksi') ?>";
+
         });
     });
 
