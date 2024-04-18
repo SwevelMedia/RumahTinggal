@@ -27,7 +27,13 @@
 </style>
 
 
+<div id="loadingDiv" style="position: fixed; z-index: 9999; top: 0px; left: 0px; height: 100%; width: 100%; background: rgb(2, 108, 182); display: none;">
+    <div style="display: cover; vertical-align: middle; z-index: 1000;top: 0;left: 0;height: 85px;width: 85px; border-radius: 100%; background: #fff url('https://rumahtinggal.id/assets/gif/rt-loader.gif') 50% 50% no-repeat;margin: 0 auto;margin-top: 23%;margin-bottom: 50%;">
 
+    </div>
+    <!-- <div style="margin: 0 auto;text-align: center;color: #fff;font-weight: 1000;font-size: 22px;margin-top: -44%;"> RumahTinggal.id</div> -->
+    <!-- Please wait...  <img src='path to your super fancy spinner' /> -->
+</div>
 
 <nav class="navbar navbar-expand-lg bg-white shadow-sm">
     <div class="container">
@@ -136,47 +142,67 @@
 
 <script>
     $(document).ready(function() {
+        var $loading = $('#loadingDiv').hide();
+        $(document).ajaxStart(function() {
+                $loading.show();
+            })
+            .ajaxStop(function() {
+                setTimeout(function() {
+                    $loading.hide();
+                }, 1000);
+            });
+    });
+    $(document).ready(function() {
         // Get customer ID from cookies
         let id_customer = Cookies.get('id_customer');
+        $.ajax({
+            url: "<?= base_url('api/getCustomerId/') ?>",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                console.log(data)
+                if (id_customer != null && id_customer != '' && id_customer == data.id) {
+                    // If customer ID exists
+                    // Fetch customer information
+                    $.ajax({
+                        url: "<?= base_url('api/getCustomerById/') ?>" + id_customer,
+                        type: "GET",
+                        dataType: "JSON",
+                        success: function(data) {
+                            // Display customer name
+                            $('#nama_customer').html(data.nama_customer + '!');
+                        }
+                    });
 
-        if (id_customer != null && id_customer != '') {
-            // If customer ID exists
-            // Fetch customer information
-            $.ajax({
-                url: "<?= base_url('api/getCustomerById/') ?>" + id_customer,
-                type: "GET",
-                dataType: "JSON",
-                success: function(data) {
-                    // Display customer name
-                    $('#nama_customer').html(data.nama_customer + '!');
+                    // Fetch liked houses
+                    $.ajax({
+                        url: "<?= base_url('api/getRumahSuka/') ?>" + id_customer,
+                        type: "GET",
+                        dataType: "JSON",
+                        success: function(data) {
+                            if (data != '') {
+                                // Iterate through liked houses and update their UI
+                                $.each(data, function(i, item) {
+                                    let id_rumah = item.id_rumah;
+                                    $('.like .fa[data-id="' + id_rumah + '"]').removeClass('fa-heart-o')
+                                        .addClass('fa-heart').css('color', 'red');
+                                });
+                            }
+                        }
+                    });
+
+                    // If customer ID exists, hide login menu and show user menu
+                    $('#menu-login').hide();
+                    $('#menu-pengguna').show();
+                } else {
+                    // If no customer ID, show login menu and hide user menu
+                    $('#menu-login').show();
+                    $('#menu-pengguna').hide();
                 }
-            });
+            }
+        });
 
-            // Fetch liked houses
-            $.ajax({
-                url: "<?= base_url('api/getRumahSuka/') ?>" + id_customer,
-                type: "GET",
-                dataType: "JSON",
-                success: function(data) {
-                    if (data != '') {
-                        // Iterate through liked houses and update their UI
-                        $.each(data, function(i, item) {
-                            let id_rumah = item.id_rumah;
-                            $('.like .fa[data-id="' + id_rumah + '"]').removeClass('fa-heart-o')
-                                .addClass('fa-heart').css('color', 'red');
-                        });
-                    }
-                }
-            });
 
-            // If customer ID exists, hide login menu and show user menu
-            $('#menu-login').hide();
-            $('#menu-pengguna').show();
-        } else {
-            // If no customer ID, show login menu and hide user menu
-            $('#menu-login').show();
-            $('#menu-pengguna').hide();
-        }
     });
 
     function logout() {
