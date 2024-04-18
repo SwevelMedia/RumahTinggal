@@ -62,9 +62,10 @@
     $data['google_client_id'] = '619189282883-54euurh55b0od41supra7n7eoksj2jbu.apps.googleusercontent.com';
     ?>
     <?php $this->load->view('demo/layout/navbar') ?>
-    <?php $this->load->view($halaman) ?>
     <?php $this->load->view('demo/masuk', $data) ?>
     <?php $this->load->view('demo/daftar', $data) ?>
+    <?php $this->load->view($halaman) ?>
+
     <?php $this->load->view('demo/layout/footer') ?>
     <script src="<?php echo base_url('assets/demo/js/bootstrap.bundle.js'); ?>"></script>
     <script src="<?php echo base_url('assets/demo/js/script.js'); ?>"></script>
