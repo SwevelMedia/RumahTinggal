@@ -15,6 +15,7 @@ class PembelianController extends CI_Controller
   {
 
     parent::__construct();
+    $this->load->library('session');
 
     $this->load->model("PembelianModel");
 
@@ -378,6 +379,15 @@ class PembelianController extends CI_Controller
   public function paket_pembelian($id)
 
   {
+    $session_id = $this->session->userdata('id_customer');
+
+
+
+    $cookie_customer = get_cookie('id_customer');
+    if ($cookie_customer !=  $session_id) {
+      show_404();
+      return;
+    }
 
     $data['halaman'] = 'demo/paket_desain';
     // $data['halaman'] = 'pembelian/paket_pembelian';
