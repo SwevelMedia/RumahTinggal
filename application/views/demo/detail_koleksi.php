@@ -366,10 +366,16 @@ Also includes a counter of the slides
         </div>
         <div class="nama-arsitek-mobile mt-1 mb-2">Didesain oleh <a style="text-decoration: none;" href="<?php echo base_url('profil_arsitek/' . $konsep->id_arsitek); ?>"><?= $konsep->nama_arsitek ?></a></div>
         <div class="d-flex">
-            <div class="d-flex justify-content-between gap-2 align-items-center me-3">
-                <i class="fa-solid fa-star text-warning fs-6"></i>
-                <div class="text-warning fw-semibold"><?= $rating_desain->rating ?></div>
-            </div>
+            <?php if ($rating_desain->rating !== null) : ?>
+                <div class="d-flex justify-content-between gap-2 align-items-center me-3">
+                    <i class="fa-solid fa-star text-warning fs-6"></i>
+                    <div class="text-warning fw-semibold"><?= $rating_desain->rating ?></div>
+                </div>
+            <?php else : ?>
+                <div class="d-flex justify-content-between gap-2 align-items-center me-3">
+                    <i style="color:#707070" class="fa-solid fa-star fs-6"></i>
+                </div>
+            <?php endif; ?>
             <div class="d-flex justify-content-between gap-2 align-items-center">
                 <img src="<?php echo base_url('assets/demo/img/eye.png'); ?>">
                 <div class="fw-semibold"><?= $konsep->dilihat ?></div>
@@ -751,56 +757,58 @@ Also includes a counter of the slides
                         </div>
                     </div>
                 <?php endif; ?>
-                <div class="col-12 d-lg-none p-0 pe-3 mb-2">
-                    <div class="row align-items-center">
-                        <div class="col-lg-4 col-5">
-                            <div class="d-flex justify-content-center align-items-center gap-1 mt-lg-5">
-                                <div class="mb-3">
-                                    <i class="fa-solid fa-star text-warning fs-6"></i>
+                <?php if ($rating_desain->jumlah_ulasan > 0) : ?>
+                    <div class="col-12 d-lg-none p-0 pe-3 mb-2">
+                        <div class="row align-items-center">
+                            <div class="col-lg-4 col-5">
+                                <div class="d-flex justify-content-center align-items-center gap-1 mt-lg-5">
+                                    <div class="mb-3">
+                                        <i class="fa-solid fa-star text-warning fs-6"></i>
+                                    </div>
+                                    <h1 class="fw-bold" style="font-size: 2em; "><?= $rating_desain->rating ?></h1>
+                                    <h4 class="mt-auto" style='font-weight: 400; '>/5</h4>
                                 </div>
-                                <h1 class="fw-bold" style="font-size: 2em; "><?= $rating_desain->rating ?></h1>
-                                <h4 class="mt-auto" style='font-weight: 400; '>/5</h4>
                             </div>
-                        </div>
-                        <div class="col-lg-8 col-7">
-                            <div class="d-flex align-items-center mb-lg-2">
-                                <div class="progress" style="flex-grow: 1; margin-right: 10px;">
-                                    <div class="progress-bar" role="progressbar" style="width: <?php echo $rating_lima[0]->rating ?>%; background-color: orange; " aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="col-lg-8 col-7">
+                                <div class="d-flex align-items-center mb-lg-2">
+                                    <div class="progress" style="flex-grow: 1; margin-right: 10px;">
+                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $rating_lima[0]->rating ?>%; background-color: orange; " aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <i class="fa-solid fa-star text-warning me-2 ulasan-bar-star"></i>
+                                    <span class='ulasan-bar-text'>5</span>
                                 </div>
-                                <i class="fa-solid fa-star text-warning me-2 ulasan-bar-star"></i>
-                                <span class='ulasan-bar-text'>5</span>
-                            </div>
-                            <div class="d-flex align-items-center mb-lg-2">
-                                <div class="progress" style="flex-grow: 1; margin-right: 10px;">
-                                    <div class="progress-bar" role="progressbar" style="width: <?php echo $rating_empat[0]->rating ?>%; background-color: orange; " aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="d-flex align-items-center mb-lg-2">
+                                    <div class="progress" style="flex-grow: 1; margin-right: 10px;">
+                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $rating_empat[0]->rating ?>%; background-color: orange; " aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <i class="fa-solid fa-star text-warning me-2 ulasan-bar-star"></i>
+                                    <span class='ulasan-bar-text'>4</span>
                                 </div>
-                                <i class="fa-solid fa-star text-warning me-2 ulasan-bar-star"></i>
-                                <span class='ulasan-bar-text'>4</span>
-                            </div>
-                            <div class="d-flex align-items-center mb-lg-2">
-                                <div class="progress" style="flex-grow: 1; margin-right: 10px;">
-                                    <div class="progress-bar" role="progressbar" style="width: <?php echo $rating_tiga[0]->rating ?>%; background-color: orange; " aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="d-flex align-items-center mb-lg-2">
+                                    <div class="progress" style="flex-grow: 1; margin-right: 10px;">
+                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $rating_tiga[0]->rating ?>%; background-color: orange; " aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <i class="fa-solid fa-star text-warning me-2 ulasan-bar-star"></i>
+                                    <span class='ulasan-bar-text'>3</span>
                                 </div>
-                                <i class="fa-solid fa-star text-warning me-2 ulasan-bar-star"></i>
-                                <span class='ulasan-bar-text'>3</span>
-                            </div>
-                            <div class="d-flex align-items-center mb-lg-2">
-                                <div class="progress" style="flex-grow: 1; margin-right: 10px;">
-                                    <div class="progress-bar" role="progressbar" style="width: <?php echo $rating_dua[0]->rating ?>%; background-color: orange; " aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="d-flex align-items-center mb-lg-2">
+                                    <div class="progress" style="flex-grow: 1; margin-right: 10px;">
+                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $rating_dua[0]->rating ?>%; background-color: orange; " aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <i class="fa-solid fa-star text-warning me-2 ulasan-bar-star"></i>
+                                    <span class='ulasan-bar-text'>2</span>
                                 </div>
-                                <i class="fa-solid fa-star text-warning me-2 ulasan-bar-star"></i>
-                                <span class='ulasan-bar-text'>2</span>
-                            </div>
-                            <div class="d-flex align-items-center mb-2">
-                                <div class="progress" style="flex-grow: 1; margin-right: 10px;">
-                                    <div class="progress-bar" role="progressbar" style="width: <?php echo $rating_satu[0]->rating ?>%; background-color: orange; " aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="progress" style="flex-grow: 1; margin-right: 10px;">
+                                        <div class="progress-bar" role="progressbar" style="width: <?php echo $rating_satu[0]->rating ?>%; background-color: orange; " aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <i class="fa-solid fa-star text-warning me-2 ulasan-bar-star"></i>
+                                    <span class='ulasan-bar-text'>1</span>
                                 </div>
-                                <i class="fa-solid fa-star text-warning me-2 ulasan-bar-star"></i>
-                                <span class='ulasan-bar-text'>1</span>
                             </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
                 <?php if ($rating_desain->jumlah_ulasan > 0) : ?>
                     <div class="col-lg-3 mt-3 d-none d-lg-block p-0 pe-2">
                         <div class="d-flex justify-content-center align-items-center gap-2">
@@ -1349,11 +1357,21 @@ Also includes a counter of the slides
             domain: 'rumahtinggal.id'
 
         });
-        if (id_customer != null && id_customer != '') {
-            window.location.href = "<?= base_url('paket_pembelian/') . $id_rumah ?>"
-        } else {
-            $('#modalLogin').modal('show');
-        }
+
+        $.ajax({
+            url: "<?= base_url('api/getCustomerId/') ?>",
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                if (id_customer != null && id_customer != '' && id_customer == data.id) {
+                    window.location.href = "<?= base_url('paket_pembelian/') . $id_rumah ?>"
+                } else {
+                    $('#modalLogin').modal('show');
+                }
+            }
+        })
+
+
     }
 
 
@@ -1825,7 +1843,6 @@ Also includes a counter of the slides
             dataType: 'json',
             success: function(response) {
                 // Check if any object in the response array has the desired id_rumah
-                console.log(response)
                 var isFavorited = response.some(function(item) {
                     return item.id_rumah == <?php echo $id_rumah; ?>;
                 });
@@ -1854,35 +1871,43 @@ Also includes a counter of the slides
 
             });
             icon = $(this).find('svg');
-            // icon.toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
-            if (id_customer != null && id_customer != '') {
-                let id_rumah = $(this).data('id');
-                console.log('id rumah', id_rumah)
-                if (icon.attr('data-prefix') === "far") {
-                    $(this)
-                        .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
-                    $.ajax({
-                        url: "<?= base_url('api/simpanDisukai') ?>",
-                        type: "POST",
-                        data: {
-                            "id_rumah": id_rumah,
-                            "id_customer": id_customer,
-                            "suka": 1
-                        },
-                        dataType: "JSON",
-                        success: function(data) {}
-                    });
-                } else {
-                    $(this)
-                        .find('[data-fa-i2svg]').toggleClass('fa-solid').toggleClass('fa-regular').css('color', 'black');
-                    $.ajax({
-                        url: "<?= base_url('api/hapusDisukai/') ?>" + id_rumah + "/" + id_customer,
-                        type: "POST",
-                        dataType: "JSON",
-                        success: function(data) {}
-                    });
+            let id_rumah = $(this).data('id');
+            $.ajax({
+                url: "<?= base_url('api/getCustomerId/') ?>",
+                type: "GET",
+                dataType: "JSON",
+                success: function(data) {
+                    if (id_customer != null && id_customer != '' && id_customer == data.id) {
+
+                        console.log('id rumah', id_rumah)
+                        if (icon.attr('data-prefix') === "far") {
+                            $('#heart-like')
+                                .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
+                            $.ajax({
+                                url: "<?= base_url('api/simpanDisukai') ?>",
+                                type: "POST",
+                                data: {
+                                    "id_rumah": id_rumah,
+                                    "id_customer": id_customer,
+                                    "suka": 1
+                                },
+                                dataType: "JSON",
+                                success: function(data) {}
+                            });
+                        } else {
+                            $('#heart-like')
+                                .find('[data-fa-i2svg]').toggleClass('fa-solid').toggleClass('fa-regular').css('color', 'black');
+                            $.ajax({
+                                url: "<?= base_url('api/hapusDisukai/') ?>" + id_rumah + "/" + id_customer,
+                                type: "POST",
+                                dataType: "JSON",
+                                success: function(data) {}
+                            });
+                        }
+                    } else $('#modalLogin').modal('show');
                 }
-            } else $('#modalLogin').modal('show');
+            })
+
         });
 
         $('#heart-like-mobile').click(function() {
@@ -1891,35 +1916,44 @@ Also includes a counter of the slides
                 domain: 'rumahtinggal.id'
 
             });
+            let id_rumah = $(this).data('id');
             icon = $(this).find('svg');
-            if (id_customer != null && id_customer != '') {
-                let id_rumah = $(this).data('id');
-                console.log('id rumah', id_rumah)
-                if (icon.attr('data-prefix') === "far") {
-                    $(this)
-                        .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
-                    $.ajax({
-                        url: "<?= base_url('api/simpanDisukai') ?>",
-                        type: "POST",
-                        data: {
-                            "id_rumah": id_rumah,
-                            "id_customer": id_customer,
-                            "suka": 1
-                        },
-                        dataType: "JSON",
-                        success: function(data) {}
-                    });
-                } else {
-                    $(this)
-                        .find('[data-fa-i2svg]').toggleClass('fa-solid').toggleClass('fa-regular').css('color', 'black');
-                    $.ajax({
-                        url: "<?= base_url('api/hapusDisukai/') ?>" + id_rumah + "/" + id_customer,
-                        type: "POST",
-                        dataType: "JSON",
-                        success: function(data) {}
-                    });
+            $.ajax({
+                url: "<?= base_url('api/getCustomerId/') ?>",
+                type: "GET",
+                dataType: "JSON",
+                success: function(data) {
+                    if (id_customer != null && id_customer != '') {
+
+                        console.log('id rumah', id_rumah)
+                        if (icon.attr('data-prefix') === "far") {
+                            $('#heart-like-mobile')
+                                .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
+                            $.ajax({
+                                url: "<?= base_url('api/simpanDisukai') ?>",
+                                type: "POST",
+                                data: {
+                                    "id_rumah": id_rumah,
+                                    "id_customer": id_customer,
+                                    "suka": 1
+                                },
+                                dataType: "JSON",
+                                success: function(data) {}
+                            });
+                        } else {
+                            $('#heart-like-mobile')
+                                .find('[data-fa-i2svg]').toggleClass('fa-solid').toggleClass('fa-regular').css('color', 'black');
+                            $.ajax({
+                                url: "<?= base_url('api/hapusDisukai/') ?>" + id_rumah + "/" + id_customer,
+                                type: "POST",
+                                dataType: "JSON",
+                                success: function(data) {}
+                            });
+                        }
+                    } else $('#modalLogin').modal('show');
                 }
-            } else $('#modalLogin').modal('show');
+            })
+
         });
     });
 </script>
