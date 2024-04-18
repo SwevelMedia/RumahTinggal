@@ -22,6 +22,7 @@ class CustomerController extends CI_Controller
     parent::__construct();
 
     $this->load->model('CustomerModel');
+    $this->load->library('session');
 
     /*$this->load->library('google');
 
@@ -345,6 +346,8 @@ class CustomerController extends CI_Controller
 
     $nama = $data['nama_lengkap'];
 
+    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
     // if (strpos(substr($email,0,3), '08') !== false){
 
     //     $awal = str_replace("08", "628", substr($email,0,3));
@@ -504,32 +507,62 @@ class CustomerController extends CI_Controller
     exit;
   }
 
+  public function getCustomerId()
+  {
+    if ($this->session->userdata('id_customer')) {
+      $id_customer = $this->session->userdata('id_customer');
+      $response = array(
 
+        'status' => 1,
 
+        'id' => $id_customer
+
+      );
+      $http_status = 200;
+    } else {
+      $response = array(
+
+        'status' => 0,
+
+        'error' => "not logged in!"
+
+      );
+      $http_status = 200;
+    }
+
+    $this->output
+      ->set_status_header($http_status)
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+      ->_display();
+    exit;
+  }
+
+  public function hashAndStorePasswords()
+  {
+    $customers = $this->CustomerModel->getAllCustomers()->result();
+
+    foreach ($customers as $customer) {
+      if ($customer->password !== null && $customer->password !== '') {
+        $hashedPassword = password_hash($customer->password, PASSWORD_DEFAULT);
+        $this->CustomerModel->updateCustomerPassword($customer->id_customer, $hashedPassword);
+      }
+    }
+
+    log_message('error', "Passwords hashed and stored successfully.");
+  }
 
 
   public function loginAkun($email, $pass)
   {
-
-    // if (strpos(substr($no_wa,0,3), '08') !== false){
-
-    //     $awal = str_replace("08", "628", substr($no_wa,0,3));
-
-    //     $no_wa_a = $awal.substr($no_wa,3);
-
-    // }
-
-
-
-
-
-    // if ($status == '1') $ket_status = 'verifikasi'; else $ket_status = 'aktivasi';
+    // $this->hashAndStorePasswords();
 
     $customer = $this->CustomerModel->getCustomerByEmail($email)->row();
 
-    if ($customer->password == $pass) {
+    if (password_verify($pass, $customer->password)) {
 
       set_cookie('id_customer', $customer->id_customer, time() + 86400);
+      $this->session->set_userdata('id_customer', $customer->id_customer);
 
       $response = array(
 
@@ -538,31 +571,6 @@ class CustomerController extends CI_Controller
         'info' => 'Selamat datang' . $customer->nama_customer . '.'
 
       );
-
-      // if ((time() - $customer->expired) < 300) {
-
-      //     set_cookie('id_customer', $customer->id_customer, time()+86400);
-
-      //     $response = array(
-
-      //       'status' => 1,
-
-      //       'info' => 'Akun berhasil ter'.$ket_status.'.'
-
-      //     );
-
-      // } else {
-
-      //     $response = array(
-
-      //       'status' => 0,
-
-      //       'info' => 'Kode '.$ket_status.' telah kadaluarsa.'
-
-      //     );
-
-      // }
-
     } else {
 
       $response = array(
@@ -573,8 +581,6 @@ class CustomerController extends CI_Controller
 
       );
     }
-
-
 
     $this->output
 
@@ -592,10 +598,10 @@ class CustomerController extends CI_Controller
   public function loginGoogle($email)
   {
     parse_str(file_get_contents('php://input'), $data);
-    log_message('error', 'email google' . var_export($email, true));
     $customer = $this->CustomerModel->getCustomerByEmail($email)->row();
     if ($customer != null) {
       set_cookie('id_customer', $customer->id_customer, time() + 86400);
+      $this->session->set_userdata('id_customer', $customer->id_customer);
       $response = array(
         'Success' => true,
         'info' => 'Selamat datang' . $customer->nama_customer . '.'
@@ -698,18 +704,26 @@ class CustomerController extends CI_Controller
 
     unset($_SESSION['access_token']);
 
+    $this->session->unset_userdata('id_customer');
+
     delete_cookie('id_customer');
 
     delete_cookie('g_state');
-
     redirect(base_url());
   }
 
 
   public function profil($id_customer)
   {
+    $session_id = $this->session->userdata('id_customer');
+
+
 
     $cookie_customer = get_cookie('id_customer');
+    if ($cookie_customer !=  $session_id) {
+      show_404();
+      return;
+    }
     $data['title'] = 'Profil';
 
     $data['halaman'] = 'demo/profil';
@@ -727,16 +741,7 @@ class CustomerController extends CI_Controller
     $this->load->view('demo/layout/layout', $data);
 
 
-
     if ($cookie_customer != $id_customer) {
-
-      // redirect($this->uri->uri_string());
-
-      // abort(404); //ke halaman error 403 //teserah, mau 404 juga boleh
-
-      # return redirect()->to('/profil/'+$id_customer); 
-
-      // return Redirect(Request.UrlReferrer.ToString());
 
       redirect('profil/' . $cookie_customer);
     }
@@ -745,6 +750,29 @@ class CustomerController extends CI_Controller
   public function hapusFotoCustomer()
   {
     $cookie_customer = get_cookie('id_customer');
+    $session_id = $this->session->userdata('id_customer');
+    if ($cookie_customer !=  $session_id) {
+      $response = array(
+
+        'Success' => false,
+
+        'Info' => 'User tidak log in.'
+
+      );
+
+      $this->output
+
+        ->set_status_header(401)
+
+        ->set_content_type('application/json')
+
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+
+        ->_display();
+
+      exit;
+    }
+
     if ($cookie_customer != null && $cookie_customer != '') {
       $customerData = $this->CustomerModel->getCustomerById($cookie_customer)->row();
 
@@ -767,6 +795,30 @@ class CustomerController extends CI_Controller
   public function uploadFotoCustomer()
   {
     $cookie_customer = get_cookie('id_customer');
+    $session_id = $this->session->userdata('id_customer');
+
+    if ($cookie_customer !=  $session_id) {
+      $response = array(
+
+        'Success' => false,
+
+        'Info' => 'User tidak log in.'
+
+      );
+
+      $this->output
+
+        ->set_status_header(401)
+
+        ->set_content_type('application/json')
+
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+
+        ->_display();
+
+      exit;
+    }
+
     if (!empty($_FILES['foto']['name']) && ($cookie_customer != null && $cookie_customer != '')) {
 
       // Set upload configuration
@@ -817,6 +869,31 @@ class CustomerController extends CI_Controller
 
   public function ubahCustomer()
   {
+
+    $session_id = $this->session->userdata('id_customer');
+
+    $cookie_customer = get_cookie('id_customer');
+    if ($cookie_customer !=  $session_id) {
+      $response = array(
+
+        'Success' => false,
+
+        'Info' => 'User tidak log in.'
+
+      );
+
+      $this->output
+
+        ->set_status_header(401)
+
+        ->set_content_type('application/json')
+
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+
+        ->_display();
+
+      exit;
+    }
 
     parse_str(file_get_contents('php://input'), $data);
 
@@ -1288,6 +1365,21 @@ class CustomerController extends CI_Controller
     $id_customer = get_cookie('id_customer');
 
     // parse_str(file_get_contents('php://input'), $data);
+
+    $session_id = $this->session->userdata('id_customer');
+
+    if ($id_customer !=  $session_id) {
+
+      $this->output
+
+        ->set_status_header(401)
+
+        ->set_content_type('application/json')
+
+        ->_display();
+
+      exit;
+    }
 
     $response = $this->CustomerModel->getKatalogDaftarProdukFavorit($id_customer)->result();
 
