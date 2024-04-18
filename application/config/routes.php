@@ -268,6 +268,8 @@ $route['api/getKatalogDaftarProdukFavorit'] = 'CustomerController/getKatalogDaft
 
 $route['api/getSummaryKatalogDaftarProdukFavorit'] = 'CustomerController/getSummaryKatalogDaftarProdukFavorit';
 
+$route['api/getCustomerId'] = 'CustomerController/getCustomerId';
+
 $route['api/loginAkun/(:any)/(:any)'] = 'CustomerController/loginAkun/$1/$2';
 
 $route['api/loginGoogle/(:any)'] = 'CustomerController/loginGoogle/$1';
