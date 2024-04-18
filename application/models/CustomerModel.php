@@ -43,6 +43,17 @@ class CustomerModel extends CI_Model
             ->get($this->tabel);
     }
 
+    public function getAllCustomers()
+    {
+        return $this->db->get('customer');
+    }
+
+    public function updateCustomerPassword($customerId, $hashedPassword)
+    {
+        $this->db->where('id_customer', $customerId);
+        $this->db->update('customer', array('password' => $hashedPassword));
+    }
+
 
 
     function getCustomerById($id)
