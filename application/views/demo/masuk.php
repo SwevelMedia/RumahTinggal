@@ -79,12 +79,15 @@
                                     <span class="px-3">atau</span>
                                     <hr class="flex-grow-1 border border-dark border-1" />
                                 </div>
-                                <div id="google-button-login" class="w-100 mb-3">
+                                <!-- <div id="google-button-login" class="w-100 mb-3">
 
+                                </div> -->
+
+                                <div id="g_id_onload" data-client_id="<?php echo $google_client_id ?>" data-callback="handleCredentialResponseLogin">
                                 </div>
-                                <!-- <div id="g_id_onload" data-client_id=<?php echo $google_client_id ?> data-callback="handleCredentialResponse">
+                                <div class="d-flex w-100 mb-3 justify-content-center align-items-center">
+                                    <div class="g_id_signin" data-type="standard"></div>
                                 </div>
-                                <div class="g_id_signin w-100 mb-3" data-width=319 data-type="standard"></div> -->
                             </form>
                             <small>Dengan Mendaftar, Anda dinyatakan telah setuju dengan syarat & ketentuan
                                 RumahTinggal.id </small>
@@ -164,32 +167,32 @@
 
 
 <script>
-    window.onload = function() {
-        var id_customer = Cookies.get('id_customer', {
-            domain: 'rumahtinggal.id'
-        });
-        if (id_customer == null || id_customer == '') {
-            google.accounts.id.initialize({
-                client_id: "<?php echo $google_client_id ?>",
-                callback: handleCredentialResponseLogin
-            });
+    // window.onload = function() {
+    //     var id_customer = Cookies.get('id_customer', {
+    //         domain: 'rumahtinggal.id'
+    //     });
+    //     if (id_customer == null || id_customer == '') {
+    //         google.accounts.id.initialize({
+    //             client_id: "<?php echo $google_client_id ?>",
+    //             callback: handleCredentialResponseLogin
+    //         });
 
-            // Wait for the modal to be shown
-            $('#modalLogin').on('shown.bs.modal', function(e) {
-                // Get the width of the element with ID 'masukButton'
-                var masukButtonWidth = document.getElementById('login-button').offsetWidth;
+    //         // Wait for the modal to be shown
+    //         $('#modalLogin').on('shown.bs.modal', function(e) {
+    //             // Get the width of the element with ID 'masukButton'
+    //             var masukButtonWidth = document.getElementById('login-button').offsetWidth;
 
-                google.accounts.id.renderButton(
-                    document.getElementById("google-button-login"), {
-                        theme: "outline",
-                        size: "large",
-                        width: masukButtonWidth // Set the width dynamically
-                    }
-                );
-                // google.accounts.id.prompt(); // also display the One Tap dialog
-            });
-        }
-    }
+    //             google.accounts.id.renderButton(
+    //                 document.getElementById("google-button-login"), {
+    //                     theme: "outline",
+    //                     size: "large",
+    //                     width: masukButtonWidth // Set the width dynamically
+    //                 }
+    //             );
+    //             // google.accounts.id.prompt(); // also display the One Tap dialog
+    //         });
+    //     }
+    // }
 
 
     function modalLogin() {

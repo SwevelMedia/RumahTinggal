@@ -82,7 +82,14 @@
                                 <!-- <div id="g_id_onload" data-client_id=<?php echo $google_client_id ?> data-callback="handleCredentialResponse">
                                 </div>
                                 <div class="g_id_signin w-100 mb-3" data-width=319 data-type="standard"></div> -->
-                                <div id="google-button-daftar" class="w-100 mb-3"></div>
+                                <!-- <div id="google-button-daftar" class="w-100 mb-3"></div> -->
+                                <div id="g_id_onload" data-client_id="<?php echo $google_client_id ?>" data-callback="handleCredentialResponseLogin">
+                                </div>
+                                <div class="d-flex w-100 mb-3 justify-content-center align-items-center">
+                                    <div class="g_id_signin" data-type="standard"></div>
+                                </div>
+
+
                             </form>
                             <small>Dengan Mendaftar, Anda dinyatakan telah setuju dengan syarat & ketentuan
                                 RumahTinggal.id </small>
@@ -101,36 +108,35 @@
             domain: 'rumahtinggal.id'
 
         });
-        if (id_customer == null || id_customer == '') {
-            google.accounts.id.initialize({
-                client_id: "<?php echo $google_client_id ?>",
-                callback: handleCredentialResponseLogin
-            });
+        // if (id_customer == null || id_customer == '') {
+        //     google.accounts.id.initialize({
+        //         client_id: "<?php echo $google_client_id ?>",
+        //         callback: handleCredentialResponseLogin
+        //     });
 
-            $('#modalDaftar, #modalLogin').on('shown.bs.modal', function(e) {
-                var loginButtonWidth = document.getElementById('btn-daftar').offsetWidth;
-                if (loginButtonWidth < 5) {
-                    loginButtonWidth = document.getElementById('login-button').offsetWidth;
-                }
-                console.log(loginButtonWidth)
-                google.accounts.id.renderButton(
-                    document.getElementById("google-button-daftar"), {
-                        theme: "outline",
-                        size: "large",
-                        width: loginButtonWidth
-                    } // customization attributes
-                );
-                google.accounts.id.renderButton(
-                    document.getElementById("google-button-login"), {
-                        theme: "outline",
-                        size: "large",
-                        width: loginButtonWidth
-                    } // customization attributes
-                );
-            });
+        //     $('#modalDaftar, #modalLogin').on('shown.bs.modal', function(e) {
+        //         var loginButtonWidth = document.getElementById('btn-daftar').offsetWidth;
+        //         if (loginButtonWidth < 5) {
+        //             loginButtonWidth = document.getElementById('login-button').offsetWidth;
+        //         }
+        //         google.accounts.id.renderButton(
+        //             document.getElementById("google-button-daftar"), {
+        //                 theme: "outline",
+        //                 size: "large",
+        //                 width: loginButtonWidth
+        //             } // customization attributes
+        //         );
+        //         google.accounts.id.renderButton(
+        //             document.getElementById("google-button-login"), {
+        //                 theme: "outline",
+        //                 size: "large",
+        //                 width: loginButtonWidth
+        //             } // customization attributes
+        //         );
+        //     });
 
-            // google.accounts.id.prompt(); // also display the One Tap dialog
-        }
+        //     // google.accounts.id.prompt(); // also display the One Tap dialog
+        // }
 
     }
 
