@@ -924,31 +924,6 @@
 </body>
 
 <script>
-    // $(window).ready(updateHeight);
-    // $(window).resize(updateHeight);
-
-    // function updateHeight() {
-    //     var div = document.querySelector('.img-container');
-    //     var divref = document.querySelector('.owl-carousel-paket-desain .paket-desain-card');
-
-    //     var width = divref.offsetWidth / 1.3333333;
-
-    //     // Set the height of the div
-    //     div.style.height = width + 'px';
-
-    //     var cards2 = document.querySelectorAll('.owl-carousel-paket-desain .paket-desain-card');
-
-    //     var maxHeight2 = 0;
-    //     cards2.forEach(function(card2) {
-    //         console.log(card2)
-    //         maxHeight2 = Math.max(maxHeight2, card2.offsetHeight);
-    //     });
-    //     console.log(maxHeight2)
-    //     cards2.forEach(function(card2) {
-    //         card2.style.height = maxHeight2 + 'px';
-    //     });
-    // }
-
     function gantiFoto() {
         var modal = new bootstrap.Modal(document.getElementById('modalGantiFoto'));
 
