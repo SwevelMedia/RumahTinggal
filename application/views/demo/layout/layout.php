@@ -44,6 +44,8 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script> -->
 
     <script src="<?= base_url('assets/js/js.cookie.min.js') ?>"></script>
+    <link href="<?= base_url('assets/dflip/css/dflip.min.css') ?>" rel="stylesheet" type="text/css">
+    <link href="<?= base_url('assets/dflip/css/themify-icons.min.css') ?>" rel="stylesheet" type="text/css">
 
 
 

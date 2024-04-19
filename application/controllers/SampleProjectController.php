@@ -21,13 +21,13 @@ class SampleProjectController extends CI_Controller
 
     {
 
-        // $data['halaman'] = 'demo/sampel';
-        // $data['title'] = 'Sampel';
-        // $this->load->view('demo/layout/layout', $data);
-
-        $data['halaman'] = 'desain/sampel_desain';
+        $data['halaman'] = 'demo/sampel';
         $data['title'] = 'Sampel';
-        $this->load->view('layout', $data);
+        $this->load->view('demo/layout/layout', $data);
+
+        // $data['halaman'] = 'desain/sampel_desain';
+        // $data['title'] = 'Sampel';
+        // $this->load->view('layout', $data);
     }
 
 
