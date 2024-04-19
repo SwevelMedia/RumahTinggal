@@ -445,7 +445,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                             <div class="col-lg-6 col-xl-4 col-md-6 col-6 mb-3">
                                 <div class="card desain-card border-0 shadow-sm pb-2 pb-md-0 h-100 w-100" style="height: max-content;">
                                     <div class="img-container">
-                                        <img src="<?= base_url('assets/img/desain/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
+                                        <img src="<?= base_url('assets/img/desain_thumbnail/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
                                     </div>
 
 

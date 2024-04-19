@@ -300,7 +300,7 @@
                 <?php foreach ($produk_favorit as $item) { ?>
                     <div class="card border-0 shadow-sm mb-2">
                         <div class="img-container">
-                            <img src="<?= base_url('assets/img/desain/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
+                            <img src="<?= base_url('assets/img/desain_thumbnail/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
                         </div>
 
                         <div class="card-body card-home">
@@ -419,7 +419,7 @@
                 <?php foreach ($produk_terbaru as $item) { ?>
                     <div class="card border-0 shadow-sm mb-2 product-card">
                         <div class="img-container">
-                            <img src="<?= base_url('assets/img/desain/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
+                            <img src="<?= base_url('assets/img/desain_thumbnail/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
                         </div>
 
                         <div class="card-body">

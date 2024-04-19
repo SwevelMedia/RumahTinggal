@@ -272,7 +272,7 @@
 
                                         <div class="card border-0 shadow-sm mb-2" style="width: 100%;">
                                             <a href="" class="image">
-                                                <div style="background-image: url('<?= base_url('assets/img/thumbnail/' . $trns->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
+                                                <div style="background-image: url('<?= base_url('assets/img/desain_thumbnail/' . $trns->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
                                             </a>
                                             <div class="card-body">
                                                 <h5 class="card-title mb-0 fw-semibold"><?= $trns->nama_rumah ?></h5>
@@ -390,7 +390,7 @@
                                         <?php foreach ($transaksi as $trns) { ?>
                                             <div class="card border-0 shadow-sm mx-auto mb-3" style="width: 280px;">
                                                 <a href="" class="image">
-                                                    <div style="background-image: url('<?= base_url('assets/img/thumbnail/' . $trns->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
+                                                    <div style="background-image: url('<?= base_url('assets/img/desain_thumbnail/' . $trns->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
                                                 </a>
                                                 <div class="card-body">
                                                     <h5 class="card-title mb-0 fw-semibold"><?= $trns->nama_rumah ?></h5>
@@ -498,7 +498,7 @@
                                             <div class="col-lg-3 col-6">
                                                 <div class="bg-white card card-body" id="myCardBody">
                                                     <div>
-                                                        <img src="<?= base_url('assets/img/thumbnail/' . $trns->foto) ?>" class="img-fluid">
+                                                        <img src="<?= base_url('assets/img/desain_thumbnail/' . $trns->foto) ?>" class="img-fluid">
                                                         <div class="harga-transaksi mt-2"> <strong><?= $trns->lantai == '1' ? "Rp" . number_format(3500000 * $trns->luas_bangunan, 0, ",", ".") : ($trns->lantai == '2' ? "Rp" . number_format(4500000 * $trns->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $trns->luas_bangunan, 0, ",", ".")); ?></strong></div>
 
                                                     </div>
@@ -597,7 +597,7 @@
 
                                         <div class="card border-0 shadow-sm mb-2" style="width: 100%;">
                                             <a href="" class="image">
-                                                <div style="background-image: url('<?= base_url('assets/img/thumbnail/' . $item->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
+                                                <div style="background-image: url('<?= base_url('assets/img/desain_thumbnail/' . $item->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
                                             </a>
                                             <div class="card-body">
                                                 <h5 class="card-title mb-0 fw-semibold"><?= $item->nama_rumah ?></h5>
@@ -697,7 +697,7 @@
 
                                         <div class="card border-0 shadow-sm mb-3 mx-auto" style="width: 280px;">
                                             <a href="" class="image">
-                                                <div style="background-image: url('<?= base_url('assets/img/thumbnail/' . $item->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
+                                                <div style="background-image: url('<?= base_url('assets/img/desain_thumbnail/' . $item->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
                                             </a>
                                             <div class="card-body">
                                                 <h5 class="card-title mb-0 fw-semibold"><?= $item->nama_rumah ?></h5>
