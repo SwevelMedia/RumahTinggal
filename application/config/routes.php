@@ -132,9 +132,9 @@ $route['sampel_desain'] = 'SampleProjectController/index';
 
 $route['sampel_desain_coba'] = 'SampleProjectController/sampel_desain_coba';
 
-$route['assessment'] = 'AssessmentController/index';
+// $route['assessment'] = 'AssessmentController/index';
 
-$route['demo_assessment'] = 'DemoAssessmentController/index';
+$route['assessment'] = 'DemoAssessmentController/index';
 
 $route['api/getKatalogProduk'] = 'DesainController/getKatalogProduk';
 
@@ -203,6 +203,8 @@ $route['api/getKatalogProdukTerbaru'] = 'DesainController/getKatalogProdukTerbar
 $route['api/getRumahSerupa/(:any)'] = 'DetailController/getRumahSerupa/$1';
 
 $route['api/getAssessmentProduk'] = 'AssessmentController/getAssessmentProduk';
+
+$route['api/getAssessmentProdukDemo'] = 'DemoAssessmentController/getAssessmentProduk';
 
 $route['api/getRumahPromo'] = 'DesainController/getRumahPromo';
 
