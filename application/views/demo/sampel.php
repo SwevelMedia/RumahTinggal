@@ -61,6 +61,19 @@
     .accordion-button:focus {
         box-shadow: none !important;
     }
+
+    @media screen and (min-width: 1200px) {
+        .pdf-container {
+            height: 650px;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .pdf-container {
+            height: 325px;
+            margin-bottom: 35px;
+        }
+    }
 </style>
 
 </styl.accordion-item>
@@ -149,18 +162,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 d-none d-lg-block">
+            <div class="col-lg-8 col-12 d-lg-block pdf-container">
                 <div>Sampel dokumen Konsep Desain ini akan Anda peroleh setelah pembelian paket 1 pada setiap produk desain kami.</div>
                 <!-- <img src="<?php echo base_url('assets/demo/img/pdf_sampel.png'); ?>" alt="Deskripsi Gambar" class="img-fluid"> -->
-                <div class="konsep_desain" id="konsep_desain_pdf" style="width: 100%;height:900px;"> </div>
+                <div class="konsep_desain" id="konsep_desain_pdf" style="width: 100%;"> </div>
 
-                <div class="gambar_skematik" id="gambar_skematik_pdf" style="width: 100%;height:900px;"> </div>
+                <div class="gambar_skematik" id="gambar_skematik_pdf" style="width: 100%;"> </div>
 
-                <div class="gambar_kerja" id="gambar_kerja_pdf" style="width: 100%;height:900px;"> </div>
+                <div class="gambar_kerja" id="gambar_kerja_pdf" style="width: 100%;"> </div>
 
-                <div class="rab" id="rab_pdf" style="width: 100%;height:900px;"> </div>
+                <div class="rab" id="rab_pdf" style="width: 100%;"> </div>
 
-                <div class="rks" id="rks_pdf" style="width: 100%;height:900px;"> </div>
+                <div class="rks" id="rks_pdf" style="width: 100%;"> </div>
             </div>
 
         </div>
@@ -184,7 +197,7 @@
         var rks_pdf = "<?php echo base_url('assets/dokumen/sampel/Rencana Kerja dan Syarat.pdf') ?>";
 
         var options = {
-            height: 650,
+            height: '100%',
             duration: 700,
             pageMode: DFLIP.PAGE_MODE.SINGLE
         };
