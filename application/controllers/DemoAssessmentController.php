@@ -27,7 +27,7 @@ class DemoAssessmentController extends CI_Controller
    public function getAssessmentProduk()
    {
       parse_str(file_get_contents('php://input'), $data);
-      $response = $this->AssessmentModel->getAssessmentProduk($data)->result();
+      $response = $this->AssessmentModel->getAssessmentProdukDemo($data)->result();
       $this->output
          ->set_status_header(200)
          ->set_content_type('application/json')
