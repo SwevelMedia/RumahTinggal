@@ -69,14 +69,17 @@
             <hr />
             <div class="d-flex justify-content-between align-items-center">
                 <h3 style="color: #003A65;">Artikel RumahTinggal.id</h3>
-                <div class="input-group mb-3 mt-3" style="width: 300px;">
-                    <input type="text" class="form-control" placeholder="Tips Bangun Rumah" style="background-color: #F7F7F7;" />
-                    <a href="<?= base_url('cari_artikel') ?>" style="text-decoration: none;">
-                        <button class="btn btn-primary" type="button" id="button-addon2" style="background-color: #f7f7f7;">
+                <form onsubmit="searchArtikel(event)" id="searchForm">
+                    <div class="input-group mb-3 mt-3" style="width: 300px;">
+                        <input type="text" class="form-control" placeholder="Tips Bangun Rumah" style="background-color: white;" id="search_term" value="" />
+
+                        <button class="btn btn-primary" type="submit" id="button-addon2" style="background-color: white; border-left:none; border-color: #ced4da; border-top-left-radius:0; border-bottom-left-radius:0;">
                             <i class="fas fa-search" style="color: black;"></i>
                         </button>
-                    </a>
-                </div>
+
+                    </div>
+                </form>
+
             </div>
             <hr />
         </div>
@@ -89,18 +92,26 @@
                 <hr />
                 <div class="justify-content-center text-center">
                     <h3 class="mb-4" style="color: #003A65;">Artikel RumahTinggal.id</h3>
-                    <div class="input-group mb-3 mt-3" style="width: 365px;">
-                        <input type="text" class="form-control" placeholder="Tips Bangun Rumah" style="background-color: #F7F7F7;" />
-                        <button class="btn btn-primary" type="button" id="button-addon2" style="background-color: #f7f7f7;">
-                            <i class="fas fa-search" style="color: black;"></i>
-                        </button>
-                    </div>
+                    <form onsubmit="searchArtikelMobile(event)" id="searchFormMobile">
+                        <div class="input-group mb-3 mt-3" style="width: 100%;">
+                            <input type="text" class="form-control" placeholder="Tips Bangun Rumah" id="search_term_mobile" style="background-color: #F7F7F7;" />
+                            <button class="btn btn-primary" type="submit" id="button-addon2" style="background-color: #F7F7F7; border-left:none; border-color: #ced4da; border-top-left-radius:0; border-bottom-left-radius:0;">
+                                <i class="fas fa-search" style="color: black;"></i>
+                            </button>
+                        </div>
+                    </form>
+
                 </div>
                 <hr />
             </div>
             <div class="col-lg-7">
-                <div class="card mt-4" onclick="detailArtikel(<?= $muka->id_artikel ?>)" style="cursor: pointer;">
-                    <img src="<?= base_url('assets/img/artikel/' . $muka->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="...">
+                <div class="card main-img-card mt-4" onclick="detailArtikel(<?= $muka->id_artikel ?>)" style="cursor: pointer;">
+                    <!-- <div class='img-container w-100'>
+                        <img src="<?= base_url('assets/img/artikel/' . $muka->foto_cover) ?>" class="h-100 card-img-artikel bg-card-artikel" alt="..." onload='updateHeight()' style="object-fit:cover;">
+                    </div> -->
+
+                    <img src="<?= base_url('assets/img/artikel/' . $muka->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="..." style="object-fit:cover;">
+
                     <div class="card-body" id="myCardBody">
                         <h4 class="artikel-title"><?php echo $muka->judul_artikel; ?></h4>
                         <div class="d-flex justify-content-between align-items-center mt-3">
@@ -121,7 +132,7 @@
                         <div class="prev-artikel mb-4" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpil" alt="...">
+                                    <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpil" alt="..." style="object-fit: cover;">
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="d-flex align-item-center gap-3">
@@ -149,7 +160,7 @@
                         <div class="pop-artikel mb-4" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpop">
+                                    <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpop" style="object-fit:cover;">
                                 </div>
                                 <div class="col-8">
                                     <div class="d-flex align-item-center gap-3">
@@ -229,5 +240,28 @@
 <script>
     function detailArtikel(id) {
         location.href = "<?= base_url('detail-artikel/') ?>" + id;
+    }
+
+    $(window).ready(updateHeight);
+    $(window).resize(updateHeight);
+
+    function updateHeight() {
+        var divref = $('.main-img-card');
+        var div = $('.img-container');
+        var width = divref.width() / 1.3333333;
+
+        div.css('height', width);
+    }
+
+    function searchArtikel(event) {
+        event.preventDefault();
+        var searchterm = $('#search_term').val();
+        location.href = "<?= base_url('cari_artikel') ?>" + "?search=" + searchterm;
+    }
+
+    function searchArtikelMobile(event) {
+        event.preventDefault();
+        var searchterm = $('#search_term_mobile').val();
+        location.href = "<?= base_url('cari_artikel') ?>" + "?search=" + searchterm;
     }
 </script>
