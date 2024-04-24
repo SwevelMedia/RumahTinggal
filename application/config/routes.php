@@ -354,7 +354,7 @@ $route['api/getArtikelMukaRight'] = 'ArtikelController/getArtikelMukaRight';
 
 $route['api/getKatalogArtikel'] = 'DesainController/getKatalogArtikel';
 
-$route['cari_artikel'] = 'DemoController/artikel_search';
+$route['cari_artikel'] = 'ArtikelController/artikel_search';
 
 
 
