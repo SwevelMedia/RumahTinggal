@@ -79,4 +79,36 @@ class ArtikelModel extends CI_Model
    {
       return $this->db->query("SELECT * FROM artikel ORDER BY tgl_dibuat DESC")->result();
    }
+
+   public function searchArtikel($search = '')
+   {
+      $searchTerms = explode(' ', $search);
+      foreach ($searchTerms as $term) {
+         $this->db->or_like('judul_artikel', $term);
+      }
+
+      $query = $this->db->get('artikel');
+
+      $results = $query->result();
+      foreach ($results as $result) {
+         $result->relevance = $this->calculateRelevanceScore($result->judul_artikel, $searchTerms);
+      }
+
+      usort($results, function ($a, $b) {
+         return $b->relevance - $a->relevance;
+      });
+
+      return $results;
+   }
+
+   private function calculateRelevanceScore($title, $searchTerms)
+   {
+      $score = 0;
+      foreach ($searchTerms as $term) {
+         if (stripos($title, $term) !== false) {
+            $score++;
+         }
+      }
+      return $score;
+   }
 }
