@@ -54,7 +54,7 @@
                     </div>
                     <div class="isi-artikel">
                         <div id="fh5co-title-box">
-                            <img src="<?= base_url('assets/img/artikel/' . $detailArtikel->foto_cover) ?>" class="img-fluid img-det-artikel">
+                            <img src="<?= base_url('assets/img/artikel/' . $detailArtikel->foto_cover) ?>" class="img-fluid img-det-artikel" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" style="object-fit:cover;">
                         </div>
                         <div class="text-artikel" id="isi_artikel" style="text-align: justify; width:95%; font-family: 'Inter', sans-serif;">
                             <?php echo $detailArtikel->isi_artikel ?>
@@ -112,7 +112,7 @@
                             <div class="pop-artikel mb-4 " onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
                                 <div class="row ">
                                     <div class="col-4">
-                                        <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpop" alt="...">
+                                        <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpop" alt="..." style="object-fit:cover;">
                                     </div>
                                     <div class="col-8">
                                         <div class="d-flex align-item-center gap-3">
