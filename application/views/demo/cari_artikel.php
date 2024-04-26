@@ -9,8 +9,9 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        height: 200px;
-        width: auto;
+        height: 100%;
+        /* height: 200px; */
+        /* width: auto; */
 
     }
 
@@ -110,8 +111,11 @@ function getParams($query_params, $name)
                     <div class="row article-container">
                         <?php foreach ($searchArtikel as $item) { ?>
                             <div class="col-lg-4 col-6 mb-3 d-flex">
-                                <div class="card mt-4 w-100" style="cursor:pointer;" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
-                                    <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-artikel-search" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" alt="..." style="object-fit:cover;">
+                                <div class="card main-img-card mt-4 w-100" style="cursor:pointer;" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
+                                    <div class="img-container">
+                                        <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-artikel-search w-100" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" alt="..." style="object-fit:cover;" onload='updateHeight()'>
+                                    </div>
+
                                     <div class="card-body" id="myCardBody">
                                         <div class="d-flex align-items-center gap-4">
                                             <small>RumahTinggal</small>
@@ -164,6 +168,17 @@ function getParams($query_params, $name)
 </div>
 
 <script>
+    $(window).ready(updateHeight);
+    $(window).resize(updateHeight);
+
+    function updateHeight() {
+        var divref = $('.main-img-card');
+        var div = $('.img-container');
+        var width = divref.width() / 1.5;
+
+        div.css('height', width);
+    }
+
     function detailArtikel(id) {
         location.href = "<?= base_url('detail-artikel/') ?>" + id;
     }
