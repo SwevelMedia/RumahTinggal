@@ -423,7 +423,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
             <div class="col-lg-9">
                 <div class="d-none d-lg-block">
                     <div class="d-flex justify-content-between flex-column flex-lg-row align-items-center mb-3">
-                        <div>
+                        <div id="pagination-info">
 
                         </div>
                         <div class="dropdown">
@@ -697,6 +697,7 @@ function getPageUrl($page)
             dataSource: koleksi_rumah,
             pageSize: itemsPerPage,
             autoHidePrevious: true,
+
             autoHideNext: true,
             pageRange: 1,
             callback: function(data, pagination) {
@@ -830,6 +831,12 @@ function getPageUrl($page)
                                 </div>
                             </div>`
                     });
+                    var currentPage = pagination.pageNumber;
+                    var rangeStart = (currentPage - 1) * itemsPerPage + 1;
+                    var rangeEnd = Math.min(currentPage * itemsPerPage, pagination.totalNumber);
+
+                    // Update the pagination info element with the range information
+                    $('#pagination-info').html('Menampilkan ' + rangeStart + ' - ' + rangeEnd + ' dari ' + pagination.totalNumber + ' desain');
 
                 }
 
@@ -853,8 +860,11 @@ function getPageUrl($page)
                         </div>
                     `);
                 }
+
             }
+
         });
+
     });
 
     //function to prevent non-numeric inputs in numeric inputs
