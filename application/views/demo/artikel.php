@@ -9,8 +9,8 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        height: 390px;
-        width: auto;
+        /* height: 390px;
+        width: auto; */
 
     }
 
@@ -26,8 +26,8 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        height: 150px;
-        width: 200px;
+        height: 100%;
+        width: 100%;
         border-radius: 5%;
 
     }
@@ -36,8 +36,9 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        height: 90px;
-        width: 120px;
+        height: 100%;
+        width: 100%;
+        max-height: 120px;
         border-radius: 5%;
 
     }
@@ -70,7 +71,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h3 style="color: #003A65;">Artikel RumahTinggal.id</h3>
                 <form onsubmit="searchArtikel(event)" id="searchForm">
-                    <div class="input-group mb-3 mt-3" style="width: 300px;">
+                    <div class="input-group mt-2 mb-2" style="width: 300px;">
                         <input type="text" class="form-control" placeholder="Tips Bangun Rumah" style="background-color: white;" id="search_term" value="" />
 
                         <button class="btn btn-primary" type="submit" id="button-addon2" style="background-color: white; border-left:none; border-color: #ced4da; border-top-left-radius:0; border-bottom-left-radius:0;">
@@ -87,7 +88,7 @@
 </div>
 <div class="bg-white">
     <div class="container">
-        <div class="row">
+        <div class="row ">
             <div class="header-artikel-mobile d-lg-none">
                 <hr />
                 <div class="justify-content-center text-center">
@@ -105,12 +106,12 @@
                 <hr />
             </div>
             <div class="col-lg-7">
-                <div class="card main-img-card mt-4" onclick="detailArtikel(<?= $muka->id_artikel ?>)" style="cursor: pointer;">
-                    <!-- <div class='img-container w-100'>
+                <div class="card col-lg-10 main-img-card mt-2" onclick="detailArtikel(<?= $muka->id_artikel ?>)" style="cursor: pointer;">
+                    <div class='img-container w-100'>
                         <img src="<?= base_url('assets/img/artikel/' . $muka->foto_cover) ?>" class="h-100 card-img-artikel bg-card-artikel" alt="..." onload='updateHeight()' style="object-fit:cover;">
-                    </div> -->
+                    </div>
 
-                    <img src="<?= base_url('assets/img/artikel/' . $muka->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="..." style="object-fit:cover;">
+                    <!-- <img src="<?= base_url('assets/img/artikel/' . $muka->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="..." style="object-fit:cover;"> -->
 
                     <div class="card-body" id="myCardBody">
                         <h4 class="artikel-title"><?php echo $muka->judul_artikel; ?></h4>
@@ -153,7 +154,7 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="artikel-populer mt-4">
+                <div class="artikel-populer mt-2 w-100">
                     <h5 class="mb-4 d-none d-lg-block">Artikel Terbaru</h5>
                     <h4 class="text-center mb-4 d-lg-none">Artikel Terbaru</h4>
                     <?php foreach ($mukaRight as $item) { ?>
@@ -183,7 +184,7 @@
                         <h4>Artikel Populer</h4>
                     </div>
                     <div class="card mt-4 mb-5" onclick="detailArtikel(<?= $item->id_artikel ?>)">
-                        <img src="<?= base_url('assets/img/artikel/' . $terbaruArtikel->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="...">
+                        <img src="<?= base_url('assets/img/artikel/' . $terbaruArtikel->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="..." style="object-fit:cover;">
                         <div class="card-body" id="myCardBody">
                             <h4 class="artikel-title"><?php echo $terbaruArtikel->judul_artikel; ?></h4>
                             <div class="d-flex justify-content-between align-items-center mt-3">
@@ -199,7 +200,7 @@
                         <div class="new-artikel mb-4" onclick="detailArtikel(<?= $item->id_artikel ?>)">
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpop" alt="...">
+                                    <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpop" style="object-fit:cover;" alt="...">
                                 </div>
                                 <div class="col-8">
                                     <div class="d-flex align-item-center gap-3">
