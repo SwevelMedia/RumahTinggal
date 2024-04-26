@@ -143,15 +143,38 @@
 <script>
     $(document).ready(function() {
         var $loading = $('#loadingDiv').hide();
-        $(document).ajaxStart(function() {
-                $loading.show();
+        $(document).ajaxStart(function(ajaxOptions) {
+
+                if (!ajaxOptions.hideLoading) {
+                    $loading.show();
+                }
             })
             .ajaxStop(function() {
                 setTimeout(function() {
                     $loading.hide();
                 }, 1000);
             });
+
+        function shouldExcludeUrl(url) {
+            console.log('h', url)
+            var excludedUrls = [
+                "https://estimator.id/dev_msib/server/api/getSummaryCariProduk",
+                "https://estimator.id/dev_msib/server/api/getKategoriProduk",
+                "https://estimator.id/dev_msib/server/api/getFilterMerkProduk",
+                "https://estimator.id/dev_msib/server/api/getKatalogProduk2"
+            ];
+
+            for (var i = 0; i < excludedUrls.length; i++) {
+                if (url === excludedUrls[i]) {
+
+                }
+            }
+            return false;
+        }
     });
+
+
+
     $(document).ready(function() {
         // Get customer ID from cookies
         let id_customer = Cookies.get('id_customer');
