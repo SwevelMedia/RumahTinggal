@@ -517,6 +517,7 @@
             url: "https://estimator.id/dev_msib/server/api/getKatalogProduk2",
             data: $('#getMaterial').serialize(),
             dataType: "json",
+            hideLoading: true,
             contentType: "text/plain",
             success: function(data) {
                 var list = "";
@@ -571,7 +572,7 @@
 
                 $("#konten-material").empty();
 
-                $("#konten-material").html(list).loading("done");
+                $("#konten-material").html(list);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown)
@@ -643,6 +644,7 @@
             type: 'POST',
             url: "https://estimator.id/dev_msib/server/api/getSummaryCariProduk",
             dataType: "JSON",
+            hideLoading: true,
             data: data,
             success: function(data) {
                 $('#jumlah_material').html(data.suplier);
