@@ -143,36 +143,37 @@
 <script>
     $(document).ready(function() {
         var $loading = $('#loadingDiv').hide();
-        $(document).ajaxStart(function(ajaxOptions) {
 
-                if (!ajaxOptions.hideLoading) {
-                    $loading.show();
-                }
-            })
-            .ajaxStop(function() {
-                setTimeout(function() {
-                    $loading.hide();
-                }, 1000);
-            });
+        // Intercept AJAX requests to apply loading div exclusion
+        $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+            if (!shouldExcludeUrl(options.url)) {
+                $loading.show();
+            }
+        });
+
+        $(document).ajaxStop(function() {
+            setTimeout(function() {
+                $loading.hide();
+            }, 1000);
+        });
 
         function shouldExcludeUrl(url) {
-            console.log('h', url)
-            var excludedUrls = [
-                "https://estimator.id/dev_msib/server/api/getSummaryCariProduk",
-                "https://estimator.id/dev_msib/server/api/getKategoriProduk",
-                "https://estimator.id/dev_msib/server/api/getFilterMerkProduk",
-                "https://estimator.id/dev_msib/server/api/getKatalogProduk2"
+            console.log('h', url);
+            var excludedBaseUrls = [
+                "<?= base_url('api/simpanDisukai') ?>",
+                "<?= base_url('api/hapusDisukai') ?>",
+                "<?= base_url('api/getCustomerId') ?>"
             ];
 
-            for (var i = 0; i < excludedUrls.length; i++) {
-                if (url === excludedUrls[i]) {
-
+            // Check if any excluded base URL matches the start of the provided URL
+            for (var i = 0; i < excludedBaseUrls.length; i++) {
+                if (url.startsWith(excludedBaseUrls[i])) {
+                    return true;
                 }
             }
             return false;
         }
     });
-
 
 
     $(document).ready(function() {
