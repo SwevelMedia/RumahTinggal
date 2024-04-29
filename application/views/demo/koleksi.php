@@ -849,7 +849,7 @@ function getPageUrl($page)
                 if (pagination.pageNumber === totalPages) {
                     // Append the additional HTML content
                     $('.desain-container').append(`
-                        <div class="row gx-3 belum-temu-container d-flex flex-row flex-nowrap p-3 mt-2 align-items-start mb-2 gap-3">
+                        <div class="col-12 gx-3 belum-temu-container d-flex flex-row flex-nowrap p-3 mt-2 align-items-start mb-2 gap-3">
                             <img src="<?php echo base_url('assets/demo/img/search-circle.svg'); ?>" class="p-0" style="height:36px; width:36px;" alt="">
                             <p class="p-0 m-0 belum-temu-text" style="width:80%;">
                                 Apakah Anda belum menemukan desain hunian yang cocok untuk Anda? </br> 
