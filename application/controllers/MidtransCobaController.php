@@ -328,7 +328,7 @@ class MidtransCobaController extends CI_Controller
             //kirim dokumen ke email
             $this->kirimEmailDokumen($orderId, $invoice, $dokumen);
             $this->kirimWhatsapp($invoice->no_wa, "Terima kasih telah melakukan pembayaran untuk Invoice Anda dengan nomor #" . $invoice->no_invoice . ".\nAnda telah membeli Desain " . $invoice->nama_rumah . ".\nDokumen anda dapat diunduh pada link berikut ini : https://rumahtinggal.id/assets/dokumen/dokumen/" . $dokumen->laporan_desain . "\nSelamat membangun rumah sesuai yang diidamkan melalui Rumahtinggal.id.\n\nHarga Lebih Hemat, Desain Lebih Akurat");
-            $this->kirimWhatsapp('628112585566', "Terima kasih telah melakukan pembayaran untuk Invoice dengan nomor #" . $invoice->no_invoice . ".\nAnda telah membeli Desain " . $invoice->nama_rumah . ".\nDokumen anda dapat diunduh pada link berikut ini : https://rumahtinggal.id/assets/dokumen/dokumen/" . $dokumen->laporan_desain . "\nSelamat membangun rumah sesuai yang diidamkan melalui Rumahtinggal.id.\n\nHarga Lebih Hemat, Desain Lebih Akurat");
+            $this->kirimWhatsapp('628112636228', "Terima kasih telah melakukan pembayaran untuk Invoice dengan nomor #" . $invoice->no_invoice . ".\nAnda telah membeli Desain " . $invoice->nama_rumah . ".\nDokumen anda dapat diunduh pada link berikut ini : https://rumahtinggal.id/assets/dokumen/dokumen/" . $dokumen->laporan_desain . "\nSelamat membangun rumah sesuai yang diidamkan melalui Rumahtinggal.id.\n\nHarga Lebih Hemat, Desain Lebih Akurat");
         } else if ($status_transaksi == 'cancel' || $status_transaksi == 'deny') {
 
             $data_bayar = array(
