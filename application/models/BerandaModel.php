@@ -33,7 +33,7 @@ class BerandaModel extends CI_Model
 
 	function getJumlahUnduh()
 	{
-		return $this->db->query('SELECT count(DISTINCT id_customer) as jumlah_unduh FROM pembelian WHERE STATUS = 1;');
+		return $this->db->query('SELECT count(*) as jumlah_unduh FROM pembelian WHERE STATUS = 1;');
 	}
 
 	function getJumlahPengunjung()
