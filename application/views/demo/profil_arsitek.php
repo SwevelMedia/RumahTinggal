@@ -214,20 +214,21 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
             </div>
         </div>
     </div>
-    <div class=" conntainer p-3 d-lg-none">
+    <div class=" container p-3 d-lg-none">
         <div class="row">
             <div class="col-3">
-                <div class="container ms-2">
+                <div class="container">
                     <div class="bg-card-circle-arsitek-mob" style="background-image: url('<?php echo base_url() . 'assets/img/arsitek/' . $arsitek->foto ?>')">
                     </div>
                 </div>
             </div>
-            <div class="col-9">
-                <div class="container ms-5 mt-1">
-                    <div class="d-flex align-items-center gap-5">
+            <div class="col-9 overflow-wrap">
+                <div class="container ms-4 mt-1">
+                    <div class="d-flex align-items-center justify-content-between gap-3 pe-3">
                         <h4 class="m-0"><?php echo $arsitek->nama_arsitek ?></h4>
-                        <div class="d-flex gap-3">
-                            <i class="fa-regular fa-envelope fs-5"></i>
+                        <div class="d-flex gap-3 align-items-center">
+                            <a href="mailto:<?php echo $arsitek->email ?>?subject=Tanya%20Arsitek%20%5Brumahtinggal.id%5D&body=Halo%20<?php echo $arsitek->nama_arsitek ?>%2C%20saya%20ingin%20bertanya%20mengenai%20desain%20Anda%20di%20rumahtinggal.id" target="_blank" style="text-decoration: none; color: inherit;">
+                                <i class="fa-regular fa-envelope fs-5"></i></a>
                             <i class="fa-solid fa-ellipsis fs-5" id="ellipsis-icon-mobile" style="cursor: pointer;"></i>
                         </div>
                     </div>
@@ -241,12 +242,12 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                     <div class="flex-row mt-3">
                         <div class="d-flex gap-3">
                             <div class="flex-row">
-                                <div>Desain</div>
-                                <div class="text-center">8</div>
+                                <div style="font-size:12px;">Desain</div>
+                                <div class="text-center" style="font-weight:500"><?= count($produk) ?></div>
                             </div>
                             <div class="flex-row">
-                                <div>Desain</div>
-                                <div class="text-center">8</div>
+                                <div style="font-size:12px;">Proyek</div>
+                                <div class="text-center" style="font-weight:500"><?= count($portofolio) ?></div>
                             </div>
                         </div>
                     </div>
@@ -342,7 +343,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 
 
                                 <div class="img-container">
-                                    <img src="<?= base_url('assets/img/thumbnail/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
+                                    <img src="<?= base_url('assets/img/desain_thumbnail/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title mb-0 fw-semibold">
@@ -379,7 +380,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                                 </div>
                                                 <div>
                                                     <small>Bangunan</small>
-                                                    <small class="fw-semibold d-block"><?= $item->luas_bangunan ?>m2 </small>
+                                                    <small class="fw-semibold d-block"><?= $item->luas_bangunan ?> m2 </small>
                                                 </div>
                                             </div>
                                         </div>
@@ -390,7 +391,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                                 </div>
                                                 <div>
                                                     <small>Kamar Tidur</small>
-                                                    <small class="fw-semibold d-block"><?= $item->kamar_tidur ?>Kamar </small>
+                                                    <small class="fw-semibold d-block"><?= $item->kamar_tidur ?> Kamar </small>
                                                 </div>
                                             </div>
                                         </div>
@@ -403,7 +404,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                                 </div>
                                                 <div>
                                                     <small>Lantai</small>
-                                                    <small class="fw-semibold d-block"><?= $item->lantai ?>Lantai </small>
+                                                    <small class="fw-semibold d-block"><?= $item->lantai ?> Lantai </small>
                                                 </div>
                                             </div>
                                         </div>
@@ -414,7 +415,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                                 </div>
                                                 <div>
                                                     <small>Kamar Mandi</small>
-                                                    <small class="fw-semibold d-block"><?= $item->toilet ?>Kamar</small>
+                                                    <small class="fw-semibold d-block"><?= $item->toilet ?> Kamar</small>
                                                 </div>
                                             </div>
                                         </div>
