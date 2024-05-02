@@ -838,7 +838,10 @@ class DetailController extends CI_Controller
           exit;
      }
 
-
+     public function detail_redirect($id_rumah)
+     {
+          redirect(base_url('detail_koleksi/' . $id_rumah));
+     }
 
 
 
