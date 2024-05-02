@@ -32,6 +32,7 @@ class MidtransCobaController extends CI_Controller
 
         $this->load->library(array('midtrans', 'veritrans'));
 
+
         $this->midtrans->config($params);
 
         $this->veritrans->config($params);
@@ -327,8 +328,11 @@ class MidtransCobaController extends CI_Controller
 
             //kirim dokumen ke email
             $this->kirimEmailDokumen($orderId, $invoice, $dokumen);
-            $this->kirimWhatsapp($invoice->no_wa, "Terima kasih telah melakukan pembayaran untuk Invoice Anda dengan nomor #" . $invoice->no_invoice . ".\nAnda telah membeli Desain " . $invoice->nama_rumah . ".\nDokumen anda dapat diunduh pada link berikut ini : https://rumahtinggal.id/assets/dokumen/dokumen/" . $dokumen->laporan_desain . "\nSelamat membangun rumah sesuai yang diidamkan melalui Rumahtinggal.id.\n\nHarga Lebih Hemat, Desain Lebih Akurat");
-            $this->kirimWhatsapp('628112636228', "Terima kasih telah melakukan pembayaran untuk Invoice dengan nomor #" . $invoice->no_invoice . ".\nAnda telah membeli Desain " . $invoice->nama_rumah . ".\nDokumen anda dapat diunduh pada link berikut ini : https://rumahtinggal.id/assets/dokumen/dokumen/" . $dokumen->laporan_desain . "\nSelamat membangun rumah sesuai yang diidamkan melalui Rumahtinggal.id.\n\nHarga Lebih Hemat, Desain Lebih Akurat");
+            // $this->kirimWhatsapp($invoice->no_wa, "Terima kasih telah melakukan pembayaran untuk Invoice Anda dengan nomor #" . $invoice->no_invoice . ".\nAnda telah membeli Desain " . $invoice->nama_rumah . ".\nDokumen anda dapat diunduh pada link berikut ini : https://rumahtinggal.id/assets/dokumen/dokumen/" . $dokumen->laporan_desain . "\nSelamat membangun rumah sesuai yang diidamkan melalui Rumahtinggal.id.\n\nHarga Lebih Hemat, Desain Lebih Akurat");
+            // $this->kirimWhatsapp('628112636228', "Terima kasih telah melakukan pembayaran untuk Invoice dengan nomor #" . $invoice->no_invoice . ".\nAnda telah membeli Desain " . $invoice->nama_rumah . ".\nDokumen anda dapat diunduh pada link berikut ini : https://rumahtinggal.id/assets/dokumen/dokumen/" . $dokumen->laporan_desain . "\nSelamat membangun rumah sesuai yang diidamkan melalui Rumahtinggal.id.\n\nHarga Lebih Hemat, Desain Lebih Akurat");
+
+            $this->kirimWhatsappFonnte($invoice->no_wa, "Terima kasih telah melakukan pembayaran untuk Invoice Anda dengan nomor #" . $invoice->no_invoice . ".\nAnda telah membeli Desain " . $invoice->nama_rumah . " untuk Paket " . $invoice->paket . " (" . $invoice->jenis_paket . ").\nDokumen anda dapat diunduh pada link berikut ini : https://rumahtinggal.id/assets/dokumen/dokumen/" . $dokumen->laporan_desain . "\nSelamat membangun rumah sesuai yang diidamkan melalui Rumahtinggal.id.\n\nHarga Lebih Hemat, Desain Lebih Akurat");
+            $this->kirimWhatsappFonnte('08112636228', "Customer " . $invoice->nama_akun . " dengan nomor WA: " . $invoice->no_wa . " telah melakukan pembayaran untuk Invoice dengan nomor #" . $invoice->no_invoice . ".\nCustomer telah membeli Desain " . $invoice->nama_rumah . " untuk Paket " . $invoice->paket . " (" . $invoice->jenis_paket . ").\nDokumen dapat diunduh pada link berikut ini : https://rumahtinggal.id/assets/dokumen/dokumen/" . $dokumen->laporan_desain . "\nSelamat membangun rumah sesuai yang diidamkan melalui Rumahtinggal.id.\n\nHarga Lebih Hemat, Desain Lebih Akurat");
         } else if ($status_transaksi == 'cancel' || $status_transaksi == 'deny') {
 
             $data_bayar = array(
@@ -383,6 +387,36 @@ class MidtransCobaController extends CI_Controller
         curl_close($curl);
         log_message('error', 'hasil kirim whatsapp' . var_export($result, true));
         return true;
+    }
+
+    public function kirimWhatsappFonnte($target, $message)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.fonnte.com/send',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array(
+                'target' => $target,
+                'message' => $message,
+                'delay' => '2',
+                // 'countryCode' => '62', //optional
+            ),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: geboNDArt6WvkxFsz8Pk' //change TOKEN to your actual token
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        return $response;
     }
 
     public function kirimEmailDokumen($id, $invoice, $dokumen)
@@ -1300,7 +1334,10 @@ class MidtransCobaController extends CI_Controller
 
         $terkirim = $mail->send();
 
-        if (!$terkirim) echo "Terjadi kesalahan saat pengiriman email: " . $mail->ErrorInfo;
+        if (!$terkirim) {
+            $eror =  "Terjadi kesalahan saat pengiriman email: " . $mail->ErrorInfo;
+            log_message('error', var_export($eror, true));
+        }
 
         return $terkirim;
     }
