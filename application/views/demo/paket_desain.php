@@ -424,12 +424,13 @@
                 <h4 class="p-2 text-center mt-3"> <b>Paket Anda sedang diproses</b></h4>
                 <div class="p-3 ms-2">
                     <p id="nama-pembeli"></p>
-                    <p>Paket yang Anda pilih secepatnya akan kami proses. Sambil menunggu, Anda dapat melakukan pembelian terlebih dahulu. Apakah Anda bersedia menunggu proses tersebut?</p>
+                    <!-- semua paket non-gratis belum tersedia : change text when packets are available! -->
+                    <p>Paket yang Anda pilih secepatnya akan kami proses. Karena paket desain belum tersedia, mohon menghubungi admin untuk melanjutkan proses pemesanan Anda.</p>
                     <p id="batas-waktu"></p>
                 </div>
                 <div class="d-flex justify-content-center align-items-center mx-auto gap-3 mt-2 mb-3">
                     <button type="button" class="btn btn-outline-primary" onclick="tanyaDesain()">Tanya Admin</button>
-                    <button type="button" class="btn btn-danger" id="lanjutOrder">Bayar Sekarang</button>
+                    <!-- <button type="button" class="btn btn-danger" id="lanjutOrder">Bayar Sekarang</button> -->
                     <!-- <button type="button" class="btn btn-primary" onclick="openTungguBayar()">Lanjut</button> -->
                 </div>
                 <div class="p-3">
@@ -1801,7 +1802,7 @@
 
                 // $('#tgl_beli').text(data.tgl_pembelian);
                 $('#jenis-paket').text('Paket ' + data.paket);
-                $('#batas-waktu').text('Pesanan Anda akan dibatalkan pada ' + data.batas_transfer);
+                // $('#batas-waktu').text('Pesanan Anda akan dibatalkan pada ' + data.batas_transfer);
                 if (data.konsep && data.konsep.foto) {
                     // Menggunakan base_url untuk mendapatkan URL lengkap
                     var fotoKonsepUrl = '<?= base_url('assets/img/konsep/') ?>' + data.konsep.foto;
@@ -2270,9 +2271,11 @@
 
     function tanyaDesain() {
 
+        var paket = sessionStorage.getItem('paket');
+
         let nama_desain = $('#nama_rumah').text();
 
-        let text = `Halo Admin RumahTinggal.id,\nSaya telah melakukan pembelian desain rumah *` + nama_desain + `* Apakah saya bisa mendapatkan informasi lebih lanjut tentang desain tersebut?\nTerima kasih`;
+        let text = `Halo Admin RumahTinggal.id,\nSaya telah melakukan pembelian desain rumah *` + nama_desain + `* untuk Paket ` + paket + `. Apakah saya bisa mendapatkan informasi lebih lanjut tentang desain dan paket tersebut?\nTerima kasih`;
 
         let phone = '628112636228';
 
