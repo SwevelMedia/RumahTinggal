@@ -97,7 +97,7 @@
                         <i class="fas fa-home fs-1 text-primary"></i>
                     </div>
                     <div class="text-center text-lg-start">
-                        <div class="fs-5 fw-semibold text-primary"><?php echo floor($jumlah_rumah / 10) * 10 . '+'; ?></div>
+                        <div class="fs-5 fw-semibold text-primary"><?php echo $jumlah_rumah; ?></div>
                         <small>Koleksi Desain</small>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                         <i class="fas fa-file-download fs-1 text-primary"></i>
                     </div>
                     <div class="text-center text-lg-start">
-                        <div class="fs-5 fw-semibold text-primary"><?php echo floor($jumlah_unduh / 100) * 100 . '+'; ?></div>
+                        <div class="fs-5 fw-semibold text-primary"><?php echo $jumlah_unduh; ?></div>
                         <small>Desain Diunduh</small>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                         <i class="fas fa-user fs-1 text-primary"></i>
                     </div>
                     <div class="text-center text-lg-start">
-                        <div class="fs-5 fw-semibold text-primary"><?php echo floor($jumlah_pengunjung / 100) * 100 . '+'; ?></div>
+                        <div class="fs-5 fw-semibold text-primary"><?php echo $jumlah_pengunjung; ?></div>
                         <small>Pengunjung Aktif</small>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                                 <i class="fas fa-home fs-1 text-primary"></i>
                             </div>
                             <div class="text-center text-lg-start">
-                                <div class="fs-5 fw-semibold text-primary">999+</div>
+                                <div class="fs-5 fw-semibold text-primary"><?php echo $jumlah_rumah; ?></div>
                                 <small>Koleksi Desain</small>
                             </div>
                         </div>
@@ -145,7 +145,7 @@
                                 <i class="fas fa-file-download fs-1 text-primary"></i>
                             </div>
                             <div class="text-center text-lg-start">
-                                <div class="fs-5 fw-semibold text-primary">1000+</div>
+                                <div class="fs-5 fw-semibold text-primary"><?php echo $jumlah_unduh; ?></div>
                                 <small>Desain Diunduh</small>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                                 <i class="fas fa-user fs-1 text-primary"></i>
                             </div>
                             <div class="text-center text-lg-start">
-                                <div class="fs-5 fw-semibold text-primary">10000+</div>
+                                <div class="fs-5 fw-semibold text-primary"><?php echo $jumlah_pengunjung; ?></div>
                                 <small>Pengunjung Aktif</small>
                             </div>
                         </div>

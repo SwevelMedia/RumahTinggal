@@ -145,12 +145,12 @@
                                                 <img src="<?php echo base_url('assets/gif/home.png'); ?>" width="35" height="35">
                                             </div>
                                             <div class="text-center text-lg-start d-none d-md-block">
-                                                <div class="fs-5 fw-semibold"><?php echo floor($jumlah_rumah / 10) * 10 . '+'; ?>
+                                                <div class="fs-5 fw-semibold"><?php echo $jumlah_rumah; ?>
                                                 </div>
                                                 <small>Koleksi Desain</small>
                                             </div>
                                             <div class="text-center text-lg-start d-block d-md-none" style="line-height:1.2">
-                                                <div class="mb-1 fs-6 fw-semibold"><?php echo floor($jumlah_rumah / 10) * 10 . '+'; ?>
+                                                <div class="mb-1 fs-6 fw-semibold"><?php echo $jumlah_rumah; ?>
                                                 </div>
                                                 <small>Koleksi Desain</small>
                                             </div>
@@ -166,12 +166,12 @@
                                                 <img src="<?php echo base_url('assets/gif/folder-download.png'); ?>" width="35" height="35">
                                             </div>
                                             <div class="text-center text-lg-start d-none d-md-block">
-                                                <div class="fs-5 fw-semibold"><?php echo floor($jumlah_unduh / 100) * 100 . '+'; ?>
+                                                <div class="fs-5 fw-semibold"><?php echo $jumlah_unduh; ?>
                                                 </div>
                                                 <small>Desain Diunduh</small>
                                             </div>
                                             <div class="text-center text-lg-start d-block d-md-none" style="line-height:1.2">
-                                                <div class="mb-1 fs-6 fw-semibold"><?php echo floor($jumlah_unduh / 100) * 100 . '+'; ?>
+                                                <div class="mb-1 fs-6 fw-semibold"><?php echo $jumlah_unduh; ?>
                                                 </div>
                                                 <small>Desain Diunduh</small>
                                             </div>
@@ -186,12 +186,12 @@
                                                 <img src="<?php echo base_url('assets/gif/users.png'); ?>" width="35" height="35">
                                             </div>
                                             <div class="text-center text-lg-start d-none d-md-block">
-                                                <div class="fs-5 fw-semibold"><?php echo floor($jumlah_pengunjung / 100) * 100 . '+'; ?>
+                                                <div class="fs-5 fw-semibold"><?php echo $jumlah_pengunjung; ?>
                                                 </div>
                                                 <small>Pengunjung Aktif</small>
                                             </div>
                                             <div class="text-center text-lg-start d-block d-md-none" style="line-height:1.2">
-                                                <div class="mb-1 fs-6 fw-semibold"><?php echo floor($jumlah_pengunjung / 100) * 100 . '+'; ?>
+                                                <div class="mb-1 fs-6 fw-semibold"><?php echo $jumlah_pengunjung; ?>
                                                 </div>
                                                 <small>Pengunjung Aktif</small>
                                             </div>
