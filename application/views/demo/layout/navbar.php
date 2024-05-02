@@ -27,8 +27,8 @@
 </style>
 
 
-<div id="loadingDiv" style="position: fixed; z-index: 9999; top: 0px; left: 0px; height: 100%; width: 100%; background: rgb(2, 108, 182); display: none;">
-    <div style="display: cover; vertical-align: middle; z-index: 1000;top: 0;left: 0;height: 85px;width: 85px; border-radius: 100%; background: #fff url('https://rumahtinggal.id/assets/gif/rt-loader.gif') 50% 50% no-repeat;margin: 0 auto;margin-top: 23%;margin-bottom: 50%;">
+<div id="loadingDiv" class="justify-content-center align-items-center" style="position: fixed; z-index: 9999; top: 0px; left: 0px; height: 100%; width: 100%; background-image:radial-gradient(circle at -90%, white 50%, #53b4fc 100%); display: none;">
+    <div style="display: cover; vertical-align: middle; z-index: 1000;top: 0;left: 0;height: 85px;width: 85px; border-radius: 100%; background: #fff url('https://rumahtinggal.id/assets/gif/rt-loader.gif') 50% 50% no-repeat;margin: 0 auto;">
 
     </div>
     <!-- <div style="margin: 0 auto;text-align: center;color: #fff;font-weight: 1000;font-size: 22px;margin-top: -44%;"> RumahTinggal.id</div> -->
@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <!-- Bagian Menu Pengguna (dengan atribut style="display: none;" agar awalnya disembunyikan) -->
-                <div id="menu-pengguna">
+                <div id="menu-pengguna" class="d-none">
                     <div class="text-center">
                         <div class="dropdown">
                             <button class="btn custom-dropdown-button dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -148,12 +148,14 @@
         $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
             if (!shouldExcludeUrl(options.url)) {
                 $loading.show();
+                $loading.addClass('d-flex');
             }
         });
 
         $(document).ajaxStop(function() {
             setTimeout(function() {
                 $loading.hide();
+                $loading.removeClass('d-flex');
             }, 1000);
         });
 
@@ -162,7 +164,9 @@
             var excludedBaseUrls = [
                 "<?= base_url('api/simpanDisukai') ?>",
                 "<?= base_url('api/hapusDisukai') ?>",
-                "<?= base_url('api/getCustomerId') ?>"
+                "<?= base_url('api/getCustomerId') ?>",
+                "<?= base_url('api/getDetailDenahLantai') ?>",
+                "<?= base_url('api/getDetailSpesifikasi') ?>"
             ];
 
             // Check if any excluded base URL matches the start of the provided URL
@@ -194,6 +198,7 @@
                         dataType: "JSON",
                         success: function(data) {
                             // Display customer name
+                            $('#menu-pengguna').removeClass('d-none');
                             $('#nama_customer').html(data.nama_customer + '!');
                         }
                     });
