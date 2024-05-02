@@ -885,7 +885,7 @@ Also includes a counter of the slides
                 #scroolFixed {
                     position: fixed;
                     top: 100px;
-                    right: 120px;
+                    left: 80%;
                     transition: top 0.3s ease-in-out;
                     z-index: 900;
                     width: 200px;
