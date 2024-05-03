@@ -96,7 +96,7 @@ class DesainModel extends CI_Model
 
   {
 
-    return $this->db->query("SELECT a.kamar_tidur,a.toilet,a.toiletwc,a.id_rumah,a.foto, a.nama_rumah, a.id_arsitek, arsitek.nama_arsitek,ROUND(a.luas_lahan) AS luas_lahan, ROUND(a.lebar_lahan) AS lebar_lahan , ROUND(a.panjang_lahan) AS panjang_lahan, ROUND(a.luas_bangunan) AS luas_bangunan, a.lantai,a.tgl_update, a.suka, a.dilihat,round(AVG(a.rating),1) AS rating FROM (SELECT b.*, IFNULL(ulasan.rating,0) AS rating FROM ({$this->from}) b LEFT JOIN ulasan ON b.id_rumah = ulasan.id_rumah) a,arsitek WHERE a.id_arsitek=arsitek.id_arsitek GROUP BY id_rumah order by tgl_update desc limit 10");
+    return $this->db->query("SELECT a.kamar_tidur,a.toilet,a.toiletwc,a.id_rumah,a.foto, a.nama_rumah, a.id_arsitek, arsitek.nama_arsitek,ROUND(a.luas_lahan) AS luas_lahan, ROUND(a.lebar_lahan) AS lebar_lahan , ROUND(a.panjang_lahan) AS panjang_lahan, ROUND(a.luas_bangunan) AS luas_bangunan, a.lantai,a.tgl_update,a.tgl_buat, a.suka, a.dilihat,round(AVG(a.rating),1) AS rating FROM (SELECT b.*, IFNULL(ulasan.rating,0) AS rating FROM ({$this->from}) b LEFT JOIN ulasan ON b.id_rumah = ulasan.id_rumah) a,arsitek WHERE a.id_arsitek=arsitek.id_arsitek GROUP BY id_rumah order by tgl_buat desc limit 10");
   }
 
   function getLebarPanjangLahan()
@@ -225,7 +225,7 @@ class DesainModel extends CI_Model
     $sortableColumns = [
       'default' => 'lebar_lahan DESC, panjang_lahan DESC',
       'populer' => 'a.dilihat DESC',
-      'terbaru' => 'a.tgl_update DESC',
+      'terbaru' => 'a.tgl_buat DESC',
       'harga_tertinggi' => "(CASE 
                                 WHEN a.lantai = '1' THEN 3500000 * a.luas_bangunan
                                 WHEN a.lantai = '2' THEN 4500000 * a.luas_bangunan
