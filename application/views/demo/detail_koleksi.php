@@ -9,6 +9,10 @@ Also includes a counter of the slides
         height: 330px;
         width: 440px;
     } */
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 
     .slide-image-container {
         overflow: hidden;
@@ -364,7 +368,7 @@ Also includes a counter of the slides
 
             </div>
         </div>
-        <div class="nama-arsitek-mobile mt-1 mb-2">Didesain oleh <a style="text-decoration: none;" href="<?php echo base_url('profil_arsitek/' . $konsep->id_arsitek); ?>"><?= $konsep->nama_arsitek ?></a></div>
+        <div class="nama-arsitek-mobile mt-1 mb-2">Didesain oleh <a style="text-decoration: none;color:#00528E;" href="<?php echo base_url('profil_arsitek/' . $konsep->id_arsitek); ?>"><?= $konsep->nama_arsitek ?></a></div>
         <div class="d-flex">
             <?php if ($rating_desain->rating !== null) : ?>
                 <div class="d-flex justify-content-between gap-2 align-items-center me-3">
@@ -576,7 +580,7 @@ Also includes a counter of the slides
                 <div class="col-lg-4 mb-3 p-0 px-lg-3">
                     <div class="d-none d-lg-block">
                         <h2 id="nama_rumah"><?= $konsep->nama_rumah ?></h2>
-                        <h5>Didesain oleh <a style="text-decoration: none;" href="<?php echo base_url('profil_arsitek/' . $konsep->id_arsitek); ?>"><?= $konsep->nama_arsitek ?></a></h5>
+                        <h5>Didesain oleh <a style="text-decoration: none;color:#00528E;" href="<?php echo base_url('profil_arsitek/' . $konsep->id_arsitek); ?>"><?= $konsep->nama_arsitek ?></a></h5>
                         <div class="d-flex flex-column flex-lg-row align-items-center my-3 gap-3">
                             <?php if ($rating_desain->rating !== null) : ?>
                                 <div class="d-flex justify-content-between gap-2 align-items-center">
@@ -983,7 +987,8 @@ Also includes a counter of the slides
 
                             <div class="card-body card-home">
                                 <h5 class="card-title mb-0 fw-semibold" onclick="detailRumah(<?= $item->id_rumah ?>)">
-                                    <?= $item->nama_rumah ?></h5>
+                                    <a href="<?php echo base_url('detail_koleksi/') . $item->id_rumah ?>"><?= $item->nama_rumah ?></a>
+                                </h5>
                                 <small class="nama_arsitek mb-0">Design by
                                     <?= $item->nama_arsitek ?></small>
                                 <hr />
@@ -1061,7 +1066,7 @@ Also includes a counter of the slides
                                 </div>
                                 <div class="pb-1">
                                     <div class="text-center">
-                                        <a class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
+                                        <a href="<?php echo base_url('detail_koleksi/') . $item->id_rumah ?>" class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
                                     </div>
                                 </div>
                             </div>

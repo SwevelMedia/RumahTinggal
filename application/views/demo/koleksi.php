@@ -823,12 +823,16 @@ function getPageUrl($page)
                                         </div>
                                         <div class="pb-1">
                                             <div class="text-center">
-                                                <a class="btn btn-primary w-100 lihat-detail-button" onclick="detailRumah(` + item.id_rumah + `)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
+                                            <a href=`
+                        <?php base_url('detail_koleksi/') ?> + item.id_rumah + ` class="btn btn-primary w-100 lihat-detail-button" onclick="detailRumah(` + item.id_rumah + `)">
+  <i class="fa-solid fa-file-import me-2"></i>Lihat Detail
+</a>
+
 
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>  
                             </div>`
                     });
                     var currentPage = pagination.pageNumber;
@@ -1112,6 +1116,10 @@ function getPageUrl($page)
 
     function detailRumah(id) {
         location.href = "<?= base_url('detail_koleksi/') ?>" + id;
+    }
+
+    function getDetailRumah(id) {
+        return "<?= base_url('detail_koleksi/') ?>" + id;
     }
 
     $(document).ready(function() {

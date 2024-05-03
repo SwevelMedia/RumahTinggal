@@ -3,6 +3,11 @@
         width: 100%;
     }
 
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
     .irs--round .irs-line {
         top: 33px;
         height: 7px;
@@ -305,7 +310,8 @@
 
                         <div class="card-body card-home">
                             <h5 class="card-title mb-0 fw-semibold" onclick="detailRumah(<?= $item->id_rumah ?>)">
-                                <?= $item->nama_rumah ?></h5>
+                                <a href="<?php echo base_url('detail_koleksi/') . $item->id_rumah ?>"><?= $item->nama_rumah ?></a>
+                            </h5>
                             <small class="nama_arsitek mb-0">Design by
                                 <?= $item->nama_arsitek ?></small>
                             <hr />
@@ -383,7 +389,7 @@
                             </div>
                             <div class="pb-1">
                                 <div class="text-center">
-                                    <a class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
+                                    <a href="<?php echo base_url('detail_koleksi/') . $item->id_rumah ?>" class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
                                 </div>
                             </div>
                         </div>
@@ -424,7 +430,8 @@
 
                         <div class="card-body">
                             <h5 class="card-title mb-0 fw-semibold" onclick="detailRumah(<?= $item->id_rumah ?>)">
-                                <?= $item->nama_rumah ?></h5>
+                                <a href="<?php echo base_url('detail_koleksi/') . $item->id_rumah ?>"><?= $item->nama_rumah ?></a>
+                            </h5>
                             <small class="nama_arsitek mb-0">Design by
                                 <?= $item->nama_arsitek ?></small>
                             <hr />
@@ -499,7 +506,7 @@
                             </div>
                             <div class="pb-1">
                                 <div class="text-center">
-                                    <a class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
+                                    <a href="<?php echo base_url('detail_koleksi/') . $item->id_rumah ?>" class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
                                 </div>
                             </div>
                         </div>

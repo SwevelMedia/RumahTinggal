@@ -1,4 +1,9 @@
 <style>
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
     .nav-link-profil {
         text-decoration: none;
         border-bottom: none;
@@ -275,7 +280,7 @@
                                                 <div style="background-image: url('<?= base_url('assets/img/desain_thumbnail/' . $trns->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
                                             </a>
                                             <div class="card-body">
-                                                <h5 class="card-title mb-0 fw-semibold"><?= $trns->nama_rumah ?></h5>
+                                                <h5 class="card-title mb-0 fw-semibold"><a href="<?php echo base_url('detail_koleksi/') . $trns->id_rumah ?>"><?= $trns->nama_rumah ?></a></h5>
                                                 <h6 class="nama_arsitek mb-0">Design by <?= $trns->nama_arsitek ?></h6>
                                                 <hr />
                                                 <div class="d-flex align-items-center gap-3 mb-1">
@@ -601,7 +606,7 @@
                                                 <div style="background-image: url('<?= base_url('assets/img/desain_thumbnail/' . $item->foto) ?>')" class="card-img-top bg-card-pakdes"></div>
                                             </a>
                                             <div class="card-body">
-                                                <h5 class="card-title mb-0 fw-semibold"><?= $item->nama_rumah ?></h5>
+                                                <h5 class="card-title mb-0 fw-semibold"><a href="<?php echo base_url('detail_koleksi/') . $item->id_rumah ?>"><?= $item->nama_rumah ?></a></h5>
                                                 <h6 class="nama_arsitek mb-0">Design by <?= $item->nama_arsitek ?></h6>
                                                 <hr />
                                                 <div class="d-flex align-items-center gap-3 mb-1">
@@ -685,7 +690,7 @@
                                                 </div>
                                                 <div class="pb-1">
                                                     <div class="text-center">
-                                                        <a class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
+                                                        <a href="<?php echo base_url('detail_koleksi/') . $item->id_rumah ?>" class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -785,7 +790,7 @@
                                                 </div>
                                                 <div class="pb-1">
                                                     <div class="text-center">
-                                                        <a class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
+                                                        <a href="<?php echo base_url('detail_koleksi/') . $item->id_rumah ?>" class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class="fa-solid fa-file-import me-2"></i>Lihat Detail</a>
                                                     </div>
                                                 </div>
                                             </div>

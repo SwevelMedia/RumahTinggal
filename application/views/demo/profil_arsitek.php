@@ -422,7 +422,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                     </div>
                                     <div class="pb-1">
                                         <div class="text-center">
-                                            <a class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class=" me-2 far fa-file"></i>Lihat Detail</a>
+                                            <a href="<?php echo base_url('detail_koleksi/') . $item->id_rumah ?>" class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class=" me-2 far fa-file"></i>Lihat Detail</a>
                                         </div>
                                     </div>
                                 </div>
