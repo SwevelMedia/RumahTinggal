@@ -223,7 +223,7 @@ class DesainModel extends CI_Model
   {
     // Definisi kolom yang dapat diurutkan
     $sortableColumns = [
-      'default' => 'a.id_rumah ASC',
+      'default' => 'lebar_lahan DESC, panjang_lahan DESC',
       'populer' => 'a.dilihat DESC',
       'terbaru' => 'a.tgl_update DESC',
       'harga_tertinggi' => "(CASE 
