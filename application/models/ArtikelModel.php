@@ -63,6 +63,12 @@ class ArtikelModel extends CI_Model
     ");
    }
 
+   public function simpanDilihat($id_artikel)
+   {
+      $this->db->set('dilihat', 'dilihat+1', FALSE);
+      $this->db->where('id_artikel', $id_artikel);
+      $this->db->update('artikel');
+   }
    // public function getDetailArtikel($id_artikel)
    // {
    //    return $this->db->query("SELECT * FROM artikel WHERE id_artikel = ?", array($id_artikel))->row();

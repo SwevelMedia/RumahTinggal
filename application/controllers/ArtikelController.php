@@ -114,6 +114,7 @@ class ArtikelController extends CI_Controller
         $data['id_artikel'] = $id_artikel;
         $data['detailArtikel'] = $this->ArtikelModel->getDetailArtikel($id_artikel);
         $data['popularArtikel'] = $this->ArtikelModel->getPopularArtikel()->result(); //json_decode(file_get_contents(base_url('api/getArtikelMukaRight')));
+        $this->ArtikelModel->simpanDilihat($id_artikel);
         $this->load->view('demo/layout/layout', $data);
     }
 
