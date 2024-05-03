@@ -26,15 +26,6 @@
     }
 </style>
 
-
-<div id="loadingDiv" class="justify-content-center align-items-center" style="position: fixed; z-index: 9999; top: 0px; left: 0px; height: 100%; width: 100%; background-image:radial-gradient(circle at -90%, white 50%, #53b4fc 100%); display: none;">
-    <div style="display: cover; vertical-align: middle; z-index: 1000;top: 0;left: 0;height: 85px;width: 85px; border-radius: 100%; background: #fff url('https://rumahtinggal.id/assets/gif/rt-loader.gif') 50% 50% no-repeat;margin: 0 auto;">
-
-    </div>
-    <!-- <div style="margin: 0 auto;text-align: center;color: #fff;font-weight: 1000;font-size: 22px;margin-top: -44%;"> RumahTinggal.id</div> -->
-    <!-- Please wait...  <img src='path to your super fancy spinner' /> -->
-</div>
-
 <nav class="navbar navbar-expand-lg bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="<?php echo base_url(); ?>">
@@ -156,7 +147,7 @@
             setTimeout(function() {
                 $loading.hide();
                 $loading.removeClass('d-flex');
-            }, 500);
+            }, 100);
         });
 
         function shouldExcludeUrl(url) {
