@@ -156,7 +156,7 @@
             setTimeout(function() {
                 $loading.hide();
                 $loading.removeClass('d-flex');
-            }, 1000);
+            }, 500);
         });
 
         function shouldExcludeUrl(url) {
