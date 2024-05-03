@@ -728,20 +728,85 @@ Also includes a counter of the slides
 
                                 <div class="tab-content" style="font-size:0.9em;">
                                     <div class="tab-pane tab-lantai fade show active mt-3" id="pills-lantai1" role="tabpanel" aria-labelledby="lantai1-tab">
-                                        <div id="label-lantai1"></div>
+                                        <div id="label-lantai1">
+                                            <?php foreach ($denah1 as $item) : ?>
+                                                <div class="d-flex justify-content-between gap-2 align-items-center mb-3">
+                                                    <div class="d-flex gap-2 align-items-center">
+                                                        <div class="bg-dark text-white rounded-circle" width="25" height="25">
+                                                            <span class="mx-2">
+                                                                <?php echo $item->label; ?>
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <?php echo $item->ruang; ?>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <?php echo $item->luas; ?> m
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
                                     <div class="tab-pane tab-lantai fade mt-3" id="pills-lantai2" role="tabpanel" aria-labelledby="lantai2-tab">
-                                        <div id="label-lantai2"></div>
+                                        <div id="label-lantai2">
+                                            <?php foreach ($denah2 as $item) : ?>
+                                                <div class="d-flex justify-content-between gap-2 align-items-center mb-3">
+                                                    <div class="d-flex gap-2 align-items-center">
+                                                        <div class="bg-dark text-white rounded-circle" width="25" height="25">
+                                                            <span class="mx-2">
+                                                                <?php echo $item->label; ?>
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <?php echo $item->ruang; ?>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <?php echo $item->luas; ?> m
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
                                     <div class="tab-pane tab-lantai fade mt-3" id="pills-lantai3" role="tabpanel" aria-labelledby="lantai3-tab">
-                                        <div id="label-lantai3"></div>
+                                        <div id="label-lantai3">
+                                            <?php foreach ($denah3 as $item) : ?>
+                                                <div class="d-flex justify-content-between gap-2 align-items-center mb-3">
+                                                    <div class="d-flex gap-2 align-items-center">
+                                                        <div class="bg-dark text-white rounded-circle" width="25" height="25">
+                                                            <span class="mx-2">
+                                                                <?php echo $item->label; ?>
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <?php echo $item->ruang; ?>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <?php echo $item->luas; ?> m
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" style="font-size:0.9em;" id="pills-spesifikasi" role="tabpanel" aria-labelledby="spesifikasi">
                             <div class="card bg-light border-0 mt-3 p-3" style="height: 355px; overflow-y: auto;">
-                                <div id="label-spesifikasi"></div>
+                                <div id="label-spesifikasi">
+                                    <?php foreach ($spesifikasi as $item) : ?>
+                                        <h5 class="fw-semibold mt-1" style="font-size:1.3em;"><?php echo $item->bagian_rumah; ?></h5>
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-lg-6"><?php echo $item->material; ?></div>
+                                                <div class="col-lg-6"><?php echo $item->spesifikasi; ?></div>
+                                            </div>
+                                            <hr class="p-0 m-0">
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1387,165 +1452,165 @@ Also includes a counter of the slides
 
         tab_spek_load = 0;
 
-    $(document).ready(function() {
+    // $(document).ready(function() {
 
-        id_rumah = "<?= $id_rumah ?>";
+    //     id_rumah = "<?= $id_rumah ?>";
 
-        $('#tab-desain .nav-link').on('click', function() {
+    //     $('#tab-desain .nav-link').on('click', function() {
 
-            let tab = $(this).data('id');
+    //         let tab = $(this).data('id');
 
-            if (tab == 2) {
+    //         if (tab == 2) {
 
-                if (tab_denah_load == 0) {
+    //             if (tab_denah_load == 0) {
 
-                    $.ajax({
+    //                 $.ajax({
 
-                        url: "<?= base_url('api/getDetailDenahLantai1/') ?>" + id_rumah,
+    //                     url: "<?= base_url('api/getDetailDenahLantai1/') ?>" + id_rumah,
 
-                        type: "GET",
+    //                     type: "GET",
 
-                        dataType: "JSON",
+    //                     dataType: "JSON",
 
-                        success: function(data) {
+    //                     success: function(data) {
 
-                            if (data != '') {
+    //                         if (data != '') {
 
-                                $.each(data, function(i, item) {
+    //                             $.each(data, function(i, item) {
 
-                                    $('#label-lantai1').append(`<div class="d-flex justify-content-between gap-2 align-items-center mb-3">
-                                            <div class="d-flex gap-2 align-items-center">
-                                                <div class="bg-dark text-white rounded-circle" width="25" height="25"><span class="mx-2">` + item.label + `</span></div>
-                                                <div>` + item.ruang + `</div>
-                                            </div>
-                                            <div>` + item.luas + ` m</div>
-                                        </div>`);
+    //                                 $('#label-lantai1').append(`<div class="d-flex justify-content-between gap-2 align-items-center mb-3">
+    //                                         <div class="d-flex gap-2 align-items-center">
+    //                                             <div class="bg-dark text-white rounded-circle" width="25" height="25"><span class="mx-2">` + item.label + `</span></div>
+    //                                             <div>` + item.ruang + `</div>
+    //                                         </div>
+    //                                         <div>` + item.luas + ` m</div>
+    //                                     </div>`);
 
-                                });
+    //                             });
 
-                            }
+    //                         }
 
-                        },
+    //                     },
 
-                        error: function(jqHR, texStatus, errorThrown) {}
+    //                     error: function(jqHR, texStatus, errorThrown) {}
 
-                    });
+    //                 });
 
 
-                    $.ajax({
+    //                 $.ajax({
 
-                        url: "<?= base_url('api/getDetailDenahLantai2/') ?>" + id_rumah,
+    //                     url: "<?= base_url('api/getDetailDenahLantai2/') ?>" + id_rumah,
 
-                        type: "GET",
+    //                     type: "GET",
 
-                        dataType: "JSON",
+    //                     dataType: "JSON",
 
-                        success: function(data) {
+    //                     success: function(data) {
 
-                            if (data != '') {
+    //                         if (data != '') {
 
-                                $.each(data, function(i, item) {
+    //                             $.each(data, function(i, item) {
 
-                                    $('#label-lantai2').append(`<div class="d-flex justify-content-between gap-2 align-items-center mb-3">
-                                            <div class="d-flex gap-2 align-items-center">
-                                                <div class="bg-dark text-white rounded-circle" width="25" height="25"><span class="mx-2">` + item.label + `</span></div>
-                                                <div>` + item.ruang + `</div>
-                                            </div>
-                                            <div>` + item.luas + ` m</div>
-                                        </div>`);
+    //                                 $('#label-lantai2').append(`<div class="d-flex justify-content-between gap-2 align-items-center mb-3">
+    //                                         <div class="d-flex gap-2 align-items-center">
+    //                                             <div class="bg-dark text-white rounded-circle" width="25" height="25"><span class="mx-2">` + item.label + `</span></div>
+    //                                             <div>` + item.ruang + `</div>
+    //                                         </div>
+    //                                         <div>` + item.luas + ` m</div>
+    //                                     </div>`);
 
-                                });
+    //                             });
 
-                            }
+    //                         }
 
-                        },
+    //                     },
 
-                        error: function(jqHR, texStatus, errorThrown) {}
+    //                     error: function(jqHR, texStatus, errorThrown) {}
 
-                    });
+    //                 });
 
-                    $.ajax({
+    //                 $.ajax({
 
-                        url: "<?= base_url('api/getDetailDenahLantai3/') ?>" + id_rumah,
+    //                     url: "<?= base_url('api/getDetailDenahLantai3/') ?>" + id_rumah,
 
-                        type: "GET",
+    //                     type: "GET",
 
-                        dataType: "JSON",
+    //                     dataType: "JSON",
 
-                        success: function(data) {
+    //                     success: function(data) {
 
-                            if (data != '') {
+    //                         if (data != '') {
 
-                                $.each(data, function(i, item) {
+    //                             $.each(data, function(i, item) {
 
-                                    $('#label-lantai3').append(`<div class="d-flex justify-content-between gap-2 align-items-center mb-3">
-                                            <div class="d-flex gap-2 align-items-center">
-                                                <div class="bg-dark text-white rounded-circle" width="25" height="25"><span class="mx-2">` + item.label + `</span></div>
-                                                <div>` + item.ruang + `</div>
-                                            </div>
-                                            <div>` + item.luas + ` m</div>
-                                        </div>`);
+    //                                 $('#label-lantai3').append(`<div class="d-flex justify-content-between gap-2 align-items-center mb-3">
+    //                                         <div class="d-flex gap-2 align-items-center">
+    //                                             <div class="bg-dark text-white rounded-circle" width="25" height="25"><span class="mx-2">` + item.label + `</span></div>
+    //                                             <div>` + item.ruang + `</div>
+    //                                         </div>
+    //                                         <div>` + item.luas + ` m</div>
+    //                                     </div>`);
 
-                                });
+    //                             });
 
-                            }
+    //                         }
 
-                        },
+    //                     },
 
-                        error: function(jqHR, texStatus, errorThrown) {}
+    //                     error: function(jqHR, texStatus, errorThrown) {}
 
-                    });
+    //                 });
 
-                    tab_denah_load = 1;
+    //                 tab_denah_load = 1;
 
-                }
+    //             }
 
-            } else if (tab == 3) {
+    //         } else if (tab == 3) {
 
-                if (tab_spek_load == 0) {
+    //             if (tab_spek_load == 0) {
 
-                    $.ajax({
+    //                 $.ajax({
 
-                        url: "<?= base_url('api/getDetailSpesifikasi/') ?>" + id_rumah,
+    //                     url: "<?= base_url('api/getDetailSpesifikasi/') ?>" + id_rumah,
 
-                        type: "GET",
+    //                     type: "GET",
 
-                        dataType: "JSON",
+    //                     dataType: "JSON",
 
-                        success: function(data) {
+    //                     success: function(data) {
 
-                            if (data != '') {
+    //                         if (data != '') {
 
-                                $.each(data, function(i, item) {
+    //                             $.each(data, function(i, item) {
 
-                                    $('#label-spesifikasi').append(`<h5 class="fw-semibold mt-1" style="font-size:1.3em;"> ` + item.bagian_rumah + `</h5>
-                                <div>
-                                    <div class="row">
-                                        <div class="col-lg-6">` + item.material + `</div>
-                                        <div class="col-lg-6">` + item.spesifikasi + `</div>
-                                    </div>
-                                    <hr class="p-0 m-0">
-                                </div>`);
+    //                                 $('#label-spesifikasi').append(`<h5 class="fw-semibold mt-1" style="font-size:1.3em;"> ` + item.bagian_rumah + `</h5>
+    //                             <div>
+    //                                 <div class="row">
+    //                                     <div class="col-lg-6">` + item.material + `</div>
+    //                                     <div class="col-lg-6">` + item.spesifikasi + `</div>
+    //                                 </div>
+    //                                 <hr class="p-0 m-0">
+    //                             </div>`);
 
-                                });
+    //                             });
 
-                            }
+    //                         }
 
-                        },
+    //                     },
 
-                        error: function(jqHR, texStatus, errorThrown) {}
+    //                     error: function(jqHR, texStatus, errorThrown) {}
 
-                    });
+    //                 });
 
-                    tab_spek_load = 1;
+    //                 tab_spek_load = 1;
 
-                }
+    //             }
 
-            }
+    //         }
 
-        });
+    //     });
 
-    });
+    // });
 
     // script.js
 

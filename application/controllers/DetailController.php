@@ -853,14 +853,19 @@ class DetailController extends CI_Controller
 
      {
           $data['halaman'] = 'demo/detail_koleksi';
-          $data['title'] = 'Detail';
           $data['id_rumah'] = $id_rumah;
           $data['produk_popular'] = $this->DesainModel->getKatalogProdukPopular()->result();
           $data['konsep'] = $this->DetailModel->getDetailKonsep($id_rumah)->row();
           $data['konsep_desain'] = $this->DetailModel->getDetailKonsepDesain($id_rumah)->row();
+          $data['title'] = $data['konsep']->nama_rumah;
           $data['interior'] = $this->DetailModel->getDetailFotoDenahLantai1($id_rumah)->row();
           $data['interior2'] = $this->DetailModel->getDetailFotoDenahLantai2($id_rumah)->row();
           $data['interior3'] = $this->DetailModel->getDetailFotoDenahLantai3($id_rumah)->row();
+          $data['denah1'] = $this->DetailModel->getDetailDenahLantai1($id_rumah)->result();
+          $data['denah2'] = $this->DetailModel->getDetailDenahLantai2($id_rumah)->result();
+          $data['denah3'] = $this->DetailModel->getDetailDenahLantai3($id_rumah)->result();
+          $data['spesifikasi'] = $this->DetailModel->getDetailSpesifikasi($id_rumah)->result();
+
           $data['terjual'] = $this->DetailModel->getRumahTerjual($id_rumah)->row();
           $data['gaya_desain'] = $this->DetailModel->getDetailGayaDesain($id_rumah)->result();
           $data['foto_rumah'] = $this->DetailModel->getFotoRumah($id_rumah)->result();
