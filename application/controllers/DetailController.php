@@ -872,7 +872,7 @@ class DetailController extends CI_Controller
           $data['rating_dua'] = $this->DetailModel->getRatingDua($id_rumah)->result();
           $data['rating_satu'] = $this->DetailModel->getRatingSatu($id_rumah)->result();
           //$data['ulasan'] = $this->DetailModel->getUlasan($id_rumah)->result();
-
+          $this->DetailModel->simpanDilihat($id_rumah);
 
           $this->load->view('demo/layout/layout', $data);
      }
