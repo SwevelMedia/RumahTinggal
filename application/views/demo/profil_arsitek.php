@@ -8,6 +8,12 @@
         border-radius: 50%;
     }
 
+    .truncateTitle {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .bg-card-circle-arsitek-mob {
         background-position: center;
         background-repeat: no-repeat;
@@ -80,18 +86,103 @@
         transition: transform 0.5s ease-in-out;
         position: relative;
         z-index: 3;
+        transform-origin: top center;
     }
 
+
     @media screen and (min-width: 768px) {
+        .teks-card-info {
+            font-size: 0.8em;
+        }
+
+        .info-row {
+            padding-right: 12px;
+        }
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 991px) {
+        .card:hover .card-body {
+            transform: translateY(-115%);
+        }
+
         .card:hover .card-body-proyek {
-            transform: translateY(-170px);
+            transform: translateY(-220px);
+        }
+    }
+
+    @media screen and (min-width: 992px) and (max-width: 1199px) {
+
+        .card:hover .card-body-proyek {
+            transform: translateY(-160px);
+        }
+    }
+
+    @media screen and (min-width: 1200px) and (max-width: 1399px) {
+        .card:hover .card-body {
+            transform: translateY(-90%);
+        }
+
+        .card:hover .card-body-proyek {
+            transform: translateY(-185px);
+        }
+    }
+
+    @media screen and (min-width: 1400px) {
+        .card:hover .card-body {
+            transform: translateY(-233px);
+        }
+
+        .card:hover .card-body-proyek {
+            transform: translateY(-220px);
         }
     }
 
     /* Aturan transform khusus untuk layar yang lebih sempit (misalnya, kurang dari 768px) */
-    @media screen and (max-width: 767px) {
+    @media screen and (min-width: 361px) and (max-width: 767px) {
         .card:hover .card-body-proyek {
-            transform: translateY(-100px);
+            transform: translateY(-220px);
+        }
+
+        .card-body {
+            max-height: 8rem;
+            /* Adjust the height as needed */
+            overflow: hidden;
+        }
+
+        .card-body:hover {
+            overflow: visible;
+        }
+
+        .teks-card-info {
+            font-weight: normal;
+            font-size: 0.7rem;
+        }
+
+        .lihat-detail-button {
+            font-size: small;
+        }
+
+        .info-row {
+            padding-right: 8px;
+        }
+
+        .card-body-text {
+            font-size: 0.8rem;
+        }
+    }
+
+    @media screen and (max-width: 360px) {
+        .card-body-text {
+            font-size: 0.7rem;
+        }
+
+        .card:hover .card-body-proyek {
+            transform: translateY(-210px);
+        }
+
+        .teks-card-info {
+            font-weight: normal;
+            font-size: 0.65rem;
         }
     }
 
@@ -135,6 +226,30 @@
     .menu-card-mobile ul li:hover {
         background-color: #f1f1f1;
     }
+
+    .proyek-kategori {
+        font-style: normal;
+        font-size: 0.9rem;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: capitalize;
+        letter-spacing: 0.5px;
+    }
+
+    .proyek-info-header {
+        vertical-align: top;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        line-height: normal;
+        font-size: 0.9rem;
+    }
+
+    .proyek-info {
+        vertical-align: top;
+        letter-spacing: 0.5px;
+        line-height: normal;
+        font-size: 0.9rem;
+    }
 </style>
 <?php
 // Definisikan fungsi getSortLabel
@@ -147,10 +262,10 @@ function getSortLabel($sortType)
             return 'Desain Populer';
         case 'terbaru':
             return 'Terbaru';
-        case 'biaya_terendah':
-            return 'Biaya Terendah';
-        case 'biaya_tertinggi':
-            return 'Biaya Tertinggi';
+        case 'harga_terendah':
+            return 'Harga Terendah';
+        case 'harga_tertinggi':
+            return 'Harga Tertinggi';
         default:
             return 'Paling Sesuai';
     }
@@ -193,8 +308,8 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                 <div class="deskripsi-arsitek mt-4" style="text-align: justify;">
                     <?php echo $arsitek->profil ?>
                 </div>
-                <div class="hub-arsitek mt-3" style="max-width: 250px;">
-                    <div class="d-flex justify-content-between align-items-center">
+                <div class="hub-arsitek mt-3" style="">
+                    <div class="d-flex justify-content-start gap-3 align-items-center">
                         <div class="card border-0 rounded-5 p-2" style="background-color: #e9e9e9;">
                             <div class="d-flex align-items-center gap-2">
                                 <i class="fa-solid fa-location-dot"></i>
@@ -258,8 +373,8 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
         <div class="mt-3" style="text-align: justify;">
             <?php echo $arsitek->profil ?>
         </div>
-        <div class="hub-arsitek mt-3" style="max-width: 250px;">
-            <div class="d-flex justify-content-between align-items-center">
+        <div class="hub-arsitek mt-3" style="">
+            <div class="d-flex justify-content-between gap-3 align-items-center">
                 <div class="card border-0 rounded-5 p-2" style="background-color: #e9e9e9;">
                     <div class="d-flex align-items-center gap-2">
                         <i class="fa-solid fa-location-dot"></i>
@@ -296,27 +411,14 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
     </div>
     <div class="tab-content bg-light border-top border-2" style="max-height: 1000x; overflow-y: auto;">
         <div class="tab-pane fade show active p-3" id="pills-desainArsitek" role="tabpanel" aria-labelledby="desainArsitek-tab">
-            <div class="container">
+            <div class="container p-0">
                 <div class="d-none d-lg-block">
                     <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <?php
-                            // Jumlah item per halaman
-                            $items_per_page = 8;
+                        <div id="pagination-info">
 
-                            // Menghitung total jumlah halaman
-                            $total_pages = ceil(count($produk) / $items_per_page);
-
-                            // Mengambil data untuk halaman yang ditampilkan
-                            $current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-                            $offset = ($current_page - 1) * $items_per_page;
-
-                            // Tampilkan pesan di sini di luar perulangan
-                            echo '<p>Menampilkan ' . ($offset + 1) . ' - ' . min(($offset + $items_per_page), count($produk)) . ' dari ' . count($produk) . ' desain</p>';
-                            ?>
                         </div>
                         <div class="dropdown">
-                            <button id="sortButton" class="btn btn-outline-white border-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button id="sortButton" class="btn btn-outline-white border-secondary dropdown-toggle bg-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Urutkan: <?= getSortLabel($sort) ?>
                             </button>
                             <ul class="dropdown-menu">
@@ -329,140 +431,14 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                         </div>
                     </div>
                 </div>
-                <div class="row mt-4">
-                    <?php
-                    // Jumlah item per halaman
-                    $paginated_data = array_slice($produk, $offset, $items_per_page);
+                <div class="mt-4 konten-desain">
+                    <div class="row gx-3 desain-container">
 
-                    // Menampilkan data produk yang dipaginasi
-                    foreach ($paginated_data as $item) :
-                    ?>
-
-                        <div class="col-lg-3 col-md-6 mb-3">
-                            <div class="card desain-arsitek-card border-0 shadow-sm h-100">
-
-
-                                <div class="img-container">
-                                    <img src="<?= base_url('assets/img/desain_thumbnail/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title mb-0 fw-semibold">
-                                        <?= $item->nama_rumah ?></h5>
-                                    <h6 class="nama_arsitek mb-0">Design by
-                                        <?= $item->nama_arsitek ?></h6>
-                                    <hr />
-                                    <div class="d-flex align-items-center gap-3 mb-1">
-                                        <div>
-                                            <img src="<?php echo base_url('assets/demo/img/arrows-expand.png'); ?>" width="25" height="25">
-                                        </div>
-                                        <div>
-                                            <small>Lahan Minimal</small>
-                                            <small class="fw-semibold d-block"><?= $item->lebar_lahan . ' m x ' . $item->panjang_lahan . ' m' ?></small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-3">
-                                        <div>
-                                            <img src="<?php echo base_url('assets/demo/img/cash.png'); ?>" width="25" height="25">
-                                        </div>
-                                        <div>
-                                            <small>Biaya Konstruksi</small>
-                                            <small class="fw-semibold d-block"><?= $item->lantai == '1' ? "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".")); ?></small>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3"></div>
-                                </div>
-                                <div class="card-info">
-                                    <div class="row justify-content-between">
-                                        <div class="col-6">
-                                            <div class="d-flex align-items-center gap-3 ms-2">
-                                                <div>
-                                                    <img src="<?php echo base_url('assets/demo/img/bangunan.png'); ?>" width="20" height="20">
-                                                </div>
-                                                <div>
-                                                    <small>Bangunan</small>
-                                                    <small class="fw-semibold d-block"><?= $item->luas_bangunan ?> m2 </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="d-flex align-items-center gap-3">
-                                                <div>
-                                                    <img src="<?php echo base_url('assets/demo/img/kt.png'); ?>" width="20" height="20">
-                                                </div>
-                                                <div>
-                                                    <small>Kamar Tidur</small>
-                                                    <small class="fw-semibold d-block"><?= $item->kamar_tidur ?> Kamar </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-between mb-3">
-                                        <div class="col-6">
-                                            <div class="d-flex align-items-center gap-3 ms-2">
-                                                <div>
-                                                    <img src="<?php echo base_url('assets/demo/img/lantai.png'); ?>" width="20" height="20">
-                                                </div>
-                                                <div>
-                                                    <small>Lantai</small>
-                                                    <small class="fw-semibold d-block"><?= $item->lantai ?> Lantai </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="d-flex align-items-center gap-3">
-                                                <div>
-                                                    <img src="<?php echo base_url('assets/demo/img/km.png'); ?>" width="20" height="20">
-                                                </div>
-                                                <div>
-                                                    <small>Kamar Mandi</small>
-                                                    <small class="fw-semibold d-block"><?= $item->toilet ?> Kamar</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="pb-1">
-                                        <div class="text-center">
-                                            <a href="<?php echo base_url('detail_koleksi/') . $item->id_rumah ?>" class="btn btn-primary w-100" onclick="detailRumah(<?= $item->id_rumah ?>)"> <i class=" me-2 far fa-file"></i>Lihat Detail</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+                    </div>
                 </div>
                 <!-- Menampilkan navigasi paginasi -->
-                <div class="d-flex justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item <?php echo ($current_page == 1) ? 'disabled' : ''; ?>">
-                                <a class="page-link" href="?page=<?php echo ($current_page - 1); ?>" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
+                <div class="d-flex justify-content-center" id="pagination-container">
 
-                            <?php
-                            // Menampilkan 3 angka halaman sekaligus
-                            $start = max(1, $current_page - 1);
-                            $end = min($total_pages, $start + 2);
-
-                            for ($i = $start; $i <= $end; $i++) {
-                            ?>
-                                <li class="page-item <?php echo ($i == $current_page) ? 'active' : ''; ?>">
-                                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                </li>
-                            <?php
-                            }
-                            ?>
-
-                            <li class="page-item <?php echo ($current_page == $total_pages) ? 'disabled' : ''; ?>">
-                                <a class="page-link" href="?page=<?php echo ($current_page + 1); ?>" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
@@ -470,20 +446,9 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
             <div class="container">
                 <div class="d-none d-lg-block">
                     <div class="d-flex justify-content-between align-items-center">
-                        <div><?php
-                                // Jumlah item per halaman
-                                $items_per_page = 8;
+                        <div id="pagination-info-portfolio">
 
-                                // Menghitung total jumlah halaman
-                                $total_pages = ceil(count($portofolio) / $items_per_page);
-
-                                // Mengambil data untuk halaman yang ditampilkan
-                                $current_page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-                                $offset = ($current_page - 1) * $items_per_page;
-
-                                // Tampilkan pesan di sini di luar perulangan
-                                echo '<p>Menampilkan ' . ($offset + 1) . ' - ' . min(($offset + $items_per_page), count($portofolio)) . ' dari ' . count($portofolio) . ' desain</p>';
-                                ?></div>
+                        </div>
                         <!-- <div class="dropdown">
                             <button id="sortButton" class="btn btn-outline-white border-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Urutkan:
@@ -498,87 +463,14 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                     </div> -->
                     </div>
                 </div>
-                <div class="row mt-4">
-                    <?php
-                    $paginated_data = array_slice($portofolio, $offset, $items_per_page);
+                <div class="mt-4 konten-portfolio">
+                    <div class="row portfolio-container">
 
-                    foreach ($paginated_data as $item) : ?>
-                        <div class="col-lg-3 col-md-6 mb-3">
-                            <div class="card border-0 shadow-sm" style="height:350px;">
-                                <!-- <a href="javascript:void(0)" class="image">
-                                    <div style="background-image:url('<?= base_url() . 'assets/img/portofolio/' . $item->foto ?>'" class="card-img-top bg-card-produk"></div>
-                                </a> -->
-
-                                <div class="img-container">
-                                    <img src="<?= base_url('assets/img/portofolio/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="">
-                                </div>
-                                <div class="card-body-proyek p-2">
-                                    <div class="card-title mb-0 fw-semibold">
-                                        <?= $item->judul ?>
-                                    </div>
-                                    <div class="mt-2"><?= $item->kategori ?></div>
-                                    <div class="mb-3">
-                                        <hr />
-                                    </div>
-
-                                </div>
-                                <div class="card-info-proyek mt-0">
-                                    <table>
-                                        <tr>
-                                            <th>Klien</th>
-                                            <td><?= $item->klien ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Lokasi</th>
-                                            <td><?= $item->lokasi ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Tahun</th>
-                                            <td><?= $item->tahun ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Status</th>
-                                            <td><?= $item->status ?></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach ?>
+                    </div>
                 </div>
                 <!-- Menampilkan navigasi paginasi -->
-                <div class="d-flex justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item <?php echo ($current_page == 1) ? 'disabled' : ''; ?>">
-                                <a class="page-link" href="?page=<?php echo ($current_page - 1); ?>" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
+                <div class="d-flex justify-content-center" id="pagination-container-portfolio">
 
-                            <?php
-                            // Menampilkan 3 angka halaman sekaligus
-                            $start = max(1, $current_page - 1);
-                            $end = min($total_pages, $start + 2);
-
-                            for ($i = $start; $i <= $end; $i++) {
-                            ?>
-                                <li class="page-item <?php echo ($i == $current_page) ? 'active' : ''; ?>">
-                                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                </li>
-                            <?php
-                            }
-                            ?>
-
-                            <li class="page-item <?php echo ($current_page == $total_pages) ? 'disabled' : ''; ?>">
-                                <a class="page-link" href="?page=<?php echo ($current_page + 1); ?>" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
@@ -625,6 +517,11 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
 
     });
 
+    function getKoleksiUrl(id_rumah) {
+        let baseurl = "<?php echo base_url('detail_koleksi/') ?>"
+        return baseurl + id_rumah;
+    }
+
     $(document).ready(function() {
         // Fungsi untuk menangani klik pada ikon
         $("#ellipsis-icon").click(function() {
@@ -667,5 +564,268 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                 container.hide();
             }
         });
+    });
+
+    $(document).ready(function() {
+        var koleksi_rumah = <?= json_encode($produk) ?>; // Assuming $koleksi_rumah contains your data
+        console.log(koleksi_rumah)
+
+        var itemsPerPage = 8; // Number of items per page
+        var totalPages = Math.ceil(koleksi_rumah.length / itemsPerPage); // Calculate total pages
+
+        $('#pagination-container').pagination({
+            dataSource: koleksi_rumah,
+            pageSize: itemsPerPage,
+            autoHidePrevious: true,
+
+            autoHideNext: true,
+            pageRange: 1,
+            callback: function(data, pagination) {
+                // Render paginated data
+                var html = '';
+                var baseurl = "<?php echo base_url('detail_koleksi/') ?>";
+                if (data.length === 0) {
+                    html = `
+                    <div class="koleksi-not-found mb-5">
+                        <div class="row justify-content-center text-center">
+                            <img src="<?php echo base_url('assets/demo/img/empty.png'); ?>" alt="Deskripsi Gambar" class="img-fluid" style="width: 300px; height: 200px;">
+                            <h5 class="mt-3">Yah! Tidak ada desain hunian yang sesuai dengan pencarian Anda.</h5>
+                            <div class="mt-1">Silahkan hubungi kami untuk mendapatkan rekomendasi desain yang sesuai.</div>
+                            <a href="https://api.whatsapp.com/send?phone=628112636228&text=Hai%20rumahtinggal.id%2C%20saya%20ingin%20bertanya%20mengenai%20desain%20rumahtinggal.id%20" target="_blank" class="btn btn-primary mt-3" style="width: fit-content;">Hubungi Kami</a>
+                        </div>
+                    </div>
+                `;
+                } else {
+                    $.each(data, function(index, item) {
+                        let biaya = item.lantai == '1' ? 3500000 * item.luas_bangunan : (item.lantai == '2' ? 4500000 * item.luas_bangunan : 5500000 * item.luas_bangunan);
+                        biaya = biaya.toLocaleString('id-ID');
+                        html += `<div class="col-lg-4 col-xl-3 col-md-6 col-6 mb-3">
+                                <div class="card desain-card border-0 shadow-sm pb-2 pb-md-0 h-100 w-100" style="height: max-content;">
+                                    <div class="img-container">
+                                        <img src="<?php echo  base_url('assets/img/desain_thumbnail/') ?>` + item.foto + `" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
+                                    </div>
+
+
+                                    <div class="card-body pt-3 pt-md-3">
+                                        <h5 class="card-title mb-0 fw-semibold d-none d-md-block">
+                                        ` + item.nama_rumah + `</h5>
+                                        <h6 class="card-title mb-0 fw-semibold d-md-none truncateTitle">
+                                        ` + item.nama_rumah + `</h6>
+                                        <!-- <h6 class="nama_arsitek mb-0 d-none d-md-block" onclick="detailArsitek(` + item.id_arsitek + `)">
+                                            ` + item.nama_arsitek + `</h6> -->
+                                        <small class="nama_arsitek mb-0" onclick="detailArsitek(` + item.id_arsitek + `)">
+                                            ` + item.nama_arsitek + `</small>
+                                        <hr class="my-2 d-md-none" />
+                                        <hr class="my-3 d-none d-md-block" />
+                                        <div class=" d-flex align-items-center gap-3 mb-1">
+                                            <div class="d-none d-md-block">
+                                                <img src="<?php echo base_url('assets/demo/img/arrows-expand.png'); ?>" width="25" height="25">
+                                            </div>
+                                            <div class="d-block d-md-none">
+                                                <img src="<?php echo base_url('assets/demo/img/arrows-expand.png'); ?>" width="20" height="20">
+                                            </div>
+                                            <div>
+                                                <small class="d-none d-md-inline lahan-minimal">Lahan Minimal</small>
+                                                <small class="fw-semibold d-block card-body-text">` + item.lebar_lahan + ` m x ` + item.panjang_lahan + ` m</small>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="d-none d-md-block">
+                                                <img src="<?php echo base_url('assets/demo/img/cash.png'); ?>" width="25" height="25">
+                                            </div>
+                                            <div class="d-block d-md-none">
+                                                <img src="<?php echo base_url('assets/demo/img/cash.png'); ?>" width="20" height="20">
+                                            </div>
+                                            <div>
+                                                <small class="d-none d-md-inline biaya-konstruksi">Biaya Konstruksi</small>
+                                                <small class="fw-semibold d-block d-none d-md-block tooltip-biaya card-body-text">Rp` + biaya + `
+                                                    <span class="tooltip-biaya-text">Estimasi Awal</span>
+                                                </small>
+                                                <small class="d-block d-md-none fw-semibold d-block card-body-text">Rp` + biaya + `
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="mt-3"></div> -->
+                                    </div>
+                                    <div class="card-info">
+                                        <div class="row justify-content-between mb-2 g-0 info-row">
+                                            <div class="col-6">
+                                                <div class="d-flex align-items-center justify-content-start gap-2 gap-md-3 gap-xl-2 gap-xxl-3 ms-2">
+                                                    <div>
+                                                        <img src="<?php echo base_url('assets/demo/img/bangunan.png'); ?>" width="18" height="18">
+                                                    </div>
+                                                    <div>
+                                                        <small class="d-none d-md-inline  d-lg-inline d-xl-none d-xxl-inline " style="font-size:0.7em">Luas Bangunan</small>
+                                                        <small class="d-none d-lg-none d-xl-inline d-xxl-none" style="font-size:0.7em">Bangunan</small>
+                                                        <small class="d-block teks-card-info" style="white-space: nowrap;">` + item.luas_bangunan + ` m2 </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="d-flex align-items-center justify-content-start gap-2 ms-3 gap-md-3 gap-xl-2 gap-xxl-3">
+                                                    <div>
+                                                        <img src="<?php echo base_url('assets/demo/img/kt.png'); ?>" width="18" height="18">
+                                                    </div>
+                                                    <div>
+                                                        <small class="d-none d-md-inline " style="font-size:0.7em">Kamar Tidur</small>
+                                                        <small class="d-none d-sm-block teks-card-info">` + item.kamar_tidur + ` Kamar</small>
+                                                        <small class="d-block d-sm-none teks-card-info">` + item.kamar_tidur + `</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-between mb-3 g-0 info-row">
+                                            <div class="col-6">
+                                                <div class="d-flex align-items-center justify-content-start gap-2 gap-md-3 gap-xl-2 gap-xxl-3 ms-2">
+                                                    <div>
+                                                        <img src="<?php echo base_url('assets/demo/img/lantai.png'); ?>" width="18" height="18">
+                                                    </div>
+                                                    <div>
+
+                                                        <small class="d-none d-md-inline  d-lg-inline d-xl-none d-xxl-inline " style="font-size:0.7em">Jumlah Lantai</small>
+                                                        <small class="d-none d-lg-none d-xl-inline d-xxl-none" style="font-size:0.7em"> Lantai</small>
+                                                        <small class="d-none d-md-block teks-card-info">` + item.lantai + ` Lantai </small>
+                                                        <small class="d-block d-md-none teks-card-info">` + item.lantai + ` Lt. </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="d-flex align-items-center justify-content-start ms-3 gap-2 gap-md-3 gap-xl-2 gap-xxl-3">
+                                                    <div>
+                                                        <img src="<?php echo base_url('assets/demo/img/km.png'); ?>" width="18" height="18">
+                                                    </div>
+                                                    <div>
+                                                        <small class="d-none d-md-inline " style="font-size:0.7em">Kamar Mandi</small>
+                                                        <small class="d-none d-sm-block teks-card-info">` + item.toilet + ` Kamar</small>
+                                                        <small class="d-block d-sm-none teks-card-info">` + item.toilet + `</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pb-1">
+                                            <div class="text-center">
+                                            <a href="${baseurl+ item.id_rumah} "  class="btn btn-primary w-100 lihat-detail-button" onclick="detailRumah(` + item.id_rumah + `)">
+  <i class="fa-solid fa-file-import me-2"></i>Lihat Detail
+</a>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>`
+                    });
+                    var currentPage = pagination.pageNumber;
+                    var rangeStart = (currentPage - 1) * itemsPerPage + 1;
+                    var rangeEnd = Math.min(currentPage * itemsPerPage, pagination.totalNumber);
+
+                    // Update the pagination info element with the range information
+                    $('#pagination-info').html('Menampilkan ' + rangeStart + ' - ' + rangeEnd + ' dari ' + pagination.totalNumber + ' desain');
+
+                }
+
+
+
+                // Update the container with the paginated HTML
+                $('.desain-container').html(html);
+
+
+            }
+
+        });
+
+    });
+
+    $(document).ready(function() {
+        var koleksi_rumah = <?= json_encode($portofolio) ?>; // Assuming $koleksi_rumah contains your data
+        console.log(koleksi_rumah)
+
+        var itemsPerPage = 8; // Number of items per page
+        var totalPages = Math.ceil(koleksi_rumah.length / itemsPerPage); // Calculate total pages
+
+        $('#pagination-container-portfolio').pagination({
+            dataSource: koleksi_rumah,
+            pageSize: itemsPerPage,
+            autoHidePrevious: true,
+
+            autoHideNext: true,
+            pageRange: 1,
+            callback: function(data, pagination) {
+                // Render paginated data
+                var html = '';
+                var baseurl = "<?php echo base_url('detail_koleksi/') ?>";
+                if (data.length === 0) {
+                    html = `
+                    <div class="koleksi-not-found mb-5">
+                        <div class="row justify-content-center text-center">
+                            <img src="<?php echo base_url('assets/demo/img/empty.png'); ?>" alt="Deskripsi Gambar" class="img-fluid" style="width: 300px; height: 200px;">
+                            <h5 class="mt-3">Tidak terdapat data proyek</h5>
+                            
+                        </div>
+                    </div>
+                `;
+                } else {
+                    $.each(data, function(index, item) {
+                        html += `<div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card border-0 shadow-sm" style="height:350px;">
+                                <!-- <a href="javascript:void(0)" class="image">
+                                    <div style="background-image:url("<?php echo  base_url('assets/img/portofolio/') ?>` + item.foto + `") class="card-img-top bg-card-produk"></div>
+                                </a> -->
+
+                                <div class="img-container">
+                                    <img src="<?php echo  base_url('assets/img/portofolio/') ?>` + item.foto + `" class="img-card-produk card-img-top" alt="">
+                                </div>
+                                <div class="card-body-proyek px-3 py-2">
+                                    <div class="card-title mb-0 fw-semibold">
+                                        ${item.judul}
+                                    </div>
+                                    <div class="mt-1 proyek-kategori">${item.kategori}</div>
+                                    <div class="mb-3">
+                                        <hr />
+                                    </div>
+
+                                </div>
+                                <div class="card-info-proyek mt-0">
+                                    <table>
+                                        <tr>
+                                            <th class="proyek-info-header" >Klien</th>
+                                            <td class="proyek-info">${item.klien}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="proyek-info-header">Lokasi</th>
+                                            <td class="proyek-info">${item.lokasi}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="proyek-info-header">Tahun</th>
+                                            <td class="proyek-info">${item.tahun}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="proyek-info-header">Status</th>
+                                            <td class="proyek-info">${item.status}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>`
+                    });
+                    var currentPage = pagination.pageNumber;
+                    var rangeStart = (currentPage - 1) * itemsPerPage + 1;
+                    var rangeEnd = Math.min(currentPage * itemsPerPage, pagination.totalNumber);
+
+                    // Update the pagination info element with the range information
+                    $('#pagination-info-portfolio').html('Menampilkan ' + rangeStart + ' - ' + rangeEnd + ' dari ' + pagination.totalNumber + ' desain');
+
+                }
+
+
+
+                // Update the container with the paginated HTML
+                $('.portfolio-container').html(html);
+
+
+            }
+
+        });
+
     });
 </script>
