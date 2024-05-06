@@ -24,12 +24,17 @@
         font-weight: 600;
     }
 
-    @media screen and (max-width: 767px) {
+    @media screen and (min-width: 361px) and (max-width: 767px) {
         .card-body {
             max-height: 8rem;
             /* Adjust the height as needed */
             overflow: hidden;
         }
+
+        .card:hover .card-body {
+            transform: translateY(-100%);
+        }
+
 
         .card-body:hover {
             overflow: visible;
@@ -51,6 +56,21 @@
         .card-body-text {
             font-size: 0.8rem;
         }
+    }
+
+    @media screen and (max-width: 360px) {
+        .card-body-text {
+            font-size: 0.7rem;
+        }
+
+        .teks-card-info {
+            font-size: 0.65rem;
+        }
+
+        .card:hover .card-body {
+            transform: translateY(-86%);
+        }
+
     }
 
     @media screen and (min-width: 768px) {
@@ -130,11 +150,6 @@
     }
 
     @media screen and (max-width: 767px) {
-
-
-        .card:hover .card-body {
-            transform: translateY(-100%);
-        }
 
         .belum-temu-text {
             font-size: 13px;
