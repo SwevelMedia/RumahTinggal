@@ -602,7 +602,7 @@ Also includes a counter of the slides
                     </div>
                     <div class="nav nav-pills btn-group border border-primary border-2 tab-desain mt-4 mt-lg-0" id="tab-desain">
                         <button class="nav-link btn btn-outline-primary active" data-id="1" id="konsep" data-bs-toggle="pill" data-bs-target="#pills-konsep" type="button" role="tab" aria-controls="pills-konsep" aria-selected="true">Konsep</button>
-                        <button class="nav-link btn btn-outline-primary" data-id="2" id="denah" data-bs-toggle="pill" data-bs-target="#pills-denah" type="button" role="tab" aria-controls="pills-denah" aria-selected="true">Denah</button>
+                        <button class="nav-link btn btn-outline-primary" data-id="2" id="denah" data-bs-toggle="pill" data-bs-target="#pills-denah" type="button" role="tab" aria-controls="pills-denah" aria-selected="true" onclick="activateDenah(1)">Denah</button>
                         <button class="nav-link btn btn-outline-primary" data-id="3" id="spesifikasi" data-bs-toggle="pill" data-bs-target="#pills-spesifikasi" type="button" role="tab" aria-controls="pills-spesifikasi" aria-selected="true">Spesifikasi</button>
                     </div>
                     <div class="tab-content" id="pills-tabContent">
@@ -720,7 +720,7 @@ Also includes a counter of the slides
 
                                         <?php if ($konsep->lantai >= 3) : ?>
                                             <li class="nav-item w-30 text-center">
-                                                <a class="nav-link-denah rounded-0 bg-light text-dark" id="lantai3-tab" data-bs-toggle="pill" href="#pills-lantai3" role="tab" aria-controls="pills-lantai3" aria-selected="false">Lantai 3</a>
+                                                <a class="nav-link-denah rounded-0 bg-light text-dark" id="lantai3-tab" data-bs-toggle="pill" href="#pills-lantai3" role="tab" aria-controls="pills-lantai3" aria-selected="false" onclick="activateDenah(3)">Lantai 3</a>
                                             </li>
                                         <?php endif; ?>
                                     </ul>
@@ -1221,7 +1221,6 @@ Also includes a counter of the slides
     $("#nextBtnProduk").click(function() {
         if ($('#pills-denah').hasClass('show')) {
             var activeTabId = $('.tab-pane.tab-lantai.fade.show.active').attr('id');
-            console.log(activeTabId)
             var currentFloor = parseInt(activeTabId.match(/\d+/)[0]);
             var nextFloor = currentFloor + 1;
             if (nextFloor > <?php echo $konsep->lantai ?>) {
@@ -1265,7 +1264,6 @@ Also includes a counter of the slides
     $("#prevBtnProduk").click(function() {
         if ($('#pills-denah').hasClass('show')) {
             var activeTabId = $('.tab-pane.tab-lantai.fade.show.active').attr('id');
-            console.log(activeTabId)
             var currentFloor = parseInt(activeTabId.match(/\d+/)[0]);
             var previousFloor = currentFloor - 1;
             if (previousFloor < 1) {
@@ -1451,6 +1449,7 @@ Also includes a counter of the slides
     var id_rumah, tab_denah_load = 0,
 
         tab_spek_load = 0;
+    id_rumah = "<?= $id_rumah ?>";
 
     // $(document).ready(function() {
 
@@ -1677,7 +1676,6 @@ Also includes a counter of the slides
     }
 
     $(document).ready(function() {
-        // Panggil fungsi getUlasan dengan halaman pertama
         getUlasan();
     });
 
@@ -1759,6 +1757,31 @@ Also includes a counter of the slides
 
         var denahImage = denahImages[lantai] || defaultDenah;
         if (denahImage) {
+
+
+            var currentTabId = '#pills-lantai' + lantai;
+            var currentTabIdCopy = 'pills-lantai' + lantai;
+            $(currentTabId).addClass('active');
+            $(currentTabId).addClass('show');
+            var tabs = document.getElementsByClassName("tab-lantai");
+
+            for (var i = 0; i < tabs.length; i++) {
+                if (tabs[i].id !== currentTabIdCopy) {
+                    tabs[i].classList.remove('active');
+                    tabs[i].classList.remove('show');
+                }
+            }
+            var currentTabButtonId = '#lantai' + lantai + '-tab';
+            var currentTabButtonIdCopy = 'lantai' + lantai + '-tab';
+            $(currentTabButtonId).addClass('active');
+            var tabButtons = document.getElementsByClassName("nav-link-denah");
+
+            for (var i = 0; i < tabButtons.length; i++) {
+                if (tabButtons[i].id !== currentTabButtonIdCopy) {
+                    tabButtons[i].classList.remove("active");
+                }
+            }
+
             var slideContainer = $(".slides");
             slideContainer.empty(); // Clear existing slides
             slideContainer.append('<div class="slide mb-3 h-100"><div class="slide-image-container rounded-3 overflow-hidden" id="zoom-container-eksterior"><img src="<?= base_url('assets/img/denah/') ?>' + denahImage + '" alt="" class="img-touch-koleksi"></div></div>');
@@ -1949,7 +1972,6 @@ Also includes a counter of the slides
                 success: function(data) {
                     if (id_customer != null && id_customer != '' && id_customer == data.id) {
 
-                        console.log('id rumah', id_rumah)
                         if (icon.attr('data-prefix') === "far") {
                             $('#heart-like')
                                 .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
@@ -1995,7 +2017,6 @@ Also includes a counter of the slides
                 success: function(data) {
                     if (id_customer != null && id_customer != '') {
 
-                        console.log('id rumah', id_rumah)
                         if (icon.attr('data-prefix') === "far") {
                             $('#heart-like-mobile')
                                 .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
