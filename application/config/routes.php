@@ -455,6 +455,7 @@ $route['api/getCountDownloadDokumen/(:any)'] = 'DesainController/getCountDownloa
 $route['demo'] = 'DemoController/index';
 // $route['detail_koleksi/(:any)'] = 'DemoController/detail_koleksi/$1';
 $route['detail_koleksi/(:any)'] = 'DetailController/detail_new/$1';
+$route['detail/(:any)'] = 'DetailController/detail_redirect/$1';
 $route['(:any)'] = 'DetailController/detail_redirect/$1';
 $route['ubah_profil_mobile/(:any)'] = 'DemoController/profilMobile/$1';
 $route['ubah_sandi_mobile'] = 'DemoController/UbahSandiMobile';
