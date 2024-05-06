@@ -415,32 +415,12 @@ class DetailController extends CI_Controller
      public function profil_arsitek($id_arsitek)
 
      {
+          $sort = $this->input->get('sort');
 
           $data['halaman'] = 'demo/profil_arsitek';
           $data['arsitek'] = $this->DetailModel->getDetailArsitek($id_arsitek);
           $data['portofolio'] =  $this->DetailModel->getPortofolioArsitek($id_arsitek)->result();
-          $data['produk'] = $this->DetailModel->getDesainArsitek($id_arsitek)->result();
-          // $sort = $this->input->get('sort');
-
-          // // Menangani logika pengurutan sesuai dengan opsi yang dipilih
-          // switch ($sort) {
-          //     case 'populer':
-          //         $data['produk'] = $this->DetailModel->getDesainArsitek('populer')->result();
-          //         break;
-          //     case 'terbaru':
-          //         $data['produk'] = $this->DetailModel->getDesainArsitek('terbaru')->result();
-          //         break;
-          //     case 'harga_terendah':
-          //         $data['produk'] = $this->DetailModel->getDesainArsitek('harga_terendah')->result();
-          //         break;
-          //     case 'harga_tertinggi':
-          //         $data['produk'] = $this->DetailModel->getDesainArsitek('harga_tertinggi')->result();
-          //         break;
-          //     default:
-          //         // Default: Paling Sesuai atau urutan default lainnya
-          //         $data['produk'] = $this->DetailModel->getDesainArsitek()->result();
-          //         break;
-          // }
+          $data['produk'] = $this->DetailModel->getDesainArsitek($id_arsitek, $sort)->result();
 
 
           $data['title'] = 'Profil Arsitek';

@@ -331,7 +331,7 @@ class DetailModel extends CI_Model
         $sortableColumns = [
             'default' => 'a.id_rumah ASC',
             'populer' => 'a.dilihat DESC',
-            'terbaru' => 'a.tgl_update DESC',
+            'terbaru' => 'a.tgl_buat DESC',
             'harga_tertinggi' => 'a.luas_bangunan DESC',
             'harga_terendah' => 'a.luas_bangunan ASC',
         ];
