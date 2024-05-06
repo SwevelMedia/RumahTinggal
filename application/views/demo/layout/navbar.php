@@ -151,7 +151,6 @@
         });
 
         function shouldExcludeUrl(url) {
-            console.log('h', url);
             var excludedBaseUrls = [
                 "<?= base_url('api/simpanDisukai') ?>",
                 "<?= base_url('api/hapusDisukai') ?>",
