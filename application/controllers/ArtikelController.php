@@ -110,7 +110,7 @@ class ArtikelController extends CI_Controller
     {
 
         $data['halaman'] = 'demo/detail_artikel';
-        $data['title'] = 'Detail Artikel';
+        $data['title'] = $this->ArtikelModel->getDetailArtikel($id_artikel)->judul_artikel;
         $data['id_artikel'] = $id_artikel;
         $data['detailArtikel'] = $this->ArtikelModel->getDetailArtikel($id_artikel);
         $data['popularArtikel'] = $this->ArtikelModel->getPopularArtikel()->result(); //json_decode(file_get_contents(base_url('api/getArtikelMukaRight')));
