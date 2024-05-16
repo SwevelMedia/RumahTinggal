@@ -748,14 +748,30 @@
     var slideshowLink = slideshow.querySelector(".slideshow-img-link");
     var slideshowImage = slideshow.querySelector("img");
     var images = <?php echo json_encode($banner_desktop); ?>;
-    console.log(images)
 
-    function changeImage() {
-        slideshowImage.src = "<?php echo base_url('assets/demo/img/beranda/'); ?>" + images[index].foto;
-        slideshowLink.href = "<?php echo base_url('detail_koleksi/') ?>" + images[index].id_rumah;
-        index = (index + 1) % images.length;
+    function preloadImage(src) {
+        var img = new Image();
+        img.src = src;
+        return img;
     }
 
+    function changeImage() {
+        var nextIndex = (index + 1) % images.length;
+        var nextImageSrc = "<?php echo base_url('assets/demo/img/beranda/'); ?>" + images[nextIndex].foto;
+        var nextImageLink = "<?php echo base_url('detail_koleksi/') ?>" + images[nextIndex].id_rumah;
+
+        // Preload the next image
+        var preloadedImage = preloadImage(nextImageSrc);
+
+        // Change the current image and link after the next image is fully loaded
+        preloadedImage.onload = function() {
+            slideshowImage.src = nextImageSrc;
+            slideshowLink.href = nextImageLink;
+            index = nextIndex;
+        };
+    }
+
+    // Start the slideshow
     setTimeout(function() {
         changeImage();
         setInterval(changeImage, 4000);
