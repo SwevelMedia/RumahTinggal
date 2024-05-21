@@ -113,7 +113,7 @@ function getParams($query_params, $name)
                             <div class="col-lg-4 col-6 mb-3 d-flex">
                                 <div class="card main-img-card mt-4 w-100" style="cursor:pointer;" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
                                     <div class="img-container">
-                                        <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-artikel-search w-100" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" alt="..." style="object-fit:cover;" onload='updateHeight()'>
+                                        <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-artikel-search w-100" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" alt="..." style="object-fit:cover;" onload='updateHeight()'>
                                     </div>
 
                                     <div class="card-body" id="myCardBody">
@@ -137,7 +137,7 @@ function getParams($query_params, $name)
                             <div class="thumb-artikel-mob mb-4 mt-4" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
                                 <div class="row gx-3">
                                     <div class="col-4">
-                                        <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpop" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" alt="..." style="object-fit:cover;">
+                                        <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-arpop" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" alt="..." style="object-fit:cover;">
                                     </div>
                                     <div class="col-8">
                                         <div class="d-flex align-item-center gap-3">

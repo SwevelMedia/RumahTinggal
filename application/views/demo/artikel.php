@@ -111,7 +111,7 @@
                         <img src="<?= base_url('assets/img/artikel/' . $muka->foto_cover) ?>" class="h-100 card-img-artikel bg-card-artikel" alt="..." onload='updateHeight()' style="object-fit:cover;">
                     </div>
 
-                    <!-- <img src="<?= base_url('assets/img/artikel/' . $muka->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="..." style="object-fit:cover;"> -->
+                    <!-- <img src="<?= base_url('assets/img/artikel_thumbnail/' . $muka->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="..." style="object-fit:cover;"> -->
 
                     <div class="card-body" id="myCardBody">
                         <h4 class="artikel-title"><?php echo $muka->judul_artikel; ?></h4>
@@ -133,7 +133,7 @@
                         <div class="prev-artikel mb-4" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpil" alt="..." style="object-fit: cover;">
+                                    <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-arpil" alt="..." style="object-fit: cover;">
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="d-flex align-item-center gap-3">
@@ -161,7 +161,7 @@
                         <div class="pop-artikel mb-4" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpop" style="object-fit:cover;">
+                                    <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-arpop" style="object-fit:cover;">
                                 </div>
                                 <div class="col-8">
                                     <div class="d-flex align-item-center gap-3">
@@ -184,7 +184,7 @@
                         <h4>Artikel Populer</h4>
                     </div>
                     <div class="card mt-4 mb-5" onclick="detailArtikel(<?= $item->id_artikel ?>)">
-                        <img src="<?= base_url('assets/img/artikel/' . $terbaruArtikel->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="..." style="object-fit:cover;">
+                        <img src="<?= base_url('assets/img/artikel_thumbnail/' . $terbaruArtikel->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="..." style="object-fit:cover;">
                         <div class="card-body" id="myCardBody">
                             <h4 class="artikel-title"><?php echo $terbaruArtikel->judul_artikel; ?></h4>
                             <div class="d-flex justify-content-between align-items-center mt-3">
@@ -200,7 +200,7 @@
                         <div class="new-artikel mb-4" onclick="detailArtikel(<?= $item->id_artikel ?>)">
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpop" style="object-fit:cover;" alt="...">
+                                    <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-arpop" style="object-fit:cover;" alt="...">
                                 </div>
                                 <div class="col-8">
                                     <div class="d-flex align-item-center gap-3">

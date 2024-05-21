@@ -60,19 +60,19 @@
                             <?php echo $detailArtikel->isi_artikel ?>
                         </div>
                     </div>
-                    <div class="kata-kunci mt-2 d-lg-none">
-                        <h5 class="mb-4">Kata Kunci Artikel</h5>
-                        <div class="horizontal-buttons" style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Business</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Technology</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Sport</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Art</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Lifestyle</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Photography</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Education</button>
-                            <!-- ... dan seterusnya -->
+                    <?php if (!empty($detailArtikel->tags)) : ?>
+                        <div class="kata-kunci mt-2 d-lg-none">
+                            <h5 class="mb-4">Kata Kunci Artikel</h5>
+                            <div class="horizontal-buttons" style="display: flex; flex-wrap: wrap; gap: 1rem; white-space:nowrap;">
+                                <?php
+                                $tagsArray = explode(',', $detailArtikel->tags);
+                                foreach ($tagsArray as $tag) : ?>
+                                    <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark"><?= $tag ?></button>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
+
                     <div class="bagikan-artikel mt-3" style="width: 95%;">
                         <hr />
                         <div class=" d-flex justify-content-between align-items-center">
@@ -98,12 +98,16 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="d-none d-lg-block">
-                        <div class="input-group mb-3 mt-4">
-                            <input type="text" class="form-control" placeholder="Berita Arsitek" style="background-color: #F7F7F7;" />
-                            <button class="btn btn-primary" type="button" id="button-addon2" style="background-color: #f7f7f7;">
-                                <i class="fas fa-search " style="color: black;"></i>
-                            </button>
-                        </div>
+                        <form onsubmit="searchArtikel(event)" id="searchForm">
+                            <div class="input-group mb-3 mt-4">
+                                <input type="text" class="form-control" placeholder="Tips Bangun Rumah" style="background-color: #f7f7f7;" id="search_term" value="" />
+
+                                <button class="btn btn-primary" type="submit" id="button-addon2" style="background-color: #f7f7f7; border-left:none; border-color: #ced4da; border-top-left-radius:0; border-bottom-left-radius:0;">
+                                    <i class="fas fa-search" style="color: black;"></i>
+                                </button>
+
+                            </div>
+                        </form>
                     </div>
                     <div class="artikel-terpopuler mt-4">
                         <h5 class="mb-4 d-none d-lg-block">Artikel Populer</h5>
@@ -112,7 +116,7 @@
                             <div class="pop-artikel mb-4 " onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
                                 <div class="row ">
                                     <div class="col-4">
-                                        <img src="<?= base_url('assets/img/artikel/' . $item->foto_cover) ?>" class="bg-card-arpop" alt="..." style="object-fit:cover;">
+                                        <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-arpop" alt="..." style="object-fit:cover;">
                                     </div>
                                     <div class="col-8">
                                         <div class="d-flex align-item-center gap-3">
@@ -187,20 +191,19 @@
                         </div>
                         <a href="#" class="btn btn-outline-primary w-100 d-lg-none mb-3">Artikel Lainnya</a>
                     </div> -->
-                    <div class="kata-kunci mt-4 d-none d-lg-block mb-5">
-                        <h5 class="mb-4">Kata Kunci Artikel</h5>
-                        <div class="horizontal-buttons" style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Business</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Technology</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Sport</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Art</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Lifestyle</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Photography</button>
-                            <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark">Education</button>
-                            <!-- ... dan seterusnya -->
+                    <?php if (!empty($detailArtikel->tags)) : ?>
+                        <div class="kata-kunci mt-4 d-none d-lg-block mb-5">
+                            <h5 class="mb-4">Kata Kunci Artikel</h5>
+                            <div class="horizontal-buttons" style="display: flex; flex-wrap: wrap; gap: 1rem; white-space:nowrap;">
+                                <?php
+                                $tagsArray = explode(',', $detailArtikel->tags);
+                                foreach ($tagsArray as $tag) : ?>
+                                    <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark"><?= $tag ?></button>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
+                    <?php endif; ?>
 
-                    </div>
                 </div>
             </div>
         </div>
@@ -209,5 +212,17 @@
 <script>
     function detailArtikel(id) {
         location.href = "<?= base_url('detail-artikel/') ?>" + id;
+    }
+
+    function searchArtikel(event) {
+        event.preventDefault();
+        var searchterm = $('#search_term').val();
+        location.href = "<?= base_url('cari_artikel') ?>" + "?search=" + searchterm;
+    }
+
+    function searchArtikelMobile(event) {
+        event.preventDefault();
+        var searchterm = $('#search_term_mobile').val();
+        location.href = "<?= base_url('cari_artikel') ?>" + "?search=" + searchterm;
     }
 </script>
