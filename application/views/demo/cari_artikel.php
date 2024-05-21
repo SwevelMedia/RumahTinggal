@@ -111,19 +111,21 @@ function getParams($query_params, $name)
                     <div class="row article-container">
                         <?php foreach ($searchArtikel as $item) { ?>
                             <div class="col-lg-4 col-6 mb-3 d-flex">
-                                <div class="card main-img-card mt-4 w-100" style="cursor:pointer;" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
-                                    <div class="img-container">
-                                        <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-artikel-search w-100" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" alt="..." style="object-fit:cover;" onload='updateHeight()'>
-                                    </div>
-
-                                    <div class="card-body" id="myCardBody">
-                                        <div class="d-flex align-items-center gap-4">
-                                            <small>RumahTinggal</small>
-                                            <small><?php echo $item->tgl_dibuat; ?></small>
+                                <a href="<?php echo base_url('detail-artikel/') . $item->id_artikel ?>" style="text-decoration:none; color:inherit ;" class="d-flex align-items-stretch">
+                                    <div class="card main-img-card mt-4 w-100" style="cursor:pointer;" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
+                                        <div class="img-container">
+                                            <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-artikel-search w-100" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" alt="..." style="object-fit:cover;" onload='updateHeight()'>
                                         </div>
-                                        <h5 class="artikel-title mt-3"><?php echo $item->judul_artikel; ?></h5>
+
+                                        <div class="card-body" id="myCardBody">
+                                            <div class="d-flex align-items-center gap-4">
+                                                <small>RumahTinggal</small>
+                                                <small><?php echo $item->tgl_dibuat; ?></small>
+                                            </div>
+                                            <h5 class="artikel-title mt-3"><?php echo $item->judul_artikel; ?></h5>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         <?php } ?>
                     </div>
