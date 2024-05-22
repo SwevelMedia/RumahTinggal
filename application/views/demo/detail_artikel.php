@@ -3,8 +3,11 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        height: 90px;
-        width: 120px;
+        /* height: 90px;
+        width: 120px; */
+        height: 100%;
+        width: 100%;
+        max-height: 120px;
         border-radius: 5%;
 
     }
@@ -113,20 +116,22 @@
                         <h5 class="mb-4 d-none d-lg-block">Artikel Populer</h5>
                         <h4 class="text-center mb-4 d-lg-none">Artikel Populer</h4>
                         <?php foreach ($popularArtikel as $item) { ?>
-                            <div class="pop-artikel mb-4 " onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
-                                <div class="row ">
-                                    <div class="col-4">
-                                        <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-arpop" alt="..." style="object-fit:cover;">
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="d-flex align-item-center gap-3">
-                                            <small>RumahTinggal</small>
-                                            <small><?php echo $item->tgl_dibuat; ?></small>
+                            <a href="<?php echo base_url('detail-artikel/') . $item->id_artikel ?>" style="text-decoration:none; color:inherit ;" class="">
+                                <div class="pop-artikel mb-4 " onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
+                                    <div class="row ">
+                                        <div class="col-4">
+                                            <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-arpop" alt="..." style="object-fit:cover;">
                                         </div>
-                                        <h5 class="limited-tittle mt-2 me-3"><?php echo $item->judul_artikel; ?></h5>
+                                        <div class="col-8">
+                                            <div class="d-flex align-item-center gap-3">
+                                                <small>RumahTinggal</small>
+                                                <small><?php echo $item->tgl_dibuat; ?></small>
+                                            </div>
+                                            <h5 class="limited-tittle mt-2 me-3"><?php echo $item->judul_artikel; ?></h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         <?php } ?>
                         <a href="<?= base_url('demo/cari_artikel') ?>" class="btn btn-outline-primary w-100 d-lg-none mb-3">Artikel Lainnya</a>
                     </div>
@@ -198,7 +203,7 @@
                                 <?php
                                 $tagsArray = explode(',', $detailArtikel->tags);
                                 foreach ($tagsArray as $tag) : ?>
-                                    <button type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark"><?= $tag ?></button>
+                                    <button onclick="tagArtikel('<?= $tag ?>')" type="button" style="flex: 1 0 calc(33.3333% - 1rem);" class="btn btn-outline-dark"><?= $tag ?></button>
                                 <?php endforeach; ?>
                             </div>
                         </div>
@@ -212,6 +217,10 @@
 <script>
     function detailArtikel(id) {
         location.href = "<?= base_url('detail-artikel/') ?>" + id;
+    }
+
+    function tagArtikel(tag) {
+        location.href = "<?= base_url('cari_artikel') ?>" + "?tags=" + tag;
     }
 
     function searchArtikel(event) {

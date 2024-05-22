@@ -107,6 +107,30 @@ class ArtikelModel extends CI_Model
       return $results;
    }
 
+   public function getArtikelByTags($tags)
+   {
+      $tags_array = explode(',', $tags);
+      foreach ($tags_array as &$tag) {
+         $tag = trim($tag);
+      }
+      $this->db->select('*');
+      $this->db->from('artikel');
+
+      // Add WHERE clause for each tag
+      $first_tag = true;
+      foreach ($tags_array as $tag) {
+         if ($first_tag) {
+            $this->db->like('tags', $tag);
+            $first_tag = false;
+         } else {
+            $this->db->or_like('tags', $tag);
+         }
+      }
+
+      $query = $this->db->get();
+      return $query->result();
+   }
+
    private function calculateRelevanceScore($title, $searchTerms)
    {
       $score = 0;
