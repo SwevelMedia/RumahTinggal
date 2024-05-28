@@ -20,7 +20,7 @@ class CustomerController extends CI_Controller
   {
 
     parent::__construct();
-
+    $this->load->driver('cache', array('adapter' => 'file'));
     $this->load->model('CustomerModel');
     $this->load->library('session');
 
@@ -507,33 +507,81 @@ class CustomerController extends CI_Controller
     exit;
   }
 
+  // public function getCustomerId()
+  // {
+  //   if ($this->session->userdata('id_customer')) {
+  //     $id_customer = $this->session->userdata('id_customer');
+  //     $response = array(
+
+  //       'status' => 1,
+
+  //       'id' => $id_customer
+
+  //     );
+  //     $http_status = 200;
+  //   } else {
+  //     $response = array(
+
+  //       'status' => 0,
+
+  //       'error' => "not logged in!"
+
+  //     );
+  //     $http_status = 200;
+  //   }
+
+  //   $this->output
+  //     ->set_status_header($http_status)
+  //     ->set_content_type('application/json')
+  //     ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+  //     ->_display();
+  //   exit;
+  // }
+
   public function getCustomerId()
   {
+    // Define a unique cache key for the output
+    $cache_key = 'getCustomerId_' . md5($this->session->userdata('id_customer'));
+
+    // Check if the response is already cached
+    $cached_response = $this->cache->get($cache_key);
+
+    if ($cached_response !== FALSE) {
+      // Output the cached response
+      $this->output
+        ->set_status_header(200)
+        ->set_content_type('application/json')
+        ->set_output($cached_response)
+        ->_display();
+      exit;
+    }
+
+    // If the response is not cached, generate it
     if ($this->session->userdata('id_customer')) {
       $id_customer = $this->session->userdata('id_customer');
       $response = array(
-
         'status' => 1,
-
         'id' => $id_customer
-
       );
       $http_status = 200;
     } else {
       $response = array(
-
         'status' => 0,
-
         'error' => "not logged in!"
-
       );
       $http_status = 200;
     }
 
+    $output = json_encode($response, JSON_PRETTY_PRINT);
+
+    // Cache the response
+    $this->cache->save($cache_key, $output, 600);  // Cache for 10 minutes
+
+    // Output the response
     $this->output
       ->set_status_header($http_status)
       ->set_content_type('application/json')
-      ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+      ->set_output($output)
       ->_display();
     exit;
   }
