@@ -65,6 +65,13 @@
         align-items: stretch;
         align-content: stretch;
     }
+
+    .truncate-three-lines {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 </style>
 
 <?php
@@ -113,8 +120,8 @@ function getParams($query_params, $name)
                             <div class="col-lg-4 col-6 mb-3 d-flex">
                                 <a href="<?php echo base_url('detail-artikel/') . $item->id_artikel ?>" style="text-decoration:none; color:inherit ;" class="d-flex align-items-stretch">
                                     <div class="card main-img-card mt-4 w-100" style="cursor:pointer;" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
-                                        <div class="img-container">
-                                            <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-artikel-search w-100" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" alt="..." style="object-fit:cover;" onload='updateHeight()'>
+                                        <div class="img-container bg-card-artikel-search" style="background-image: url('<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>');" onerror="this.style.backgroundImage='url(<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>)';" onload='updateHeight()'>
+                                            <!-- <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-artikel-search w-100" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" alt="..." style="object-fit:cover;" onload='updateHeight()'> -->
                                         </div>
 
                                         <div class="card-body" id="myCardBody">
@@ -123,6 +130,7 @@ function getParams($query_params, $name)
                                                 <small><?php echo $item->tgl_dibuat; ?></small>
                                             </div>
                                             <h5 class="artikel-title mt-3"><?php echo $item->judul_artikel; ?></h5>
+                                            <small class="artikel-title truncate-three-lines mt-3"><?php echo $item->deskripsi_meta; ?></small>
                                         </div>
                                     </div>
                                 </a>
@@ -136,20 +144,23 @@ function getParams($query_params, $name)
                 <div class="content-mobile d-lg-none p-1">
                     <div class="artikel mb-4 mt-4">
                         <?php foreach ($searchArtikel as $item) { ?>
-                            <div class="thumb-artikel-mob mb-4 mt-4" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
-                                <div class="row gx-3">
-                                    <div class="col-4">
-                                        <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="bg-card-arpop" onerror="this.onerror=null; this.src='<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>';" alt="..." style="object-fit:cover;">
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="d-flex align-item-center gap-3">
-                                            <small>RumahTinggal</small>
-                                            <small><?php echo $item->tgl_dibuat; ?></small>
+                            <a href="<?php echo base_url('detail-artikel/') . $item->id_artikel ?>" style="text-decoration:none; color:inherit ;">
+                                <div class="thumb-artikel-mob mb-4 mt-4" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
+                                    <div class="row gx-3">
+                                        <div class="col-4">
+                                            <div class="bg-card-arpop" style="background-image: url('<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>');" onerror="this.style.backgroundImage='url(<?= base_url('assets/demo/img/artikel/default-artikel-small.png') ?>)';" alt="..." style="object-fit:cover;"></div>
                                         </div>
-                                        <h5 class="limited-tittle-search mt-2 me-3"><?php echo $item->judul_artikel; ?></h5>
+
+                                        <div class="col-8">
+                                            <div class="d-flex align-item-center gap-3">
+                                                <small>RumahTinggal</small>
+                                                <small><?php echo $item->tgl_dibuat; ?></small>
+                                            </div>
+                                            <h5 class="limited-tittle-search mt-2 me-3"><?php echo $item->judul_artikel; ?></h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         <?php } ?>
                     </div>
                     <!-- <div class="d-flex justify-content-center mb-2">
