@@ -46,7 +46,7 @@ class ArtikelModel extends CI_Model
 
    {
 
-      return $this->db->query("SELECT artikel.* FROM artikel WHERE `status` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "' limit 5");
+      return $this->db->query("SELECT artikel.* FROM artikel WHERE `status` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "'order by dilihat desc limit 5");
    }
 
    function getTerbaruArtikel()
@@ -91,13 +91,14 @@ class ArtikelModel extends CI_Model
       $searchTerms = explode(' ', $search);
       foreach ($searchTerms as $term) {
          $this->db->or_like('judul_artikel', $term);
+         $this->db->or_like('isi_artikel', $term);
       }
 
       $query = $this->db->get('artikel');
 
       $results = $query->result();
       foreach ($results as $result) {
-         $result->relevance = $this->calculateRelevanceScore($result->judul_artikel, $searchTerms);
+         $result->relevance = $this->calculateRelevanceScore($result->judul_artikel, $result->isi_artikel, $searchTerms);
       }
 
       usort($results, function ($a, $b) {
@@ -105,6 +106,20 @@ class ArtikelModel extends CI_Model
       });
 
       return $results;
+   }
+
+   private function calculateRelevanceScore($title, $content, $searchTerms)
+   {
+      $score = 0;
+      foreach ($searchTerms as $term) {
+         if (stripos($title, $term) !== false) {
+            $score++;
+         }
+         if (stripos($content, $term) !== false) {
+            $score++;
+         }
+      }
+      return $score;
    }
 
    public function getArtikelByTags($tags)
@@ -129,16 +144,5 @@ class ArtikelModel extends CI_Model
 
       $query = $this->db->get();
       return $query->result();
-   }
-
-   private function calculateRelevanceScore($title, $searchTerms)
-   {
-      $score = 0;
-      foreach ($searchTerms as $term) {
-         if (stripos($title, $term) !== false) {
-            $score++;
-         }
-      }
-      return $score;
    }
 }

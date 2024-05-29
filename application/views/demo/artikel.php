@@ -130,7 +130,7 @@
                     <hr />
                 </div>
                 <div class="container artikel-pil mt-3 p-3 d-none d-lg-block">
-                    <h5 class="mb-4">Artikel Pilihan</h5>
+                    <h5 class="mb-4">Artikel Populer</h5>
                     <?php foreach ($popularArtikel as $item) { ?>
                         <a href="<?php echo base_url('detail-artikel/') . $item->id_artikel ?>" style="text-decoration:none; color:inherit ;" class="d-flex align-items-stretch">
                             <div class="prev-artikel mb-4" onclick="detailArtikel(<?= $item->id_artikel ?>)" style="cursor: pointer;">
@@ -191,13 +191,13 @@
                     </div>
                     <a href="<?php echo base_url('detail-artikel/') . $item->id_artikel ?>" style="text-decoration:none; color:inherit ;" class="">
                         <div class="card mt-4 mb-5" onclick="detailArtikel(<?= $item->id_artikel ?>)">
-                            <img src="<?= base_url('assets/img/artikel_thumbnail/' . $terbaruArtikel->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="..." style="object-fit:cover;">
+                            <img src="<?= base_url('assets/img/artikel_thumbnail/' . $item->foto_cover) ?>" class="card-img-artikel bg-card-artikel" alt="..." style="object-fit:cover;">
                             <div class="card-body" id="myCardBody">
-                                <h4 class="artikel-title"><?php echo $terbaruArtikel->judul_artikel; ?></h4>
+                                <h4 class="artikel-title"><?php echo $item->judul_artikel; ?></h4>
                                 <div class="d-flex justify-content-between align-items-center mt-3">
                                     <div class="d-flex align-items-center gap-4">
                                         <small>RumahTinggal</small>
-                                        <small><?php echo $terbaruArtikel->tgl_dibuat; ?></small>
+                                        <small><?php echo $item->tgl_dibuat; ?></small>
                                     </div>
                                     <a href="#" class="btn btn-outline-primary d-none d-lg-block">Baca Artikel</a>
                                 </div>
