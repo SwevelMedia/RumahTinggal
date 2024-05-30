@@ -283,7 +283,7 @@ Also includes a counter of the slides
 
 
 
-    @media screen and (min-width: 992px) {
+    @media screen and (min-width: 768px) {
         .subheading {
             font-style: normal;
             font-weight: 500;
@@ -302,7 +302,7 @@ Also includes a counter of the slides
         .ulasan-box {
             border: 0.5px solid var(--Grey-01, #EBEBEB);
             background: #FFF;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
         }
     }
 
@@ -336,6 +336,11 @@ Also includes a counter of the slides
             border: 0.75px solid var(--Grey-03, #C2C2C2);
             background: #FFF;
         }
+    }
+
+    .owl-carousel-one .owl-stage {
+        display: flex;
+        align-items: stretch;
     }
 </style>
 
@@ -1044,8 +1049,8 @@ Also includes a counter of the slides
             </div>
             <div class="position-relative">
                 <div class="card-container owl-carousel owl-theme owl-carousel-one">
-                    <?php foreach ($produk_popular as $item) { ?>
-                        <div class="card product-card border-0 shadow-sm mb-3">
+                    <?php foreach ($produk_rekomendasi as $item) { ?>
+                        <div class="card product-card border-0 shadow-sm mb-3" style="height:99%;">
                             <div class="img-container">
                                 <img src="<?= base_url('assets/img/desain/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
                             </div>
@@ -1360,15 +1365,16 @@ Also includes a counter of the slides
 
         div.css('height', width);
 
-        var cards2 = document.querySelectorAll('.owl-carousel-two .card');
+        // var cards2 = document.querySelectorAll('.owl-carousel-one .card');
 
-        var maxHeight2 = 0;
-        cards2.forEach(function(card2) {
-            maxHeight2 = Math.max(maxHeight2, card2.offsetHeight);
-        });
-        cards2.forEach(function(card2) {
-            card2.style.height = maxHeight2 + 'px';
-        });
+
+        // var maxHeight2 = 0;
+        // cards2.forEach(function(card2) {
+        //     maxHeight2 = Math.max(maxHeight2, card2.offsetHeight);
+        // });
+        // cards2.forEach(function(card2) {
+        //     card2.style.height = maxHeight2 + 'px';
+        // });
     }
 
     document.addEventListener("DOMContentLoaded", function() {
