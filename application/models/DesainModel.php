@@ -219,7 +219,7 @@ class DesainModel extends CI_Model
     return $this->db->query("SELECT a.kamar_tidur,a.toilet,a.id_rumah,a.foto, a.nama_rumah, a.id_arsitek, a.nama_arsitek,a.luas_lahan,a.lebar_lahan, a.panjang_lahan, a.luas_bangunan,a.lantai,a.tgl_buat,a.tgl_update,a.dilihat,a.suka,a.rating, a.harga_konstruksi,a.promo FROM (SELECT b.id_rumah, b.nama_rumah,b.kamar_tidur, b.toilet, b.id_arsitek,arsitek.nama_arsitek, ROUND(b.lebar_lahan) AS lebar_lahan, ROUND(b.panjang_lahan) AS panjang_lahan, ROUND(b.luas_lahan) AS luas_lahan ,ROUND(b.luas_bangunan) AS luas_bangunan,b.muka,b.wastafel,b.bathup,b.kloset_duduk,b.kloset_jongkok, b.foto,b.tgl_buat,b.tgl_update,b.suka,b.dilihat, max(b.lantai) AS lantai, round(AVG(IFNULL(ulasan.rating,0)),1) AS rating,harga_konstruksi,IFNULL(rumah_promo.promo,0) AS promo FROM (SELECT c.*, max(denah.lantai) AS lantai FROM (SELECT rumah.id_rumah, rumah.nama_rumah,x.kamar_tidur, x.toilet, rumah.id_arsitek, rumah.lebar_lahan, rumah.panjang_lahan, (rumah.lebar_lahan*rumah.panjang_lahan) AS luas_lahan,rumah.luas_bangunan,rumah.muka,rumah.wastafel,rumah.bathup,rumah.kloset_duduk,rumah.kloset_jongkok, rumah.foto,rumah.tgl_buat,rumah.tgl_update,rumah.suka,rumah.dilihat FROM (SELECT id_rumah, COUNT(CASE WHEN id_ruang = '7' THEN id_ruang END) kamar_tidur, COUNT(CASE WHEN id_ruang = '14' OR id_ruang='15' THEN id_ruang END) toilet FROM ruang_rumah GROUP BY id_rumah) x, rumah where x.id_rumah=rumah.id_rumah AND rumah.publish = 1) c, denah WHERE c.id_rumah = denah.id_rumah GROUP BY c.id_rumah, denah.lantai) b LEFT JOIN ulasan ON b.id_rumah = ulasan.id_rumah LEFT JOIN rumah_promo ON b.id_rumah = rumah_promo.id_rumah JOIN arsitek ON b.id_arsitek=arsitek.id_arsitek JOIN harga_konstruksi ON harga_konstruksi.id_rumah = b.id_rumah GROUP BY id_rumah) a join ruang_rumah ON a.id_rumah=ruang_rumah.id_rumah join gaya_desain_rumah ON a.id_rumah=gaya_desain_rumah.id_rumah join gaya_desain ON gaya_desain_rumah.id_gaya_desain=gaya_desain.id_gaya_desain $where GROUP BY id_rumah  $having $orderby");
   }
 
-  public function getKatalogProdukNew($sort = 'default', $search = '', $min_panjang = '', $max_panjang = '', $min_lebar = '', $max_lebar = '', $lantai = '', $kamar = '', $gaya = '', $ruang = '', $min_biaya = null, $max_biaya = null)
+  public function getKatalogProdukNew($sort = 'default', $search = '', $min_panjang = '', $max_panjang = '', $min_lebar = '', $max_lebar = '', $lantai = '', $kamar = '', $gaya = '', $ruang = '', $min_biaya = null, $max_biaya = null, $limit = null)
   {
     // Definisi kolom yang dapat diurutkan
     $sortableColumns = [
@@ -243,6 +243,8 @@ class DesainModel extends CI_Model
 
     // Tentukan kolom pengurutan berdasarkan nilai $sort
     $orderBy = $sortableColumns[$sort];
+
+    $limitClause = '';
 
     // Prepare WHERE clause
     $whereConditions = [];
@@ -280,6 +282,9 @@ class DesainModel extends CI_Model
             (a.lantai = '2' AND 4500000 * a.luas_bangunan <= {$max_biaya}) OR
             (a.lantai NOT IN ('1', '2') AND 5500000 * a.luas_bangunan <= {$max_biaya})
         )";
+    }
+    if ($limit !== null) {
+      $limitClause = 'LIMIT ' . $limit;
     }
 
     // Construct the WHERE clause
@@ -329,6 +334,7 @@ class DesainModel extends CI_Model
             a.id_rumah
         ORDER BY
             $orderBy
+          $limitClause
     ";
     // log_message('error',  'query' . var_export($query, true));
     return $this->db->query($query);

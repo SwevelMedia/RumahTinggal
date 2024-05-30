@@ -108,6 +108,13 @@ class DetailModel extends CI_Model
         return $this->db->query("SELECT gaya_desain.gaya_desain FROM gaya_desain,gaya_desain_rumah WHERE gaya_desain.id_gaya_desain = gaya_desain_rumah.id_gaya_desain AND gaya_desain_rumah.id_rumah='{$id_rumah}' ");
     }
 
+    function getDetailGayaDesainId($id_rumah)
+
+    {
+
+        return $this->db->query("SELECT id_gaya_desain FROM gaya_desain_rumah WHERE gaya_desain_rumah.id_rumah='{$id_rumah}' ");
+    }
+
 
 
     function getFotoRumah($id_rumah)

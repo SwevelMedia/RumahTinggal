@@ -856,6 +856,31 @@ class DetailController extends CI_Controller
           $data['rating_tiga'] = $this->DetailModel->getRatingTiga($id_rumah)->result();
           $data['rating_dua'] = $this->DetailModel->getRatingDua($id_rumah)->result();
           $data['rating_satu'] = $this->DetailModel->getRatingSatu($id_rumah)->result();
+
+          $lantai = $data['konsep']->lantai;
+          $gaya_desain_id = $this->DetailModel->getDetailGayaDesainId($id_rumah)->result();
+          $id_array = array();
+          foreach ($gaya_desain_id as $item) {
+               $id_array[] = $item->id_gaya_desain;
+          }
+          $id_gaya_desain = implode(",", $id_array);
+          $max_lebar = $data['konsep']->lebar_lahan;
+          $max_panjang = $data['konsep']->panjang_lahan;
+
+
+          $rekomendasi = $this->DesainModel->getKatalogProdukNew(null, null, 0, (int)$max_panjang, 0, (int)$max_lebar, $lantai, null, $id_gaya_desain, null, null, null, 11)->result();
+
+          $data['produk_rekomendasi'] = array_filter($rekomendasi, function ($item) use ($id_rumah) {
+               return $item->id_rumah !== $id_rumah;
+          });
+
+          if (empty($data['produk_rekomendasi'])) {
+               $rekomendasi = $this->DesainModel->getKatalogProdukNew(null, null, 0, (int)$max_panjang, 0, (int)$max_lebar, $lantai, null, '', null, null, null, 11)->result();
+               $data['produk_rekomendasi'] = array_filter($rekomendasi, function ($item) use ($id_rumah) {
+                    return $item->id_rumah !== $id_rumah;
+               });
+          }
+
           //$data['ulasan'] = $this->DetailModel->getUlasan($id_rumah)->result();
           $this->DetailModel->simpanDilihat($id_rumah);
 
