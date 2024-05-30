@@ -556,7 +556,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                     ?>
                                         <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="<?php echo $option->id_gaya_desain; ?>" id="checkbox_desain_<?php echo $option->id_gaya_desain; ?>" name="checkbox_desain" <?php echo $isChecked; ?>>
+                                                <input class="form-check-input" type="checkbox" value="<?php echo $option->id_gaya_desain; ?>" id="checkbox_desain_<?php echo $option->id_gaya_desain; ?>" name="checkbox_desain_mobile" <?php echo $isChecked; ?>>
                                                 <label class="form-check-label" for="checkbox_desain_<?php echo $option->id_gaya_desain; ?>">
                                                     <?php echo $option->gaya_desain; ?>
                                                 </label>
@@ -616,8 +616,8 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default';
                                     ?>
                                         <div class="d-flex justify-content-between gap-3 align-items-center mb-2">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="<?php echo $option->id_ruang; ?>" id="checkbox_desain_<?php echo $option->id_ruang; ?>" name="checkbox_ruang" <?php echo $isChecked; ?>>
-                                                <label class="form-check-label" for="checkbox_desain_<?php echo $option->id_ruang; ?>">
+                                                <input class="form-check-input" type="checkbox" value="<?php echo $option->id_ruang; ?>" id="checkbox_ruang_<?php echo $option->id_ruang; ?>" name="checkbox_ruang_mobile" <?php echo $isChecked; ?>>
+                                                <label class="form-check-label" for="checkbox_ruang_<?php echo $option->id_ruang; ?>">
                                                     <?php echo $option->ruang; ?>
                                                 </label>
                                             </div>
@@ -856,7 +856,7 @@ function getPageUrl($page)
 
                     // Update the pagination info element with the range information
                     $('#pagination-info').html('Menampilkan ' + rangeStart + ' - ' + rangeEnd + ' dari ' + pagination.totalNumber + ' desain');
-
+                    $('#pagination-info').append('<?php echo $produk_temu ?>');
                 }
 
 
@@ -1280,7 +1280,7 @@ function getPageUrl($page)
             if (queryParams.length > 0) {
                 url += '?' + queryParams.join('&') + queryStringDesain + queryStringRuang;
             }
-            console.log(url)
+            // console.log(url)
 
             window.location.href = url;
         });
@@ -1318,11 +1318,12 @@ function getPageUrl($page)
         })
     });
 
+    // handle form untuk mobile
     $(document).ready(function() {
         $('#mobile-filter-submit').on('click', function() {
             var form = document.getElementById('modal-filter-mobile');
             // handle checkbox desain
-            var checkboxes_desain = form.querySelectorAll('[name="checkbox_desain"]');
+            var checkboxes_desain = form.querySelectorAll('[name="checkbox_desain_mobile"]');
             var checkedDesain = [];
             checkboxes_desain.forEach(function(checkbox) {
                 if (checkbox.checked) {
@@ -1333,7 +1334,7 @@ function getPageUrl($page)
 
 
             // handle checkbox ruangan
-            var checkboxes_ruang = form.querySelectorAll('[name="checkbox_ruang"]');
+            var checkboxes_ruang = form.querySelectorAll('[name="checkbox_ruang_mobile"]');
 
             var checkedRuang = [];
             checkboxes_ruang.forEach(function(checkbox) {

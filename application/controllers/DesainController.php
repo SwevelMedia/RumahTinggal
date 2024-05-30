@@ -48,6 +48,7 @@ class DesainController extends CI_Controller
 
     $data['halaman'] = 'demo/koleksi';
     $data['title'] = 'Koleksi';
+    $data['produk_temu'] = '';
     $data['produk_favorit'] = $this->DesainModel->getKatalogProdukFavorit()->result();
     $data['koleksi_rumah'] = $this->DesainModel->getKatalogProdukNew()->result();
     $data['range_panjang_lahan'] = $this->DesainModel->getRangePanjangLahan()->row();
@@ -74,6 +75,113 @@ class DesainController extends CI_Controller
 
     // Get the filtered records from the database
     $data['koleksi_rumah'] = $this->DesainModel->getKatalogProdukNew($sort, $search, (int)$min_panjang, (int)$max_panjang, (int)$min_lebar, (int)$max_lebar, $lantai, $kamar, $gaya, $ruang, $min_biaya, $max_biaya)->result();
+
+    if (empty($data['koleksi_rumah'])) {
+      $filter_priority = [
+        'search', 'ruang', 'max_biaya', 'min_biaya', 'kamar', 'gaya', 'min_lebar', 'max_lebar', 'min_panjang', 'max_panjang', 'lantai'
+      ];
+
+      $original_filters = [
+        'lantai' => $lantai,
+        'min_panjang' => $min_panjang,
+        'max_panjang' => $max_panjang,
+        'min_lebar' => $min_lebar,
+        'max_lebar' => $max_lebar,
+        'gaya' => $gaya,
+        'kamar' => $kamar,
+        'min_biaya' => $min_biaya,
+        'max_biaya' => $max_biaya,
+        'ruang' => $ruang,
+        'search' => $search
+      ];
+
+      // $relaxed_filters = '';
+
+      foreach ($filter_priority as $filter) {
+        if (!empty($original_filters[$filter])) {
+          // $relaxed_filters .= $filter . ' ';
+          switch ($filter) {
+            case 'lantai':
+              // Relax lantai filter incrementally
+              if ($lantai !== '') {
+                $nearby_lantai = range($lantai - 1, $lantai + 1);
+                log_message('error', var_export($gaya, true));
+                foreach ($nearby_lantai as $l) {
+                  $data['koleksi_rumah'] = $this->DesainModel->getKatalogProdukNew(
+                    $sort,
+                    $search,
+                    (int)$min_panjang,
+                    (int)$max_panjang,
+                    (int)$min_lebar,
+                    (int)$max_lebar,
+                    $l,
+                    $kamar,
+                    $gaya,
+                    $ruang,
+                    $min_biaya,
+                    $max_biaya
+                  )->result();
+                  if (!empty($data['koleksi_rumah'])) {
+                    $data['produk_temu'] = ' yang mendekati: ';
+                    break 3;
+                  }
+                }
+              }
+              break;
+            case 'min_panjang':
+              $min_panjang = '';
+              break;
+            case 'max_panjang':
+              $max_panjang = '';
+              break;
+            case 'min_lebar':
+              $min_lebar = '';
+              break;
+            case 'max_lebar':
+              $max_lebar = '';
+              break;
+            case 'gaya':
+              $gaya = '';
+              break;
+            case 'kamar':
+              $kamar = '';
+              break;
+            case 'min_biaya':
+              $min_biaya = null;
+              break;
+            case 'max_biaya':
+              $max_biaya = null;
+              break;
+            case 'ruang':
+              $ruang = '';
+              break;
+            case 'search':
+              $search = '';
+              break;
+          }
+
+          $data['koleksi_rumah'] = $this->DesainModel->getKatalogProdukNew(
+            $sort,
+            $search,
+            (int)$min_panjang,
+            (int)$max_panjang,
+            (int)$min_lebar,
+            (int)$max_lebar,
+            $lantai,
+            $kamar,
+            $gaya,
+            $ruang,
+            $min_biaya,
+            $max_biaya
+          )->result();
+
+          if (!empty($data['koleksi_rumah'])) {
+            $data['produk_temu'] = ' yang mendekati: ';
+            break;
+          }
+        }
+      }
+    }
 
 
     $this->load->view('demo/layout/layout', $data);
