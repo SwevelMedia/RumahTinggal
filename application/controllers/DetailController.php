@@ -21,6 +21,8 @@ class DetailController extends CI_Controller
           $this->load->model("CustomerModel");
 
           $this->load->library('user_agent');
+
+          $this->load->library('session');
      }
 
 
@@ -705,6 +707,18 @@ class DetailController extends CI_Controller
 
      {
 
+          $id_customer = get_cookie('id_customer');
+
+          $session_id = $this->session->userdata('id_customer');
+
+          if ($id_customer !=  $session_id || $id_customer == null || $session_id == null) {
+               $this->output
+                    ->set_status_header(401)
+                    ->set_content_type('application/json')
+                    ->_display();
+               exit;
+          }
+
           parse_str(file_get_contents('php://input'), $data);
 
           $this->DetailModel->simpanDisukai($data);
@@ -739,6 +753,17 @@ class DetailController extends CI_Controller
      public function hapusDisukai($id_rumah, $id_customer)
 
      {
+          $id_customer = get_cookie('id_customer');
+
+          $session_id = $this->session->userdata('id_customer');
+
+          if ($id_customer !=  $session_id || $id_customer == null || $session_id == null) {
+               $this->output
+                    ->set_status_header(401)
+                    ->set_content_type('application/json')
+                    ->_display();
+               exit;
+          }
 
           $response = $this->DetailModel->hapusDisukai($id_rumah, $id_customer);
 
