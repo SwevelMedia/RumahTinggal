@@ -68,32 +68,36 @@
                         <a class="nav-link <?= ($title == "Layanan") ? 'active' : ''; ?>" href="<?= base_url('tentangKami') ?>">Layanan</a>
                     </li>
                 </ul>
-                <div id="menu-login">
-                    <div class="d-flex flex-column flex-lg-row gap-1">
-                        <a class="btn btn-outline-white d-none d-lg-block" onclick="modalLogin()">
-                            <span class="mx-2">Masuk</span>
-                        </a>
-                        <a class="btn btn-outline-white d-lg-none" data-bs-toggle="modal" data-bs-target="#modalLogin">Masuk</a>
-                        <a class="btn btn-primary rounded-3 fw-semibold d-none d-lg-block" onclick="modalDaftar()">
-                            <span class="mx-2">Daftar</span>
-                        </a>
-                    </div>
-                </div>
-                <!-- Bagian Menu Pengguna (dengan atribut style="display: none;" agar awalnya disembunyikan) -->
-                <div id="menu-pengguna" class="d-none">
-                    <div class="text-center">
-                        <div class="dropdown">
-                            <button class="btn custom-dropdown-button dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Halo, <span id="nama_customer"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" onclick="profil()">Profil</a></li>
-                                <li><a class="dropdown-item" onclick="logout()">Keluar</a></li>
-                            </ul>
+                <?php if (!$is_logged_in) : ?>
+                    <div id="menu-login">
+                        <div class="d-flex flex-column flex-lg-row gap-1">
+                            <a class="btn btn-outline-white d-none d-lg-block" onclick="modalLogin()">
+                                <span class="mx-2">Masuk</span>
+                            </a>
+                            <a class="btn btn-outline-white d-lg-none" data-bs-toggle="modal" data-bs-target="#modalLogin">Masuk</a>
+                            <a class="btn btn-primary rounded-3 fw-semibold d-none d-lg-block" onclick="modalDaftar()">
+                                <span class="mx-2">Daftar</span>
+                            </a>
                         </div>
                     </div>
+                <?php endif; ?>
+                <!-- Bagian Menu Pengguna (dengan atribut style="display: none;" agar awalnya disembunyikan) -->
+                <?php if ($is_logged_in) : ?>
+                    <div id="menu-pengguna" class="">
+                        <div class="text-center">
+                            <div class="dropdown">
+                                <button class="btn custom-dropdown-button dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Halo, <span id="nama_customer"><?= $customer_data->nama_customer ?></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" onclick="profil()">Profil</a></li>
+                                    <li><a class="dropdown-item" onclick="logout()">Keluar</a></li>
+                                </ul>
+                            </div>
+                        </div>
 
-                </div>
+                    </div>
+                <?php endif; ?>
                 <!-- <div class="d-flex flex-column flex-lg-row gap-1" id="menu-login">
                     <a class="btn btn-outline-white d-none d-lg-block" onclick="modalLogin()">
                         <span class="mx-2">Masuk</span>
@@ -154,7 +158,7 @@
             var excludedBaseUrls = [
                 "<?= base_url('api/simpanDisukai') ?>",
                 "<?= base_url('api/hapusDisukai') ?>",
-                "<?= base_url('api/getCustomerId') ?>",
+                // "<?= base_url('api/getCustomerId') ?>",
                 "<?= base_url('api/getDetailDenahLantai') ?>",
                 "<?= base_url('api/getDetailSpesifikasi') ?>"
             ];
@@ -170,59 +174,65 @@
     });
 
 
-    $(document).ready(function() {
-        // Get customer ID from cookies
-        let id_customer = Cookies.get('id_customer');
-        $.ajax({
-            url: "<?= base_url('api/getCustomerId/') ?>",
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                console.log(data)
-                if (id_customer != null && id_customer != '' && id_customer == data.id) {
-                    // If customer ID exists
-                    // Fetch customer information
-                    $.ajax({
-                        url: "<?= base_url('api/getCustomerById/') ?>" + id_customer,
-                        type: "GET",
-                        dataType: "JSON",
-                        success: function(data) {
-                            // Display customer name
-                            $('#menu-pengguna').removeClass('d-none');
-                            $('#nama_customer').html(data.nama_customer + '!');
-                        }
-                    });
+    // $(document).ready(function() {
+    //     // Get customer ID from cookies
+    //     let id_customer = Cookies.get('id_customer');
+    //     // $.ajax({
+    //     //     url: "<?= base_url('api/getCustomerId/') ?>",
+    //     //     type: "GET",
+    //     //     dataType: "JSON",
+    //     //     success: function(data) {
+    //     //         console.log(data)
+    //     if (id_customer != null && id_customer != '') {
+    //         // If customer ID exists
+    //         // Fetch customer information
+    //         $.ajax({
+    //             url: "<?= base_url('api/getCustomerById/') ?>" + id_customer,
+    //             type: "GET",
+    //             dataType: "JSON",
+    //             success: function(data) {
+    //                 if (id_customer == data.id_customer) {
+    //                     // Display customer name
+    //                     $('#menu-pengguna').removeClass('d-none');
+    //                     $('#nama_customer').html(data.nama_customer + '!');
 
-                    // Fetch liked houses
-                    $.ajax({
-                        url: "<?= base_url('api/getRumahSuka/') ?>" + id_customer,
-                        type: "GET",
-                        dataType: "JSON",
-                        success: function(data) {
-                            if (data != '') {
-                                // Iterate through liked houses and update their UI
-                                $.each(data, function(i, item) {
-                                    let id_rumah = item.id_rumah;
-                                    $('.like .fa[data-id="' + id_rumah + '"]').removeClass('fa-heart-o')
-                                        .addClass('fa-heart').css('color', 'red');
-                                });
-                            }
-                        }
-                    });
+    //                     // If customer ID exists, hide login menu and show user menu
+    //                     $('#menu-login').hide();
+    //                     $('#menu-pengguna').show();
 
-                    // If customer ID exists, hide login menu and show user menu
-                    $('#menu-login').hide();
-                    $('#menu-pengguna').show();
-                } else {
-                    // If no customer ID, show login menu and hide user menu
-                    $('#menu-login').show();
-                    $('#menu-pengguna').hide();
-                }
-            }
-        });
+    //                     // Fetch liked houses
+    //                     $.ajax({
+    //                         url: "<?= base_url('api/getRumahSuka/') ?>" + id_customer,
+    //                         type: "GET",
+    //                         dataType: "JSON",
+    //                         success: function(data) {
+    //                             if (data != '') {
+    //                                 // Iterate through liked houses and update their UI
+    //                                 $.each(data, function(i, item) {
+    //                                     let id_rumah = item.id_rumah;
+    //                                     $('.like .fa[data-id="' + id_rumah + '"]').removeClass('fa-heart-o')
+    //                                         .addClass('fa-heart').css('color', 'red');
+    //                                 });
+    //                             }
+    //                         }
+    //                     });
+    //                 } else {
+    //                     $('#menu-login').show();
+    //                     $('#menu-pengguna').hide();
+    //                 }
+    //             }
+    //         });
+
+    //     } else {
+    //         // If no customer ID, show login menu and hide user menu
+    //         $('#menu-login').show();
+    //         $('#menu-pengguna').hide();
+    //     }
+    //     //     }
+    //     // });
 
 
-    });
+    // });
 
     function logout() {
         window.location.href = "<?= base_url('logout') ?>";
