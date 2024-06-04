@@ -83,11 +83,13 @@
                                 </div>
                                 <div class="g_id_signin w-100 mb-3" data-width=319 data-type="standard"></div> -->
                                 <!-- <div id="google-button-daftar" class="w-100 mb-3"></div> -->
-                                <div id="g_id_onload" data-client_id="<?php echo $google_client_id ?>" data-callback="handleCredentialResponseLogin">
-                                </div>
-                                <div class="d-flex w-100 mb-3 justify-content-center align-items-center">
-                                    <div class="g_id_signin" data-type="standard"></div>
-                                </div>
+                                <?php if (!$is_logged_in) : ?>
+                                    <div id="g_id_onload" data-client_id="<?php echo $google_client_id ?>" data-callback="handleCredentialResponseLogin">
+                                    </div>
+                                    <div class="d-flex w-100 mb-3 justify-content-center align-items-center">
+                                        <div class="g_id_signin" data-type="standard"></div>
+                                    </div>
+                                <?php endif; ?>
 
 
                             </form>
