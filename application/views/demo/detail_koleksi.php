@@ -1971,86 +1971,87 @@ Also includes a counter of the slides
             });
             icon = $(this).find('svg');
             let id_rumah = $(this).data('id');
-            $.ajax({
-                url: "<?= base_url('api/getCustomerId/') ?>",
-                type: "GET",
-                dataType: "JSON",
-                success: function(data) {
-                    if (id_customer != null && id_customer != '' && id_customer == data.id) {
+            // $.ajax({
+            //     url: "<?= base_url('api/getCustomerId/') ?>",
+            //     type: "GET",
+            //     dataType: "JSON",
+            //     success: function(data) {
+            if (id_customer != null) {
 
-                        if (icon.attr('data-prefix') === "far") {
-                            $('#heart-like')
-                                .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
-                            $.ajax({
-                                url: "<?= base_url('api/simpanDisukai') ?>",
-                                type: "POST",
-                                data: {
-                                    "id_rumah": id_rumah,
-                                    "id_customer": id_customer,
-                                    "suka": 1
-                                },
-                                dataType: "JSON",
-                                success: function(data) {}
-                            });
-                        } else {
-                            $('#heart-like')
-                                .find('[data-fa-i2svg]').toggleClass('fa-solid').toggleClass('fa-regular').css('color', 'black');
-                            $.ajax({
-                                url: "<?= base_url('api/hapusDisukai/') ?>" + id_rumah + "/" + id_customer,
-                                type: "POST",
-                                dataType: "JSON",
-                                success: function(data) {}
-                            });
-                        }
-                    } else $('#modalLogin').modal('show');
+                if (icon.attr('data-prefix') === "far") {
+                    $('#heart-like')
+                        .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
+                    $.ajax({
+                        url: "<?= base_url('api/simpanDisukai') ?>",
+                        type: "POST",
+                        data: {
+                            "id_rumah": id_rumah,
+                            "id_customer": id_customer,
+                            "suka": 1
+                        },
+                        dataType: "JSON",
+                        success: function(data) {}
+                    });
+                } else {
+                    $('#heart-like')
+                        .find('[data-fa-i2svg]').toggleClass('fa-solid').toggleClass('fa-regular').css('color', 'black');
+                    $.ajax({
+                        url: "<?= base_url('api/hapusDisukai/') ?>" + id_rumah + "/" + id_customer,
+                        type: "POST",
+                        dataType: "JSON",
+                        success: function(data) {}
+                    });
                 }
-            })
+            } else $('#modalLogin').modal('show');
+            // }
+            //     })
 
-        });
+            // });
 
-        $('#heart-like-mobile').click(function() {
-            var id_customer = Cookies.get('id_customer', {
+            $('#heart-like-mobile').click(function() {
+                var id_customer = Cookies.get('id_customer', {
 
-                domain: 'rumahtinggal.id'
+                    domain: 'rumahtinggal.id'
+
+                });
+                let id_rumah = $(this).data('id');
+                icon = $(this).find('svg');
+                $.ajax({
+                    url: "<?= base_url('api/getCustomerId/') ?>",
+                    type: "GET",
+                    dataType: "JSON",
+                    success: function(data) {
+                        if (id_customer != null && id_customer != '') {
+
+                            if (icon.attr('data-prefix') === "far") {
+                                $('#heart-like-mobile')
+                                    .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
+                                $.ajax({
+                                    url: "<?= base_url('api/simpanDisukai') ?>",
+                                    type: "POST",
+                                    data: {
+                                        "id_rumah": id_rumah,
+                                        "id_customer": id_customer,
+                                        "suka": 1
+                                    },
+                                    dataType: "JSON",
+                                    success: function(data) {}
+                                });
+                            } else {
+                                $('#heart-like-mobile')
+                                    .find('[data-fa-i2svg]').toggleClass('fa-solid').toggleClass('fa-regular').css('color', 'black');
+                                $.ajax({
+                                    url: "<?= base_url('api/hapusDisukai/') ?>" + id_rumah + "/" + id_customer,
+                                    type: "POST",
+                                    dataType: "JSON",
+                                    success: function(data) {}
+                                });
+                            }
+                        } else $('#modalLogin').modal('show');
+                    }
+                })
 
             });
-            let id_rumah = $(this).data('id');
-            icon = $(this).find('svg');
-            $.ajax({
-                url: "<?= base_url('api/getCustomerId/') ?>",
-                type: "GET",
-                dataType: "JSON",
-                success: function(data) {
-                    if (id_customer != null && id_customer != '') {
-
-                        if (icon.attr('data-prefix') === "far") {
-                            $('#heart-like-mobile')
-                                .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
-                            $.ajax({
-                                url: "<?= base_url('api/simpanDisukai') ?>",
-                                type: "POST",
-                                data: {
-                                    "id_rumah": id_rumah,
-                                    "id_customer": id_customer,
-                                    "suka": 1
-                                },
-                                dataType: "JSON",
-                                success: function(data) {}
-                            });
-                        } else {
-                            $('#heart-like-mobile')
-                                .find('[data-fa-i2svg]').toggleClass('fa-solid').toggleClass('fa-regular').css('color', 'black');
-                            $.ajax({
-                                url: "<?= base_url('api/hapusDisukai/') ?>" + id_rumah + "/" + id_customer,
-                                type: "POST",
-                                dataType: "JSON",
-                                success: function(data) {}
-                            });
-                        }
-                    } else $('#modalLogin').modal('show');
-                }
-            })
-
         });
     });
 </script>
