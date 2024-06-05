@@ -1306,7 +1306,7 @@ function getPageUrl($page)
                 currentUrl += currentUrl.includes('?') ? '&search=' + searchQuery : '?search=' + searchQuery;
             }
 
-            // window.location.href = currentUrl;
+            window.location.href = currentUrl;
 
         })
     });
