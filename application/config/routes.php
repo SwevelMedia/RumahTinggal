@@ -380,6 +380,12 @@ $route['api/rumahBatalSuka/(:any)'] = 'DetailController/rumahBatalSuka/$1';
 
 $route['api/getRumahSuka/(:any)'] = 'DetailController/getRumahSuka/$1';
 
+// keranjang
+
+$route['api/simpanKeranjang'] = 'CustomerController/simpanKeranjang';
+
+$route['api/hapusKeranjang'] = 'CustomerController/hapusKeranjang';
+
 
 
 //dokumen 
