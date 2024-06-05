@@ -85,7 +85,7 @@
 
 <body class="bg-light">
     <div class="d-lg-none">
-        <div style="background-image: url('<?= base_url('assets/img/konsep/' . $konsep->foto) ?>')" class="card-img-top bg-card-detail">
+        <div style="background-image: url('<?= base_url('assets/img/konsep/' . $konsep->foto) ?>')" class="card-img-top bg-card-detail w-100">
         </div>
         <div class="p-3">
             <h5><?= $nama_rumah ?></h5>
@@ -151,7 +151,7 @@
                     </div>
                     <hr />
                     <small class="mt-3" style="color:grey; font-weight: normal;"><s>Rp<?= $harga_p2 ?></s></small>
-                    <h5 class="semibold">Rp <?= $harga_p2 ?></h5>
+                    <h5 class="semibold">Rp <?= $harga_promo_p2 ?></h5>
                     <button type="button" class="btn btn-primary w-100 mt-1" onclick="checkoutPaket(2,<?= $id_rumah ?>)">
                         <i class="fa-solid fa-cart-shopping  me-2 ms-3"></i> Beli Sekarang
                     </button>
@@ -415,7 +415,7 @@
     </div>
 
     <!-- modal proses pembayaran -->
-    <div class="modal fade" id="modalProsesBayar" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade w-100" id="modalProsesBayar" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="text-end">
@@ -425,11 +425,12 @@
                 <div class="p-3 ms-2">
                     <p id="nama-pembeli"></p>
                     <!-- semua paket non-gratis belum tersedia : change text when packets are available! -->
-                    <p>Paket yang Anda pilih secepatnya akan kami proses. Karena paket desain belum tersedia, mohon menghubungi admin untuk melanjutkan proses pemesanan Anda.</p>
+                    <p>Paket yang Anda pilih telah ditambahkan ke keranjang Anda dan akan kami proses secepatnya. Karena paket desain belum tersedia, mohon menghubungi admin untuk melanjutkan proses pemesanan Anda.</p>
                     <p id="batas-waktu"></p>
                 </div>
                 <div class="d-flex justify-content-center align-items-center mx-auto gap-3 mt-2 mb-3">
                     <button type="button" class="btn btn-outline-primary" onclick="tanyaDesain()">Tanya Admin</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="lihatKeranjang()">Lihat Keranjang</button>
                     <!-- <button type="button" class="btn btn-danger" id="lanjutOrder">Bayar Sekarang</button> -->
                     <!-- <button type="button" class="btn btn-primary" onclick="openTungguBayar()">Lanjut</button> -->
                 </div>
@@ -761,7 +762,7 @@
 
                 <div class="modal-body">
 
-                    <h5 class="mb-3">Silakan lengkapi profil sebelum checkout</h5>
+                    <h5 class="mb-3">Silakan lengkapi profil Anda</h5>
 
                     <form id="ubahCustomer">
 
@@ -1261,8 +1262,14 @@
                             dataType: "JSON",
 
                             success: function(data) {
-
-                                if (data == 3) {
+                                if ("<?php echo $laporan_desain->laporan_desain ?>" === "404") {
+                                    swal.fire({
+                                        title: 'Mohon Maaf',
+                                        text: 'Dokumen belum tersedia',
+                                        icon: 'error',
+                                        button: 'OK',
+                                    });
+                                } else if (data == 3) {
 
                                     swal.fire({
                                         title: 'Peringatan',
@@ -1366,7 +1373,14 @@
 
                             success: function(data) {
 
-                                if (data == 3) {
+                                if ("<?php echo $laporan_desain->laporan_desain ?>" === "404") {
+                                    swal.fire({
+                                        title: 'Mohon Maaf',
+                                        text: 'Dokumen belum tersedia',
+                                        icon: 'error',
+                                        button: 'OK',
+                                    });
+                                } else if (data == 3) {
 
                                     swal.fire({
                                         title: 'Peringatan',
@@ -1523,104 +1537,95 @@
     }
 
     $("#downloadPDF").click(function() {
+        if ("<?php echo $laporan_desain->laporan_desain ?>" !== "404") {
+            var id_customer = Cookies.get('id_customer', {
 
-        //function downloadPDF(){
+                domain: 'rumahtinggal.id'
 
+            });
 
+            var id_rumah = <?= $id_rumah ?>;
+            var download = 1;
 
-        //var a = $("<a />");
+            var timestamp = Math.floor(Date.now() / 1000);
 
-        //$("#downloadPDF a").attr("href", "<?= base_url('assets/dokumen/dokumen_gratis/') . $laporan_desain->laporan_desain ?>");
-
-        //$("#downloadPDF a").attr("download", "<?= $nama_rumah ?>");
-
-        // $("#downloadPDF").append(a);
-
-
-
-
-
-        var id_customer = Cookies.get('id_customer', {
-
-            domain: 'rumahtinggal.id'
-
-        });
-
-        var id_rumah = <?= $id_rumah ?>;
-        var download = 1;
-
-        var timestamp = Math.floor(Date.now() / 1000);
-
-        // Menggunakan timestamp sebagai bagian dari nomor invoice
-        var no_invoice = timestamp + "_123";
+            // Menggunakan timestamp sebagai bagian dari nomor invoice
+            var no_invoice = timestamp + "_123";
 
 
-        console.log("Nilai download:", download);
-        $.ajax({
+            console.log("Nilai download:", download);
+            $.ajax({
 
-            url: "<?php echo base_url('api/simpanDataDownload/') ?>" + id_rumah + "/" + id_customer,
+                url: "<?php echo base_url('api/simpanDataDownload/') ?>" + id_rumah + "/" + id_customer,
 
-            type: "POST",
+                type: "POST",
 
-            data: {
+                data: {
 
-                "download": download,
+                    "download": download,
 
-                "id_rumah": id_rumah,
+                    "id_rumah": id_rumah,
 
-                "id_customer": id_customer
+                    "id_customer": id_customer
 
-            },
+                },
 
-            dataType: "JSON",
+                dataType: "JSON",
 
-            success: function(data) {
+                success: function(data) {
 
-                $.ajax({
+                    $.ajax({
 
-                    url: "<?php echo base_url() ?>api/simpanPembelianGratis",
+                        url: "<?php echo base_url() ?>api/simpanPembelianGratis",
 
-                    cache: false,
+                        cache: false,
 
-                    type: "POST",
+                        type: "POST",
 
-                    data: {
+                        data: {
 
-                        "no_invoice": no_invoice,
+                            "no_invoice": no_invoice,
 
-                        "id_rumah": id_rumah,
+                            "id_rumah": id_rumah,
 
-                        "id_customer": id_customer,
+                            "id_customer": id_customer,
 
-                        "alamat": "Online",
+                            "alamat": "Online",
 
-                        "harga": 0,
+                            "harga": 0,
 
-                        "diskon": 0
+                            "diskon": 0
 
-                    },
+                        },
 
-                    dataType: "JSON",
+                        dataType: "JSON",
 
-                    success: function(resp) {
-                        //  $("#downloadPDF").attr("onclick", "").unbind("click");
-                        //    $("#downloadPDF a").click();
-                        // $("#downloadPDF a").remove();
-                        // toastr.success(data.Info, 'Informasi', opsi_toastr);
-                        $('#modalDownloadPDF').modal('hide');
-                        window.location.href = "<?= base_url('assets/dokumen/dokumen_gratis/') . $laporan_desain->laporan_desain ?>";
-                    }
-                });
+                        success: function(resp) {
+                            //  $("#downloadPDF").attr("onclick", "").unbind("click");
+                            //    $("#downloadPDF a").click();
+                            // $("#downloadPDF a").remove();
+                            // toastr.success(data.Info, 'Informasi', opsi_toastr);
+                            $('#modalDownloadPDF').modal('hide');
+                            window.location.href = "<?= base_url('assets/dokumen/dokumen_gratis/') . $laporan_desain->laporan_desain ?>";
+                        }
+                    });
 
 
 
 
 
-            },
+                },
 
-            error: function(jqHR, texStatus, errorThrown) {}
+                error: function(jqHR, texStatus, errorThrown) {}
 
-        });
+            });
+        }
+
+
+
+
+
+
 
         // }
 
@@ -1783,6 +1788,9 @@
 
     function showModalProsesBayar(paketawal, id_rumah) {
         var paket = sessionStorage.getItem('paket');
+        var id_customer = Cookies.get('id_customer', {
+            domain: 'rumahtinggal.id'
+        });
         $.ajax({
 
             url: "<?= base_url('checkout/') ?>" + paket + "/" + id_rumah,
@@ -1792,44 +1800,66 @@
             dataType: "JSON",
 
             success: function(data) {
-                $('#modalProsesBayar').modal('show');
-                $('#nama-pembeli').text('Halo ' + data.nama_customer);
-                $('#nama-rumah').text(data.nama_rumah);
-                $('#harga-desain').text('Rp' + data.harga);
-                $('#harga-desain1').text('Rp' + data.harga);
-                $('#tgl_beli').text(data.tgl_pembelian);
+                console.log(data.harga)
+
+                $.ajax({
+                    url: "<?= base_url('api/simpanKeranjang') ?>",
+                    type: "POST",
+                    data: {
+                        'id_customer': id_customer,
+                        'id_rumah': id_rumah,
+                        'paket': paket,
+                        'harga': parseInt(data.harga.replace(/\./g, "")),
+                        'diskon': data.diskon
+                    },
+                    dataType: "JSON",
+                    success: function(datakeranjang) {
+                        $('#modalProsesBayar').modal('show');
+                        $('#nama-pembeli').text('Halo ' + data.nama_customer);
+                        $('#nama-rumah').text(data.nama_rumah);
+                        $('#harga-desain').text('Rp' + data.harga);
+                        $('#harga-desain1').text('Rp' + data.harga);
+                        $('#tgl_beli').text(data.tgl_pembelian);
 
 
-                // $('#tgl_beli').text(data.tgl_pembelian);
-                $('#jenis-paket').text('Paket ' + data.paket);
-                // $('#batas-waktu').text('Pesanan Anda akan dibatalkan pada ' + data.batas_transfer);
-                if (data.konsep && data.konsep.foto) {
-                    // Menggunakan base_url untuk mendapatkan URL lengkap
-                    var fotoKonsepUrl = '<?= base_url('assets/img/konsep/') ?>' + data.konsep.foto;
+                        // $('#tgl_beli').text(data.tgl_pembelian);
+                        $('#jenis-paket').text('Paket ' + data.paket);
+                        // $('#batas-waktu').text('Pesanan Anda akan dibatalkan pada ' + data.batas_transfer);
+                        if (data.konsep && data.konsep.foto) {
+                            // Menggunakan base_url untuk mendapatkan URL lengkap
+                            var fotoKonsepUrl = '<?= base_url('assets/img/konsep/') ?>' + data.konsep.foto;
 
-                    // Perbarui atribut src
-                    $('#foto-rumah').attr('src', fotoKonsepUrl);
-                } else {
-                    console.error('Data konsep tidak valid.');
-                }
+                            // Perbarui atribut src
+                            $('#foto-rumah').attr('src', fotoKonsepUrl);
+                        } else {
+                            console.error('Data konsep tidak valid.');
+                        }
 
-                $('#nama-arsitek').text('By ' + data.nama_arsitek);
+                        $('#nama-arsitek').text('By ' + data.nama_arsitek);
 
-                $('#sub-total').text(data.harga);
+                        $('#sub-total').text(data.harga);
 
-                $('#ppn').text(data.ppn);
+                        $('#ppn').text(data.ppn);
 
-                $('#total').text(data.total);
+                        $('#total').text(data.total);
 
-                $('#alamat_pengiriman').val(data.alamat);
+                        $('#alamat_pengiriman').val(data.alamat);
 
-                // $('#modalOrder').modal('show');
+                        // $('#modalOrder').modal('show');
 
-                // $('#modalOrder').modal('toggle');
+                        // $('#modalOrder').modal('toggle');
 
-                // $('#pop_up_website_coba').modal('show');
+                        // $('#pop_up_website_coba').modal('show');
 
-                //$('#modalOrder').modal('hide');
+                        //$('#modalOrder').modal('hide');
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+
+                        modalLogin();
+
+                    }
+
+                })
 
             },
 
@@ -2275,7 +2305,7 @@
 
         let nama_desain = $('#nama_rumah').text();
 
-        let text = `Halo Admin RumahTinggal.id,\nSaya telah melakukan pembelian desain rumah *` + nama_desain + `* untuk Paket ` + paket + `. Apakah saya bisa mendapatkan informasi lebih lanjut tentang desain dan paket tersebut?\nTerima kasih`;
+        let text = `Halo Admin RumahTinggal.id,\nSaya telah melakukan pemesanan desain rumah *` + nama_desain + `* untuk Paket ` + paket + `. Apakah saya bisa mendapatkan informasi lebih lanjut tentang desain dan paket tersebut?\nTerima kasih`;
 
         let phone = '628112636228';
 
@@ -2293,5 +2323,12 @@
 
         window.open(url, '_blank');
 
+    }
+
+    function lihatKeranjang() {
+        var id_customer = Cookies.get('id_customer', {
+            domain: 'rumahtinggal.id'
+        });
+        window.location.href = "<?php echo base_url("/profil") ?>/" + id_customer
     }
 </script>
