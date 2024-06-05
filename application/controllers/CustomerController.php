@@ -22,6 +22,7 @@ class CustomerController extends CI_Controller
     parent::__construct();
     $this->load->driver('cache', array('adapter' => 'file'));
     $this->load->model('CustomerModel');
+    $this->load->model('KeranjangModel');
     $this->load->library('session');
 
     /*$this->load->library('google');
@@ -213,6 +214,33 @@ class CustomerController extends CI_Controller
 
   public function getCustomerById($id)
   {
+
+    $id_customer = get_cookie('id_customer');
+
+    $session_id = $this->session->userdata('id_customer');
+
+    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null) {
+      $this->output
+        ->set_status_header(401)
+        ->set_content_type('application/json')
+        ->_display();
+      exit;
+    }
+    // Define a unique cache key for the output
+    $cache_key = 'getCustomerById_' . md5($this->session->userdata('id_customer'));
+
+    // Check if the response is already cached
+    $cached_response = $this->cache->get($cache_key);
+
+    if ($cached_response !== FALSE) {
+      // Output the cached response
+      $this->output
+        ->set_status_header(200)
+        ->set_content_type('application/json')
+        ->set_output($cached_response)
+        ->_display();
+      exit;
+    }
 
     $response = $this->CustomerModel->getCustomerById($id)->row();
 
@@ -611,6 +639,7 @@ class CustomerController extends CI_Controller
 
       set_cookie('id_customer', $customer->id_customer, time() + 86400);
       $this->session->set_userdata('id_customer', $customer->id_customer);
+      $this->session->set_userdata('customer_data', $customer);
 
       $response = array(
 
@@ -650,6 +679,7 @@ class CustomerController extends CI_Controller
     if ($customer != null) {
       set_cookie('id_customer', $customer->id_customer, time() + 86400);
       $this->session->set_userdata('id_customer', $customer->id_customer);
+      $this->session->set_userdata('customer_data', $customer);
       $response = array(
         'Success' => true,
         'info' => 'Selamat datang' . $customer->nama_customer . '.'
@@ -659,6 +689,8 @@ class CustomerController extends CI_Controller
       $customer = $this->CustomerModel->getCustomerByEmail($email)->row();
       if ($customer != null) {
         set_cookie('id_customer', $customer->id_customer, time() + 86400);
+        $this->session->set_userdata('id_customer', $customer->id_customer);
+        $this->session->set_userdata('customer_data', $customer);
 
         $response = array(
           'Success' => true,
@@ -753,6 +785,7 @@ class CustomerController extends CI_Controller
     unset($_SESSION['access_token']);
 
     $this->session->unset_userdata('id_customer');
+    $this->session->unset_userdata('customer_data');
 
     delete_cookie('id_customer');
 
@@ -784,7 +817,7 @@ class CustomerController extends CI_Controller
 
     $data['dokumen'] = $this->CustomerModel->getDokumen($id_customer);
 
-
+    $data['keranjang'] = $this->KeranjangModel->getKeranjangCustomer($id_customer);
 
     $this->load->view('demo/layout/layout', $data);
 
@@ -1468,17 +1501,92 @@ class CustomerController extends CI_Controller
     exit;
   }
 
+  public function simpanKeranjang()
+  {
+    $id_customer = get_cookie('id_customer');
 
+    $session_id = $this->session->userdata('id_customer');
 
+    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null) {
+      $this->output
+        ->set_status_header(401)
+        ->set_content_type('application/json')
+        ->_display();
+      exit;
+    }
 
+    parse_str(file_get_contents('php://input'), $data);
 
+    $existingPaket = $this->KeranjangModel->getKeranjangCustomerPaketRumah($data['id_customer'], $data['id_rumah'], $data['paket'])->result();
+    if (empty($existingPaket)) {
+      $this->KeranjangModel->simpanKeranjang($data);
+    }
 
+    $response = array(
+      'Success' => true,
+      'Info' => 'Keranjang disimpan'
+    );
 
+    $this->output
+      ->set_status_header(201)
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+      ->_display();
+    exit;
+  }
 
+  public function getKeranjangCustomer()
+  {
 
+    $id_customer = get_cookie('id_customer');
 
+    $session_id = $this->session->userdata('id_customer');
 
+    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null) {
+      $this->output
+        ->set_status_header(401)
+        ->set_content_type('application/json')
+        ->_display();
+      exit;
+    }
 
+    $response = $this->KeranjangModel->getKeranjangCustomer($id_customer)->result();
+    $this->output
+      ->set_status_header(200)
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+      ->_display();
+    exit;
+  }
+
+  public function hapusKeranjang()
+  {
+    $id_customer = get_cookie('id_customer');
+
+    $session_id = $this->session->userdata('id_customer');
+
+    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null) {
+      $this->output
+        ->set_status_header(401)
+        ->set_content_type('application/json')
+        ->_display();
+      exit;
+    }
+
+    parse_str(file_get_contents('php://input'), $data);
+    $this->KeranjangModel->hapusKeranjang($data['id_customer'], $data['id_rumah'], $data['paket']);
+    $response = array(
+      'Success' => true,
+      'Info' => 'Keranjang berhasil dihapus!'
+    );
+
+    $this->output
+      ->set_status_header(200)
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+      ->_display();
+    exit;
+  }
 
 
 
