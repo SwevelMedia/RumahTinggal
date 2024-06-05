@@ -350,7 +350,7 @@ Also includes a counter of the slides
         <div class="d-flex justify-content-between gap-2 align-items-center mt-2">
             <h2 class='nama-rumah-mobile' id="nama_rumah" style='margin-bottom:0;'><?= $konsep->nama_rumah ?></h2>
             <div class="d-flex">
-                <div id="heart-like-mobile" data-id="<?php echo $id_rumah ?>"><i class="fa-regular fa-heart me-3 fs-3"></i></div>
+                <div id="heart-like-mobile" data-id="<?php echo $id_rumah ?>"><i class="fa-regular fa-heart me-3 fs-3" style="cursor:pointer;"></i></div>
 
                 <div class="share-mobile" style="position:relative;">
                     <i class="fa-solid fa-share fs-3"></i>
@@ -1432,18 +1432,23 @@ Also includes a counter of the slides
 
         });
 
-        $.ajax({
-            url: "<?= base_url('api/getCustomerId/') ?>",
-            type: "GET",
-            dataType: "JSON",
-            success: function(data) {
-                if (id_customer != null && id_customer != '' && id_customer == data.id) {
-                    window.location.href = "<?= base_url('paket_pembelian/') . $id_rumah ?>"
-                } else {
-                    $('#modalLogin').modal('show');
-                }
-            }
-        })
+        // $.ajax({
+        //     url: "<?= base_url('api/getCustomerId/') ?>",
+        //     type: "GET",
+        //     dataType: "JSON",
+        //     success: function(data) {
+        //         if (id_customer != null && id_customer != '' && id_customer == data.id) {
+        //             window.location.href = "<?= base_url('paket_pembelian/') . $id_rumah ?>"
+        //         } else {
+        //             $('#modalLogin').modal('show');
+        //         }
+        //     }
+        // })
+        if ("<?= $is_logged_in ?>" != "" && id_customer != null && id_customer != '') {
+            window.location.href = "<?= base_url('paket_pembelian/') . $id_rumah ?>"
+        } else {
+            $('#modalLogin').modal('show');
+        }
 
 
     }
@@ -2007,51 +2012,51 @@ Also includes a counter of the slides
             //     })
 
             // });
+        });
 
-            $('#heart-like-mobile').click(function() {
-                var id_customer = Cookies.get('id_customer', {
+        $('#heart-like-mobile').click(function() {
+            var id_customer = Cookies.get('id_customer', {
 
-                    domain: 'rumahtinggal.id'
-
-                });
-                let id_rumah = $(this).data('id');
-                icon = $(this).find('svg');
-                $.ajax({
-                    url: "<?= base_url('api/getCustomerId/') ?>",
-                    type: "GET",
-                    dataType: "JSON",
-                    success: function(data) {
-                        if (id_customer != null && id_customer != '') {
-
-                            if (icon.attr('data-prefix') === "far") {
-                                $('#heart-like-mobile')
-                                    .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
-                                $.ajax({
-                                    url: "<?= base_url('api/simpanDisukai') ?>",
-                                    type: "POST",
-                                    data: {
-                                        "id_rumah": id_rumah,
-                                        "id_customer": id_customer,
-                                        "suka": 1
-                                    },
-                                    dataType: "JSON",
-                                    success: function(data) {}
-                                });
-                            } else {
-                                $('#heart-like-mobile')
-                                    .find('[data-fa-i2svg]').toggleClass('fa-solid').toggleClass('fa-regular').css('color', 'black');
-                                $.ajax({
-                                    url: "<?= base_url('api/hapusDisukai/') ?>" + id_rumah + "/" + id_customer,
-                                    type: "POST",
-                                    dataType: "JSON",
-                                    success: function(data) {}
-                                });
-                            }
-                        } else $('#modalLogin').modal('show');
-                    }
-                })
+                domain: 'rumahtinggal.id'
 
             });
+            let id_rumah = $(this).data('id');
+            icon = $(this).find('svg');
+            $.ajax({
+                url: "<?= base_url('api/getCustomerId/') ?>",
+                type: "GET",
+                dataType: "JSON",
+                success: function(data) {
+                    if (id_customer != null && id_customer != '') {
+
+                        if (icon.attr('data-prefix') === "far") {
+                            $('#heart-like-mobile')
+                                .find('[data-fa-i2svg]').toggleClass('fa-regular').toggleClass('fa-solid').css('color', 'red');
+                            $.ajax({
+                                url: "<?= base_url('api/simpanDisukai') ?>",
+                                type: "POST",
+                                data: {
+                                    "id_rumah": id_rumah,
+                                    "id_customer": id_customer,
+                                    "suka": 1
+                                },
+                                dataType: "JSON",
+                                success: function(data) {}
+                            });
+                        } else {
+                            $('#heart-like-mobile')
+                                .find('[data-fa-i2svg]').toggleClass('fa-solid').toggleClass('fa-regular').css('color', 'black');
+                            $.ajax({
+                                url: "<?= base_url('api/hapusDisukai/') ?>" + id_rumah + "/" + id_customer,
+                                type: "POST",
+                                dataType: "JSON",
+                                success: function(data) {}
+                            });
+                        }
+                    } else $('#modalLogin').modal('show');
+                }
+            })
+
         });
     });
 </script>
