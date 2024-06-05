@@ -415,10 +415,10 @@ class PembelianController extends CI_Controller
     // $laporan_desain = $this->DesainModel->getDokumenRumahGratis($id)->row();
 
     $data['laporan_desain'] = $this->DesainModel->getDokumenRumahGratis($id)->row();
-
-
-
-
+    if (empty($data['laporan_desain'])) {
+      $data['laporan_desain'] = new stdClass();
+      $data['laporan_desain']->laporan_desain = "404";
+    }
 
     $promo = $this->PembelianModel->getRumahPromo($id)->row();
 
