@@ -245,7 +245,7 @@
                     confirmButtonColor: "#056BB7"
                 }).then(() => {
                     let url = $(location).attr('href');
-                    window.location.href = "<?= base_url() ?>";
+                    window.location.href = url;
                 });
             },
             error: function(jqXHR, textStatus, errorThrown) {
