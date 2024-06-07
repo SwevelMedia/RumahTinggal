@@ -392,7 +392,8 @@ $config['encryption_key'] = 'uiuyfgfkjehfe3589789erjhgregther346346';
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
+$config['sess_expiration'] = 604800; // Session lasts for 1 week
+$config['sess_expire_on_close'] = FALSE;
 $config['sess_encrypt_cookie'] = TRUE;
 $config['sess_use_database'] = TRUE;
 $config['sess_save_path'] = sys_get_temp_dir(); //NULL;

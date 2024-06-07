@@ -637,7 +637,8 @@ class CustomerController extends CI_Controller
 
     if (password_verify($pass, $customer->password)) {
 
-      set_cookie('id_customer', $customer->id_customer, time() + 86400);
+      $cookie_expiration = 7 * 24 * 60 * 60; // 1 week
+      set_cookie('id_customer', $customer->id_customer, $cookie_expiration);
       $this->session->set_userdata('id_customer', $customer->id_customer);
       $this->session->set_userdata('customer_data', $customer);
 
@@ -677,7 +678,8 @@ class CustomerController extends CI_Controller
     parse_str(file_get_contents('php://input'), $data);
     $customer = $this->CustomerModel->getCustomerByEmail($email)->row();
     if ($customer != null) {
-      set_cookie('id_customer', $customer->id_customer, time() + 86400);
+      $cookie_expiration = 7 * 24 * 60 * 60; // 1 week
+      set_cookie('id_customer', $customer->id_customer, $cookie_expiration);
       $this->session->set_userdata('id_customer', $customer->id_customer);
       $this->session->set_userdata('customer_data', $customer);
       $response = array(
@@ -781,6 +783,7 @@ class CustomerController extends CI_Controller
 
   public function logout()
   {
+    $return_url = $this->input->get('return_url');
 
     unset($_SESSION['access_token']);
 
@@ -790,7 +793,11 @@ class CustomerController extends CI_Controller
     delete_cookie('id_customer');
 
     delete_cookie('g_state');
-    redirect(base_url());
+    if ($return_url) {
+      redirect($return_url);
+    } else {
+      redirect(base_url());
+    }
   }
 
 
