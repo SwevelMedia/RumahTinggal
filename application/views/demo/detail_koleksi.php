@@ -1052,7 +1052,7 @@ Also includes a counter of the slides
                     <?php foreach ($produk_rekomendasi as $item) { ?>
                         <div class="card product-card border-0 shadow-sm mb-3" style="height:99%;">
                             <div class="img-container">
-                                <img src="<?= base_url('assets/img/desain/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
+                                <img src="<?= base_url('assets/img/desain_thumbnail/' . $item->foto) ?>" class="img-card-produk card-img-top" alt="" onload='updateHeight()'>
                             </div>
 
                             <div class="card-body card-home">
