@@ -235,7 +235,8 @@
     // });
 
     function logout() {
-        window.location.href = "<?= base_url('logout') ?>";
+        var currentUrl = window.location.href;
+        window.location.href = "<?= base_url('logout') ?>?return_url=" + encodeURIComponent(currentUrl);
     }
 
     function profil() {
