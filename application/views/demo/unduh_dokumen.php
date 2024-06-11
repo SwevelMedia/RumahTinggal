@@ -97,7 +97,7 @@
                         </div>
                         <?php
                         // Mengecek nilai paket, dan tombol akan menyala jika paket adalah 1, 2, atau 3
-                        $unduhButtonState = ($unduh->paket == 1 || $unduh->paket == 2 || $unduh->paket == 3) ? '' : 'disabled';
+                        $unduhButtonState = ($unduh->paket == 2 || $unduh->paket == 3) ? '' : 'disabled';
                         ?>
 
                         <button type="button" class="btn btn-primary" <?php echo $unduhButtonState; ?> onclick="unduhDokumen('<?= base_url('assets/dokumen/dokumen_gratis/') ?>' + '<?= $unduh->laporan_desain ?>')">Unduh</button>
