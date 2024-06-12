@@ -543,8 +543,13 @@
                                                 <div class="d-flex flex-column">
                                                     <div class="d-none d-lg-block"><strong>#<?= $trns->no_invoice ?></strong></div>
                                                     <small><?= $tgl_pembelian ?></small>
-                                                    <h5 class="bold mt-3 d-none d-lg-block"><?= $trns->nama_rumah ?></h5>
-                                                    <h5 class="bold mt-3 d-lg-none name-rumah"><?= $trns->nama_rumah ?></h5>
+                                                    <a href="<?php echo base_url('detail_koleksi/') . $trns->id_rumah ?>">
+                                                        <h5 class="bold mt-3 d-none d-lg-block"><?= $trns->nama_rumah ?></h5>
+                                                    </a>
+                                                    <a href="<?php echo base_url('detail_koleksi/') . $trns->id_rumah ?>">
+                                                        <h5 class="bold mt-3 d-lg-none name-rumah"><?= $trns->nama_rumah ?></h5>
+                                                    </a>
+
                                                     <small>By <?= $trns->nama_arsitek ?></small>
                                                     <div class="card-lunas mt-1 p-1 d-lg-none mt-3" style="width:fit-content;">
                                                         <?php
@@ -855,8 +860,13 @@
                                                 <div class="d-flex flex-column">
 
                                                     <small><?= $tgl_pembelian ?></small>
-                                                    <h5 class="bold mt-3 d-none d-lg-block"><?= $trns->nama_rumah ?></h5>
-                                                    <h5 class="bold mt-3 d-lg-none name-rumah"><?= $trns->nama_rumah ?></h5>
+                                                    <a href="<?php echo base_url('detail_koleksi/') . $trns->id_rumah ?>">
+                                                        <h5 class="bold mt-3 d-none d-lg-block"><?= $trns->nama_rumah ?></h5>
+                                                    </a>
+                                                    <a href="<?php echo base_url('detail_koleksi/') . $trns->id_rumah ?>">
+                                                        <h5 class="bold mt-3 d-lg-none name-rumah"><?= $trns->nama_rumah ?></h5>
+                                                    </a>
+
                                                     <small>By <?= $trns->nama_arsitek ?></small>
                                                     <div class="mt-1 p-1 d-lg-none mt-lg-3" style="width:fit-content;">
                                                         <?php
