@@ -207,7 +207,7 @@
             <thead>
                 <tr>
                     <th width="100%" class="mt-2" style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="background-image: url('<?= base_url('assets/img/konsep/' . $konsep->foto) ?>'); width:100%; height:240px; background-position:top; background-size:cover;" class="img-fluid bg-card-paket"></div>
+                        <div style="background-image: url('<?= base_url('assets/img/desain_thumbnail/' . $konsep->foto) ?>'); width:100%; height:240px; background-position:top; background-size:cover;" class="img-fluid bg-card-paket"></div>
                         <h4 class="p-2" id="nama_rumah"><?= $nama_rumah ?></h4>
                     </th>
                     <th width="18%">
