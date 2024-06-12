@@ -104,7 +104,7 @@ class CustomerModel extends CI_Model
 
     function getTransaksi($id_customer)
     {
-        $this->db->select('pembelian.*, rumah.nama_rumah, rumah.foto, ROUND(rumah.lebar_lahan) AS lebar_lahan, ROUND(rumah.panjang_lahan) AS panjang_lahan, ROUND(rumah.luas_bangunan) AS luas_bangunan, MAX(ruang_rumah.lantai) AS lantai, SUM(CASE WHEN ruang_rumah.id_ruang = 7 THEN 1 ELSE 0 END) AS kamar_tidur, SUM(CASE WHEN (ruang_rumah.id_ruang = 14 OR ruang_rumah.id_ruang = 15) THEN 1 ELSE 0 END) AS toilet, arsitek.id_arsitek, arsitek.nama_arsitek, pembelian.no_invoice,pembelian.harga, CASE WHEN pembelian.paket = 1 THEN "Lite" ELSE "Premium" END AS jenis_paket', FALSE)
+        $this->db->select('pembelian.*, rumah.nama_rumah, rumah.foto, ROUND(rumah.lebar_lahan) AS lebar_lahan, ROUND(rumah.panjang_lahan) AS panjang_lahan, ROUND(rumah.luas_bangunan) AS luas_bangunan, MAX(ruang_rumah.lantai) AS lantai, SUM(CASE WHEN ruang_rumah.id_ruang = 7 THEN 1 ELSE 0 END) AS kamar_tidur, SUM(CASE WHEN (ruang_rumah.id_ruang = 14 OR ruang_rumah.id_ruang = 15) THEN 1 ELSE 0 END) AS toilet, arsitek.id_arsitek, arsitek.nama_arsitek, pembelian.no_invoice,pembelian.harga, CASE WHEN pembelian.paket = 0 THEN "Lite" ELSE "Premium" END AS jenis_paket', FALSE)
             ->from($this->tabel_pembelian)
             ->where('id_customer', $id_customer)
             ->where('(status <> 1 AND tgl_expired > NOW() OR status = 1)', NULL, FALSE)
@@ -118,11 +118,12 @@ class CustomerModel extends CI_Model
         return $query->result();
     }
 
-    public function getTransaksiByIdRumah($id_rumah)
+    public function getTransaksiByIdRumah($id_rumah, $id_customer)
     {
-        $this->db->select('pembelian.*, rumah.nama_rumah, rumah.foto, ROUND(rumah.lebar_lahan) AS lebar_lahan, ROUND(rumah.panjang_lahan) AS panjang_lahan, ROUND(rumah.luas_bangunan) AS luas_bangunan, MAX(ruang_rumah.lantai) AS lantai, SUM(CASE WHEN ruang_rumah.id_ruang = 7 THEN 1 ELSE 0 END) AS kamar_tidur, SUM(CASE WHEN (ruang_rumah.id_ruang = 14 OR ruang_rumah.id_ruang = 15) THEN 1 ELSE 0 END) AS toilet, arsitek.id_arsitek, arsitek.nama_arsitek, pembelian.no_invoice,pembelian.harga, CASE WHEN pembelian.paket = 1 THEN "Lite" ELSE "Premium" END AS jenis_paket', FALSE)
+        $this->db->select('pembelian.*, rumah.nama_rumah, rumah.foto, ROUND(rumah.lebar_lahan) AS lebar_lahan, ROUND(rumah.panjang_lahan) AS panjang_lahan, ROUND(rumah.luas_bangunan) AS luas_bangunan, MAX(ruang_rumah.lantai) AS lantai, SUM(CASE WHEN ruang_rumah.id_ruang = 7 THEN 1 ELSE 0 END) AS kamar_tidur, SUM(CASE WHEN (ruang_rumah.id_ruang = 14 OR ruang_rumah.id_ruang = 15) THEN 1 ELSE 0 END) AS toilet, arsitek.id_arsitek, arsitek.nama_arsitek, pembelian.no_invoice,pembelian.harga, CASE WHEN pembelian.paket = 0 THEN "Lite" ELSE "Premium" END AS jenis_paket', FALSE)
             ->from($this->tabel_pembelian)
             ->where('pembelian.id_rumah', $id_rumah)  // Filter berdasarkan id_rumah
+            ->where('pembelian.id_customer', $id_customer)
             ->where('(pembelian.status <> 1 AND pembelian.tgl_expired > NOW() OR pembelian.status = 1)', NULL, FALSE)
             ->join('rumah', 'rumah.id_rumah = pembelian.id_rumah')
             ->join('arsitek', 'rumah.id_arsitek = arsitek.id_arsitek')
