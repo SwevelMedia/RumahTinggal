@@ -384,8 +384,8 @@ class PembelianController extends CI_Controller
 
 
     $cookie_customer = get_cookie('id_customer');
-    if ($cookie_customer !=  $session_id) {
-      show_404();
+    if ($cookie_customer !=  $session_id || $cookie_customer == null || $session_id == null) {
+      redirect(base_url());
       return;
     }
 
