@@ -122,7 +122,7 @@ class PembelianModel extends CI_Model
 
       'alamat_pengiriman' => $data['alamat'],
 
-      'paket' => 1,
+      'paket' => 0, //SHOULD BE ZERO
 
       'harga' => $data['harga'],
 
