@@ -81,7 +81,7 @@
                         </div>
                         <?php
                         // Mengecek nilai paket, dan tombol akan menyala jika paket adalah 1, 2, atau 3
-                        $unduhButtonState = ($unduh->paket == 1 || $unduh->paket == 2 || $unduh->paket == 3) ? '' : 'disabled';
+                        $unduhButtonState = ($unduh->paket == 0 || $unduh->paket == 1 || $unduh->paket == 2 || $unduh->paket == 3) ? '' : 'disabled';
                         ?>
 
                         <button type="button" class="btn btn-primary" <?php echo $unduhButtonState; ?> onclick="unduhDokumen('<?= base_url('assets/dokumen/dokumen_gratis/') ?>' + '<?= $unduh->laporan_desain ?>')">Unduh</button>
@@ -97,7 +97,7 @@
                         </div>
                         <?php
                         // Mengecek nilai paket, dan tombol akan menyala jika paket adalah 1, 2, atau 3
-                        $unduhButtonState = ($unduh->paket == 2 || $unduh->paket == 3) ? '' : 'disabled';
+                        $unduhButtonState = ($unduh->paket == 1 || $unduh->paket == 2 || $unduh->paket == 3) ? '' : 'disabled';
                         ?>
 
                         <button type="button" class="btn btn-primary" <?php echo $unduhButtonState; ?> onclick="unduhDokumen('<?= base_url('assets/dokumen/dokumen_gratis/') ?>' + '<?= $unduh->laporan_desain ?>')">Unduh</button>
@@ -129,7 +129,7 @@
 
                         <?php
                         // Mengecek nilai paket, dan tombol akan menyala jika paket adalah 1, 2, atau 3
-                        $unduhButtonState = ($unduh->paket == 2 || $unduh->paket == 3) ? '' : 'disabled';
+                        $unduhButtonState = ($unduh->paket == 3) ? '' : 'disabled';
                         ?>
 
                         <button type="button" class="btn btn-primary" <?php echo $unduhButtonState; ?> onclick="unduhDokumen('<?= base_url('assets/dokumen/dokumen_gratis/') ?>' + '<?= $unduh->laporan_desain ?>')">Unduh</button>
@@ -146,11 +146,15 @@
                         <div class="d-flex align-items-center gap-3">
                             <?php
                             // Mengecek nilai paket, dan tombol "Tanya Kami" akan menyala untuk paket 2 dan 3
-                            $tanyaKamiButtonState = ($unduh->paket == 2 || $unduh->paket == 3) ? '' : 'disabled';
+                            $tanyaKamiButtonState = ($unduh->paket == 2 || $unduh->paket == 3 || $unduh->paket == 1) ? '' : 'disabled';
+                            ?>
+                            <?php
+                            // Mengecek nilai paket, dan tombol akan menyala jika paket adalah 1, 2, atau 3
+                            $unduhButtonState = ($unduh->paket == 3) ? '' : 'disabled';
                             ?>
 
                             <button type="button" class="btn btn-success d-none d-lg-block" <?php echo $tanyaKamiButtonState; ?>>Tanya Kami</button>
-                            <button type="button" class="btn btn-secondary">Unduh</button>
+                            <button type="button" class="btn btn-secondary" <?php echo $unduhButtonState; ?>>Unduh</button>
                             <!-- <button type="button" class="btn btn-primary">Unduh</button> -->
                         </div>
 
