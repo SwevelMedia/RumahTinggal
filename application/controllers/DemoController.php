@@ -16,6 +16,7 @@ class DemoController extends CI_Controller
         $this->load->model('PembelianModel');
         // $this->load->model('SearchModel');
         $this->load->model('BerandaModel');
+        $this->load->library('session');
     }
 
     public function index()
@@ -304,7 +305,15 @@ class DemoController extends CI_Controller
 
     public function unduhDokumen($id_rumah)
     {
-        $data['transaksiku'] = $this->CustomerModel->getTransaksiByIdRumah($id_rumah)[0];
+        $id_customer = get_cookie('id_customer');
+
+        $session_id = $this->session->userdata('id_customer');
+
+        if ($id_customer !=  $session_id || $id_customer == null || $session_id == null) {
+            redirect(base_url());
+        }
+
+        $data['transaksiku'] = $this->CustomerModel->getTransaksiByIdRumah($id_rumah, $id_customer)[0];
         $data['unduh'] = $this->CustomerModel->getDokumen($id_rumah)->row();
         $data['halaman'] = 'demo/unduh_dokumen';
         $data['title'] = 'Unduh Dokumen';
