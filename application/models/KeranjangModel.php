@@ -24,7 +24,7 @@ class KeranjangModel extends CI_Model
             SUM(CASE WHEN ruang_rumah.id_ruang IN (14, 15) THEN 1 ELSE 0 END) AS toilet, 
             arsitek.id_arsitek, 
             arsitek.nama_arsitek, 
-            CASE WHEN keranjang.paket = 1 THEN "Lite" ELSE "Premium" END AS jenis_paket',
+            CASE WHEN keranjang.paket = 0 THEN "Lite" ELSE "Premium" END AS jenis_paket',
             FALSE
         )
             ->from("keranjang")
