@@ -1148,6 +1148,7 @@
         div.css('height', width);
 
         var cards2 = document.querySelectorAll('.owl-carousel-two .card');
+        var cards1 = document.querySelectorAll('.owl-carousel-one .card');
 
         var maxHeight2 = 0;
         cards2.forEach(function(card2) {
@@ -1155,6 +1156,9 @@
         });
         cards2.forEach(function(card2) {
             card2.style.height = maxHeight2 + 'px';
+        });
+        cards1.forEach(function(card1) {
+            card1.style.height = maxHeight2 + 'px';
         });
     }
 
