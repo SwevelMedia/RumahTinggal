@@ -89,7 +89,8 @@ class DesainModel extends CI_Model
 
 
 
-    return $this->db->query("SELECT a.kamar_tidur,a.toilet,a.toiletwc,a.id_rumah,a.foto, a.nama_rumah, a.id_arsitek, arsitek.nama_arsitek,ROUND(a.luas_lahan) AS luas_lahan, ROUND(a.lebar_lahan) AS lebar_lahan , ROUND(a.panjang_lahan) AS panjang_lahan, ROUND(a.luas_bangunan) AS luas_bangunan, a.lantai,a.dilihat,a.suka,round(AVG(a.rating),1) AS rating FROM (SELECT b.*, IFNULL(ulasan.rating,0) AS rating FROM ({$this->from}) b LEFT JOIN ulasan ON b.id_rumah = ulasan.id_rumah) a,arsitek WHERE a.id_arsitek=arsitek.id_arsitek GROUP BY id_rumah order by suka desc limit 10");
+    return $this->db->query("SELECT a.kamar_tidur,a.toilet,a.toiletwc,a.id_rumah,a.foto, a.nama_rumah, a.id_arsitek, arsitek.nama_arsitek,ROUND(a.luas_lahan) AS luas_lahan, ROUND(a.lebar_lahan) AS lebar_lahan , ROUND(a.panjang_lahan) AS panjang_lahan, ROUND(a.luas_bangunan) AS luas_bangunan, a.lantai,a.dilihat,a.suka,round(AVG(a.rating),1) AS rating FROM (SELECT b.*, IFNULL(ulasan.rating,0) AS rating FROM ({$this->from}) b LEFT JOIN ulasan ON b.id_rumah = ulasan.id_rumah) a LEFT JOIN arsitek ON a.id_arsitek = arsitek.id_arsitek
+    RIGHT JOIN rumah_rekomendasi rr ON a.id_rumah = rr.id_rumah GROUP BY a.id_rumah order by a.suka desc limit 10");
   }
 
   function getRumahTerbaru()
