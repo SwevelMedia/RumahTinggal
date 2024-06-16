@@ -15,38 +15,39 @@ class ArtikelModel extends CI_Model
    {
 
       if (!$id) {
-         return $this->db->query("SELECT artikel.* FROM artikel WHERE `status` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "' ORDER BY tgl_dibuat desc");
+         return $this->db->query("SELECT artikel.* FROM artikel WHERE `status` = 1 AND `approve` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "' ORDER BY tgl_dibuat desc");
       } else {
-         return $this->db->query("SELECT artikel.* FROM artikel where id_artikel != $id AND `status` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "' ORDER BY tgl_dibuat desc limit 5");
+         return $this->db->query("SELECT artikel.* FROM artikel where id_artikel != $id AND `status` = 1 AND `approve` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "' ORDER BY tgl_dibuat desc limit 5");
       }
    }
 
    function getArtikelMuka()
 
    {
-
       return $this->db->query("
-        SELECT artikel.* 
-        FROM artikel 
-        WHERE `status` = 1 
-        AND `tgl_dibuat` <= '" . date("Y-m-d") . "' 
-        AND `id_artikel` >= 27
-        LIMIT 4
-    ");
+      SELECT * 
+      FROM artikel 
+      RIGHT JOIN penulis ON artikel.dibuat_oleh = penulis.id_penulis
+      WHERE artikel.status = 1 
+      AND artikel.approve = 1
+      AND artikel.tgl_dibuat <= '" . date("Y-m-d") . "' 
+      AND artikel.id_artikel >= 27
+      LIMIT 4
+  ");
    }
 
    function getArtikelMukaRight()
 
    {
 
-      return $this->db->query("SELECT artikel.* FROM artikel WHERE `status` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "' ORDER BY tgl_dibuat desc limit 5");
+      return $this->db->query("SELECT * FROM artikel RIGHT JOIN penulis ON artikel.dibuat_oleh = penulis.id_penulis WHERE `status` = 1 AND `approve` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "' ORDER BY tgl_dibuat desc limit 5");
    }
 
    function getPopularArtikel()
 
    {
 
-      return $this->db->query("SELECT artikel.* FROM artikel WHERE `status` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "'order by dilihat desc limit 5");
+      return $this->db->query("SELECT * FROM artikel RIGHT JOIN penulis ON artikel.dibuat_oleh = penulis.id_penulis WHERE `status` = 1 AND `approve` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "'order by dilihat desc limit 5");
    }
 
    function getTerbaruArtikel()
@@ -54,9 +55,11 @@ class ArtikelModel extends CI_Model
    {
 
       return $this->db->query("
-        SELECT artikel.* 
+        SELECT * 
         FROM artikel 
-        WHERE `status` = 1 
+        RIGHT JOIN penulis ON artikel.dibuat_oleh = penulis.id_penulis
+        WHERE `status` = 1
+        AND `approve` = 1 
         AND `tgl_dibuat` <= '" . date("Y-m-d") . "' 
         AND `id_artikel` >= 20
         LIMIT 1
@@ -77,24 +80,43 @@ class ArtikelModel extends CI_Model
 
    public function getDetailArtikel($id_artikel)
    {
-      $query = $this->db->get_where('artikel', array('id_artikel' => $id_artikel));
+      $this->db->select('artikel.*, penulis.*');
+      $this->db->from('artikel'); // Main table
+      $this->db->join('penulis', 'artikel.dibuat_oleh = penulis.id_penulis', 'right'); // Right join
+      $this->db->where('artikel.id_artikel', $id_artikel); // Where condition
+
+      $query = $this->db->get();
+
       return $query->row();
    }
 
    public function getAllArtikel()
    {
-      return $this->db->query("SELECT * FROM artikel ORDER BY tgl_dibuat DESC")->result();
+      return $this->db->query("SELECT * FROM artikel WHERE `status` = 1 AND `approve` = 1 ORDER BY  tgl_dibuat DESC")->result();
    }
 
    public function searchArtikel($search = '')
    {
       $searchTerms = explode(' ', $search);
+      // Start building the query
+      $this->db->from('artikel');
+      $this->db->join('penulis', 'artikel.dibuat_oleh = penulis.id_penulis', 'right');
+      $this->db->where('status', 1);
+      $this->db->where('approve', 1);
+      $this->db->where('tgl_dibuat <=', date("Y-m-d"));
+
+      // Apply the like conditions for each search term
+      $this->db->group_start();  // Start a group of OR conditions
+
       foreach ($searchTerms as $term) {
          $this->db->or_like('judul_artikel', $term);
          $this->db->or_like('isi_artikel', $term);
       }
 
-      $query = $this->db->get('artikel');
+      $this->db->group_end();  // End the group of OR conditions
+
+      // Execute the query
+      $query = $this->db->get();
 
       $results = $query->result();
       foreach ($results as $result) {
@@ -130,6 +152,10 @@ class ArtikelModel extends CI_Model
       }
       $this->db->select('*');
       $this->db->from('artikel');
+      $this->db->join('penulis', 'artikel.dibuat_oleh = penulis.id_penulis', 'right');
+      $this->db->where('status', 1);
+      $this->db->where('approve', 1);
+
 
       // Add WHERE clause for each tag
       $first_tag = true;
