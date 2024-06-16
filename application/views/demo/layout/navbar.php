@@ -68,7 +68,7 @@
                         <a class="nav-link <?= ($title == "Layanan") ? 'active' : ''; ?>" href="<?= base_url('tentangKami') ?>">Layanan</a>
                     </li>
                 </ul>
-                <?php if (!$is_logged_in) : ?>
+                <?php if (!$is_logged_in || !isset($_COOKIE['id_customer'])) : ?>
                     <div id="menu-login">
                         <div class="d-flex flex-column flex-lg-row gap-1">
                             <a class="btn btn-outline-white d-none d-lg-block" onclick="modalLogin()">
@@ -82,7 +82,7 @@
                     </div>
                 <?php endif; ?>
                 <!-- Bagian Menu Pengguna (dengan atribut style="display: none;" agar awalnya disembunyikan) -->
-                <?php if ($is_logged_in) : ?>
+                <?php if ($is_logged_in && isset($_COOKIE['id_customer'])) : ?>
                     <div id="menu-pengguna" class="">
                         <div class="text-center">
                             <div class="dropdown">
