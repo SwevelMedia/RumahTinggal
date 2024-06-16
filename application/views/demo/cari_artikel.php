@@ -126,7 +126,7 @@ function getParams($query_params, $name)
 
                                         <div class="card-body" id="myCardBody">
                                             <div class="d-flex align-items-center gap-4">
-                                                <small>RumahTinggal</small>
+                                                <small><?php echo $item->nama_penulis; ?></small>
                                                 <small><?php echo $item->tgl_dibuat; ?></small>
                                             </div>
                                             <h5 class="artikel-title mt-3"><?php echo $item->judul_artikel; ?></h5>
@@ -153,7 +153,7 @@ function getParams($query_params, $name)
 
                                         <div class="col-8">
                                             <div class="d-flex align-item-center gap-3">
-                                                <small>RumahTinggal</small>
+                                                <small><?php echo $item->nama_penulis; ?></small>
                                                 <small><?php echo $item->tgl_dibuat; ?></small>
                                             </div>
                                             <h5 class="limited-tittle-search mt-2 me-3"><?php echo $item->judul_artikel; ?></h5>

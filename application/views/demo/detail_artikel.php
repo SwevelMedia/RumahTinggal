@@ -53,7 +53,7 @@
                             echo $formattedDate;
                             ?>
                         </div>
-                        <div id="dibuat_oleh">Ditulis Oleh <?php echo $detailArtikel->dibuat_oleh ?> </div>
+                        <div id="dibuat_oleh">Ditulis Oleh <?php echo $detailArtikel->nama_penulis ?> </div>
                     </div>
                     <div class="isi-artikel">
                         <div id="fh5co-title-box">
@@ -124,7 +124,7 @@
                                         </div>
                                         <div class="col-8">
                                             <div class="d-flex align-item-center gap-3">
-                                                <small>RumahTinggal</small>
+                                                <small><?php echo $item->nama_penulis; ?></small>
                                                 <small><?php echo $item->tgl_dibuat; ?></small>
                                             </div>
                                             <h5 class="limited-tittle mt-2 me-3"><?php echo $item->judul_artikel; ?></h5>

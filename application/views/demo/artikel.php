@@ -118,7 +118,7 @@
                             <h4 class="artikel-title"><?php echo $muka->judul_artikel; ?></h4>
                             <div class="d-flex justify-content-between align-items-center mt-3">
                                 <div class="d-flex align-items-center gap-4">
-                                    <small>RumahTinggal</small>
+                                    <small><?php echo $muka->nama_penulis; ?></small>
                                     <small><?php echo $muka->tgl_dibuat; ?></small>
                                 </div>
                                 <a href="<?= base_url('detail-artikel/' . $muka->id_artikel) ?>" class="btn btn-outline-primary d-none d-lg-block">Baca Artikel</a>
@@ -140,7 +140,7 @@
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="d-flex align-item-center gap-3">
-                                            <small>RumahTinggal</small>
+                                            <small><?php echo $item->nama_penulis; ?></small>
                                             <small><?php echo $item->tgl_dibuat; ?></small>
                                         </div>
                                         <h5 class="mt-3"><?php echo $item->judul_artikel; ?></h5>
@@ -170,7 +170,7 @@
                                     </div>
                                     <div class="col-8">
                                         <div class="d-flex align-item-center gap-3">
-                                            <small>RumahTinggal</small>
+                                            <small><?php echo $muka->nama_penulis; ?></small>
                                             <small><?php echo $item->tgl_dibuat; ?></small>
                                         </div>
                                         <h5 class="limited-tittle mt-2 me-3"><?php echo $item->judul_artikel; ?></h5>
@@ -196,7 +196,7 @@
                                 <h4 class="artikel-title"><?php echo $item->judul_artikel; ?></h4>
                                 <div class="d-flex justify-content-between align-items-center mt-3">
                                     <div class="d-flex align-items-center gap-4">
-                                        <small>RumahTinggal</small>
+                                        <small><?php echo $item->nama_penulis; ?></small>
                                         <small><?php echo $item->tgl_dibuat; ?></small>
                                     </div>
                                     <a href="#" class="btn btn-outline-primary d-none d-lg-block">Baca Artikel</a>
@@ -213,7 +213,7 @@
                                     </div>
                                     <div class="col-8">
                                         <div class="d-flex align-item-center gap-3">
-                                            <small>RumahTinggal</small>
+                                            <small><?php echo $item->nama_penulis; ?></small>
                                             <small><?php echo $item->tgl_dibuat; ?></small>
                                         </div>
                                         <h5 class="limited-tittle mt-2 me-3"><?php echo $item->judul_artikel; ?></h5>
