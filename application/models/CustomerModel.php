@@ -340,7 +340,6 @@ class CustomerModel extends CI_Model
                                       AND pembelian.id_rumah = rumah.id_rumah 
                                       AND rumah.id_arsitek = arsitek.id_arsitek 
                                       AND pembelian.id_rumah = dokumen.id_rumah 
-                                      AND pembelian.paket = dokumen.paket 
                                       AND pembelian.status = 1
                                 ) b 
                                 LEFT JOIN ulasan ON b.id_rumah = ulasan.id_rumah
