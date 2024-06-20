@@ -1122,7 +1122,7 @@
 
         if (term.trim() !== '') {
             var url = "<?= base_url('koleksi') ?>";
-            url += "?search=" + term
+            url += "?search=" + encodeURIComponent(term);
             window.location.href = url
             // $.ajax({
             //     url: '<?= base_url('api/simpanTerm/') ?>' + term, // Replace with your API endpoint

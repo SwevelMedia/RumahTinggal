@@ -1291,7 +1291,7 @@ function getPageUrl($page)
         $('.search-mobile').on('submit', function(e) {
             e.preventDefault();
 
-            var searchQuery = document.querySelector('.search-mobile input[name="search"]').value;
+            var searchQuery = encodeURIComponent(document.querySelector('.search-mobile input[name="search"]').value);
             var currentUrl = window.location.href;
 
             // Check if the URL already contains a search parameter
