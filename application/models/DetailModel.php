@@ -121,7 +121,12 @@ class DetailModel extends CI_Model
 
     {
 
-        return $this->db->query("SELECT rumah_foto.foto FROM rumah_foto,rumah WHERE rumah.id_rumah = rumah_foto.id_rumah AND rumah_foto.id_rumah='{$id_rumah}' ");
+        $sql = "
+        SELECT foto FROM rumah WHERE id_rumah = ?
+        UNION
+        SELECT foto FROM rumah_foto WHERE id_rumah = ?
+    ";
+        return $this->db->query($sql, array($id_rumah, $id_rumah));
     }
 
 
