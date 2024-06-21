@@ -1738,7 +1738,7 @@ Also includes a counter of the slides
             if (denahImage) {
                 var slideContainer = $(".slides");
                 slideContainer.empty(); // Clear existing slides
-                slideContainer.append('<div class="slide mb-3 h-100"><div class="slide-image-container rounded-3 overflow-hidden" id="zoom-container-eksterior"><img src="<?= base_url('assets/img/denah/') ?>' + denahImage + '" alt="" class="img-touch-koleksi"></div></div>');
+                slideContainer.append('<div class="slide mb-3 h-100"><div class="slide-image-container rounded-3 overflow-hidden" id="zoom-container-eksterior"><img src="<?= base_url('assets/img/denah_new/') ?>' + denahImage + '" alt="" class="img-touch-koleksi"></div></div>');
 
                 var slideContainerMobile = $(".owl-carousel-detail");
                 slideContainerMobile.empty(); // Clear existing slides
@@ -1795,7 +1795,7 @@ Also includes a counter of the slides
 
             var slideContainer = $(".slides");
             slideContainer.empty(); // Clear existing slides
-            slideContainer.append('<div class="slide mb-3 h-100"><div class="slide-image-container rounded-3 overflow-hidden" id="zoom-container-eksterior"><img src="<?= base_url('assets/img/denah/') ?>' + denahImage + '" alt="" class="img-touch-koleksi"></div></div>');
+            slideContainer.append('<div class="slide mb-3 h-100"><div class="slide-image-container rounded-3 overflow-hidden" id="zoom-container-eksterior"><img src="<?= base_url('assets/img/denah_new/') ?>' + denahImage + '" alt="" class="img-touch-koleksi"></div></div>');
 
             var slideContainerMobile = $(".owl-carousel-detail");
             slideContainerMobile.empty(); // Clear existing slides
