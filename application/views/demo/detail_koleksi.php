@@ -1802,7 +1802,7 @@ Also includes a counter of the slides
             slideContainerMobile.append(`
                 <div class="card-container">
                     <div style="background-image: url('<?= base_url('assets/img/denah/') ?>${denahImage}')" class="bg-card-detail">
-                        <div class="position-absolute top-0 start-0 ms-3 rounded-2 p-2 mt-2 denah-card">Denah Lantai ${lantai}</div>
+                        
                     </div>
                 </div>
             `);
