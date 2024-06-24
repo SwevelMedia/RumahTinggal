@@ -76,7 +76,7 @@ class CustomerController extends CI_Controller
 
     // parse_str(file_get_contents('php://input'), $data);
 
-    $this->CustomerModel->getResetPassword($email, $pw);
+    $this->CustomerModel->getResetPassword($email, password_hash($pw, PASSWORD_DEFAULT));
 
     $customer = $this->CustomerModel->getCustomerByEmail($email)->row();
 
@@ -219,7 +219,7 @@ class CustomerController extends CI_Controller
 
     $session_id = $this->session->userdata('id_customer');
 
-    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null) {
+    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null || $id_customer == '') {
       $this->output
         ->set_status_header(401)
         ->set_content_type('application/json')
@@ -805,10 +805,8 @@ class CustomerController extends CI_Controller
   {
     $session_id = $this->session->userdata('id_customer');
 
-
-
     $cookie_customer = get_cookie('id_customer');
-    if ($cookie_customer !=  $session_id) {
+    if ($cookie_customer !=  $session_id || $cookie_customer == null || $session_id == null || $cookie_customer == '') {
       show_404();
       return;
     }
@@ -835,11 +833,68 @@ class CustomerController extends CI_Controller
     }
   }
 
+  public function ubahPasswordCustomer()
+  {
+    $session_id = $this->session->userdata('id_customer');
+
+    $cookie_customer = get_cookie('id_customer');
+    if ($cookie_customer !=  $session_id || $cookie_customer == null || $session_id == null || $cookie_customer == '') {
+      $response = array(
+        'Success' => false,
+        'Info' => 'User tidak log in.'
+
+      );
+
+      $this->output
+        ->set_status_header(401)
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        ->_display();
+      exit;
+    }
+
+    $email = $this->session->userdata('customer_data')->email;
+    $pw_lama = $this->input->post('pw_lama');
+    $pw_baru = $this->input->post('pw_baru');
+
+    $customer = $this->CustomerModel->getCustomerByEmail($email)->row();
+
+    if (!password_verify($pw_lama, $customer->password)) {
+      $response = array(
+        'Success' => false,
+        'Info' => 'Password lama tidak benar!'
+
+      );
+
+      $this->output
+        ->set_status_header(200)
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+        ->_display();
+      exit;
+    }
+
+    $this->CustomerModel->getResetPassword($email, password_hash($pw_baru, PASSWORD_DEFAULT));
+
+    $response = array(
+      'Success' => true,
+      'Info' => 'Password berhasil diubah!'
+
+    );
+
+    $this->output
+      ->set_status_header(200)
+      ->set_content_type('application/json')
+      ->set_output(json_encode($response, JSON_PRETTY_PRINT))
+      ->_display();
+    exit;
+  }
+
   public function hapusFotoCustomer()
   {
     $cookie_customer = get_cookie('id_customer');
     $session_id = $this->session->userdata('id_customer');
-    if ($cookie_customer !=  $session_id) {
+    if ($cookie_customer !=  $session_id || $cookie_customer == null || $session_id == null || $cookie_customer == '') {
       $response = array(
 
         'Success' => false,
@@ -885,7 +940,7 @@ class CustomerController extends CI_Controller
     $cookie_customer = get_cookie('id_customer');
     $session_id = $this->session->userdata('id_customer');
 
-    if ($cookie_customer !=  $session_id) {
+    if ($cookie_customer !=  $session_id || $cookie_customer == null || $session_id == null || $cookie_customer == '') {
       $response = array(
 
         'Success' => false,
@@ -961,7 +1016,7 @@ class CustomerController extends CI_Controller
     $session_id = $this->session->userdata('id_customer');
 
     $cookie_customer = get_cookie('id_customer');
-    if ($cookie_customer !=  $session_id) {
+    if ($cookie_customer !=  $session_id || $cookie_customer == null || $session_id == null || $cookie_customer == '') {
       $response = array(
 
         'Success' => false,
@@ -1183,27 +1238,27 @@ class CustomerController extends CI_Controller
       );
     } else {
 
-      $mail = new PHPMailer();
+      $mail = new PHPMailer(true);
 
       $mail->isSMTP();
 
-      $mail->Host       = 'sv2.ecc.co.id';
+      $mail->Host       = 'smtp.gmail.com';
 
       $mail->SMTPAuth   = true;
 
-      $mail->Username   = 'admin@rumahtinggal.id';
+      $mail->Username   = 'fsd08.nasywa.syifa.azizah@gmail.com';
 
-      $mail->Password   = 'ZOBAFvIOP5Yh';
+      $mail->Password   = 'zjtz mvia vsoz melo';
 
-      $mail->SMTPSecure = 'tls';
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 
-      $mail->Port       = 587;
+      $mail->Port       = 465;
 
 
 
-      $mail->setFrom('admin@rumahtinggal.id', 'Admin RumahTinggal.id');
-
-      $mail->addAddress($email);
+      $mail->setFrom('fsd08.nasywa.syifa.azizah@gmail.com', 'rumahtinggal.id');
+      $mail->addAddress($email);                                  // Add a recipient
+      $mail->addCC('mail.rumahtinggal@gmail.com', 'admin@rumahtinggal.id');
 
       $mail->Subject = 'Konfirmasi Reset Password';
 
@@ -1257,6 +1312,7 @@ class CustomerController extends CI_Controller
       } else {
 
         echo "Terjadi kesalahan saat pengiriman email: " . $mail->ErrorInfo;
+        log_message('error', 'Mailer Error: ' . $mail->ErrorInfo);
       }
     }
 
@@ -1456,7 +1512,7 @@ class CustomerController extends CI_Controller
 
     $session_id = $this->session->userdata('id_customer');
 
-    if ($id_customer !=  $session_id) {
+    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null || $id_customer == '') {
 
       $this->output
 
@@ -1514,7 +1570,7 @@ class CustomerController extends CI_Controller
 
     $session_id = $this->session->userdata('id_customer');
 
-    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null) {
+    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null || $id_customer == '') {
       $this->output
         ->set_status_header(401)
         ->set_content_type('application/json')
@@ -1549,7 +1605,7 @@ class CustomerController extends CI_Controller
 
     $session_id = $this->session->userdata('id_customer');
 
-    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null) {
+    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null || $id_customer == '') {
       $this->output
         ->set_status_header(401)
         ->set_content_type('application/json')
@@ -1572,7 +1628,7 @@ class CustomerController extends CI_Controller
 
     $session_id = $this->session->userdata('id_customer');
 
-    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null) {
+    if ($id_customer !=  $session_id || $id_customer == null || $session_id == null || $id_customer == '') {
       $this->output
         ->set_status_header(401)
         ->set_content_type('application/json')

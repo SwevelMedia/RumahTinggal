@@ -443,6 +443,8 @@ $route['api/getListWilayahKelurahan'] = 'WilayahController/getListWilayahKelurah
 
 $route['api/ubahAlamatCustomer'] = 'PembelianController/ubahAlamatCustomer';
 
+$route['api/ubahPasswordCustomer'] = 'CustomerController/ubahPasswordCustomer';
+
 
 
 $route['api/getIsDownloadDokumen/(:any)/(:any)'] = 'DesainController/getIsDownloadDokumen/$1/$2';

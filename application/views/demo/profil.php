@@ -940,8 +940,8 @@
             <div class="modal-content">
                 <div class="row justify-content-center">
                     <div class="col-lg-4 bg-light">
-                        <h5 class="mt-5 ms-2 menu-item-active" id="infoPribadiBtn" onclick="showContent('info-pribadi')">Info Pribadi</h5>
-                        <h5 class="mt-4 ms-2 menu-item" id="gantiKataSandiBtn" onclick="showContent('ganti-kata-sandi')">Ganti Kata Sandi</h5>
+                        <h5 class="mt-5 ms-4 menu-item-active" style="cursor:pointer;" id="infoPribadiBtn" onclick="showContent('info-pribadi')">Info Pribadi</h5>
+                        <h5 class="mt-4 ms-4 menu-item" style="cursor:pointer;" id="gantiKataSandiBtn" onclick="showContent('ganti-kata-sandi')">Ganti Kata Sandi</h5>
                     </div>
                     <div class="col-lg-8 p-4">
                         <div id="info-pribadi">
@@ -1000,21 +1000,21 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <h4 class="mb-4" style="font-weight: bold;">Ubah Kata Sandi</h4>
-                            <form action="">
+                            <form id="ubahPasswordForm" action="" onsubmit="ubahPassword(event)">
                                 <div class="mb-2 mt-1">
-                                    <label for="exampleInputEmail1" class="form-label">KATA SANDI LAMA</label>
-                                    <input type="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                    <label for="pw_lama" class="form-label">KATA SANDI LAMA</label>
+                                    <input type="password" class="form-control" name="pw_lama" />
                                 </div>
                                 <div class="mb-2">
-                                    <label for="exampleInputEmail1" class="form-label">KATA SANDI BARU</label>
-                                    <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                    <label for="pw_baru" class="form-label">KATA SANDI BARU</label>
+                                    <input type="password" class="form-control" name="pw_baru" />
                                 </div>
                                 <div class="mb-2">
-                                    <label for="exampleInputEmail1" class="form-label">ULANGI KATA SANDI BARU</label>
-                                    <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                    <label for="pw_baru_konfirmasi" class="form-label">ULANGI KATA SANDI BARU</label>
+                                    <input type="password" class="form-control" name="pw_baru_konfirmasi" />
                                 </div>
                                 <div class="mt-3">
-                                    <button class="btn btn-primary w-100" type="button" id="button-addon2">Ubah</button>
+                                    <button class="btn btn-primary w-100" type="submit" id="button-addon2">Ubah</button>
                                 </div>
                             </form>
 
@@ -1073,6 +1073,58 @@
             reader.readAsDataURL(file);
         }
     });
+
+    function ubahPassword(event) {
+        event.preventDefault();
+        let pwBaru = $('[name="pw_baru"]').val();
+        let pwBaruKonfirmasi = $('[name="pw_baru_konfirmasi"]').val();
+
+        if (pwBaru !== pwBaruKonfirmasi) {
+            Swal.fire({
+                title: 'Password baru tidak sama!',
+                // text: data.Info,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+        $.ajax({
+            url: "<?php echo base_url() ?>api/ubahPasswordCustomer",
+            type: "POST",
+            data: $('#ubahPasswordForm :input').serialize(),
+            dataType: "JSON",
+            success: function(response) {
+                if (response.Success) {
+                    Swal.fire({
+                        title: 'Success',
+                        text: response.Info,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        // if (result.isConfirmed) {
+                        $('#ubahProfil').modal('hide');
+                        // }
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: response.Info,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Tampilkan SweetAlert dengan tipe error untuk semua respon error
+                Swal.fire({
+                    title: 'Error',
+                    text: errorThrown,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+    }
 
     document.getElementById('hapus-foto-button').addEventListener('click', function() {
         // Create a new file input element
