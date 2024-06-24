@@ -130,7 +130,7 @@
                             <small class="mb-3">
                                 Masukkan email yang terhubung dengan akun Anda.
                             </small>
-                            <form action="" id="frm-lupa-password">
+                            <form action="" id="frm-lupa-password" onsubmit="event.preventDefault(); sendMail($('#email_lupa_password').val())">
                                 <div class="form-floating mt-3 mb-2">
                                     <input type="email" class="form-control" id="email_lupa_password" name="email_lupa_password" placeholder="Email" />
                                     <label for="email_lupa_password">Email</label>
