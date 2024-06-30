@@ -1,0 +1,17 @@
+.rapStarBack{
+	color: rgb(221, 221, 221);
+    display: inline-block;
+    font-size: 17px;
+    margin: auto;
+    position: relative;
+	/*cursor: pointer;*/
+}	
+
+.rapStarFront{
+	top: 0;
+	color: gold;
+	display: block;
+	overflow: hidden;
+	position: absolute;		
+	z-index: 1;
+}	

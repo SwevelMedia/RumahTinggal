@@ -1,0 +1,310 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+img {
+	pointer-events: none;
+}
+
+.bg-card {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 200px;
+	width: auto;
+}
+
+.bg-card-banner-mobile {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 25vh;
+	width: auto;
+}
+
+.container-bg-card-produk {
+	height: 232px;
+	width: 309px;
+}
+
+.bg-card-produk {
+	/* background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover; */
+	/* height: 232px;
+	width: 309px; */
+}
+
+.img-container {
+	width: 100%; /* Width of the container */
+	overflow: hidden;
+	/* height: auto; */
+}
+
+.img-card-produk {
+	width: 100%; /* Ensure the image fills the container */
+	height: auto;
+	object-fit: cover; /* Let the browser calculate the height based on the aspect ratio */
+}
+
+.banner-card {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-clip: border-box;
+	height: 230px;
+	width: 100%;
+	box-shadow: inset;
+	border-radius: 30px;
+}
+
+.bg-card-circle {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 75px;
+	width: 75px;
+	border-radius: 50%;
+}
+
+.card-img-artikel {
+	height: 180px;
+	width: auto;
+}
+
+.card-container {
+	width: 100%;
+}
+
+.card {
+	position: relative;
+	overflow: hidden;
+}
+
+.card-img-container {
+	position: relative;
+}
+
+.card-info {
+	display: none;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.9);
+	padding: 10px;
+	box-sizing: border-box;
+	transition: transform 0.3s ease-in-out;
+	transform: translateY(100%);
+	z-index: 2;
+}
+
+.card-body {
+	transition: transform 0.5s ease-in-out;
+	position: relative;
+	z-index: 3;
+}
+
+.product-card {
+	width: 100%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+	.card:hover .card-body {
+		transform: translateY(-90%);
+	}
+	.bg-header-web-home {
+		height: 93vh;
+	}
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+	.card:hover .card-body {
+		transform: translateY(-75%);
+	}
+	.bg-header-web-home {
+		height: 93vh;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.card:hover .card-body {
+		transform: translateY(-225px);
+	}
+	.bg-header-web-home {
+		height: 93vh;
+	}
+}
+
+/* Aturan transform khusus untuk layar yang lebih sempit (misalnya, kurang dari 768px) */
+@media screen and (max-width: 767px) {
+	/* .card:hover .card-body {
+		transform: translateY(-150px);
+	} */
+
+	.card:hover .card-body {
+		transform: translateY(-85%);
+	}
+
+	.bg-card-produk {
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 150px;
+	}
+	.bg-header-web-home {
+		height: 59vh;
+	}
+}
+
+.card-img-top {
+	position: relative;
+	z-index: 1;
+	transition: opacity 0.3s ease-in-out;
+}
+
+.card:hover .card-img-top {
+	opacity: 0;
+}
+
+.card:hover .card-info {
+	display: block;
+	transform: translateY(0);
+}
+
+#myCardBody {
+	/* Tambahkan properti CSS yang ingin diatur pada elemen dengan ID "myCardBody" */
+	/* Misalnya, agar tidak ada transform pada elemen tersebut */
+	transform: none !important;
+}
+
+.bg-header-web {
+	background-image: linear-gradient(to right, white, lightblue);
+}
+
+/* .slideshow {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.slideshow img {
+	position: absolute;
+	right: 0;
+	top: -30vh; 
+	right: -50vw;
+	transform: translateY(-50%);
+	max-width: 100%;
+	height: auto;
+	width: 470px;
+} */
+
+.card-min {
+	min-height: 200px;
+}
+
+.limited-lines {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	-webkit-line-clamp: 3; /* Atur jumlah baris yang diinginkan */
+}
+
+.banner-img {
+	height: 270px;
+	width: 360px;
+}
+
+.limited-lines {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	-webkit-line-clamp: 3; /* Atur jumlah baris yang diinginkan */
+}
+
+/* css gambar detail koleksi*/
+.slider-photos {
+	width: 600px;
+}
+
+.slider-photos .slider-thumbs .slide {
+	opacity: 0.5;
+}
+
+.slider-photos .slider-thumbs .slide.active {
+	opacity: 1;
+}
+
+.slider-photos .slides {
+	counter-reset: currentSlide slide max;
+}
+
+.slider-photos .slides .owl-item:not(.cloned) {
+	counter-increment: currentSlide;
+}
+
+.slider-photos .slides .owl-item:not(.cloned) .slide {
+	counter-increment: max;
+}
+
+.slider-photos .slides .owl-item:not(.cloned).active ~ .owl-item {
+	counter-increment: slide;
+}
+
+.slider-photos .slides .owl-dots:before {
+	content: counter(currentSlide) "/";
+}
+
+.slider-photos .slides .owl-dots:after {
+	content: counter(max);
+}
+
+.slider-photos .slides .owl-dot {
+	display: none;
+}
+
+.checked {
+	color: orange;
+}
+
+.tooltip-biaya {
+	position: relative;
+}
+
+.tooltip-biaya .tooltip-biaya-text {
+	visibility: hidden;
+	width: max-content;
+	background-color: #00528e;
+	color: #fff;
+	text-align: center;
+	border-radius: 5px;
+	padding: 5px 10px;
+	position: absolute;
+	z-index: 1;
+	bottom: calc(100% + 5px);
+	/* Adjust the distance between the text and the tooltip-biaya */
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0;
+	transition: opacity 0.3s;
+	font-size: 0.9em;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	letter-spacing: 0.5px;
+}
+
+.tooltip-biaya .tooltip-biaya-text::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	/* Adjust the position of the triangle */
+	border-width: 5px;
+	border-style: solid;
+	border-color: #00528e transparent transparent transparent;
+}
+
+.tooltip-biaya:hover .tooltip-biaya-text {
+	visibility: visible;
+	opacity: 1;
+}
