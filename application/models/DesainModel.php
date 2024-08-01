@@ -228,14 +228,14 @@ class DesainModel extends CI_Model
       'populer' => 'a.dilihat DESC',
       'terbaru' => 'a.tgl_buat DESC',
       'harga_tertinggi' => "(CASE 
-                                WHEN a.lantai = '1' THEN 3500000 * a.luas_bangunan
-                                WHEN a.lantai = '2' THEN 4500000 * a.luas_bangunan
-                                ELSE 5500000 * a.luas_bangunan
+                                WHEN a.lantai = '1' THEN 4000000 * a.luas_bangunan
+                                WHEN a.lantai = '2' THEN 5000000 * a.luas_bangunan
+                                ELSE 8000000 * a.luas_bangunan
                             END) DESC",
       'harga_terendah' => "(CASE 
-                                WHEN a.lantai = '1' THEN 3500000 * a.luas_bangunan
-                                WHEN a.lantai = '2' THEN 4500000 * a.luas_bangunan
-                                ELSE 5500000 * a.luas_bangunan
+                                WHEN a.lantai = '1' THEN 4000000 * a.luas_bangunan
+                                WHEN a.lantai = '2' THEN 5000000 * a.luas_bangunan
+                                ELSE 8000000 * a.luas_bangunan
                             END) ASC",
     ];
 
@@ -272,16 +272,16 @@ class DesainModel extends CI_Model
     }
     if ($min_biaya !== null) {
       $whereConditions[] = "(
-            (a.lantai = '1' AND 3500000 * a.luas_bangunan >= {$min_biaya}) OR
-            (a.lantai = '2' AND 4500000 * a.luas_bangunan >= {$min_biaya}) OR
-            (a.lantai NOT IN ('1', '2') AND 5500000 * a.luas_bangunan >= {$min_biaya})
+            (a.lantai = '1' AND 4000000 * a.luas_bangunan >= {$min_biaya}) OR
+            (a.lantai = '2' AND 5000000 * a.luas_bangunan >= {$min_biaya}) OR
+            (a.lantai NOT IN ('1', '2') AND 8000000 * a.luas_bangunan >= {$min_biaya})
         )";
     }
     if ($max_biaya !== null) {
       $whereConditions[] = "(
-            (a.lantai = '1' AND 3500000 * a.luas_bangunan <= {$max_biaya}) OR
-            (a.lantai = '2' AND 4500000 * a.luas_bangunan <= {$max_biaya}) OR
-            (a.lantai NOT IN ('1', '2') AND 5500000 * a.luas_bangunan <= {$max_biaya})
+            (a.lantai = '1' AND 4000000 * a.luas_bangunan <= {$max_biaya}) OR
+            (a.lantai = '2' AND 5000000 * a.luas_bangunan <= {$max_biaya}) OR
+            (a.lantai NOT IN ('1', '2') AND 8000000 * a.luas_bangunan <= {$max_biaya})
         )";
     }
     if ($limit !== null) {

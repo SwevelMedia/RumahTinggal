@@ -330,7 +330,7 @@
                                 </div>
                                 <div>
                                     <small>Biaya Konstruksi</small>
-                                    <small class="fw-semibold d-block tooltip-biaya"><?= $item->lantai == '1' ? "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".")); ?>
+                                    <small class="fw-semibold d-block tooltip-biaya"><?= $item->lantai == '1' ? "Rp" . number_format(4000000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(5000000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(8000000 * $item->luas_bangunan, 0, ",", ".")); ?>
                                         <span class="tooltip-biaya-text">Estimasi Awal</span>
                                     </small>
 
@@ -450,7 +450,7 @@
                                 </div>
                                 <div>
                                     <small>Biaya Konstruksi</small>
-                                    <small class="fw-semibold d-block"><?= $item->lantai == '1' ? "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".")); ?></small>
+                                    <small class="fw-semibold d-block"><?= $item->lantai == '1' ? "Rp" . number_format(4000000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(5000000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(8000000 * $item->luas_bangunan, 0, ",", ".")); ?></small>
                                 </div>
                             </div>
                             <div class="mt-3"></div>

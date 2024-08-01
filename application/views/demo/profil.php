@@ -324,11 +324,11 @@
                                                         <small class="fw-semibold d-block">
                                                             <?php
                                                             if ($trns->lantai == '1') {
-                                                                echo "Rp" . number_format(3500000 * $trns->luas_bangunan, 0, ",", ".");
+                                                                echo "Rp" . number_format(4000000 * $trns->luas_bangunan, 0, ",", ".");
                                                             } elseif ($trns->lantai == '2') {
-                                                                echo "Rp" . number_format(4500000 * $trns->luas_bangunan, 0, ",", ".");
+                                                                echo "Rp" . number_format(5000000 * $trns->luas_bangunan, 0, ",", ".");
                                                             } else {
-                                                                echo "Rp" . number_format(5500000 * $trns->luas_bangunan, 0, ",", ".");
+                                                                echo "Rp" . number_format(8000000 * $trns->luas_bangunan, 0, ",", ".");
                                                             }
                                                             ?>
                                                         </small>
@@ -440,7 +440,7 @@
                                                         <div>
                                                             <small>Biaya Konstruksi</small>
                                                             <small class="fw-semibold d-block">
-                                                                <?= $trns->lantai == '1' ? "Rp" . number_format(3500000 * $trns->luas_bangunan, 0, ",", ".") : ($trns->lantai == '2' ? "Rp" . number_format(4500000 * $trns->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $trns->luas_bangunan, 0, ",", ".")); ?>
+                                                                <?= $trns->lantai == '1' ? "Rp" . number_format(4000000 * $trns->luas_bangunan, 0, ",", ".") : ($trns->lantai == '2' ? "Rp" . number_format(5000000 * $trns->luas_bangunan, 0, ",", ".") : "Rp" . number_format(8000000 * $trns->luas_bangunan, 0, ",", ".")); ?>
                                                             </small>
                                                         </div>
                                                     </div>
@@ -527,7 +527,7 @@
                                                 <div class="bg-white card card-body" id="myCardBody">
                                                     <div>
                                                         <img src="<?= base_url('assets/img/desain_thumbnail/' . $trns->foto) ?>" class="img-fluid">
-                                                        <!-- <div class="harga-transaksi mt-2"> <strong><?= $trns->lantai == '1' ? "Rp" . number_format(3500000 * $trns->luas_bangunan, 0, ",", ".") : ($trns->lantai == '2' ? "Rp" . number_format(4500000 * $trns->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $trns->luas_bangunan, 0, ",", ".")); ?></strong></div> -->
+                                                        <!-- <div class="harga-transaksi mt-2"> <strong><?= $trns->lantai == '1' ? "Rp" . number_format(4000000 * $trns->luas_bangunan, 0, ",", ".") : ($trns->lantai == '2' ? "Rp" . number_format(5000000 * $trns->luas_bangunan, 0, ",", ".") : "Rp" . number_format(8000000 * $trns->luas_bangunan, 0, ",", ".")); ?></strong></div> -->
                                                         <div class="harga-transaksi mt-2"> <strong><?= "Rp " . number_format($trns->harga, 0, ",", ".") ?></strong></div>
 
                                                     </div>
@@ -655,11 +655,11 @@
                                                         <small class="fw-semibold d-block">
                                                             <?php
                                                             if ($item->lantai == '1') {
-                                                                echo "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".");
+                                                                echo "Rp" . number_format(4000000 * $item->luas_bangunan, 0, ",", ".");
                                                             } elseif ($item->lantai == '2') {
-                                                                echo "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".");
+                                                                echo "Rp" . number_format(5000000 * $item->luas_bangunan, 0, ",", ".");
                                                             } else {
-                                                                echo "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".");
+                                                                echo "Rp" . number_format(8000000 * $item->luas_bangunan, 0, ",", ".");
                                                             }
                                                             ?>
                                                         </small>
@@ -755,11 +755,11 @@
                                                         <small class="fw-semibold d-block">
                                                             <?php
                                                             if ($item->lantai == '1') {
-                                                                echo "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".");
+                                                                echo "Rp" . number_format(4000000 * $item->luas_bangunan, 0, ",", ".");
                                                             } elseif ($item->lantai == '2') {
-                                                                echo "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".");
+                                                                echo "Rp" . number_format(5000000 * $item->luas_bangunan, 0, ",", ".");
                                                             } else {
-                                                                echo "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".");
+                                                                echo "Rp" . number_format(8000000 * $item->luas_bangunan, 0, ",", ".");
                                                             }
                                                             ?>
                                                         </small>
@@ -844,7 +844,7 @@
                                                 <div class="bg-white card card-body" id="myCardBody">
                                                     <div>
                                                         <img src="<?= base_url('assets/img/desain_thumbnail/' . $trns->foto) ?>" class="img-fluid">
-                                                        <!-- <div class="harga-transaksi mt-2"> <strong><?= $trns->lantai == '1' ? "Rp" . number_format(3500000 * $trns->luas_bangunan, 0, ",", ".") : ($trns->lantai == '2' ? "Rp" . number_format(4500000 * $trns->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $trns->luas_bangunan, 0, ",", ".")); ?></strong></div> -->
+                                                        <!-- <div class="harga-transaksi mt-2"> <strong><?= $trns->lantai == '1' ? "Rp" . number_format(4000000 * $trns->luas_bangunan, 0, ",", ".") : ($trns->lantai == '2' ? "Rp" . number_format(5000000 * $trns->luas_bangunan, 0, ",", ".") : "Rp" . number_format(8000000 * $trns->luas_bangunan, 0, ",", ".")); ?></strong></div> -->
                                                         <div class="harga-transaksi mt-2"> <strong><?= "Rp " . number_format($trns->harga, 0, ",", ".") ?></strong></div>
 
                                                     </div>

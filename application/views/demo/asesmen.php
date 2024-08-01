@@ -1349,7 +1349,7 @@
                     $hasilContainer.empty();
 
                     $.each(data, function(index, item) {
-                        let biaya = item.lantai == '1' ? 3500000 * item.luas_bangunan : (item.lantai == '2' ? 4500000 * item.luas_bangunan : 5500000 * item.luas_bangunan);
+                        let biaya = item.lantai == '1' ? 4000000 * item.luas_bangunan : (item.lantai == '2' ? 5000000 * item.luas_bangunan : 8000000 * item.luas_bangunan);
                         biaya = biaya.toLocaleString('id-ID');
 
                         $hasilContainer.append(`

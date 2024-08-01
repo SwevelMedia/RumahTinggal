@@ -19,7 +19,7 @@
                                 <div>
                                     <img src="<?= base_url('assets/img/thumbnail/' . $transaksiku->foto) ?>" class="img-fluid">
                                     <div class="text-center d-none d-lg-block mt-2"> <strong>#<?php echo $transaksiku->no_invoice; ?></strong></div>
-                                    <div class="text-center d-lg-none mt-2" style="font-size: 12px;"><strong><?= $transaksiku->lantai == '1' ? "Rp" . number_format(3500000 * $transaksiku->luas_bangunan, 0, ",", ".") : ($transaksiku->lantai == '2' ? "Rp" . number_format(4500000 * $transaksiku->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $transaksiku->luas_bangunan, 0, ",", ".")); ?></strong></div>
+                                    <div class="text-center d-lg-none mt-2" style="font-size: 12px;"><strong><?= $transaksiku->lantai == '1' ? "Rp" . number_format(4000000 * $transaksiku->luas_bangunan, 0, ",", ".") : ($transaksiku->lantai == '2' ? "Rp" . number_format(5000000 * $transaksiku->luas_bangunan, 0, ",", ".") : "Rp" . number_format(8000000 * $transaksiku->luas_bangunan, 0, ",", ".")); ?></strong></div>
                                     <div class="bg-white card card-body p-0 d-lg-none mt-2" id="myCardBody" style="max-width: 85px;margin: 0 auto;">
                                         <div class="d-flex align-items-center gap-2" style="text-align: center; display: flex; justify-content: center;">
                                             <img src="<?php echo base_url('assets/demo/img/gift.png'); ?>" width="15" height="15">
@@ -40,7 +40,7 @@
                                 </div>
                                 <div>
                                     <small class="d-none d-lg-block">Biaya Konstruksi</small>
-                                    <small class="fw-semibold d-block"><?= $transaksiku->lantai == '1' ? "Rp" . number_format(3500000 * $transaksiku->luas_bangunan, 0, ",", ".") : ($transaksiku->lantai == '2' ? "Rp" . number_format(4500000 * $transaksiku->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $transaksiku->luas_bangunan, 0, ",", ".")); ?></small>
+                                    <small class="fw-semibold d-block"><?= $transaksiku->lantai == '1' ? "Rp" . number_format(4000000 * $transaksiku->luas_bangunan, 0, ",", ".") : ($transaksiku->lantai == '2' ? "Rp" . number_format(5000000 * $transaksiku->luas_bangunan, 0, ",", ".") : "Rp" . number_format(8000000 * $transaksiku->luas_bangunan, 0, ",", ".")); ?></small>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center gap-2 mt-3">

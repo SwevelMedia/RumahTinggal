@@ -15,7 +15,7 @@ class ArtikelModel extends CI_Model
    {
 
       if (!$id) {
-         return $this->db->query("SELECT artikel.* FROM artikel WHERE `status` = 1 AND `approve` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "' ORDER BY tgl_dibuat desc");
+         return $this->db->query("SELECT artikel.* FROM artikel WHERE `status` = 1 AND `approve` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "' ORDER BY tgl_dibuat desc limit 5");
       } else {
          return $this->db->query("SELECT artikel.* FROM artikel where id_artikel != $id AND `status` = 1 AND `approve` = 1 AND `tgl_dibuat` <= '" . date("Y-m-d") . "' ORDER BY tgl_dibuat desc limit 5");
       }

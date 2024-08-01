@@ -614,7 +614,7 @@ Also includes a counter of the slides
                         <div class="tab-pane fade show active" id="pills-konsep" role="tabpanel" aria-labelledby="konsep">
                             <div class="card bg-light border-0 mt-3 p-3" style="height:355px; overflow-y:auto;">
                                 <p class="m-0 p-0 mt-1">Biaya konstruksi mulai dari</p>
-                                <h3 class="mt-1 fw-semibold"><?= $konsep->lantai == '1' ? "Rp" . number_format(3500000 * $konsep->luas_bangunan, 0, ",", ".") : ($konsep->lantai == '2' ? "Rp" . number_format(4500000 * $konsep->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $konsep->luas_bangunan, 0, ",", ".")); ?></h3>
+                                <h3 class="mt-1 fw-semibold"><?= $konsep->lantai == '1' ? "Rp" . number_format(4000000 * $konsep->luas_bangunan, 0, ",", ".") : ($konsep->lantai == '2' ? "Rp" . number_format(5000000 * $konsep->luas_bangunan, 0, ",", ".") : "Rp" . number_format(8000000 * $konsep->luas_bangunan, 0, ",", ".")); ?></h3>
                                 <hr class="p-0 m-0 mt-3 mb-3" />
                                 <div class="row justify-content-between mb-4">
                                     <div class="col-6">
@@ -1077,7 +1077,7 @@ Also includes a counter of the slides
                                     </div>
                                     <div>
                                         <small>Biaya Konstruksi</small>
-                                        <small class="fw-semibold d-block tooltip-biaya"><?= $item->lantai == '1' ? "Rp" . number_format(3500000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(4500000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(5500000 * $item->luas_bangunan, 0, ",", ".")); ?>
+                                        <small class="fw-semibold d-block tooltip-biaya"><?= $item->lantai == '1' ? "Rp" . number_format(4000000 * $item->luas_bangunan, 0, ",", ".") : ($item->lantai == '2' ? "Rp" . number_format(5000000 * $item->luas_bangunan, 0, ",", ".") : "Rp" . number_format(8000000 * $item->luas_bangunan, 0, ",", ".")); ?>
                                             <span class="tooltip-biaya-text">Estimasi Awal</span>
                                         </small>
 

@@ -731,7 +731,7 @@ function getPageUrl($page)
                 `;
                 } else {
                     $.each(data, function(index, item) {
-                        let biaya = item.lantai == '1' ? 3500000 * item.luas_bangunan : (item.lantai == '2' ? 4500000 * item.luas_bangunan : 5500000 * item.luas_bangunan);
+                        let biaya = item.lantai == '1' ? 4000000 * item.luas_bangunan : (item.lantai == '2' ? 5000000 * item.luas_bangunan : 8000000 * item.luas_bangunan);
                         biaya = biaya.toLocaleString('id-ID');
                         html += `<div class="col-lg-6 col-xl-4 col-md-6 col-6 mb-3">
                                 <div class="card desain-card border-0 shadow-sm pb-2 pb-md-0 h-100 w-100" style="height: max-content;">
